@@ -8,7 +8,7 @@ import * as Brevo from '@getbrevo/brevo';
  * @returns An object indicating success or failure.
  */
 export async function subscribeToNewsletter(email: string): Promise<{ success: boolean; message: string }> {
-  const apiKey = process.env.BREVO_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY;
   if (!apiKey) {
     console.error('Brevo API key is not configured.');
     return { success: false, message: 'La configuration de la newsletter est incomplète.' };
@@ -19,10 +19,7 @@ export async function subscribeToNewsletter(email: string): Promise<{ success: b
 
   const createContact = new Brevo.CreateContact();
   createContact.email = email;
-  // By default, this adds the contact to your Brevo account.
-  // You can then manage which list they belong to from the Brevo dashboard.
-  // If you want to add them to a specific list immediately, you can add:
-  // createContact.listIds = [YOUR_LIST_ID]; // e.g., [2]
+  // Add the contact to a specific list.
   createContact.listIds = [2];
 
 
