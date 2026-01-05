@@ -7,7 +7,16 @@ import type { Resource } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const resources: Resource[] = [
-  {
+    {
+    id: "4",
+    title: "Comment créer un compte-titre à la Bourse de Casablanca",
+    description: "Un guide PDF pas à pas pour vous accompagner dans l'ouverture de votre premier compte-titres auprès d'un courtier marocain.",
+    price: "Gratuit",
+    href: "https://drive.google.com/uc?export=download&id=1bL4Yam2LfuJISP0_ExyigJyLpeeLhw7s",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageHint || '',
+  },
+   {
     id: "3",
     title: "كيفية فتح حساب في بورصة (Titres-Compte( الدار البيضاء",
     description: "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
