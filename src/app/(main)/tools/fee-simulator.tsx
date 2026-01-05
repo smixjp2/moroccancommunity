@@ -110,7 +110,6 @@ export default function FeeSimulator() {
   };
 
   return (
-    <>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
       <Card>
         <CardHeader>
@@ -254,8 +253,8 @@ export default function FeeSimulator() {
                         <YAxis tickFormatter={(value) => formatCurrency(value as number).replace('MAD', '').trim()} />
                         <Tooltip formatter={(value) => formatCurrency(value as number)} />
                         <Legend />
-                        <Bar dataKey="Sans Frais" fill="hsl(var(--chart-2))" radius={4} />
-                        <Bar dataKey="Avec Frais" fill="hsl(var(--primary))" radius={4} />
+                        <Bar dataKey="Sans Frais" fill="var(--color-Sans Frais)" radius={4} />
+                        <Bar dataKey="Avec Frais" fill="var(--color-Avec Frais)" radius={4} />
                       </BarChart>
                     </ChartContainer>
                   </CardContent>
@@ -294,6 +293,6 @@ export default function FeeSimulator() {
           </CardContent>
         </Card>
       </div>
-    </>
+    </div>
   );
 }
