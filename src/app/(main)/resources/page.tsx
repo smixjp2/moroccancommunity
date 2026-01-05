@@ -9,10 +9,10 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 const resources: Resource[] = [
   {
     id: "3",
-    title: "Guide : La Psychologie du Trading",
+    title: "كيفية فتح حساب في بورصة (Titres-Compte( الدار البيضاء",
     description: "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
     price: "Gratuit",
-    href: "https://drive.google.com/file/d/1SJMxRYWXLN84R-ELkFZcc_-QcqwEJZYY/view?usp=sharing",
+    href: "https://drive.google.com/uc?export=download&id=1SJMxRYWXLN84R-ELkFZcc_-QcqwEJZYY",
     imageUrl: PlaceHolderImages.find(p => p.id === 'resource-psychology')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'resource-psychology')?.imageHint || '',
   },
