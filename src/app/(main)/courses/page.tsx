@@ -28,6 +28,16 @@ const courses: Course[] = [
     imageHint: PlaceHolderImages.find(p => p.id === 'course-excel-power-bi')?.imageHint || '',
     href: "/courses/formation-excel-power-bi"
   },
+   {
+    id: "5",
+    title: "La Stratégie DCA : Investir Simplement et Efficacement",
+    description: "Découvrez la puissance de l'investissement programmé (DCA) pour construire votre patrimoine sans stress et en battant l'inflation. 8 modules pour devenir un expert.",
+    level: "Débutant",
+    duration: "2-3 Heures",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageHint || '',
+    href: "/courses/formation-dca"
+  },
   {
     id: "1",
     title: "Comment Investir Votre Premier Salaire",
@@ -52,7 +62,7 @@ export default function CoursesPage() {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {courses.map((course) => (
           <Card key={course.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            {(course.id === "3" || course.id === "4") && (
+            {(course.id === "3" || course.id === "4" || course.id === "5") && (
                 <Badge className="absolute top-4 right-4 flex items-center gap-1 z-10 bg-yellow-400 text-yellow-900">
                     <Star className="h-4 w-4" /> NOUVEAU
                 </Badge>
@@ -92,3 +102,5 @@ export default function CoursesPage() {
     </div>
   );
 }
+
+    

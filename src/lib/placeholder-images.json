@@ -37,7 +37,7 @@
       "imageHint": "excel dashboard"
     },
     {
-      "id": "3",
+      "id": "resource-psychology",
       "description": "Image for the arabic guide on opening a brokerage account.",
       "imageUrl": "https://images.unsplash.com/photo-1554224154-26032f3a62d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaW5hbmNpYWwlMjBkb2N1bWVudHxlbnwwfHx8fDE3Njc5NzgwMTd8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "financial document"
@@ -49,7 +49,7 @@
       "imageHint": "checklist document"
     },
     {
-      "id": "4",
+      "id": "resource-account-opening",
       "description": "Image for a guide on opening a brokerage account.",
       "imageUrl": "https://images.unsplash.com/photo-1600880292210-f7611c78b659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNpYWwlMjBhZHZpc29yfGVufDB8fHx8MTc2Nzk3ODAxN3ww&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "financial advisor"
@@ -69,7 +69,7 @@
     {
       "id": "feature-courses",
       "description": "Image for the courses feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1610484826967-092c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "online learning"
     },
     {
@@ -83,6 +83,12 @@
       "description": "Image for a course about Casablanca stock exchange.",
       "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "Casablanca building"
+    },
+    {
+      "id": "course-dca",
+      "description": "Image for a course about Dollar Cost Averaging strategy.",
+      "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "piggy bank"
     }
   ]
 }

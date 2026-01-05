@@ -52,3 +52,10 @@ export interface Brokerage {
   responsiveness: string;
   logo: React.ReactNode;
 }
+
+export interface Module {
+    icon: LucideIcon | ((props: any) => JSX.Element);
+    title: string;
+    points: string[];
+}
+    
