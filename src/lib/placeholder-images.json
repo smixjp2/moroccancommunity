@@ -27,7 +27,7 @@
     {
       "id": "course-1",
       "description": "Image for a course on how to invest your first salary.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "young professional"
     },
     {
@@ -39,8 +39,8 @@
     {
       "id": "resource-psychology",
       "description": "Image for the arabic guide on opening a brokerage account.",
-      "imageUrl": "https://images.unsplash.com/photo-1556742059-4393b33a76f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXBlcndvcmslMjBzaWduaW5nfGVufDB8fHx8MTc2NzY5MTE2Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "paperwork signing"
+      "imageUrl": "https://images.unsplash.com/photo-1559526324-c1f275fbfa32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmaW5hbmNpYWwlMjBwbGFubmluZ3xlbnwwfHx8fDE3Njc4OTg5MDd8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "financial planning"
     },
     {
       "id": "resource-2",
