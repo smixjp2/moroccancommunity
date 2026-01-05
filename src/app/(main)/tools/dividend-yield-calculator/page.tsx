@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { ChartContainer } from "@/components/ui/chart";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Info, HelpCircle, Percent, HandCoins, PiggyBank } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { formatCurrency } from "@/lib/utils";
+import { ChartContainer } from "@/components/ui/chart";
 
 // Define the output type manually as we are no longer using the AI flow
 export interface DividendYieldOutput {
@@ -76,8 +76,15 @@ export default function DividendYieldCalculatorPage() {
     { name: 'Investissement Initial', value: form.getValues('investmentAmount') },
     { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome },
   ] : [];
-  
-  const COLORS = ['hsl(var(--muted))', 'hsl(var(--primary))'];
+
+  const chartConfig = {
+    "Investissement Initial": {
+      label: "Investissement Initial",
+    },
+    "Revenu Annuel Dividendes": {
+      label: "Revenu Annuel",
+    },
+  };
 
 
   return (
@@ -189,16 +196,14 @@ export default function DividendYieldCalculatorPage() {
                     <CardTitle>Composition du Revenu</CardTitle>
                   </CardHeader>
                   <CardContent>
-                     <ChartContainer config={{}} className="h-[200px] w-full">
+                     <ChartContainer config={chartConfig} className="h-[200px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
-                            <Tooltip />
                             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                                 {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    <Cell key={`cell-${index}`} fill={index === 0 ? "hsl(var(--muted))" : "hsl(var(--primary))"} />
                                 ))}
                             </Pie>
-                             <Legend />
                         </PieChart>
                         </ResponsiveContainer>
                     </ChartContainer>
