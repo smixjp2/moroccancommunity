@@ -42,8 +42,8 @@ function TradingViewTicker() {
               }
             ],
             "showSymbolLogo": true,
-            "colorTheme": "light",
-            "isTransparent": false,
+            "colorTheme": "dark",
+            "isTransparent": true,
             "displayMode": "adaptive",
             "locale": "fr"
           }`;
