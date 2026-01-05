@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { calculateDividendYield, type DividendYieldOutput } from "@/ai/flows/dividend-yield-calculator";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 
@@ -16,6 +15,15 @@ import { Loader2, Info, HelpCircle, Percent, HandCoins, PiggyBank } from "lucide
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { formatCurrency } from "@/lib/utils";
 
+// Define the output type manually as we are no longer using the AI flow
+export interface DividendYieldOutput {
+  dividendYield: number;
+  numberOfShares: number;
+  annualDividendIncome: number;
+  analysis: string;
+  recommendation: string;
+}
+
 const formSchema = z.object({
   stockPrice: z.coerce.number().min(0.01, "Le prix doit être positif"),
   annualDividendPerShare: z.coerce.number().min(0, "Le dividende ne peut être négatif"),
@@ -26,7 +34,6 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function DividendYieldCalculatorPage() {
   const [result, setResult] = useState<DividendYieldOutput | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormValues>({
@@ -41,16 +48,28 @@ export default function DividendYieldCalculatorPage() {
   async function onSubmit(values: FormValues) {
     setLoading(true);
     setResult(null);
-    setError(null);
-    try {
-      const response = await calculateDividendYield(values);
-      setResult(response);
-    } catch (e) {
-      setError("Une erreur est survenue lors du calcul. Veuillez réessayer.");
-      console.error(e);
-    } finally {
+
+    // Perform calculation client-side
+    const { stockPrice, annualDividendPerShare, investmentAmount } = values;
+    const dividendYield = (annualDividendPerShare / stockPrice) * 100;
+    const numberOfShares = investmentAmount / stockPrice;
+    const annualDividendIncome = numberOfShares * annualDividendPerShare;
+
+    // Static analysis and recommendation
+    const analysis = `Un rendement de ${dividendYield.toFixed(2)}% est un indicateur clé. Il représente le retour sur investissement que vous obtenez uniquement grâce aux dividendes. Il est important de le comparer à d'autres entreprises du même secteur et à la moyenne du marché marocain pour évaluer son attractivité.`;
+    const recommendation = `Pour un investisseur axé sur le revenu, un rendement stable et croissant est souvent préférable. Assurez-vous que l'entreprise a un historique de paiement de dividendes fiable et une santé financière solide pour maintenir ces paiements à l'avenir. Ne vous fiez pas uniquement à un rendement élevé, qui peut parfois signaler un risque.`;
+
+    // Simulate a short delay to mimic an API call
+    setTimeout(() => {
+      setResult({
+        dividendYield,
+        numberOfShares,
+        annualDividendIncome,
+        analysis,
+        recommendation,
+      });
       setLoading(false);
-    }
+    }, 500);
   }
 
   const chartData = result ? [
@@ -141,7 +160,7 @@ export default function DividendYieldCalculatorPage() {
           </CardHeader>
           <CardContent>
             {loading && <div className="flex justify-center items-center h-48"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}
-            {error && <p className="text-destructive">{error}</p>}
+            
             {result && (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4 text-center">

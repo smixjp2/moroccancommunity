@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { planRetirement, type RetirementPlannerOutput } from "@/ai/flows/retirement-planner";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 
@@ -15,6 +14,20 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Info, HelpCircle, TrendingUp, PiggyBank, Target } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { formatCurrency } from "@/lib/utils";
+
+// Define the output type manually as we are no longer using the AI flow
+interface YearData {
+  year: number;
+  value: number;
+}
+export interface RetirementPlannerOutput {
+  finalSavings: number;
+  totalContributions: number;
+  totalInterest: number;
+  yearlyBreakdown: YearData[];
+  analysis: string;
+  recommendation: string;
+}
 
 const formSchema = z.object({
   currentAge: z.coerce.number().int().min(18, "L'âge doit être d'au moins 18 ans"),
@@ -28,7 +41,6 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function RetirementPlannerPage() {
   const [result, setResult] = useState<RetirementPlannerOutput | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormValues>({
@@ -45,16 +57,37 @@ export default function RetirementPlannerPage() {
   async function onSubmit(values: FormValues) {
     setLoading(true);
     setResult(null);
-    setError(null);
-    try {
-      const response = await planRetirement(values);
-      setResult(response);
-    } catch (e) {
-      setError("Une erreur est survenue lors de la simulation. Veuillez réessayer.");
-      console.error(e);
-    } finally {
-      setLoading(false);
+
+    const { currentAge, retirementAge, initialSavings, monthlyContribution, annualReturnRate } = values;
+    const yearsToInvest = retirementAge - currentAge;
+    const annualContribution = monthlyContribution * 12;
+    const rate = annualReturnRate / 100;
+
+    let futureValue = initialSavings;
+    const yearlyBreakdown: YearData[] = [{ year: new Date().getFullYear(), value: initialSavings }];
+
+    for (let i = 1; i <= yearsToInvest; i++) {
+      futureValue = (futureValue + annualContribution) * (1 + rate);
+      yearlyBreakdown.push({ year: new Date().getFullYear() + i, value: parseFloat(futureValue.toFixed(2)) });
     }
+
+    const totalContributions = initialSavings + (annualContribution * yearsToInvest);
+    const totalInterest = futureValue - totalContributions;
+
+    const analysis = `Votre projection montre la puissance des intérêts composés. Sur ${yearsToInvest} ans, votre épargne pourrait atteindre ${formatCurrency(futureValue)}. Les intérêts générés représentent une part significative de votre capital final, démontrant l'importance d'investir tôt et régulièrement.`;
+    const recommendation = `Pour améliorer votre plan, envisagez d'augmenter votre contribution mensuelle, même modestement. Explorez des options d'investissement diversifiées adaptées au marché marocain pour potentiellement améliorer votre rendement annuel. Révisez votre plan chaque année pour vous assurer que vous êtes toujours sur la bonne voie.`;
+
+    setTimeout(() => {
+      setResult({
+        finalSavings: futureValue,
+        totalContributions,
+        totalInterest,
+        yearlyBreakdown,
+        analysis,
+        recommendation,
+      });
+      setLoading(false);
+    }, 500);
   }
   
   const chartConfig = {
@@ -112,7 +145,7 @@ export default function RetirementPlannerPage() {
             </CardHeader>
             <CardContent>
               {loading && <div className="flex justify-center items-center h-96"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}
-              {error && <p className="text-destructive">{error}</p>}
+              
               {result && (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 gap-4 text-center">

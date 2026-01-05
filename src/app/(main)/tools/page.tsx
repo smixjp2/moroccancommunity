@@ -3,30 +3,30 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck } from "lucide-react";
 
 const simulators = [
-  // {
-  //   href: "/tools/fee-simulator",
-  //   icon: <Calculator className="h-8 w-8 text-primary" />,
-  //   title: "Simulateur d'Impact des Frais",
-  //   description: "Analysez l'impact des frais bancaires et des commissions sur vos rendements.",
-  // },
-  // {
-  //   href: "/tools/dividend-yield-calculator",
-  //   icon: <Percent className="h-8 w-8 text-primary" />,
-  //   title: "Calculateur de Rendement des Dividendes",
-  //   description: "Calculez le rendement de vos investissements en dividendes.",
-  // },
-  // {
-  //   href: "/tools/retirement-planner",
-  //   icon: <ShieldCheck className="h-8 w-8 text-primary" />,
-  //   title: "Planificateur de Retraite",
-  //   description: "Simulez votre épargne retraite pour atteindre vos objectifs financiers.",
-  // },
-  // {
-  //   href: "/tools/investor-profile-quiz",
-  //   icon: <UserCheck className="h-8 w-8 text-primary" />,
-  //   title: "Quiz Profil d'Investisseur",
-  //   description: "Découvrez quel type d'investisseur vous êtes et recevez des conseils adaptés.",
-  // },
+  {
+    href: "/tools/fee-simulator",
+    icon: <Calculator className="h-8 w-8 text-primary" />,
+    title: "Simulateur d'Impact des Frais",
+    description: "Analysez l'impact des frais bancaires et des commissions sur vos rendements.",
+  },
+  {
+    href: "/tools/dividend-yield-calculator",
+    icon: <Percent className="h-8 w-8 text-primary" />,
+    title: "Calculateur de Rendement des Dividendes",
+    description: "Calculez le rendement de vos investissements en dividendes.",
+  },
+  {
+    href: "/tools/retirement-planner",
+    icon: <ShieldCheck className="h-8 w-8 text-primary" />,
+    title: "Planificateur de Retraite",
+    description: "Simulez votre épargne retraite pour atteindre vos objectifs financiers.",
+  },
+  {
+    href: "/tools/investor-profile-quiz",
+    icon: <UserCheck className="h-8 w-8 text-primary" />,
+    title: "Quiz Profil d'Investisseur",
+    description: "Découvrez quel type d'investisseur vous êtes et recevez des conseils adaptés.",
+  },
   {
     href: "/tools/bank-comparator",
     icon: <Landmark className="h-8 w-8 text-primary" />,

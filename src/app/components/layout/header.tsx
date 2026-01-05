@@ -12,7 +12,7 @@ import type { NavLink } from "@/lib/types";
 const navLinks: NavLink[] = [
   { href: "/", label: "Accueil" },
   { href: "/articles", label: "Articles" },
-  // { href: "/tools", label: "Outils" },
+  { href: "/tools", label: "Outils" },
   { href: "/courses", label: "Cours" },
   { href: "/resources", label: "Ressources" },
 ];

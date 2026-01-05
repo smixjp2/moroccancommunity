@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { feeSimulator, type FeeSimulatorOutput } from "@/ai/flows/fee-simulator-tool";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 
@@ -16,19 +15,27 @@ import { Loader2, TrendingUp, TrendingDown, Info, HelpCircle } from "lucide-reac
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { formatCurrency } from "@/lib/utils";
 
+// Define the output type manually as we are no longer using the AI flow
+export interface FeeSimulatorOutput {
+  finalValueWithoutFees: number;
+  totalFeesPaid: number;
+  finalValueWithFees: number;
+  feeImpactPercentage: number;
+  recommendation: string;
+}
+
 const formSchema = z.object({
   initialInvestment: z.coerce.number().min(1000, "Doit être d'au moins 1 000"),
   annualReturnRate: z.coerce.number().min(0).max(100),
   investmentPeriod: z.coerce.number().int().min(1, "Doit être d'au moins 1 an"),
   bankFees: z.coerce.number().min(0),
-  commissionStructure: z.string().min(10, "Veuillez fournir quelques détails"),
+  commissionStructure: z.string().min(3, "Veuillez fournir quelques détails"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
 export default function FeeSimulator() {
   const [result, setResult] = useState<FeeSimulatorOutput | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormValues>({
@@ -38,23 +45,53 @@ export default function FeeSimulator() {
       annualReturnRate: 8,
       investmentPeriod: 10,
       bankFees: 500,
-      commissionStructure: "0.5% sur chaque transaction (achat/vente), avec 2 transactions par an.",
+      commissionStructure: "0.5% - 2 transactions/an",
     },
   });
 
   async function onSubmit(values: FormValues) {
     setLoading(true);
     setResult(null);
-    setError(null);
-    try {
-      const response = await feeSimulator(values);
-      setResult(response);
-    } catch (e) {
-      setError("Une erreur est survenue lors de l'exécution de la simulation. Veuillez réessayer.");
-      console.error(e);
-    } finally {
-      setLoading(false);
+
+    const { initialInvestment, annualReturnRate, investmentPeriod, bankFees, commissionStructure } = values;
+
+    // Simplified commission parsing
+    const commissionRateMatch = commissionStructure.match(/(\d?\.?\d+)\s?%/);
+    const commissionRate = commissionRateMatch ? parseFloat(commissionRateMatch[1]) / 100 : 0.005;
+    const transactionsPerYearMatch = commissionStructure.match(/(\d+)\s?trans/);
+    const transactionsPerYear = transactionsPerYearMatch ? parseInt(transactionsPerYearMatch[1]) : 2;
+
+    const rate = annualReturnRate / 100;
+
+    // Without fees
+    let valWithoutFees = initialInvestment;
+    for (let i = 0; i < investmentPeriod; i++) {
+        valWithoutFees *= (1 + rate);
     }
+
+    // With fees
+    let valWithFees = initialInvestment;
+    let totalFees = 0;
+    for (let i = 0; i < investmentPeriod; i++) {
+        const commissionForYear = valWithFees * commissionRate * transactionsPerYear;
+        const totalDeductions = bankFees + commissionForYear;
+        totalFees += totalDeductions;
+        valWithFees = (valWithFees * (1 + rate)) - totalDeductions;
+    }
+    
+    const feeImpactPercentage = ((valWithoutFees - valWithFees) / valWithoutFees) * 100;
+    const recommendation = feeImpactPercentage > 15 ? "L'impact des frais semble élevé. Il serait judicieux de comparer avec d'autres courtiers pour optimiser vos rendements à long terme." : "L'impact des frais semble raisonnable. Assurez-vous que le service fourni justifie ces coûts.";
+
+    setTimeout(() => {
+        setResult({
+            finalValueWithoutFees: valWithoutFees,
+            totalFeesPaid: totalFees,
+            finalValueWithFees: valWithFees,
+            feeImpactPercentage,
+            recommendation,
+        });
+        setLoading(false);
+    }, 500);
   }
   
   const chartData = result ? [
@@ -152,7 +189,7 @@ export default function FeeSimulator() {
                   <FormItem>
                     <FormLabel>Structure des Commissions</FormLabel>
                     <FormControl>
-                      <Input placeholder="ex: 0.5% par transaction" {...field} />
+                      <Input placeholder="ex: 0.5% - 2 transactions/an" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -179,7 +216,7 @@ export default function FeeSimulator() {
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                 </div>
             )}
-            {error && <p className="text-destructive">{error}</p>}
+            
             {result && (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">

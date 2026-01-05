@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { determineInvestorProfile, type InvestorProfileQuizInput, type InvestorProfileQuizOutput } from "@/ai/flows/investor-profile-quiz";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,13 @@ import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown } f
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
+// Define the output type manually as we are no longer using the AI flow
+export interface InvestorProfileQuizOutput {
+  profile: string;
+  description: string;
+  recommendation: string;
+}
+
 const formSchema = z.object({
   age: z.coerce.number().min(18, "L'âge doit être d'au moins 18 ans"),
   investmentHorizon: z.string({required_error: "Veuillez sélectionner une option."}),
@@ -23,7 +29,6 @@ const formSchema = z.object({
   marketDropResponse: z.string({required_error: "Veuillez sélectionner une option."}),
   investmentKnowledge: z.string({required_error: "Veuillez sélectionner une option."}),
 });
-
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -38,7 +43,6 @@ const formSteps = [
 export default function InvestorProfileQuizPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [result, setResult] = useState<InvestorProfileQuizOutput | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormValues>({
@@ -65,16 +69,51 @@ export default function InvestorProfileQuizPage() {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setLoading(true);
     setResult(null);
-    setError(null);
-    try {
-      const response = await determineInvestorProfile(data);
-      setResult(response);
-    } catch (e) {
-      setError("Une erreur est survenue lors de l'analyse. Veuillez réessayer.");
-      console.error(e);
-    } finally {
-      setLoading(false);
+
+    // Simple logic to determine profile
+    let score = 0;
+    if (data.investmentHorizon === 'Moyen terme (3-7 ans)') score += 1;
+    if (data.investmentHorizon === 'Long terme (> 7 ans)') score += 2;
+    if (data.riskTolerance === 'Faible') score += 1;
+    if (data.riskTolerance === 'Modérée') score += 2;
+    if (data.riskTolerance === 'Élevée') score += 3;
+    if (data.marketDropResponse === 'Ne rien faire et attendre') score += 1;
+    if (data.marketDropResponse === 'Acheter plus car c\'est une opportunité') score += 2;
+    if (data.investmentKnowledge === 'Intermédiaire') score += 1;
+    if (data.investmentKnowledge === 'Avancé') score += 2;
+    if (data.age < 30) score += 1;
+
+    let profile: InvestorProfileQuizOutput;
+    if (score <= 3) {
+      profile = {
+        profile: 'Prudent',
+        description: "Votre priorité est la sécurité du capital. Vous préférez des rendements stables et un risque minimal.",
+        recommendation: "Allocation suggérée : 60% Obligations/Fonds monétaires, 20% OPCVM Actions, 10% Immobilier (OPCI), 10% Liquidités. Concentrez-vous sur des entreprises solides et bien établies avec des dividendes réguliers."
+      };
+    } else if (score <= 6) {
+      profile = {
+        profile: 'Équilibré',
+        description: "Vous recherchez un équilibre entre croissance et sécurité. Vous êtes prêt à accepter un risque modéré pour un meilleur rendement.",
+        recommendation: "Allocation suggérée : 40% OPCVM Actions, 40% Obligations, 15% Immobilier (OPCI), 5% Liquidités. Un portefeuille diversifié entre actions de croissance et de valeur est idéal."
+      };
+    } else if (score <= 9) {
+      profile = {
+        profile: 'Dynamique',
+        description: "Vous êtes à l'aise avec le risque et visez une croissance significative de votre capital à long terme.",
+        recommendation: "Allocation suggérée : 65% Actions (Marocaines et Internationales via OPCVM), 20% Obligations, 15% Immobilier/Alternatifs. Vous pouvez inclure des secteurs de croissance comme la technologie et les énergies renouvelables."
+      };
+    } else {
+      profile = {
+        profile: 'Agressif',
+        description: "Vous visez des rendements maximaux et êtes prêt à accepter une forte volatilité et des risques élevés.",
+        recommendation: "Allocation suggérée : 80% Actions (avec une part de petites et moyennes capitalisations), 10% Alternatifs, 10% Obligations à haut rendement. Une recherche approfondie et une tolérance élevée aux pertes sont nécessaires."
+      };
     }
+
+    setTimeout(() => {
+      setResult(profile);
+      setLoading(false);
+    }, 500);
   };
 
   const progress = (currentStep / formSteps.length) * 100;
@@ -228,7 +267,7 @@ export default function InvestorProfileQuizPage() {
                     </motion.div>
                 )}
                 
-                {error && <p className="text-destructive text-center">{error}</p>}
+                {loading && <p className="text-destructive text-center">Une erreur est survenue lors de l'analyse. Veuillez réessayer.</p>}
 
               </AnimatePresence>
 
@@ -249,9 +288,9 @@ export default function InvestorProfileQuizPage() {
                 </div>
               )}
 
-              {(result || error) && !loading && (
+              {(result || loading) && !loading && (
                  <div className="text-center pt-4">
-                     <Button type="button" onClick={() => { setCurrentStep(0); setResult(null); setError(null); form.reset(); }}>
+                     <Button type="button" onClick={() => { setCurrentStep(0); setResult(null); form.reset(); }}>
                         Recommencer le quiz
                     </Button>
                  </div>
