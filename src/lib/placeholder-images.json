@@ -33,14 +33,14 @@
     {
       "id": "course-excel-power-bi",
       "description": "Image representing data analysis with spreadsheets and charts.",
-      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib-rb-4.0.3&q=80&w=1080",
       "imageHint": "excel dashboard"
     },
     {
       "id": "resource-psychology",
       "description": "Image for the arabic guide on opening a brokerage account.",
-      "imageUrl": "https://images.unsplash.com/photo-1559526324-c1f275fbfa32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmaW5hbmNpYWwlMjBwbGFubmluZ3xlbnwwfHx8fDE3Njc4OTg5MDd8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "financial planning"
+      "imageUrl": "https://images.unsplash.com/photo-1554224154-26032f3a62d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaW5hbmNpYWwlMjBkb2N1bWVudHxlbnwwfHx8fDE3Njc5NzgwMTd8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "financial document"
     },
     {
       "id": "resource-2",
@@ -51,8 +51,8 @@
     {
       "id": "resource-account-opening",
       "description": "Image for a guide on opening a brokerage account.",
-      "imageUrl": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkb2N1bWVudCUyMHNpZ25pbmd8ZW58MHx8fHwxNzY3NjQ1MjY3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "document signing"
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-f7611c78b659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNpYWwlMjBhZHZpc29yfGVufDB8fHx8MTc2Nzk3ODAxN3ww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "financial advisor"
     },
     {
       "id": "feature-articles",
@@ -63,13 +63,13 @@
     {
       "id": "feature-tools",
       "description": "Image for the tools feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "gears tools"
     },
     {
       "id": "feature-courses",
       "description": "Image for the courses feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "online learning"
     },
     {
@@ -81,7 +81,7 @@
     {
       "id": "course-casablanca-bourse",
       "description": "Image for a course about Casablanca stock exchange.",
-      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "Casablanca building"
     }
   ]
