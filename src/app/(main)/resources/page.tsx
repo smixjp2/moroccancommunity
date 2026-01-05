@@ -8,6 +8,15 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const resources: Resource[] = [
   {
+    id: "3",
+    title: "Guide : La Psychologie du Trading",
+    description: "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
+    price: "Gratuit",
+    href: "https://drive.google.com/file/d/1SJMxRYWXLN84R-ELkFZcc_-QcqwEJZYY/view?usp=sharing",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-psychology')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-psychology')?.imageHint || '',
+  },
+  {
     id: "2",
     title: "La Liste Comparative Ultime des Courtiers",
     description: "Un PDF complet comparant tous les courtiers bancaires marocains sur les commissions, les frais, les taxes et les fonctionnalités de la plateforme. Faites un choix éclairé.",
@@ -31,16 +40,16 @@ export default function ResourcesPage() {
         {resources.map((resource) => (
           <Card key={resource.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
              <CardHeader className="p-0">
-                <div className="aspect-video overflow-hidden">
+                <Link href={resource.href} target="_blank" rel="noopener noreferrer" className="block aspect-video overflow-hidden group">
                     <Image
                         src={resource.imageUrl}
                         alt={resource.title}
                         data-ai-hint={resource.imageHint}
                         width={600}
                         height={400}
-                        className="object-cover"
+                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                     />
-                </div>
+                </Link>
             </CardHeader>
             <CardContent className="p-6 flex flex-col flex-1">
               <CardTitle className="font-headline text-2xl mb-2">{resource.title}</CardTitle>
@@ -48,8 +57,8 @@ export default function ResourcesPage() {
               <div className="flex justify-between items-center mt-4">
                 <span className="text-2xl font-bold font-headline text-primary">{resource.price}</span>
                 <Button asChild className="font-bold">
-                  <Link href={resource.href}>
-                    Obtenir <Download className="ml-2 h-4 w-4" />
+                  <Link href={resource.href} target="_blank" rel="noopener noreferrer">
+                    {resource.price === 'Gratuit' ? 'Télécharger' : 'Obtenir'} <Download className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
