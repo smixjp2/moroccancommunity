@@ -29,7 +29,7 @@ const resources: Resource[] = [
     id: "2",
     title: "La Liste Comparative Ultime des Courtiers",
     description: "Un PDF complet comparant tous les courtiers bancaires marocains sur les commissions, les frais, les taxes et les fonctionnalités de la plateforme. Faites un choix éclairé.",
-    price: "99 MAD",
+    price: "Bientôt",
     href: "#",
     imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
@@ -49,7 +49,7 @@ export default function ResourcesPage() {
         {resources.map((resource) => (
           <Card key={resource.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
              <CardHeader className="p-0">
-                <Link href={resource.href} target="_blank" rel="noopener noreferrer" className="block aspect-video overflow-hidden group">
+                <Link href={resource.price === 'Bientôt' ? '#' : resource.href} target="_blank" rel="noopener noreferrer" className="block aspect-video overflow-hidden group">
                     <Image
                         src={resource.imageUrl}
                         alt={resource.title}
@@ -65,9 +65,10 @@ export default function ResourcesPage() {
               <CardDescription className="mb-4 flex-1">{resource.description}</CardDescription>
               <div className="flex justify-between items-center mt-4">
                 <span className="text-2xl font-bold font-headline text-primary">{resource.price}</span>
-                <Button asChild className="font-bold">
+                <Button asChild className="font-bold" disabled={resource.price === 'Bientôt'}>
                   <Link href={resource.href} target="_blank" rel="noopener noreferrer">
-                    {resource.price === 'Gratuit' ? 'Télécharger' : 'Obtenir'} <Download className="ml-2 h-4 w-4" />
+                    {resource.price === 'Gratuit' ? 'Télécharger' : 'Obtenir'} 
+                    {resource.price !== 'Bientôt' && <Download className="ml-2 h-4 w-4" />}
                   </Link>
                 </Button>
               </div>
