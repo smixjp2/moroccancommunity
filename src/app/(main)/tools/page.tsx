@@ -1,13 +1,21 @@
 import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, Feather } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const simulators = [
+  {
+    href: "/tools/article-generator",
+    icon: <Feather className="h-8 w-8 text-primary" />,
+    title: "Générateur d'Articles par IA",
+    description: "Créez un article complet à partir d'un titre et d'un résumé.",
+    isNew: true,
+  },
   {
     href: "/tools/fee-simulator",
     icon: <Calculator className="h-8 w-8 text-primary" />,
     title: "Simulateur d'Impact des Frais",
-    description: "Analysez l'impact des frais bancaires et des commissions sur vos rendements.",
+    description: "Analysez l'impact des frais bancaires sur vos rendements.",
   },
   {
     href: "/tools/dividend-yield-calculator",
@@ -19,25 +27,27 @@ const simulators = [
     href: "/tools/retirement-planner",
     icon: <ShieldCheck className="h-8 w-8 text-primary" />,
     title: "Planificateur de Retraite",
-    description: "Simulez votre épargne retraite pour atteindre vos objectifs financiers.",
+    description: "Simulez votre épargne retraite pour atteindre vos objectifs.",
   },
   {
     href: "/tools/investor-profile-quiz",
     icon: <UserCheck className="h-8 w-8 text-primary" />,
     title: "Quiz Profil d'Investisseur",
-    description: "Découvrez quel type d'investisseur vous êtes et recevez des conseils adaptés.",
+    description: "Découvrez quel type d'investisseur vous êtes.",
   },
   {
-    href: "/tools/bank-comparator",
+    href: "#",
     icon: <Landmark className="h-8 w-8 text-primary" />,
     title: "Comparateur de Banques",
-    description: "Comparez les frais et l'accessibilité des comptes courants au Maroc.",
+    description: "Comparez les frais et l'accessibilité des comptes courants.",
+    isComingSoon: true,
   },
   {
-    href: "/tools/brokerage-comparator",
+    href: "#",
     icon: <Briefcase className="h-8 w-8 text-primary" />,
     title: "Comparateur de Courtiers",
-    description: "Comparez les courtiers en bourse en fonction des frais et des services.",
+    description: "Comparez les courtiers en bourse selon les frais et services.",
+    isComingSoon: true,
   },
 ];
 
@@ -52,9 +62,17 @@ export default function ToolsPage() {
       </div>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-        {simulators.map((tool) => (
-          <Link href={tool.href} key={tool.href}>
-            <Card className="h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+        {simulators.map((tool) => {
+          const isClickable = !tool.isComingSoon;
+          const Wrapper = isClickable ? Link : 'div';
+          return (
+            <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
+              <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${tool.isComingSoon ? 'opacity-60' : ''}`}>
+                {(tool.isComingSoon || tool.isNew) && (
+                    <Badge variant={tool.isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
+                        {tool.isNew ? "Nouveau" : "Bientôt disponible"}
+                    </Badge>
+                )}
                 <CardHeader className="p-6">
                     <div className="mb-4">{tool.icon}</div>
                     <CardTitle className="font-headline text-xl">{tool.title}</CardTitle>
@@ -62,9 +80,10 @@ export default function ToolsPage() {
                 <CardContent>
                     <p className="text-muted-foreground">{tool.description}</p>
                 </CardContent>
-            </Card>
-          </Link>
-        ))}
+              </Card>
+            </Wrapper>
+          )
+        })}
       </div>
     </div>
   );
