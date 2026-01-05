@@ -47,6 +47,7 @@ export interface Bank {
 export interface Brokerage {
   name: string;
   fees: string;
+  custodyFees: string;
   platform: string;
   responsiveness: string;
   logo: React.ReactNode;
