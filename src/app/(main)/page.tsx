@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,7 +15,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
+import React from "react";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const featureImages = {
@@ -68,20 +71,27 @@ const faqItems = [
 
 
 export default function Home() {
+  const { toast } = useToast();
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   async function handleSubscription(formData: FormData) {
-    'use server';
     const email = formData.get('email') as string;
     if (!email) return;
 
-    try {
-      await subscribeToNewsletter(email);
-      // NOTE: We cannot call `toast` from a server action. 
-      // This would need a more complex implementation using useFormState
-      // to show a success message to the user.
-    } catch (error) {
-       // Similarly, error handling would need to be bubbled up to the client.
-      console.error('Subscription failed:', error);
+    const result = await subscribeToNewsletter(email);
+
+    if (result.success) {
+      toast({
+        title: "Inscription réussie !",
+        description: result.message,
+      });
+      formRef.current?.reset();
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Erreur d'inscription",
+        description: result.message,
+      });
     }
   }
 
@@ -200,7 +210,7 @@ export default function Home() {
                       Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.
                   </p>
               </div>
-              <form action={handleSubscription} className="flex w-full max-w-md items-center space-x-2 mx-auto">
+              <form action={handleSubscription} ref={formRef} className="flex w-full max-w-md items-center space-x-2 mx-auto">
                 <Input name="email" type="email" placeholder="Votre meilleure adresse e-mail" className="flex-1 py-6" required />
                 <Button type="submit" size="lg">S'abonner</Button>
               </form>

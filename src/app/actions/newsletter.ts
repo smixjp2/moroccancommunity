@@ -1,39 +1,42 @@
-
 'use server';
 
 import * as Brevo from '@getbrevo/brevo';
 
-export async function subscribeToNewsletter(email: string) {
-  if (!process.env.BREVO_API_KEY) {
-    throw new Error('Brevo API key is not configured.');
+/**
+ * Adds a contact to the Brevo mailing list.
+ * @param email The email address of the user to subscribe.
+ * @returns An object indicating success or failure.
+ */
+export async function subscribeToNewsletter(email: string): Promise<{ success: boolean; message: string }> {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.error('Brevo API key is not configured.');
+    return { success: false, message: 'La configuration de la newsletter est incomplète.' };
   }
 
-  const api = new Brevo.TransactionalEmailsApi();
-  api.setApiKey(
-    Brevo.TransactionalEmailsApiApiKeys.apiKey,
-    process.env.BREVO_API_KEY
-  );
+  const contactsApi = new Brevo.ContactsApi();
+  contactsApi.setApiKey(Brevo.ContactsApiApiKeys.apiKey, apiKey);
 
   const createContact = new Brevo.CreateContact();
   createContact.email = email;
-  // IMPORTANT: You need to specify which list(s) to add the contact to.
-  // Go to your Brevo account -> Contacts -> Lists to find your list ID.
-  // For example, if your newsletter list has an ID of 2, you would use [2].
-  createContact.listIds = [2]; 
+  // By default, this adds the contact to your Brevo account.
+  // You can then manage which list they belong to from the Brevo dashboard.
+  // If you want to add them to a specific list immediately, you can add:
+  // createContact.listIds = [YOUR_LIST_ID]; // e.g., [2]
+  createContact.listIds = [2];
 
-  const contactsApi = new Brevo.ContactsApi();
-  contactsApi.setApiKey(
-    Brevo.ContactsApiApiKeys.apiKey,
-    process.env.BREVO_API_KEY
-  );
 
   try {
-    const data = await contactsApi.createContact(createContact);
-    return { success: true, data };
-  } catch (error) {
-    // Brevo's API might throw an error if the contact already exists.
-    // You might want to handle this gracefully.
-    console.error('Failed to subscribe to newsletter:', error);
-    throw new Error('Could not subscribe user.');
+    await contactsApi.createContact(createContact);
+    return { success: true, message: 'Merci pour votre inscription !' };
+  } catch (error: any) {
+    // It's common for the API to signal an error if the contact already exists.
+    // We can interpret this as a "soft" success.
+    if (error?.response?.body?.code === 'duplicate_parameter') {
+        return { success: true, message: 'Vous êtes déjà inscrit !' };
+    }
+
+    console.error('Failed to subscribe to newsletter:', error?.response?.body || error.message);
+    return { success: false, message: "Une erreur est survenue lors de l'inscription. Veuillez réessayer." };
   }
 }
