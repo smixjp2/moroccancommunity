@@ -1,20 +1,29 @@
 'use client';
 
-import { useUser, useAuth } from '@/firebase';
+import { useUser } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowRight } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
+import Link from 'next/link';
+
+const userCourses = [
+    {
+        id: "dca-strategie",
+        title: "La Stratégie DCA : Investir Simplement et Efficacement",
+        description: "Accédez aux 5 vidéos et aux ressources de la formation.",
+        href: "https://drive.google.com/drive/folders/17RZCsZxcYzKefhFPapH9naeJKkKVAbBT?usp=drive_link"
+    }
+]
 
 export default function DashboardPage() {
-  const { user, isUserLoading, userError } = useUser();
-  const auth = useAuth();
+  const { user, isUserLoading } = useUser();
+  const auth = getAuth();
   const router = useRouter();
 
   useEffect(() => {
-    // If not loading and no user, redirect to login
     if (!isUserLoading && !user) {
       router.push('/login');
     }
@@ -57,12 +66,31 @@ export default function DashboardPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-center text-muted-foreground py-16">
-            <p>Vous n'avez accès à aucune formation pour le moment.</p>
-            <Button asChild className="mt-4">
-              <a href="/courses">Découvrir nos formations</a>
-            </Button>
-          </div>
+            {userCourses.length > 0 ? (
+                <div className="grid gap-6">
+                    {userCourses.map(course => (
+                        <Card key={course.id} className="flex flex-col sm:flex-row items-start justify-between p-6">
+                            <div>
+                                <h3 className="text-xl font-bold font-headline">{course.title}</h3>
+                                <p className="text-muted-foreground mt-1">{course.description}</p>
+                            </div>
+                            <Button asChild className="mt-4 sm:mt-0 sm:ml-4 flex-shrink-0">
+                                <Link href={course.href} target="_blank" rel="noopener noreferrer">
+                                    Accéder au Contenu
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                </Link>
+                            </Button>
+                        </Card>
+                    ))}
+                </div>
+            ) : (
+                 <div className="text-center text-muted-foreground py-16">
+                    <p>Vous n'avez accès à aucune formation pour le moment.</p>
+                    <Button asChild className="mt-4">
+                    <a href="/courses">Découvrir nos formations</a>
+                    </Button>
+                </div>
+            )}
         </CardContent>
       </Card>
     </div>

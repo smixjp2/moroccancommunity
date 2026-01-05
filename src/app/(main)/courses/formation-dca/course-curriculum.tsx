@@ -145,7 +145,7 @@ export function CourseCurriculum() {
                  <p className="text-xs text-muted-foreground">(Paiement unique)</p>
             </div>
           <Button type="button" size="lg" asChild className="w-full mt-4">
-            <a href="https://drive.google.com/drive/folders/17RZCsZxcYzKefhFPapH9naeJKkKVAbBT?usp=drive_link" target="_blank" rel="noopener noreferrer">Accéder à la Formation</a>
+            <a href="#">S'inscrire Maintenant</a>
           </Button>
            <DialogClose asChild>
                 <Button type="button" variant="ghost" className="text-xs text-muted-foreground">
