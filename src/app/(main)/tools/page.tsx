@@ -1,16 +1,9 @@
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, Feather } from "lucide-react";
+import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
-  {
-    href: "/tools/article-generator",
-    icon: <Feather className="h-8 w-8 text-primary" />,
-    title: "Générateur d'Articles par IA",
-    description: "Créez un article complet à partir d'un titre et d'un résumé.",
-    isNew: true,
-  },
   {
     href: "/tools/fee-simulator",
     icon: <Calculator className="h-8 w-8 text-primary" />,
@@ -68,9 +61,9 @@ export default function ToolsPage() {
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
               <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${tool.isComingSoon ? 'opacity-60' : ''}`}>
-                {(tool.isComingSoon || tool.isNew) && (
-                    <Badge variant={tool.isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
-                        {tool.isNew ? "Nouveau" : "Bientôt disponible"}
+                {(tool.isComingSoon || (tool as any).isNew) && (
+                    <Badge variant={(tool as any).isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
+                        {(tool as any).isNew ? "Nouveau" : "Bientôt disponible"}
                     </Badge>
                 )}
                 <CardHeader className="p-6">
