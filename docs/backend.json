@@ -1,0 +1,169 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the MASI Insights platform, primarily for dashboard access control.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user, used for login.",
+          "format": "email"
+        },
+        "hashedPassword": {
+          "type": "string",
+          "description": "Hashed password of the user. Note: Secure password storage is crucial. Consider using a robust hashing algorithm."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of the user (e.g., admin, user).  Used for access control."
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "hashedPassword",
+        "firstName",
+        "lastName",
+        "role"
+      ]
+    },
+    "Course": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Course",
+      "type": "object",
+      "description": "Represents an investment course offered on the MASI Insights platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Course entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the course."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the course content."
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the course."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "price"
+      ]
+    },
+    "UserCourse": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserCourse",
+      "type": "object",
+      "description": "Represents the courses a user has access to.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserCourse entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N UserCourse)"
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Reference to Course. (Relationship: Course 1:N UserCourse)"
+        },
+        "purchaseDate": {
+          "type": "string",
+          "description": "The date when the user purchased the course.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "courseId",
+        "purchaseDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profile information. Used for authentication and authorization. The userId parameter is used to enforce ownership in security rules.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}",
+        "definition": {
+          "entityName": "Course",
+          "schema": {
+            "$ref": "#/backend/entities/Course"
+          },
+          "description": "Stores course information. Accessible to all users for listing and viewing course details.",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique identifier for the course."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/userCourses/{userCourseId}",
+        "definition": {
+          "entityName": "UserCourse",
+          "schema": {
+            "$ref": "#/backend/entities/UserCourse"
+          },
+          "description": "Stores the courses a user has access to. The userId parameter is denormalized to enable Authorization Independence and path-based security rules.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "userCourseId",
+              "description": "The unique identifier for the userCourse."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure prioritizes security and scalability for the MASI Insights platform, focusing on user authentication and access control to courses. It leverages Authorization Independence by avoiding `get()` calls in security rules, ensuring atomic operations. Homogeneous Security Posture is achieved by segregating data with different access requirements into separate collections.\n\n*   **Users**: User data is stored in a dedicated collection, enabling straightforward authentication via email/password using Firebase Authentication and DBAC based authorization using `role` field.\n*   **Courses**: Courses are stored in a dedicated collection, accessible for listing. Course details are public.\n*   **UserCourses**: Grants users access to courses, ensuring users can only access the courses they have purchased. The `userId` is used to secure access via path-based rules to only the current user's courses. A QAP is supported because listing courses is permitted and access to `UserCourse` documents are secured by the `userId`.\n\nThis design provides a solid foundation for the MASI Insights platform, facilitating secure access control and scalable data management. The denormalization of authorization data within the `UserCourse` documents is critical for ensuring authorization independence and simplifying security rules. This will allow for atomic operations and predictable authorization logic without relying on complex `get()` calls."
+  }
+}

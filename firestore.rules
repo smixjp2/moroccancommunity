@@ -1,0 +1,133 @@
+/**
+ * Core Philosophy: This ruleset establishes a robust security model for a learning platform.
+ * It strictly enforces user ownership of personal data and course entitlements, while
+ * making the general course catalog publicly visible. It also introduces a privileged
+ * 'admin' role responsible for managing course content.
+ *
+ * Data Structure:
+ * - /users/{userId}: Contains private user profiles. Access is restricted to the document owner.
+ * - /courses/{courseId}: A public collection of all available courses. Read access is open,
+ *   but write access is restricted to administrators.
+ * - /users/{userId}/userCourses/{userCourseId}: A subcollection storing records of courses a user
+ *   has access to. This data is private and only accessible to the parent user.
+ *
+ * Key Security Decisions:
+ * - User Isolation: Users can only access their own data within their `/users/{userId}` tree.
+ *   Listing all users is explicitly disallowed to protect privacy.
+ * - Admin-Managed Content: The `/courses` collection is treated as administrative content.
+ *   Only users with a `role` of 'admin' on their user document can create, modify, or delete courses.
+ * - Immutable Entitlements: To prevent tampering, `userCourse` documents, which represent a user's
+ *   access to a course, are made immutable. Once created, they cannot be updated or deleted by the user.
+ * - Default Secure: Any path not explicitly defined is inaccessible by default.
+ *
+ * Denormalization for Authorization:
+ * - The `role` field is denormalized onto each `/users/{userId}` document. This allows a single `get()`
+ *   call in the rules to check for admin privileges when securing the top-level `/courses` collection.
+ * - The `userId` is denormalized into each `userCourse` document. This allows for path-based security
+ *   while also enabling validation on creation to ensure a user can only create entitlements for themselves.
+ *
+ * Structural Segregation:
+ * - The ruleset leverages structural segregation by separating the publicly readable `/courses` collection
+ *   from the private, user-specific `/users/{userId}/userCourses` subcollection. This makes public
+ *   listing queries simple and performant without compromising the security of private user data.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -------------------------------------------------------------------------
+    // Helper Functions
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns true if the user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Returns true if the authenticated user's UID matches the provided userId.
+     * This is the foundation of the ownership model.
+     * @param userId The UID of the resource owner.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Returns true if the document being operated on already exists.
+     * Used to protect against updates or deletes of non-existent documents.
+     */
+    function isExistingDoc() {
+      return resource != null;
+    }
+
+    /**
+     * Checks if a user has the 'admin' role.
+     * Requires one document read to the user's own profile.
+     */
+    function isAdmin() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // -------------------------------------------------------------------------
+    // Collection Rules
+    // -------------------------------------------------------------------------
+
+    /**
+     * @description Secures user profile documents. A user can create their own profile,
+     *   and can only read or update their own data thereafter. Listing users is forbidden.
+     * @path /users/{userId}
+     * @allow (create) A new user signing up creates their own document at `/users/NEW_USER_ID`.
+     * @allow (get) An authenticated user with UID 'USER_123' reads their own profile at `/users/USER_123`.
+     * @deny (list) Any user, including admins, attempting to list all documents in the `/users` collection.
+     * @deny (update) User 'USER_123' trying to modify the profile of 'USER_456'.
+     * @principle Restricts access to a user's own data tree.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isOwner(userId) && isExistingDoc() && request.resource.data.id == resource.data.id;
+      allow delete: if isOwner(userId) && isExistingDoc();
+    }
+
+    /**
+     * @description Defines rules for the public course catalog. All users (including unauthenticated)
+     *   can read course information, but only admins can create, update, or delete courses.
+     * @path /courses/{courseId}
+     * @allow (list) An anonymous visitor lists all courses.
+     * @allow (get) Any signed-in user reads the details of `/courses/COURSE_ABC`.
+     * @allow (create) An admin user creates a new course document.
+     * @deny (update) A regular, non-admin user attempts to change the price of a course.
+     * @deny (delete) A regular, non-admin user attempts to delete a course.
+     * @principle Public Read with Role-Based Writes.
+     */
+    match /courses/{courseId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && request.resource.data.id == courseId;
+      allow update: if isAdmin() && isExistingDoc() && request.resource.data.id == resource.data.id;
+      allow delete: if isAdmin() && isExistingDoc();
+    }
+
+    /**
+     * @description Secures user-specific course entitlements. A user can read their own entitlements
+     *   and create new ones (simulating a purchase), but cannot modify or delete them after creation.
+     * @path /users/{userId}/userCourses/{userCourseId}
+     * @allow (list) User 'USER_123' lists all their course entitlements under `/users/USER_123/userCourses`.
+     * @allow (create) User 'USER_123' creates a new entitlement for themselves.
+     * @deny (get) User 'USER_456' attempts to read an entitlement belonging to 'USER_123'.
+     * @deny (update) User 'USER_123' attempts to change the `courseId` on an existing entitlement record.
+     * @principle Enforces document ownership via path nesting and ensures data immutability post-creation.
+     */
+    match /users/{userId}/userCourses/{userCourseId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}
