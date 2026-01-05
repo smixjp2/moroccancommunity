@@ -15,27 +15,35 @@ export default async function ArticlePage({ params }: { params: { id: string } }
   const generatedContent = await generateArticle({ title: article.title, excerpt: article.excerpt });
 
   const renderMarkdown = (markdown: string) => {
-    return markdown
-      .split(/(?=\n## |^## |^### )/g) // Split by headings
-      .map((section, index) => {
-        if (section.startsWith('## ')) {
-          const title = section.replace('## ', '').trim();
-          return (
-            <div key={index}>
-              <h2 className="font-headline text-3xl font-bold mt-8 mb-4 border-b pb-2">{title}</h2>
-            </div>
-          );
+    // Split by lines, then process each line. This is simpler than complex regex.
+    const lines = markdown.split('\n').filter(line => line.trim() !== '');
+    
+    const elements: JSX.Element[] = [];
+    let currentParagraphs: string[] = [];
+
+    const flushParagraphs = () => {
+        if (currentParagraphs.length > 0) {
+            elements.push(<p key={elements.length} className="mb-4 leading-relaxed">{currentParagraphs.join(' ')}</p>);
+            currentParagraphs = [];
         }
-        if (section.startsWith('### ')) {
-          const title = section.replace('### ', '').trim();
-          return <h3 key={index} className="font-headline text-2xl font-semibold mt-6 mb-3">{title}</h3>;
-        }
-        // Handle paragraphs within sections
-        return section.split('\n').filter(p => p.trim() !== '').map((paragraph, pIndex) => (
-          <p key={`${index}-${pIndex}`} className="mb-4 leading-relaxed">{paragraph}</p>
-        ));
-      });
+    };
+
+    lines.forEach((line, index) => {
+      if (line.startsWith('## ')) {
+        flushParagraphs();
+        elements.push(<h2 key={index} className="font-headline text-3xl font-bold mt-10 mb-4 border-b pb-2">{line.substring(3)}</h2>);
+      } else if (line.startsWith('### ')) {
+        flushParagraphs();
+        elements.push(<h3 key={index} className="font-headline text-2xl font-semibold mt-8 mb-4">{line.substring(4)}</h3>);
+      } else {
+        currentParagraphs.push(line);
+      }
+    });
+
+    flushParagraphs(); // Add any remaining paragraphs
+    return elements;
   };
+
 
   return (
     <div className="container py-12 md:py-16">
@@ -64,15 +72,20 @@ export default async function ArticlePage({ params }: { params: { id: string } }
         </Card>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
-            <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground text-xl">
+            {/* Introduction */}
+            <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
               {generatedContent.introduction}
             </blockquote>
             
-            <div className="mt-8">{renderMarkdown(generatedContent.body)}</div>
+            {/* Body */}
+            <div className="mt-8">
+                {renderMarkdown(generatedContent.body)}
+            </div>
             
+            {/* Conclusion */}
             <Card className="mt-12 bg-muted/50">
               <CardContent className="p-6">
-                <h4 className="font-headline font-semibold mb-2">Conclusion</h4>
+                <h4 className="font-headline text-xl font-semibold mb-2">Conclusion</h4>
                 <p className="text-muted-foreground">{generatedContent.conclusion}</p>
               </CardContent>
             </Card>
