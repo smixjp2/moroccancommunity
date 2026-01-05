@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ const resources: Resource[] = [
     imageHint: PlaceHolderImages.find(p => p.id === 'resource-compound-interest')?.imageHint || '',
   },
     {
-    id: "4",
+    id: "resource-account-opening",
     title: "Comment créer un compte-titre à la Bourse de Casablanca",
     description: "Un guide PDF pas à pas pour vous accompagner dans l'ouverture de votre premier compte-titres auprès d'un courtier marocain.",
     price: "Gratuit",
@@ -26,7 +27,7 @@ const resources: Resource[] = [
     imageHint: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageHint || '',
   },
    {
-    id: "3",
+    id: "resource-psychology-arabic",
     title: "كيفية فتح حساب في بورصة (Titres-Compte( الدار البيضاء",
     description: "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
     price: "Gratuit",
@@ -88,5 +89,3 @@ export default function ResourcesPage() {
     </div>
   );
 }
-
-    
