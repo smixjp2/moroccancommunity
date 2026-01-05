@@ -1,9 +1,24 @@
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Scaling, Instagram, Youtube } from "lucide-react";
 import Link from "next/link";
+import { subscribeToNewsletter } from "@/app/actions/newsletter";
 
 export function Footer() {
+
+  async function handleSubscription(formData: FormData) {
+    'use server';
+    const email = formData.get('email') as string;
+    if (!email) return;
+
+    try {
+      await subscribeToNewsletter(email);
+    } catch (error) {
+      console.error('Subscription failed:', error);
+    }
+  }
+
   return (
     <footer className="border-t bg-card">
       <div className="container py-12">
@@ -33,8 +48,8 @@ export function Footer() {
             <p className="text-muted-foreground text-sm">
                 Recevez chaque mois des informations sur le marché, des offres promotionnelles et des mises à jour sur les nouveaux services directement dans votre boîte de réception.
             </p>
-            <form className="flex w-full max-w-md items-center space-x-2">
-              <Input type="email" placeholder="Entrez votre email" className="flex-1" />
+            <form action={handleSubscription} className="flex w-full max-w-md items-center space-x-2">
+              <Input name="email" type="email" placeholder="Entrez votre email" className="flex-1" required />
               <Button type="submit" variant="default">
                 S'abonner
               </Button>

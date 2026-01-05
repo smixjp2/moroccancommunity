@@ -12,6 +12,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { subscribeToNewsletter } from "@/app/actions/newsletter";
+import { toast } from "@/hooks/use-toast";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const featureImages = {
@@ -66,6 +68,23 @@ const faqItems = [
 
 
 export default function Home() {
+
+  async function handleSubscription(formData: FormData) {
+    'use server';
+    const email = formData.get('email') as string;
+    if (!email) return;
+
+    try {
+      await subscribeToNewsletter(email);
+      // NOTE: We cannot call `toast` from a server action. 
+      // This would need a more complex implementation using useFormState
+      // to show a success message to the user.
+    } catch (error) {
+       // Similarly, error handling would need to be bubbled up to the client.
+      console.error('Subscription failed:', error);
+    }
+  }
+
   return (
     <>
       <section className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center text-center text-white">
@@ -181,8 +200,8 @@ export default function Home() {
                       Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.
                   </p>
               </div>
-              <form className="flex w-full max-w-md items-center space-x-2 mx-auto">
-                <Input type="email" placeholder="Votre meilleure adresse e-mail" className="flex-1 py-6" />
+              <form action={handleSubscription} className="flex w-full max-w-md items-center space-x-2 mx-auto">
+                <Input name="email" type="email" placeholder="Votre meilleure adresse e-mail" className="flex-1 py-6" required />
                 <Button type="submit" size="lg">S'abonner</Button>
               </form>
           </div>
