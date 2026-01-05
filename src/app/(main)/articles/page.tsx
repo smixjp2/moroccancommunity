@@ -38,7 +38,7 @@ export default function ArticlesPage() {
                 </h2>
                 <p className="text-muted-foreground text-sm mb-4">{article.excerpt}</p>
                 <div className="text-xs text-muted-foreground">
-                  Par {article.author} le {new Date(article.date).toLocaleDateString('fr-FR')}
+                  Publié le {new Date(article.date).toLocaleDateString('fr-FR')}
                 </div>
               </CardContent>
             </Card>
