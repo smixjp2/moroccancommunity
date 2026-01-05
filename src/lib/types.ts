@@ -27,6 +27,13 @@ export interface Course {
   href: string;
 }
 
+export interface UserCourse {
+    id: string; // This will be the course ID like 'dca-strategie'
+    title: string;
+    description: string;
+    href: string;
+}
+
 export interface Resource {
   id: string;
   title: string;

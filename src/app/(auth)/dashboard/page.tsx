@@ -1,33 +1,58 @@
 'use client';
 
-import { useUser } from '@/firebase';
+import { useUser, useFirestore } from '@/firebase';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
-
-const userCourses = [
-    {
-        id: "dca-strategie",
-        title: "La Stratégie DCA : Investir Simplement et Efficacement",
-        description: "Accédez aux 5 vidéos et aux ressources de la formation.",
-        href: "https://drive.google.com/drive/folders/17RZCsZxcYzKefhFPapH9naeJKkKVAbBT?usp=drive_link"
-    }
-]
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import type { UserCourse } from '@/lib/types';
+import { ALL_COURSES } from '@/lib/course-data';
 
 export default function DashboardPage() {
   const { user, isUserLoading } = useUser();
   const auth = getAuth();
+  const firestore = useFirestore();
   const router = useRouter();
+
+  const [userCourses, setUserCourses] = useState<UserCourse[]>([]);
+  const [loadingCourses, setLoadingCourses] = useState(true);
 
   useEffect(() => {
     if (!isUserLoading && !user) {
       router.push('/login');
     }
   }, [user, isUserLoading, router]);
+
+  useEffect(() => {
+    if (user) {
+      const fetchUserCourses = async () => {
+        setLoadingCourses(true);
+        try {
+          const userCoursesColRef = collection(firestore, `users/${user.uid}/userCourses`);
+          const querySnapshot = await getDocs(userCoursesColRef);
+          
+          const courses: UserCourse[] = [];
+          querySnapshot.forEach(doc => {
+            const courseId = doc.id;
+            const courseData = ALL_COURSES.find(c => c.id === courseId);
+            if (courseData) {
+              courses.push(courseData);
+            }
+          });
+          setUserCourses(courses);
+        } catch (error) {
+          console.error("Erreur lors de la récupération des formations de l'utilisateur:", error);
+        } finally {
+          setLoadingCourses(false);
+        }
+      };
+      fetchUserCourses();
+    }
+  }, [user, firestore]);
 
   const handleLogout = async () => {
     try {
@@ -38,7 +63,9 @@ export default function DashboardPage() {
     }
   };
 
-  if (isUserLoading || !user) {
+  const isLoading = isUserLoading || loadingCourses;
+
+  if (isLoading || !user) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
@@ -87,7 +114,7 @@ export default function DashboardPage() {
                  <div className="text-center text-muted-foreground py-16">
                     <p>Vous n'avez accès à aucune formation pour le moment.</p>
                     <Button asChild className="mt-4">
-                    <a href="/courses">Découvrir nos formations</a>
+                    <Link href="/courses">Découvrir nos formations</Link>
                     </Button>
                 </div>
             )}
