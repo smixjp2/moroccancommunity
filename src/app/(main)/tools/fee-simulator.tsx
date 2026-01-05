@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartContainer, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -105,7 +105,7 @@ export default function FeeSimulator() {
     },
     "Avec Frais": {
       label: "Avec Frais",
-      color: "hsl(var(--chart-1))",
+      color: "hsl(var(--primary))",
     },
   };
 
@@ -253,7 +253,7 @@ export default function FeeSimulator() {
                         <XAxis dataKey="name" tickLine={false} tickMargin={10} axisLine={false} />
                         <YAxis tickFormatter={(value) => formatCurrency(value as number).replace('MAD', '').trim()} />
                         <Tooltip content={<ChartTooltipContent />} />
-                        <Legend />
+                        <ChartLegend content={<ChartLegendContent />} />
                         <Bar dataKey="Sans Frais" fill="var(--color-Sans Frais)" radius={4} />
                         <Bar dataKey="Avec Frais" fill="var(--color-Avec Frais)" radius={4} />
                       </BarChart>

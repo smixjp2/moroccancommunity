@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartContainer, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -73,19 +73,19 @@ export default function DividendYieldCalculatorPage() {
   }
 
   const chartData = result ? [
-    { name: 'Investissement Initial', value: form.getValues('investmentAmount'), fill: "hsl(var(--muted))" },
-    { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome, fill: "hsl(var(--primary))" },
+    { name: 'Investissement Initial', value: form.getValues('investmentAmount'), fill: "var(--color-initial)" },
+    { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome, fill: "var(--color-income)" },
   ] : [];
 
   const chartConfig = {
     value: {
       label: "Value",
     },
-    'Investissement Initial': {
+    'initial': {
       label: "Investissement Initial",
       color: "hsl(var(--muted))",
     },
-    'Revenu Annuel Dividendes': {
+    'income': {
       label: "Revenu Annuel",
       color: "hsl(var(--primary))",
     },
@@ -210,7 +210,7 @@ export default function DividendYieldCalculatorPage() {
                                     <Cell key={`cell-${index}`} fill={entry.fill} />
                                 ))}
                             </Pie>
-                            <Legend />
+                             <ChartLegend content={<ChartLegendContent />} />
                         </PieChart>
                         </ResponsiveContainer>
                     </ChartContainer>
