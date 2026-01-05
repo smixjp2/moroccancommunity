@@ -78,20 +78,28 @@ export default function Home() {
     const email = formData.get('email') as string;
     if (!email) return;
 
-    const result = await subscribeToNewsletter(email);
+    try {
+        const result = await subscribeToNewsletter(email);
 
-    if (result.success) {
-      toast({
-        title: "Inscription réussie !",
-        description: result.message,
-      });
-      formRef.current?.reset();
-    } else {
-      toast({
-        variant: "destructive",
-        title: "Erreur d'inscription",
-        description: result.message,
-      });
+        if (result.success) {
+          toast({
+            title: "Inscription réussie !",
+            description: result.message,
+          });
+          formRef.current?.reset();
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Erreur d'inscription",
+            description: result.message,
+          });
+        }
+    } catch (error) {
+        toast({
+            variant: "destructive",
+            title: "Erreur inattendue",
+            description: "Une erreur s'est produite. Veuillez réessayer plus tard.",
+        });
     }
   }
 
