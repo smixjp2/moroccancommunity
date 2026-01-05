@@ -27,13 +27,13 @@
     {
       "id": "course-1",
       "description": "Image for a course on how to invest your first salary.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "young professional"
     },
     {
       "id": "course-excel-power-bi",
       "description": "Image representing data analysis with spreadsheets and charts.",
-      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib-rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "excel dashboard"
     },
     {
@@ -75,7 +75,7 @@
     {
       "id": "private-community",
       "description": "Image for the private community section.",
-      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract background"
     },
     {
