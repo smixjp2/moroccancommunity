@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
-import { useRouter }s from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/firebase';
 import { initiateEmailSignIn } from '@/firebase/non-blocking-login';
 import { Button } from '@/components/ui/button';
