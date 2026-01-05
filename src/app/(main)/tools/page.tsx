@@ -36,13 +36,6 @@ const simulators = [
     title: "Quiz Profil d'Investisseur",
     description: "Découvrez quel type d'investisseur vous êtes.",
   },
-  {
-    href: "/tools/article-generator",
-    icon: <Briefcase className="h-8 w-8 text-primary" />,
-    title: "Générateur d'Articles par IA",
-    description: "Créez un article de qualité professionnelle en quelques secondes.",
-    isComingSoon: true,
-  },
 ];
 
 export default function ToolsPage() {
@@ -62,9 +55,9 @@ export default function ToolsPage() {
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
               <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable ? 'opacity-60' : ''}`}>
-                {(tool.isComingSoon || tool.isNew) && (
-                    <Badge variant={tool.isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
-                        {tool.isNew ? "Nouveau" : "Bientôt disponible"}
+                {(tool.isComingSoon) && (
+                    <Badge variant={"secondary"} className="absolute top-4 right-4 z-10">
+                        {"Bientôt disponible"}
                     </Badge>
                 )}
                 <CardHeader className="p-6">
