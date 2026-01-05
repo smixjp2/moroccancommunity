@@ -73,19 +73,19 @@ export default function DividendYieldCalculatorPage() {
   }
 
   const chartData = result ? [
-    { name: 'Investissement Initial', value: form.getValues('investmentAmount'), fill: "var(--color-initial)" },
-    { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome, fill: "var(--color-income)" },
+    { name: 'Investissement Initial', value: form.getValues('investmentAmount') },
+    { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome },
   ] : [];
 
   const chartConfig = {
     value: {
       label: "Value",
     },
-    'initial': {
+    'Investissement Initial': {
       label: "Investissement Initial",
       color: "hsl(var(--muted))",
     },
-    'income': {
+    'Revenu Annuel Dividendes': {
       label: "Revenu Annuel",
       color: "hsl(var(--primary))",
     },
@@ -207,7 +207,7 @@ export default function DividendYieldCalculatorPage() {
                             <Tooltip content={<ChartTooltipContent hideLabel />} />
                             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                                 {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                                    <Cell key={`cell-${index}`} fill={`var(--color-${entry.name.replace(/ /g, '-')})`} />
                                 ))}
                             </Pie>
                              <ChartLegend content={<ChartLegendContent />} />

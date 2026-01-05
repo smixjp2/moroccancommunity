@@ -169,14 +169,16 @@ export default function RetirementPlannerPage() {
                     <CardHeader><CardTitle>Croissance de l'Épargne</CardTitle></CardHeader>
                     <CardContent>
                       <ChartContainer config={chartConfig} className="h-[250px] w-full">
-                        <LineChart data={result.yearlyBreakdown} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="year" />
-                          <YAxis tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`} />
-                          <Tooltip content={<ChartTooltipContent formatter={(value) => formatCurrency(value as number)}/>} />
-                          <ChartLegend content={<ChartLegendContent />} />
-                          <Line type="monotone" dataKey="value" stroke="var(--color-value)" strokeWidth={2} dot={false}/>
-                        </LineChart>
+                        <ResponsiveContainer>
+                          <LineChart data={result.yearlyBreakdown} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`} />
+                            <Tooltip content={<ChartTooltipContent formatter={(value) => formatCurrency(value as number)}/>} />
+                            <ChartLegend content={<ChartLegendContent />} />
+                            <Line type="monotone" dataKey="value" stroke="var(--color-value)" strokeWidth={2} dot={false}/>
+                          </LineChart>
+                        </ResponsiveContainer>
                       </ChartContainer>
                     </CardContent>
                   </Card>

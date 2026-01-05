@@ -254,8 +254,8 @@ export default function FeeSimulator() {
                         <YAxis tickFormatter={(value) => formatCurrency(value as number).replace('MAD', '').trim()} />
                         <Tooltip content={<ChartTooltipContent />} />
                         <ChartLegend content={<ChartLegendContent />} />
-                        <Bar dataKey="Sans Frais" fill="var(--color-Sans Frais)" radius={4} />
-                        <Bar dataKey="Avec Frais" fill="var(--color-Avec Frais)" radius={4} />
+                        <Bar dataKey="Sans Frais" fill="var(--color-Sans-Frais)" radius={4} />
+                        <Bar dataKey="Avec Frais" fill="var(--color-Avec-Frais)" radius={4} />
                       </BarChart>
                     </ChartContainer>
                   </CardContent>
