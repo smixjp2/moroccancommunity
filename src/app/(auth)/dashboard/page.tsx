@@ -8,7 +8,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Loader2, ArrowRight } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import type { UserCourse } from '@/lib/types';
 import { ALL_COURSES } from '@/lib/course-data';
 
@@ -29,9 +29,23 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (user) {
-      const fetchUserCourses = async () => {
+      const setupUserAndCourses = async () => {
         setLoadingCourses(true);
         try {
+          // 1. Check if user document exists, create if not
+          const userDocRef = doc(firestore, 'users', user.uid);
+          const userDocSnap = await getDoc(userDocRef);
+          if (!userDocSnap.exists()) {
+            await setDoc(userDocRef, {
+              id: user.uid,
+              email: user.email,
+              role: 'user', // default role
+              firstName: '', // You can populate this from a profile page later
+              lastName: '',
+            });
+          }
+
+          // 2. Fetch user's enrolled courses
           const userCoursesColRef = collection(firestore, `users/${user.uid}/userCourses`);
           const querySnapshot = await getDocs(userCoursesColRef);
           
@@ -45,12 +59,12 @@ export default function DashboardPage() {
           });
           setUserCourses(courses);
         } catch (error) {
-          console.error("Erreur lors de la récupération des formations de l'utilisateur:", error);
+          console.error("Erreur lors de la configuration de l'utilisateur ou de la récupération des formations:", error);
         } finally {
           setLoadingCourses(false);
         }
       };
-      fetchUserCourses();
+      setupUserAndCourses();
     }
   }, [user, firestore]);
 
