@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { ChartContainer, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -76,20 +76,8 @@ export default function DividendYieldCalculatorPage() {
     { name: 'Investissement Initial', value: form.getValues('investmentAmount') },
     { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome },
   ] : [];
-
-  const chartConfig = {
-    value: {
-      label: "Value",
-    },
-    'Investissement Initial': {
-      label: "Investissement Initial",
-      color: "hsl(var(--muted))",
-    },
-    'Revenu Annuel Dividendes': {
-      label: "Revenu Annuel",
-      color: "hsl(var(--primary))",
-    },
-  };
+  
+  const COLORS = ['hsl(var(--muted))', 'hsl(var(--primary))'];
 
 
   return (
@@ -201,16 +189,16 @@ export default function DividendYieldCalculatorPage() {
                     <CardTitle>Composition du Revenu</CardTitle>
                   </CardHeader>
                   <CardContent>
-                     <ChartContainer config={chartConfig} className="h-[200px] w-full">
+                     <ChartContainer config={{}} className="h-[200px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
-                            <Tooltip content={<ChartTooltipContent hideLabel />} />
+                            <Tooltip />
                             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                                 {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={`var(--color-${entry.name.replace(/ /g, '-')})`} />
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
-                             <ChartLegend content={<ChartLegendContent />} />
+                             <Legend />
                         </PieChart>
                         </ResponsiveContainer>
                     </ChartContainer>

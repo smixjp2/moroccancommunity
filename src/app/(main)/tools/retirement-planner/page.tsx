@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { ChartContainer, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -174,9 +174,9 @@ export default function RetirementPlannerPage() {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="year" />
                             <YAxis tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`} />
-                            <Tooltip content={<ChartTooltipContent formatter={(value) => formatCurrency(value as number)}/>} />
-                            <ChartLegend content={<ChartLegendContent />} />
-                            <Line type="monotone" dataKey="value" stroke="var(--color-value)" strokeWidth={2} dot={false}/>
+                            <Tooltip formatter={(value) => formatCurrency(value as number)}/>
+                            <Legend />
+                            <Line type="monotone" dataKey="value" stroke="hsl(var(--primary))" name="Épargne Totale" strokeWidth={2} dot={false}/>
                           </LineChart>
                         </ResponsiveContainer>
                       </ChartContainer>

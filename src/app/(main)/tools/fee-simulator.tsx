@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { ChartContainer, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -95,7 +95,7 @@ export default function FeeSimulator() {
   }
   
   const chartData = result ? [
-    { name: "Valeur de l'investissement", "Sans Frais": result.finalValueWithoutFees, "Avec Frais": result.finalValueWithFees },
+    { name: "Valeur Finale", "Sans Frais": result.finalValueWithoutFees, "Avec Frais": result.finalValueWithFees },
   ] : [];
 
   const chartConfig = {
@@ -252,10 +252,10 @@ export default function FeeSimulator() {
                         <CartesianGrid vertical={false} />
                         <XAxis dataKey="name" tickLine={false} tickMargin={10} axisLine={false} />
                         <YAxis tickFormatter={(value) => formatCurrency(value as number).replace('MAD', '').trim()} />
-                        <Tooltip content={<ChartTooltipContent />} />
-                        <ChartLegend content={<ChartLegendContent />} />
-                        <Bar dataKey="Sans Frais" fill="var(--color-Sans-Frais)" radius={4} />
-                        <Bar dataKey="Avec Frais" fill="var(--color-Avec-Frais)" radius={4} />
+                        <Tooltip formatter={(value) => formatCurrency(value as number)} />
+                        <Legend />
+                        <Bar dataKey="Sans Frais" fill="hsl(var(--chart-2))" radius={4} />
+                        <Bar dataKey="Avec Frais" fill="hsl(var(--primary))" radius={4} />
                       </BarChart>
                     </ChartContainer>
                   </CardContent>
