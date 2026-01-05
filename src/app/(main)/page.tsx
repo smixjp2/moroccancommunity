@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { ArrowRight, Newspaper, Wrench, GraduationCap, Crown } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Input } from "@/components/ui/input";
-import TradingViewTicker from "@/app/components/tradingview-ticker";
 import {
   Accordion,
   AccordionContent,
@@ -100,8 +99,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <TradingViewTicker />
 
       <main>
         <section className="py-16 md:py-24 bg-background">

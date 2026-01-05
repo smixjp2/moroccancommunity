@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/lib/types";
 import { useUser } from "@/firebase";
+import TradingViewTicker from "@/app/components/tradingview-ticker";
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Accueil" },
@@ -93,6 +94,7 @@ export function Header() {
             </Sheet>
         </div>
       </div>
+      <TradingViewTicker />
     </header>
   );
 }
