@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/lib/types";
+import { useUser } from "@/firebase";
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Accueil" },
@@ -19,6 +20,25 @@ const navLinks: NavLink[] = [
 
 export function Header() {
   const pathname = usePathname();
+  const { user, isUserLoading } = useUser();
+
+  const AuthButton = () => {
+    if (isUserLoading) {
+      return <Button variant="ghost" size="sm">Chargement...</Button>
+    }
+    if (user) {
+      return (
+        <Button asChild variant="outline" size="sm">
+          <Link href="/dashboard">Mon Espace</Link>
+        </Button>
+      );
+    }
+    return (
+      <Button asChild size="sm">
+        <Link href="/login">Connexion</Link>
+      </Button>
+    );
+  };
 
   const NavLinks = ({ className }: { className?: string }) => (
     <nav className={cn("flex items-center gap-4 lg:gap-6", className)}>
@@ -48,23 +68,29 @@ export function Header() {
         <div className="hidden md:flex flex-1 items-center justify-center">
           <NavLinks />
         </div>
-
-        <div className="flex flex-1 items-center justify-end gap-4 md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Ouvrir le menu de navigation</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left">
-              <Link href="/" className="mr-6 flex items-center gap-2 mb-6">
-                <Scaling className="h-6 w-6 text-primary" />
-                <span className="font-headline text-lg font-bold">The Moroccan Community</span>
-              </Link>
-              <NavLinks className="flex-col items-start space-y-4 text-lg" />
-            </SheetContent>
-          </Sheet>
+        
+        <div className="flex flex-1 items-center justify-end gap-4">
+            <div className="hidden md:block">
+                <AuthButton />
+            </div>
+            <Sheet>
+                <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Ouvrir le menu de navigation</span>
+                </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                <Link href="/" className="mr-6 flex items-center gap-2 mb-6">
+                    <Scaling className="h-6 w-6 text-primary" />
+                    <span className="font-headline text-lg font-bold">The Moroccan Community</span>
+                </Link>
+                <NavLinks className="flex-col items-start space-y-4 text-lg" />
+                 <div className="mt-6">
+                    <AuthButton />
+                </div>
+                </SheetContent>
+            </Sheet>
         </div>
       </div>
     </header>
