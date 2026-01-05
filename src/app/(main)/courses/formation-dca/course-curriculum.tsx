@@ -18,11 +18,11 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
-import { CheckCircle, Myth, Calculator, Brain, Zap, Shield, Briefcase, XCircle, ListChecks } from "lucide-react";
+import { CheckCircle, Lightbulb, Calculator, Brain, Zap, Shield, Briefcase, XCircle, ListChecks } from "lucide-react";
 
 const modules = [
   {
-    icon: Myth,
+    icon: Lightbulb,
     title: "MODULE 1 : Le Mythe du Timing du Marché",
     points: [
       "Pourquoi essayer de deviner le marché est une cause perdue",
@@ -157,5 +157,3 @@ export function CourseCurriculum() {
     </Dialog>
   );
 }
-
-    
