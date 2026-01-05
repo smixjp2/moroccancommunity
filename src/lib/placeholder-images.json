@@ -1,0 +1,82 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "Arrière-plan abstrait représentant la croissance financière et les données.",
+      "imageUrl": "https://images.unsplash.com/photo-1762279389002-7b6abd7bd6c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGZpbmFuY2V8ZW58MHx8fHwxNzY2NzA0OTczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract finance"
+    },
+    {
+      "id": "article-1",
+      "description": "Image for an article about MASI index analysis.",
+      "imageUrl": "https://images.unsplash.com/photo-1649003515353-c58a239cf662?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMGNoYXJ0fGVufDB8fHx8MTc2NjY5NjM1OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stock chart"
+    },
+    {
+      "id": "article-2",
+      "description": "Image for an article about Moroccan banking sector.",
+      "imageUrl": "https://images.unsplash.com/photo-1644093387522-b1be6de270a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtb2Rlcm4lMjBiYW5rfGVufDB8fHx8MTc2NjcwNDk3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "modern bank"
+    },
+    {
+      "id": "article-3",
+      "description": "Image for an article about real estate investment in Morocco.",
+      "imageUrl": "https://images.unsplash.com/photo-1643875402004-22631ef914aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjaXR5JTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2NjY3NDk3MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city architecture"
+    },
+    {
+      "id": "course-1",
+      "description": "Image for a course on how to invest your first salary.",
+      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "young professional"
+    },
+    {
+      "id": "course-excel-power-bi",
+      "description": "Image representing data analysis with spreadsheets and charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "excel dashboard"
+    },
+    {
+      "id": "resource-1",
+      "description": "Image for a digital product, a fee simulator.",
+      "imageUrl": "https://images.unsplash.com/photo-1716799323871-d82962608d7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYWxjdWxhdG9yJTIwbW9uZXl8ZW58MHx8fHwxNzY2NzA0OTczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "calculator money"
+    },
+    {
+      "id": "resource-2",
+      "description": "Image for a digital product, a comparison list.",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-cfa08c2a758f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVja2xpc3QlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "checklist document"
+    },
+    {
+      "id": "feature-articles",
+      "description": "Image for the articles feature card on the homepage.",
+      "imageUrl": "https://images.unsplash.com/photo-1734080512636-2741e9e3a2bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxuZXdzcGFwZXIlMjByZWFkaW5nfGVufDB8fHx8fDE3NjY2NjE3Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "newspaper reading"
+    },
+    {
+      "id": "feature-tools",
+      "description": "Image for the tools feature card on the homepage.",
+      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gears tools"
+    },
+    {
+      "id": "feature-courses",
+      "description": "Image for the courses feature card on the homepage.",
+      "imageUrl": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "online learning"
+    },
+    {
+      "id": "private-community",
+      "description": "Image for the private community section.",
+      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract background"
+    },
+    {
+      "id": "course-casablanca-bourse",
+      "description": "Image for a course about Casablanca stock exchange.",
+      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Casablanca building"
+    }
+  ]
+}

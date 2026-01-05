@@ -1,0 +1,50 @@
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Scaling, Instagram, Youtube } from "lucide-react";
+import Link from "next/link";
+
+export function Footer() {
+  return (
+    <footer className="border-t bg-card">
+      <div className="container py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="space-y-4">
+            <Link href="/" className="flex items-center gap-2">
+                <Scaling className="h-6 w-6 text-primary" />
+                <span className="font-headline text-lg font-bold">The Moroccan Community</span>
+            </Link>
+            <p className="text-muted-foreground text-sm">
+              Votre source de premier plan pour l'analyse du marché marocain et l'intelligence d'investissement.
+            </p>
+            <div className="flex space-x-4">
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://www.youtube.com/@The_Moroccan_Analyst" target="_blank" rel="noopener noreferrer" aria-label="The Moroccan Analyst YouTube"><Youtube className="h-5 w-5" /></a>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://www.youtube.com/@TheMoroccanCFO" target="_blank" rel="noopener noreferrer" aria-label="The Moroccan CFO YouTube"><Youtube className="h-5 w-5" /></a>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://www.instagram.com/the_moroccananalyst/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram className="h-5 w-5" /></a>
+              </Button>
+            </div>
+          </div>
+          <div className="md:col-span-2 space-y-4">
+            <h3 className="font-headline font-semibold">Abonnez-vous à notre newsletter mensuelle</h3>
+            <p className="text-muted-foreground text-sm">
+                Recevez chaque mois des informations sur le marché, des offres promotionnelles et des mises à jour sur les nouveaux services directement dans votre boîte de réception.
+            </p>
+            <form className="flex w-full max-w-md items-center space-x-2">
+              <Input type="email" placeholder="Entrez votre email" className="flex-1" />
+              <Button type="submit" variant="default">
+                S'abonner
+              </Button>
+            </form>
+          </div>
+        </div>
+        <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} The Moroccan Community. Tous droits réservés.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
