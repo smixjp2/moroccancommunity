@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { generateArticle } from '@/ai/flows/article-generator';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default async function ArticlePage({ params }: { params: { id: string } }) {
   const article = articles.find((a) => a.id === params.id);
