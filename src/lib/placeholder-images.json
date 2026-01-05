@@ -45,7 +45,7 @@
     {
       "id": "resource-2",
       "description": "Image for a digital product, a comparison list.",
-      "imageUrl": "https://images.unsplash.com/photo-1554224155-cfa08c2a758f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVja2xpc3QlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-cfa08c2a758f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVja2xpc3QlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "checklist document"
     },
     {
@@ -63,25 +63,25 @@
     {
       "id": "feature-tools",
       "description": "Image for the tools feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "gears tools"
     },
     {
       "id": "feature-courses",
       "description": "Image for the courses feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1610484826967-09c5720778c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZ3xlbnwwfHx8fDE3NjY2NzI0ODh8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "online learning"
     },
     {
       "id": "private-community",
       "description": "Image for the private community section.",
-      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract background"
     },
     {
       "id": "course-casablanca-bourse",
       "description": "Image for a course about Casablanca stock exchange.",
-      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "Casablanca building"
     }
   ]
