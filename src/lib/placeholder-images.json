@@ -51,8 +51,14 @@
     {
       "id": "resource-account-opening",
       "description": "Image for a guide on opening a brokerage account.",
-      "imageUrl": "https://images.unsplash.com/photo-1600880292210-f7611c78b659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNpYWwlMjBhZHZpc29yfGVufDB8fHx8MTc2Nzk3ODAxN3ww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-f7611c78b659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNpYWwlMjBhZHZpc29yfGVufDB8fHx8MTc2Nzk3ODAxN3ww&ixlib-rb-4.0.3&q=80&w=1080",
       "imageHint": "financial advisor"
+    },
+    {
+      "id": "resource-compound-interest",
+      "description": "Image for a compound interest simulation spreadsheet.",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGdyYXBoJTIwdXB8ZW58MHx8fHwxNzIyMzc5MDUzfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "investment graph"
     },
     {
       "id": "feature-articles",

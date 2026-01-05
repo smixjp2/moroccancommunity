@@ -8,6 +8,15 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const resources: Resource[] = [
     {
+    id: "5",
+    title: "Simulateur d'Intérêts Composés",
+    description: "Un outil Excel puissant pour visualiser la croissance de vos investissements sur le long terme grâce à la magie des intérêts composés.",
+    price: "Gratuit",
+    href: "https://docs.google.com/spreadsheets/d/10hXt59mH8YaJixCOHUZaGyYCKszxtc_Q/edit?usp=sharing&ouid=104577439630191948819&rtpof=true&sd=true",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-compound-interest')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-compound-interest')?.imageHint || '',
+  },
+    {
     id: "4",
     title: "Comment créer un compte-titre à la Bourse de Casablanca",
     description: "Un guide PDF pas à pas pour vous accompagner dans l'ouverture de votre premier compte-titres auprès d'un courtier marocain.",
@@ -79,3 +88,5 @@ export default function ResourcesPage() {
     </div>
   );
 }
+
+    
