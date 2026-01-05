@@ -94,9 +94,14 @@ export default function DashboardPage() {
             <h1 className="text-3xl font-bold font-headline">Mon Espace</h1>
             <p className="text-muted-foreground">Bienvenue, {user.email || 'Investisseur'} !</p>
         </div>
-        <Button variant="outline" onClick={handleLogout}>
-          Déconnexion
-        </Button>
+        <div className="flex items-center gap-2">
+            <Button variant="outline" asChild>
+              <Link href="/">Accueil</Link>
+            </Button>
+            <Button variant="outline" onClick={handleLogout}>
+              Déconnexion
+            </Button>
+        </div>
       </header>
 
       <Card>
