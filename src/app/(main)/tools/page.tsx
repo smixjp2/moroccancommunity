@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, BarChart3 } from "lucide-react";
@@ -9,7 +10,7 @@ const simulators = [
     icon: <BarChart3 className="h-8 w-8 text-primary" />,
     title: "Comparateur d'OPCVM",
     description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
-    isNew: true,
+    isComingSoon: true,
   },
   {
     href: "/tools/fee-simulator",
@@ -40,7 +41,7 @@ const simulators = [
     icon: <Briefcase className="h-8 w-8 text-primary" />,
     title: "Générateur d'Articles par IA",
     description: "Créez un article de qualité professionnelle en quelques secondes.",
-    isNew: true,
+    isComingSoon: true,
   },
 ];
 
