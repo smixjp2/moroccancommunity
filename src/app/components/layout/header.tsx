@@ -22,7 +22,6 @@ const navLinks: NavLink[] = [
   { href: "/articles", label: "Articles" },
   { href: "/courses", label: "Cours" },
   { href: "/resources", label: "Ressources" },
-  { href: "/about", label: "À propos" },
 ];
 
 const toolsLinks: NavLink[] = [
@@ -32,6 +31,9 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/retirement-planner", label: "Planificateur de Retraite"},
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
 ];
+
+const aboutLink: NavLink = { href: "/about", label: "À propos" };
+
 
 export function Header() {
   const pathname = usePathname();
@@ -58,12 +60,12 @@ export function Header() {
   const ToolsDropdown = () => (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <Link href="/tools" className={cn(
-                "text-sm font-medium transition-colors hover:text-primary flex items-center gap-1",
+            <Button variant="link" className={cn(
+                "text-sm font-medium transition-colors hover:text-primary p-0 h-auto",
                 pathname.startsWith('/tools') ? "text-primary" : "text-muted-foreground"
             )}>
-               Outils <ChevronDown className="h-4 w-4" />
-            </Link>
+               <Link href="/tools" className="flex items-center gap-1">Outils <ChevronDown className="h-4 w-4" /></Link>
+            </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
             {toolsLinks.map(link => (
@@ -90,6 +92,15 @@ export function Header() {
         </Link>
       ))}
       <ToolsDropdown />
+        <Link
+            href={aboutLink.href}
+            className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === aboutLink.href ? "text-primary" : "text-muted-foreground"
+            )}
+        >
+            {aboutLink.label}
+        </Link>
     </nav>
   );
 
@@ -139,6 +150,15 @@ export function Header() {
                         pathname.startsWith('/tools') ? "text-primary" : "text-muted-foreground"
                     )}>
                         Outils
+                    </Link>
+                    <Link
+                        href={aboutLink.href}
+                        className={cn(
+                            "font-medium transition-colors hover:text-primary",
+                            pathname === aboutLink.href ? "text-primary" : "text-muted-foreground"
+                        )}
+                        >
+                        {aboutLink.label}
                     </Link>
                 </nav>
                  <div className="mt-6">
