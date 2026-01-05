@@ -2,7 +2,6 @@ import { articles } from '@/lib/article-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import { generateArticle } from '@/ai/flows/article-generator';
 import { Card, CardContent } from '@/components/ui/card';
 
 export default async function ArticlePage({ params }: { params: { id: string } }) {
@@ -12,36 +11,17 @@ export default async function ArticlePage({ params }: { params: { id: string } }
     notFound();
   }
 
-  const generatedContent = await generateArticle({ title: article.title, excerpt: article.excerpt });
+  // Placeholder content since the AI generator was removed.
+  // We can use the excerpt as the main content for now.
+  const content = {
+    introduction: article.excerpt,
+    body: "Le contenu détaillé de cet article sera bientôt disponible. Revenez plus tard pour une analyse complète et approfondie.",
+    conclusion: "Restez à l'écoute pour les conclusions finales et les perspectives de cet article.",
+  };
 
   const renderMarkdown = (markdown: string) => {
-    // Split by lines, then process each line. This is simpler than complex regex.
-    const lines = markdown.split('\n').filter(line => line.trim() !== '');
-    
-    const elements: JSX.Element[] = [];
-    let currentParagraphs: string[] = [];
-
-    const flushParagraphs = () => {
-        if (currentParagraphs.length > 0) {
-            elements.push(<p key={elements.length} className="mb-4 leading-relaxed">{currentParagraphs.join(' ')}</p>);
-            currentParagraphs = [];
-        }
-    };
-
-    lines.forEach((line, index) => {
-      if (line.startsWith('## ')) {
-        flushParagraphs();
-        elements.push(<h2 key={index} className="font-headline text-3xl font-bold mt-10 mb-4 border-b pb-2">{line.substring(3)}</h2>);
-      } else if (line.startsWith('### ')) {
-        flushParagraphs();
-        elements.push(<h3 key={index} className="font-headline text-2xl font-semibold mt-8 mb-4">{line.substring(4)}</h3>);
-      } else {
-        currentParagraphs.push(line);
-      }
-    });
-
-    flushParagraphs(); // Add any remaining paragraphs
-    return elements;
+    // A simple renderer for the placeholder content.
+    return markdown.split('\n').map((line, index) => <p key={index} className="mb-4 leading-relaxed">{line}</p>);
   };
 
 
@@ -74,19 +54,19 @@ export default async function ArticlePage({ params }: { params: { id: string } }
         <div className="prose prose-lg dark:prose-invert max-w-none">
             {/* Introduction */}
             <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
-              {generatedContent.introduction}
+              {content.introduction}
             </blockquote>
             
             {/* Body */}
             <div className="mt-8">
-                {renderMarkdown(generatedContent.body)}
+                {renderMarkdown(content.body)}
             </div>
             
             {/* Conclusion */}
             <Card className="mt-12 bg-muted/50">
               <CardContent className="p-6">
                 <h4 className="font-headline text-xl font-semibold mb-2">Conclusion</h4>
-                <p className="text-muted-foreground">{generatedContent.conclusion}</p>
+                <p className="text-muted-foreground">{content.conclusion}</p>
               </CardContent>
             </Card>
         </div>
