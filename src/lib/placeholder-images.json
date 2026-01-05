@@ -89,6 +89,12 @@
       "description": "Image for a course about Dollar Cost Averaging strategy.",
       "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "piggy bank"
+    },
+    {
+      "id": "about-us",
+      "description": "Image for the about us page, showing a modern city skyline.",
+      "imageUrl": "https://images.unsplash.com/photo-1573426137648-22369d194532?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzEzfDB8MHxwaG90by1yZWxhdGVkfDE5fHx8ZW58MHx8fHx8&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "city skyline"
     }
   ]
 }
