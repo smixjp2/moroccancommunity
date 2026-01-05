@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { ChartContainer } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -98,16 +97,11 @@ export default function FeeSimulator() {
     { name: "Valeur Finale", "Sans Frais": result.finalValueWithoutFees, "Avec Frais": result.finalValueWithFees },
   ] : [];
 
-  const chartConfig = {
-    "Sans Frais": {
-      label: "Sans Frais",
-      color: "hsl(var(--chart-2))",
-    },
-    "Avec Frais": {
-      label: "Avec Frais",
-      color: "hsl(var(--primary))",
-    },
+  const COLORS = {
+    "Sans Frais": "hsl(var(--chart-2))",
+    "Avec Frais": "hsl(var(--primary))",
   };
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -246,17 +240,19 @@ export default function FeeSimulator() {
                     <CardTitle>Analyse Visuelle</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ChartContainer config={chartConfig} className="h-[200px] w-full">
-                      <BarChart accessibilityLayer data={chartData}>
-                        <CartesianGrid vertical={false} />
-                        <XAxis dataKey="name" tickLine={false} tickMargin={10} axisLine={false} />
-                        <YAxis tickFormatter={(value) => formatCurrency(value as number).replace('MAD', '').trim()} />
-                        <Tooltip formatter={(value) => formatCurrency(value as number)} />
-                        <Legend />
-                        <Bar dataKey="Sans Frais" fill="var(--color-Sans Frais)" radius={4} />
-                        <Bar dataKey="Avec Frais" fill="var(--color-Avec Frais)" radius={4} />
-                      </BarChart>
-                    </ChartContainer>
+                    <div className="h-[200px] w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart accessibilityLayer data={chartData}>
+                          <CartesianGrid vertical={false} />
+                          <XAxis dataKey="name" tickLine={false} tickMargin={10} axisLine={false} />
+                          <YAxis tickFormatter={(value) => formatCurrency(value as number).replace('MAD', '').trim()} />
+                          <Tooltip formatter={(value) => formatCurrency(value as number)} />
+                          <Legend />
+                          <Bar dataKey="Sans Frais" fill={COLORS['Sans Frais']} radius={4} />
+                          <Bar dataKey="Avec Frais" fill={COLORS['Avec Frais']} radius={4} />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </CardContent>
                 </Card>
                  <Alert>

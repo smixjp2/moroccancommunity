@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { ChartContainer } from "@/components/ui/chart";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -89,13 +88,6 @@ export default function RetirementPlannerPage() {
       setLoading(false);
     }, 500);
   }
-  
-  const chartConfig = {
-    value: {
-      label: "Épargne Totale",
-      color: "hsl(var(--primary))",
-    },
-  };
 
   return (
     <>
@@ -168,7 +160,7 @@ export default function RetirementPlannerPage() {
                   <Card>
                     <CardHeader><CardTitle>Croissance de l'Épargne</CardTitle></CardHeader>
                     <CardContent>
-                      <ChartContainer config={chartConfig} className="h-[250px] w-full">
+                      <div className="h-[250px] w-full">
                         <ResponsiveContainer>
                           <LineChart data={result.yearlyBreakdown} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" />
@@ -179,7 +171,7 @@ export default function RetirementPlannerPage() {
                             <Line type="monotone" dataKey="value" stroke="hsl(var(--primary))" name="Épargne Totale" strokeWidth={2} dot={false}/>
                           </LineChart>
                         </ResponsiveContainer>
-                      </ChartContainer>
+                      </div>
                     </CardContent>
                   </Card>
 

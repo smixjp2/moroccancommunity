@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Info, HelpCircle, Percent, HandCoins, PiggyBank } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { formatCurrency } from "@/lib/utils";
-import { ChartContainer } from "@/components/ui/chart";
 
 // Define the output type manually as we are no longer using the AI flow
 export interface DividendYieldOutput {
@@ -31,6 +30,8 @@ const formSchema = z.object({
 });
 
 type FormValues = z.infer<typeof formSchema>;
+
+const COLORS = ["hsl(var(--muted))", "hsl(var(--primary))"];
 
 export default function DividendYieldCalculatorPage() {
   const [result, setResult] = useState<DividendYieldOutput | null>(null);
@@ -76,16 +77,6 @@ export default function DividendYieldCalculatorPage() {
     { name: 'Investissement Initial', value: form.getValues('investmentAmount') },
     { name: 'Revenu Annuel Dividendes', value: result.annualDividendIncome },
   ] : [];
-
-  const chartConfig = {
-    "Investissement Initial": {
-      label: "Investissement Initial",
-    },
-    "Revenu Annuel Dividendes": {
-      label: "Revenu Annuel",
-    },
-  };
-
 
   return (
      <>
@@ -196,17 +187,17 @@ export default function DividendYieldCalculatorPage() {
                     <CardTitle>Composition du Revenu</CardTitle>
                   </CardHeader>
                   <CardContent>
-                     <ChartContainer config={chartConfig} className="h-[200px] w-full">
+                     <div className="h-[200px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
                                 {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={index === 0 ? "hsl(var(--muted))" : "hsl(var(--primary))"} />
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
                         </PieChart>
                         </ResponsiveContainer>
-                    </ChartContainer>
+                    </div>
                   </CardContent>
                 </Card>
 
