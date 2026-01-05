@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -100,121 +101,121 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-4 border-b border-t">
-        <TradingViewTicker />
-      </section>
+      <TradingViewTicker />
 
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container px-4 md:px-6">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Des Outils pour Chaque Investisseur</h2>
-            <p className="mt-4 text-muted-foreground md:text-lg">
-              Que vous soyez débutant ou professionnel chevronné, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <Card key={feature.title} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-                <CardHeader className="p-0">
-                  {feature.image && (
-                     <div className="aspect-video overflow-hidden">
-                        <Image
-                            src={feature.image.imageUrl}
-                            alt={feature.title}
-                            data-ai-hint={feature.image.imageHint}
-                            width={600}
-                            height={400}
-                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                        />
-                     </div>
-                  )}
-                </CardHeader>
-                <CardContent className="p-6">
-                    <div className="mb-4">{feature.icon}</div>
-                    <CardTitle className="font-headline text-2xl">{feature.title}</CardTitle>
-                    <CardDescription className="mt-2">{feature.description}</CardDescription>
-                    <Button asChild variant="link" className="px-0 mt-4 font-bold">
-                        <Link href={feature.link}>Découvrir <ArrowRight className="ml-2" /></Link>
-                    </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <div className="relative rounded-lg overflow-hidden p-8 md:p-12 text-center text-white bg-card">
-              {privateCommunityImage && (
-                <Image
-                  src={privateCommunityImage.imageUrl}
-                  alt={privateCommunityImage.description}
-                  data-ai-hint={privateCommunityImage.imageHint}
-                  fill
-                  className="object-cover"
-                />
-              )}
-              <div className="absolute inset-0 bg-primary/80" />
-              <div className="relative z-10 max-w-2xl mx-auto">
-                  <div className="mb-4">
-                      <Crown className="h-12 w-12 mx-auto text-yellow-300" />
-                  </div>
-                  <h2 className="font-headline text-3xl font-bold md:text-4xl text-primary-foreground">
-                      Rejoignez notre Communauté Privée
-                  </h2>
-                  <p className="mt-4 text-lg text-primary-foreground/90">
-                      Accédez à du contenu exclusif, des analyses approfondies et interagissez directement avec nous en devenant membre payant sur YouTube.
-                  </p>
-                  <Button asChild size="lg" className="mt-8 font-bold bg-background text-foreground hover:bg-background/90">
-                      <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">
-                          Devenir Membre
-                      </a>
-                  </Button>
-              </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-card py-16 md:py-24">
-        <div className="container grid md:grid-cols-2 gap-8 items-center">
-            <div>
-                <h2 className="font-headline text-3xl font-bold md:text-4xl">Restez à l'Avant-Garde du Marché</h2>
-                <p className="mt-4 text-muted-foreground md:text-lg">
-                    Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.
-                </p>
+      <main>
+        <section className="py-16 md:py-24 bg-background">
+          <div className="container px-4 md:px-6">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="font-headline text-3xl font-bold md:text-4xl">Des Outils pour Chaque Investisseur</h2>
+              <p className="mt-4 text-muted-foreground md:text-lg">
+                Que vous soyez débutant ou professionnel chevronné, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.
+              </p>
             </div>
-            <form className="flex w-full max-w-md items-center space-x-2 mx-auto">
-              <Input type="email" placeholder="Votre meilleure adresse e-mail" className="flex-1 py-6" />
-              <Button type="submit" size="lg">S'abonner</Button>
-            </form>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Foire Aux Questions</h2>
-            <p className="mt-4 text-muted-foreground md:text-lg">
-              Trouvez des réponses rapides aux questions les plus courantes.
-            </p>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index}>
-                  <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
+            <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {features.map((feature) => (
+                <Card key={feature.title} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+                  <CardHeader className="p-0">
+                    {feature.image && (
+                      <div className="aspect-video overflow-hidden">
+                          <Image
+                              src={feature.image.imageUrl}
+                              alt={feature.title}
+                              data-ai-hint={feature.image.imageHint}
+                              width={600}
+                              height={400}
+                              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                          />
+                      </div>
+                    )}
+                  </CardHeader>
+                  <CardContent className="p-6">
+                      <div className="mb-4">{feature.icon}</div>
+                      <CardTitle className="font-headline text-2xl">{feature.title}</CardTitle>
+                      <CardDescription className="mt-2">{feature.description}</CardDescription>
+                      <Button asChild variant="link" className="px-0 mt-4 font-bold">
+                          <Link href={feature.link}>Découvrir <ArrowRight className="ml-2" /></Link>
+                      </Button>
+                  </CardContent>
+                </Card>
               ))}
-            </Accordion>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        
+        <section className="py-16 md:py-24">
+          <div className="container">
+            <div className="relative rounded-lg overflow-hidden p-8 md:p-12 text-center text-white bg-card">
+                {privateCommunityImage && (
+                  <Image
+                    src={privateCommunityImage.imageUrl}
+                    alt={privateCommunityImage.description}
+                    data-ai-hint={privateCommunityImage.imageHint}
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-primary/80" />
+                <div className="relative z-10 max-w-2xl mx-auto">
+                    <div className="mb-4">
+                        <Crown className="h-12 w-12 mx-auto text-yellow-300" />
+                    </div>
+                    <h2 className="font-headline text-3xl font-bold md:text-4xl text-primary-foreground">
+                        Rejoignez notre Communauté Privée
+                    </h2>
+                    <p className="mt-4 text-lg text-primary-foreground/90">
+                        Accédez à du contenu exclusif, des analyses approfondies et interagissez directement avec nous en devenant membre payant sur YouTube.
+                    </p>
+                    <Button asChild size="lg" className="mt-8 font-bold bg-background text-foreground hover:bg-background/90">
+                        <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">
+                            Devenir Membre
+                        </a>
+                    </Button>
+                </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-card py-16 md:py-24">
+          <div className="container grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                  <h2 className="font-headline text-3xl font-bold md:text-4xl">Restez à l'Avant-Garde du Marché</h2>
+                  <p className="mt-4 text-muted-foreground md:text-lg">
+                      Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.
+                  </p>
+              </div>
+              <form className="flex w-full max-w-md items-center space-x-2 mx-auto">
+                <Input type="email" placeholder="Votre meilleure adresse e-mail" className="flex-1 py-6" />
+                <Button type="submit" size="lg">S'abonner</Button>
+              </form>
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24 bg-background">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="font-headline text-3xl font-bold md:text-4xl">Foire Aux Questions</h2>
+              <p className="mt-4 text-muted-foreground md:text-lg">
+                Trouvez des réponses rapides aux questions les plus courantes.
+              </p>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map((item, index) => (
+                  <AccordionItem value={`item-${index}`} key={index}>
+                    <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
