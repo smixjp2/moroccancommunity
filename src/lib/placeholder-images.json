@@ -37,7 +37,7 @@
       "imageHint": "excel dashboard"
     },
     {
-      "id": "resource-psychology",
+      "id": "3",
       "description": "Image for the arabic guide on opening a brokerage account.",
       "imageUrl": "https://images.unsplash.com/photo-1554224154-26032f3a62d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaW5hbmNpYWwlMjBkb2N1bWVudHxlbnwwfHx8fDE3Njc5NzgwMTd8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "financial document"
@@ -49,7 +49,7 @@
       "imageHint": "checklist document"
     },
     {
-      "id": "resource-account-opening",
+      "id": "4",
       "description": "Image for a guide on opening a brokerage account.",
       "imageUrl": "https://images.unsplash.com/photo-1600880292210-f7611c78b659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNpYWwlMjBhZHZpc29yfGVufDB8fHx8MTc2Nzk3ODAxN3ww&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "financial advisor"

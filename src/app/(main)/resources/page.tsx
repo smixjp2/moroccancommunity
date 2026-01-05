@@ -13,8 +13,8 @@ const resources: Resource[] = [
     description: "Un guide PDF pas à pas pour vous accompagner dans l'ouverture de votre premier compte-titres auprès d'un courtier marocain.",
     price: "Gratuit",
     href: "https://drive.google.com/uc?export=download&id=1bL4Yam2LfuJISP0_ExyigJyLpeeLhw7s",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageHint || '',
+    imageUrl: PlaceHolderImages.find(p => p.id === '4')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === '4')?.imageHint || '',
   },
    {
     id: "3",
@@ -22,8 +22,8 @@ const resources: Resource[] = [
     description: "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
     price: "Gratuit",
     href: "https://drive.google.com/uc?export=download&id=1SJMxRYWXLN84R-ELkFZcc_-QcqwEJZYY",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-psychology')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-psychology')?.imageHint || '',
+    imageUrl: PlaceHolderImages.find(p => p.id === '3')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === '3')?.imageHint || '',
   },
   {
     id: "2",
