@@ -8,15 +8,6 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const resources: Resource[] = [
   {
-    id: "1",
-    title: "Simulateur de Frais de Courtage et Commissions",
-    description: "Un simulateur Excel avancé pour calculer les coûts d'entrée et de sortie pour chaque courtier bancaire marocain. Planifiez vos transactions avec précision.",
-    price: "199 MAD",
-    href: "#",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-1')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-1')?.imageHint || '',
-  },
-  {
     id: "2",
     title: "La Liste Comparative Ultime des Courtiers",
     description: "Un PDF complet comparant tous les courtiers bancaires marocains sur les commissions, les frais, les taxes et les fonctionnalités de la plateforme. Faites un choix éclairé.",
