@@ -66,3 +66,16 @@ export interface Module {
     points: string[];
 }
     
+export interface Opcvm {
+  id: string;
+  name: string;
+  description: string;
+  ytd: number;
+  logo?: string;
+}
+
+export interface OpcvmCategory {
+  title: string;
+  icon: LucideIcon | ((props: any) => JSX.Element);
+  funds: Opcvm[];
+}

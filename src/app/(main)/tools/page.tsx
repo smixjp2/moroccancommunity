@@ -1,9 +1,16 @@
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck } from "lucide-react";
+import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, BarChart3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
+    {
+    href: "/tools/opcvm-comparator",
+    icon: <BarChart3 className="h-8 w-8 text-primary" />,
+    title: "Comparateur d'OPCVM",
+    description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
+    isNew: true,
+  },
   {
     href: "/tools/fee-simulator",
     icon: <Calculator className="h-8 w-8 text-primary" />,
@@ -29,18 +36,11 @@ const simulators = [
     description: "Découvrez quel type d'investisseur vous êtes.",
   },
   {
-    href: "#",
-    icon: <Landmark className="h-8 w-8 text-primary" />,
-    title: "Comparateur de Banques",
-    description: "Comparez les frais et l'accessibilité des comptes courants.",
-    isComingSoon: true,
-  },
-  {
-    href: "#",
+    href: "/tools/article-generator",
     icon: <Briefcase className="h-8 w-8 text-primary" />,
-    title: "Comparateur de Courtiers",
-    description: "Comparez les courtiers en bourse selon les frais et services.",
-    isComingSoon: true,
+    title: "Générateur d'Articles par IA",
+    description: "Créez un article de qualité professionnelle en quelques secondes.",
+    isNew: true,
   },
 ];
 
@@ -60,10 +60,10 @@ export default function ToolsPage() {
           const Wrapper = isClickable ? Link : 'div';
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
-              <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${tool.isComingSoon ? 'opacity-60' : ''}`}>
-                {(tool.isComingSoon || (tool as any).isNew) && (
-                    <Badge variant={(tool as any).isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
-                        {(tool as any).isNew ? "Nouveau" : "Bientôt disponible"}
+              <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable ? 'opacity-60' : ''}`}>
+                {(tool.isComingSoon || tool.isNew) && (
+                    <Badge variant={tool.isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
+                        {tool.isNew ? "Nouveau" : "Bientôt disponible"}
                     </Badge>
                 )}
                 <CardHeader className="p-6">
