@@ -1,6 +1,8 @@
-import { ai } from "@/ai/genkit";
-import { genkitNextApiHandler } from "@genkit-ai/next";
+'use server';
 
-export const { GET, POST } = genkitNextApiHandler({
-    getGenkit: () => ai,
+import {ai} from '@/ai/genkit';
+import {genkitNextApiHandler} from '@genkit-ai/next';
+
+export const {GET, POST} = genkitNextApiHandler({
+  getGenkit: () => ai,
 });
