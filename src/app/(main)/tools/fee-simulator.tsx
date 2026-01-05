@@ -111,12 +111,6 @@ export default function FeeSimulator() {
 
   return (
     <>
-     <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="font-headline text-4xl font-bold md:text-5xl">Simulateur d'Impact des Frais</h1>
-        <p className="mt-4 text-muted-foreground md:text-lg">
-            Voyez comment les frais bancaires et les commissions affectent vos rendements d'investissement dans le temps.
-        </p>
-      </div>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
       <Card>
         <CardHeader>
@@ -300,7 +294,6 @@ export default function FeeSimulator() {
           </CardContent>
         </Card>
       </div>
-    </div>
     </>
   );
 }
