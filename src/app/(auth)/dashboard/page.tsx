@@ -1,17 +1,24 @@
-
 'use client';
 
-import { useUser, useFirestore } from '@/firebase';
+import { useUser, useFirestore, useMemoFirebase } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Loader2, ArrowRight } from 'lucide-react';
+import { Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { collection, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import type { UserCourse } from '@/lib/types';
-import { ALL_COURSES } from '@/lib/course-data';
+
+// Define a type for the user profile data from Firestore
+interface UserProfile {
+  id: string;
+  email: string;
+  role: 'user' | 'admin';
+  firstName: string;
+  lastName: string;
+}
 
 export default function DashboardPage() {
   const { user, isUserLoading } = useUser();
@@ -19,8 +26,16 @@ export default function DashboardPage() {
   const firestore = useFirestore();
   const router = useRouter();
 
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [userCourses, setUserCourses] = useState<UserCourse[]>([]);
-  const [loadingCourses, setLoadingCourses] = useState(true);
+  const [loadingData, setLoadingData] = useState(true);
+
+  const userDocRef = useMemoFirebase(() => {
+    if (user && firestore) {
+      return doc(firestore, 'users', user.uid);
+    }
+    return null;
+  }, [user, firestore]);
 
   useEffect(() => {
     if (!isUserLoading && !user) {
@@ -29,21 +44,24 @@ export default function DashboardPage() {
   }, [user, isUserLoading, router]);
 
   useEffect(() => {
-    if (user && firestore) {
+    if (user && firestore && userDocRef) {
       const setupUserAndCourses = async () => {
-        setLoadingCourses(true);
+        setLoadingData(true);
         try {
-          // 1. Check if user document exists, create if not
-          const userDocRef = doc(firestore, 'users', user.uid);
+          // 1. Fetch or create user document
           const userDocSnap = await getDoc(userDocRef);
           if (!userDocSnap.exists()) {
-            await setDoc(userDocRef, {
+            const newUserProfile: UserProfile = {
               id: user.uid,
-              email: user.email,
+              email: user.email || 'inconnu',
               role: 'user', // default role
               firstName: user.displayName?.split(' ')[0] || '',
               lastName: user.displayName?.split(' ')[1] || '',
-            });
+            };
+            await setDoc(userDocRef, newUserProfile);
+            setUserProfile(newUserProfile);
+          } else {
+            setUserProfile(userDocSnap.data() as UserProfile);
           }
 
           // 2. Fetch user's enrolled courses from Firestore
@@ -52,8 +70,6 @@ export default function DashboardPage() {
           
           const coursesFromDb: UserCourse[] = [];
           querySnapshot.forEach(doc => {
-            // doc.data() should match the UserCourse structure but might lack an 'id'
-            // if we rely on document ID. Let's get it from the doc.id
             const data = doc.data() as Omit<UserCourse, 'id'>;
             coursesFromDb.push({ ...data, id: doc.id });
           });
@@ -62,12 +78,12 @@ export default function DashboardPage() {
         } catch (error) {
           console.error("Erreur lors de la configuration de l'utilisateur ou de la récupération des formations:", error);
         } finally {
-          setLoadingCourses(false);
+          setLoadingData(false);
         }
       };
       setupUserAndCourses();
     }
-  }, [user, firestore]);
+  }, [user, firestore, userDocRef]);
 
   const handleLogout = async () => {
     try {
@@ -78,7 +94,7 @@ export default function DashboardPage() {
     }
   };
 
-  const isLoading = isUserLoading || loadingCourses;
+  const isLoading = isUserLoading || loadingData;
 
   if (isLoading || !user) {
     return (
@@ -88,14 +104,24 @@ export default function DashboardPage() {
     );
   }
 
+  const isAdmin = userProfile?.role === 'admin';
+
   return (
     <div className="container py-12">
       <header className="mb-8 flex items-center justify-between">
         <div>
             <h1 className="text-3xl font-bold font-headline">Mon Espace</h1>
-            <p className="text-muted-foreground">Bienvenue, {user.email || 'Investisseur'} !</p>
+            <p className="text-muted-foreground">Bienvenue, {userProfile?.firstName || user.email || 'Investisseur'} !</p>
         </div>
         <div className="flex items-center gap-2">
+            {isAdmin && (
+                 <Button variant="destructive" asChild>
+                    <Link href="/admin/dashboard">
+                        <ShieldCheck className="mr-2 h-4 w-4" />
+                        Dashboard Admin
+                    </Link>
+                </Button>
+            )}
             <Button variant="outline" asChild>
               <Link href="/">Accueil</Link>
             </Button>
