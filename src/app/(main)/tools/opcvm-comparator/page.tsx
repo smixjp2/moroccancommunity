@@ -1,3 +1,4 @@
+
 import { opcvmCategories } from '@/lib/opcvm-data';
 import type { Opcvm, OpcvmCategory } from '@/lib/types';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
@@ -65,9 +66,8 @@ export default function OpcvmComparatorPage() {
               <HelpCircle className="mr-2" />
               Qu'est-ce qu'un OPCVM?
             </Button>
-            <Button size="lg">
-              Aidez-moi à choisir
-              <ArrowRight className="ml-2" />
+            <Button size="lg" asChild>
+                <Link href="/tools/investor-profile-quiz">Aidez-moi à choisir</Link>
             </Button>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function OpcvmComparatorPage() {
           <CategorySection key={category.title} category={category} />
         ))}
          <div className="text-center text-muted-foreground text-sm">
-            <p>▲ Version Beta: Les données sont fournies à titre indicatif. Veuillez signaler tout problème de données.</p>
+            <p>▲ Version Beta: Les données sont fournies à titre indicatif. Les performances passées ne préjugent pas des performances futures. Veuillez contacter la société de gestion pour des informations complètes.</p>
         </div>
       </div>
     </div>

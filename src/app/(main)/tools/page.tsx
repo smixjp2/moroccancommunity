@@ -40,7 +40,7 @@ const simulators = [
     icon: <BarChart3 className="h-8 w-8 text-primary" />,
     title: "Comparateur d'OPCVM",
     description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
-    isComingSoon: true,
+    isComingSoon: false,
   },
 ];
 

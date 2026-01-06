@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -11,6 +12,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/lib/types";
@@ -30,6 +32,7 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
     { href: "/tools/retirement-planner", label: "Planificateur de Retraite"},
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
+    { href: "/tools/opcvm-comparator", label: "Comparateur d'OPCVM"},
 ];
 
 const aboutLink: NavLink = { href: "/about", label: "À propos" };
@@ -64,10 +67,14 @@ export function Header() {
                 "text-sm font-medium transition-colors hover:text-primary p-0 h-auto",
                 pathname.startsWith('/tools') ? "text-primary" : "text-muted-foreground"
             )}>
-               <Link href="/tools" className="flex items-center gap-1">Outils <ChevronDown className="h-4 w-4" /></Link>
+               <span className="flex items-center gap-1">Outils <ChevronDown className="h-4 w-4" /></span>
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
+            <DropdownMenuItem asChild>
+                <Link href="/tools">Tous les Outils</Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
             {toolsLinks.map(link => (
                  <DropdownMenuItem key={link.href} asChild>
                     <Link href={link.href}>{link.label}</Link>
