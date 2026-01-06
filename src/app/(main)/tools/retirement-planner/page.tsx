@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -73,7 +74,7 @@ export default function RetirementPlannerPage() {
     const totalContributions = initialSavings + (annualContribution * yearsToInvest);
     const totalInterest = futureValue - totalContributions;
 
-    const analysis = `Votre projection montre la puissance des intérêts composés. Sur ${yearsToInvest} ans, votre épargne pourrait atteindre ${formatCurrency(futureValue)}. Les intérêts générés représentent une part significative de votre capital final, démontrant l'importance d'investir tôt et régulièrement.`;
+    const analysis = `Votre projection montre la puissance des intérêts composés. Sur ${yearsToInvest} ans, votre épargne pourrait atteindre ${formatCurrency(futureValue)}. Les intérêts générés (${formatCurrency(totalInterest)}) représentent une part significative de votre capital final, démontrant l'importance d'investir tôt et régulièrement.`;
     const recommendation = `Pour améliorer votre plan, envisagez d'augmenter votre contribution mensuelle, même modestement. Explorez des options d'investissement diversifiées adaptées au marché marocain pour potentiellement améliorer votre rendement annuel. Révisez votre plan chaque année pour vous assurer que vous êtes toujours sur la bonne voie.`;
 
     setTimeout(() => {
@@ -200,3 +201,5 @@ export default function RetirementPlannerPage() {
     </>
   );
 }
+
+    

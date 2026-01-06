@@ -1,10 +1,11 @@
+
 "use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,8 +31,6 @@ const formSchema = z.object({
 });
 
 type FormValues = z.infer<typeof formSchema>;
-
-const COLORS = ["hsl(var(--muted))", "hsl(var(--primary))"];
 
 export default function DividendYieldCalculatorPage() {
   const [result, setResult] = useState<DividendYieldOutput | null>(null);
@@ -182,25 +181,6 @@ export default function DividendYieldCalculatorPage() {
                     </CardContent>
                 </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Composition du Revenu</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                     <div className="h-[200px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                                {chartData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                ))}
-                            </Pie>
-                        </PieChart>
-                        </ResponsiveContainer>
-                    </div>
-                  </CardContent>
-                </Card>
-
                 <Alert>
                   <Info className="h-4 w-4" />
                   <AlertTitle className="font-headline">Analyse</AlertTitle>
@@ -235,3 +215,5 @@ export default function DividendYieldCalculatorPage() {
     </>
   );
 }
+
+    

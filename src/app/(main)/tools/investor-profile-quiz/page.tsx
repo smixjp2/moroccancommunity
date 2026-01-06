@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -11,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown } from "lucide-react";
+import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown, HelpCircle, Info } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -20,6 +21,7 @@ export interface InvestorProfileQuizOutput {
   profile: string;
   description: string;
   recommendation: string;
+  analysis: string;
 }
 
 const formSchema = z.object({
@@ -74,39 +76,35 @@ export default function InvestorProfileQuizPage() {
     let score = 0;
     if (data.investmentHorizon === 'Moyen terme (3-7 ans)') score += 1;
     if (data.investmentHorizon === 'Long terme (> 7 ans)') score += 2;
-    if (data.riskTolerance === 'Faible') score += 1;
-    if (data.riskTolerance === 'Modérée') score += 2;
-    if (data.riskTolerance === 'Élevée') score += 3;
+    if (data.riskTolerance === 'Modérée') score += 1;
+    if (data.riskTolerance === 'Élevée') score += 2;
     if (data.marketDropResponse === 'Ne rien faire et attendre') score += 1;
     if (data.marketDropResponse === 'Acheter plus car c\'est une opportunité') score += 2;
     if (data.investmentKnowledge === 'Intermédiaire') score += 1;
     if (data.investmentKnowledge === 'Avancé') score += 2;
-    if (data.age < 30) score += 1;
+    if (data.age < 40) score += 1;
 
     let profile: InvestorProfileQuizOutput;
     if (score <= 3) {
       profile = {
         profile: 'Prudent',
         description: "Votre priorité est la sécurité du capital. Vous préférez des rendements stables et un risque minimal.",
+        analysis: "Votre profil prudent est principalement défini par une faible tolérance au risque et un horizon de placement potentiellement court. Votre réaction face à une baisse de marché et vos connaissances en investissement confirment cette tendance à la prudence.",
         recommendation: "Allocation suggérée : 60% Obligations/Fonds monétaires, 20% OPCVM Actions, 10% Immobilier (OPCI), 10% Liquidités. Concentrez-vous sur des entreprises solides et bien établies avec des dividendes réguliers."
       };
     } else if (score <= 6) {
       profile = {
         profile: 'Équilibré',
         description: "Vous recherchez un équilibre entre croissance et sécurité. Vous êtes prêt à accepter un risque modéré pour un meilleur rendement.",
+        analysis: "Votre profil équilibré montre que vous comprenez la nécessité de prendre un certain risque pour obtenir de la croissance, tout en restant mesuré. Votre horizon de placement à moyen ou long terme vous le permet. Votre réponse à une baisse de marché est rationnelle.",
         recommendation: "Allocation suggérée : 40% OPCVM Actions, 40% Obligations, 15% Immobilier (OPCI), 5% Liquidités. Un portefeuille diversifié entre actions de croissance et de valeur est idéal."
-      };
-    } else if (score <= 9) {
-      profile = {
-        profile: 'Dynamique',
-        description: "Vous êtes à l'aise avec le risque et visez une croissance significative de votre capital à long terme.",
-        recommendation: "Allocation suggérée : 65% Actions (Marocaines et Internationales via OPCVM), 20% Obligations, 15% Immobilier/Alternatifs. Vous pouvez inclure des secteurs de croissance comme la technologie et les énergies renouvelables."
       };
     } else {
       profile = {
-        profile: 'Agressif',
-        description: "Vous visez des rendements maximaux et êtes prêt à accepter une forte volatilité et des risques élevés.",
-        recommendation: "Allocation suggérée : 80% Actions (avec une part de petites et moyennes capitalisations), 10% Alternatifs, 10% Obligations à haut rendement. Une recherche approfondie et une tolérance élevée aux pertes sont nécessaires."
+        profile: 'Dynamique',
+        description: "Vous êtes à l'aise avec le risque et visez une croissance significative de votre capital à long terme.",
+        analysis: "Votre profil dynamique est caractérisé par un horizon de placement long, une bonne tolérance au risque et une vision opportuniste des baisses de marché. Votre niveau de connaissance vous permet d'envisager des stratégies plus audacieuses.",
+        recommendation: "Allocation suggérée : 70% Actions (Marocaines et Internationales via OPCVM), 15% Obligations, 15% Immobilier/Alternatifs. Vous pouvez inclure des secteurs de croissance comme la technologie et les énergies renouvelables."
       };
     }
 
@@ -258,6 +256,13 @@ export default function InvestorProfileQuizPage() {
                             </CardContent>
                         </Card>
                          <Alert>
+                          <Info className="h-4 w-4" />
+                          <AlertTitle className="font-headline">Analyse de votre profil</AlertTitle>
+                          <AlertDescription>
+                            <p>{result.analysis}</p>
+                          </AlertDescription>
+                        </Alert>
+                         <Alert>
                           <BarChart className="h-4 w-4" />
                           <AlertTitle className="font-headline">Recommandations</AlertTitle>
                           <AlertDescription>
@@ -267,7 +272,6 @@ export default function InvestorProfileQuizPage() {
                     </motion.div>
                 )}
                 
-                {loading && <p className="text-destructive text-center">Une erreur est survenue lors de l'analyse. Veuillez réessayer.</p>}
 
               </AnimatePresence>
 
@@ -288,7 +292,7 @@ export default function InvestorProfileQuizPage() {
                 </div>
               )}
 
-              {(result || loading) && !loading && (
+              {result && !loading && (
                  <div className="text-center pt-4">
                      <Button type="button" onClick={() => { setCurrentStep(0); setResult(null); form.reset(); }}>
                         Recommencer le quiz
@@ -299,6 +303,23 @@ export default function InvestorProfileQuizPage() {
           </Form>
         </CardContent>
       </Card>
+      
+       <Card className="max-w-2xl mx-auto mt-8">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Guide d'Utilisation</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-muted-foreground">
+                <p>Ce quiz vous aide à mieux comprendre votre attitude face à l'investissement et au risque. Il n'y a pas de bonnes ou de mauvaises réponses.</p>
+                <ul className="list-disc pl-6 space-y-2">
+                    <li><strong>Horizon de placement :</strong> C'est la durée pendant laquelle vous prévoyez d'investir. Un horizon long permet de prendre plus de risques car vous avez le temps de récupérer d'éventuelles baisses.</li>
+                    <li><strong>Tolérance au risque :</strong> C'est votre capacité émotionnelle et financière à supporter les fluctuations du marché. Soyez honnête avec vous-même.</li>
+                    <li><strong>Réaction à la baisse :</strong> Cette question est un excellent indicateur de votre comportement en situation de stress sur les marchés.</li>
+                </ul>
+                <p><strong>Analyse :</strong> Le profil déterminé est une indication de votre comportement général. Les recommandations d'allocation sont des exemples classiques et doivent être adaptées à votre situation personnelle et à vos recherches.</p>
+            </CardContent>
+        </Card>
     </div>
   );
 }
+
+    

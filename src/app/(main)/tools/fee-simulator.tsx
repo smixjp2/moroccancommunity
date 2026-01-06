@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -20,6 +21,7 @@ export interface FeeSimulatorOutput {
   totalFeesPaid: number;
   finalValueWithFees: number;
   feeImpactPercentage: number;
+  analysis: string;
   recommendation: string;
 }
 
@@ -79,7 +81,9 @@ export default function FeeSimulator() {
     }
     
     const feeImpactPercentage = ((valWithoutFees - valWithFees) / valWithoutFees) * 100;
-    const recommendation = feeImpactPercentage > 15 ? "L'impact des frais semble élevé. Il serait judicieux de comparer avec d'autres courtiers pour optimiser vos rendements à long terme." : "L'impact des frais semble raisonnable. Assurez-vous que le service fourni justifie ces coûts.";
+    
+    const analysis = `Sur une période de ${investmentPeriod} ans, les frais totaux s'élèvent à ${formatCurrency(totalFees)}. Ces coûts réduisent la valeur finale de votre portefeuille de ${feeImpactPercentage.toFixed(2)}%. C'est une illustration claire de la manière dont les frais, même faibles en apparence, érodent la performance sur le long terme.`;
+    const recommendation = feeImpactPercentage > 15 ? "L'impact des frais semble élevé. Il serait judicieux de comparer avec d'autres courtiers pour optimiser vos rendements à long terme. Chaque pourcentage économisé sur les frais est un pourcentage gagné sur votre performance." : "L'impact des frais semble raisonnable. Assurez-vous que la qualité du service (plateforme, analyses, support) justifie ces coûts. Continuez à surveiller les offres du marché.";
 
     setTimeout(() => {
         setResult({
@@ -87,6 +91,7 @@ export default function FeeSimulator() {
             totalFeesPaid: totalFees,
             finalValueWithFees: valWithFees,
             feeImpactPercentage,
+            analysis,
             recommendation,
         });
         setLoading(false);
@@ -257,6 +262,11 @@ export default function FeeSimulator() {
                 </Card>
                  <Alert>
                     <Info className="h-4 w-4" />
+                    <AlertTitle className="font-headline">Analyse</AlertTitle>
+                    <AlertDescription>{result.analysis}</AlertDescription>
+                </Alert>
+                 <Alert>
+                    <Info className="h-4 w-4" />
                     <AlertTitle className="font-headline">Recommandation</AlertTitle>
                     <AlertDescription>{result.recommendation}</AlertDescription>
                 </Alert>
@@ -292,3 +302,5 @@ export default function FeeSimulator() {
     </div>
   );
 }
+
+    
