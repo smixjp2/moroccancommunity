@@ -39,11 +39,6 @@ const CategorySection = ({ category }: { category: OpcvmCategory }) => (
         <category.icon className="h-7 w-7 text-primary" />
         {category.title}
       </h2>
-      <Button variant="link" asChild>
-        <Link href="#">
-          Voir tous les fonds <ArrowRight className="ml-2 h-4 w-4" />
-        </Link>
-      </Button>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {category.funds.map(fund => (
