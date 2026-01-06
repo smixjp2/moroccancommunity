@@ -1,3 +1,4 @@
+
 import { articles } from '@/lib/article-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -11,12 +12,11 @@ export default async function ArticlePage({ params }: { params: { id: string } }
     notFound();
   }
 
-  // Placeholder content since the AI generator was removed.
-  // We can use the excerpt as the main content for now.
+  // Use the article excerpt for the content to make the page functional.
   const content = {
     introduction: article.excerpt,
-    body: "Le contenu détaillé de cet article sera bientôt disponible. Revenez plus tard pour une analyse complète et approfondie.",
-    conclusion: "Restez à l'écoute pour les conclusions finales et les perspectives de cet article.",
+    body: `L'analyse détaillée pour "${article.title}" est en cours de rédaction. Voici les points essentiels à retenir : ${article.excerpt}`,
+    conclusion: `En résumé, les éléments clés à surveiller concernant "${article.title}" sont directement liés aux points soulevés dans l'introduction. Une analyse plus approfondie sera bientôt publiée.`,
   };
 
   const renderMarkdown = (markdown: string) => {
