@@ -1,8 +1,9 @@
+
 'use client';
 
 import { useUser, useFirestore } from '@/firebase';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Loader2, ArrowRight } from 'lucide-react';
@@ -28,7 +29,7 @@ export default function DashboardPage() {
   }, [user, isUserLoading, router]);
 
   useEffect(() => {
-    if (user) {
+    if (user && firestore) {
       const setupUserAndCourses = async () => {
         setLoadingCourses(true);
         try {
@@ -40,24 +41,24 @@ export default function DashboardPage() {
               id: user.uid,
               email: user.email,
               role: 'user', // default role
-              firstName: '', // You can populate this from a profile page later
-              lastName: '',
+              firstName: user.displayName?.split(' ')[0] || '',
+              lastName: user.displayName?.split(' ')[1] || '',
             });
           }
 
-          // 2. Fetch user's enrolled courses
+          // 2. Fetch user's enrolled courses from Firestore
           const userCoursesColRef = collection(firestore, `users/${user.uid}/userCourses`);
           const querySnapshot = await getDocs(userCoursesColRef);
           
-          const courses: UserCourse[] = [];
+          const coursesFromDb: UserCourse[] = [];
           querySnapshot.forEach(doc => {
-            const courseId = doc.id;
-            const courseData = ALL_COURSES.find(c => c.id === courseId);
-            if (courseData) {
-              courses.push(courseData);
-            }
+            // doc.data() should match the UserCourse structure but might lack an 'id'
+            // if we rely on document ID. Let's get it from the doc.id
+            const data = doc.data() as Omit<UserCourse, 'id'>;
+            coursesFromDb.push({ ...data, id: doc.id });
           });
-          setUserCourses(courses);
+          setUserCourses(coursesFromDb);
+
         } catch (error) {
           console.error("Erreur lors de la configuration de l'utilisateur ou de la récupération des formations:", error);
         } finally {
