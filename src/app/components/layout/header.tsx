@@ -25,6 +25,7 @@ const navLinks: NavLink[] = [
 ];
 
 const toolsLinks: NavLink[] = [
+    { href: "/tools/personal-wealth-analyzer", label: "Analyse de Patrimoine"},
     { href: "/tools/fee-simulator", label: "Simulateur d'Impact des Frais"},
     { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
     { href: "/tools/retirement-planner", label: "Planificateur de Retraite"},

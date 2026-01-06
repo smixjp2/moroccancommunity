@@ -1,10 +1,16 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, BarChart3 } from "lucide-react";
+import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, BarChart3, Wallet } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
+    {
+    href: "/tools/personal-wealth-analyzer",
+    icon: <Wallet className="h-8 w-8 text-primary" />,
+    title: "Analyse de Patrimoine",
+    description: "Obtenez une vue d'ensemble de votre situation financière et des conseils pour l'optimiser.",
+  },
     {
     href: "/tools/opcvm-comparator",
     icon: <BarChart3 className="h-8 w-8 text-primary" />,
