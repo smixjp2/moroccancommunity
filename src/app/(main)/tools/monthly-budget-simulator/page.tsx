@@ -11,8 +11,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Loader2, HelpCircle, Wallet, PlusCircle, Trash2, TrendingUp, TrendingDown, Circle } from "lucide-react";
+import { Loader2, HelpCircle, Wallet, PlusCircle, Trash2, TrendingUp, TrendingDown, Circle, AlertCircle, Sparkles, Goal } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Link from "next/link";
 
 const formSchema = z.object({
   salary: z.coerce.number().min(0, "Le salaire doit être positif."),
@@ -29,6 +31,14 @@ type FormValues = z.infer<typeof formSchema>;
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"];
 
+interface AnalysisResult {
+    totalIncomes: number;
+    totalExpenses: number;
+    balance: number;
+    debtRatio: number;
+    expenseData: { name: string; value: number }[];
+}
+
 const ExpenseCategory = ({ name, value }: {name: string, value: number}) => {
     const color = COLORS[Math.abs(name.split('').reduce((a,c) => (a + c.charCodeAt(0)), 0)) % COLORS.length];
     return (
@@ -42,8 +52,51 @@ const ExpenseCategory = ({ name, value }: {name: string, value: number}) => {
     );
 }
 
+const DynamicRecommendations = ({ result }: { result: AnalysisResult }) => {
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2 font-headline">
+                    <Sparkles className="h-6 w-6 text-primary"/>
+                    Analyse et Recommandations
+                </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                {result.balance < 0 && (
+                     <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle>Attention : Solde Négatif</AlertTitle>
+                        <AlertDescription>
+                            Votre budget est actuellement en déficit. Il est crucial d'identifier des postes de dépenses à réduire. Concentrez-vous sur les charges variables comme les loisirs ou les "autres dépenses" pour commencer.
+                        </AlertDescription>
+                    </Alert>
+                )}
+                 {result.balance >= 0 && (
+                     <Alert variant="default" className="bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-700">
+                        <Goal className="h-4 w-4" />
+                        <AlertTitle className="text-green-800 dark:text-green-300">Félicitations ! Capacité d'Épargne Positive</AlertTitle>
+                        <AlertDescription className="text-green-700 dark:text-green-400">
+                            Vous dégagez un excédent de <strong>{formatCurrency(result.balance)}</strong> chaque mois. C'est excellent ! C'est la somme que vous pouvez allouer à votre épargne ou à vos investissements. Pensez à des stratégies comme le <Link href="/courses/formation-dca" className="underline font-bold">DCA (Dollar Cost Averaging)</Link> pour faire travailler cet argent pour vous.
+                        </AlertDescription>
+                    </Alert>
+                )}
+                 {result.debtRatio > 0.4 && (
+                     <Alert>
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertTitle>Taux d'Endettement à Surveiller</AlertTitle>
+                        <AlertDescription>
+                            Vos charges fixes (loyer + crédits) représentent plus de 40% de vos revenus. C'est un niveau élevé qui peut fragiliser votre budget. Soyez vigilant sur vos autres dépenses et envisagez de réduire ce poids si possible à l'avenir.
+                        </AlertDescription>
+                    </Alert>
+                 )}
+                 <p className="text-sm text-muted-foreground pt-2">Le graphique de répartition des dépenses est votre meilleur allié. Identifiez les catégories les plus importantes. Le "Loyer" et les "Crédits" sont souvent difficiles à réduire à court terme. Concentrez-vous sur les charges variables : Où pouvez-vous faire des économies sans trop impacter votre qualité de vie ? Chaque dirham économisé peut être un dirham investi pour votre avenir.</p>
+            </CardContent>
+        </Card>
+    )
+}
+
 export default function MonthlyBudgetSimulatorPage() {
-  const [result, setResult] = useState<any | null>(null);
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormValues>({
@@ -66,6 +119,8 @@ export default function MonthlyBudgetSimulatorPage() {
     const totalIncomes = values.salary + values.otherIncomes;
     const totalExpenses = values.rent + values.loans + values.food + values.transport + values.leisure + values.otherExpenses;
     const balance = totalIncomes - totalExpenses;
+    const debtRatio = totalIncomes > 0 ? (values.rent + values.loans) / totalIncomes : 0;
+
 
     const expenseData = [
       { name: 'Loyer', value: values.rent },
@@ -81,6 +136,7 @@ export default function MonthlyBudgetSimulatorPage() {
         totalIncomes,
         totalExpenses,
         balance,
+        debtRatio,
         expenseData,
       });
       setLoading(false);
@@ -215,19 +271,18 @@ export default function MonthlyBudgetSimulatorPage() {
                     </CardContent>
                 </Card>
 
+                <DynamicRecommendations result={result} />
+
                 <Card>
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Guide d'Utilisation et Analyse</CardTitle>
+                        <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Guide d'Utilisation</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4 text-muted-foreground">
                         <p>Cet outil vous aide à avoir une vision claire de votre budget mensuel pour identifier votre capacité d'épargne et d'investissement.</p>
                         <ul className="list-disc pl-6 space-y-2">
                             <li><strong>Revenus :</strong> Incluez votre salaire net (après impôts et cotisations) ainsi que toute autre source de revenu régulière (bonus, loyers perçus, etc.).</li>
                             <li><strong>Charges :</strong> Soyez le plus précis possible. Séparez bien vos charges fixes (loyer, crédits) de vos charges variables (nourriture, loisirs). N'oubliez pas les petites dépenses qui s'accumulent !</li>
-                            <li><strong>Solde :</strong> C'est le chiffre le plus important. S'il est largement positif, félicitations ! Vous avez une bonne capacité d'épargne. S'il est faible ou négatif, c'est le signe qu'il faut analyser vos dépenses.</li>
                         </ul>
-                        <p className="font-semibold text-foreground">Pistes d'optimisation :</p>
-                        <p>Le graphique de répartition des dépenses est votre meilleur allié. Identifiez les catégories les plus importantes. Le "Loyer" et les "Crédits" sont souvent difficiles à réduire à court terme. Concentrez-vous sur les charges variables : Où pouvez-vous faire des économies sans trop impacter votre qualité de vie ? Chaque dirham économisé peut être un dirham investi pour votre avenir.</p>
                     </CardContent>
                 </Card>
               </>
@@ -240,3 +295,5 @@ export default function MonthlyBudgetSimulatorPage() {
     </>
   );
 }
+
+    
