@@ -1,16 +1,15 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Landmark, Briefcase, Percent, ShieldCheck, UserCheck, BarChart3, Wallet } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
     {
-    href: "/tools/opcvm-comparator",
-    icon: <BarChart3 className="h-8 w-8 text-primary" />,
-    title: "Comparateur d'OPCVM",
-    description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
-    isComingSoon: true,
+    href: "/tools/monthly-budget-simulator",
+    icon: <Wallet className="h-8 w-8 text-primary" />,
+    title: "Simulateur de Budget Mensuel",
+    description: "Analysez vos revenus, charges et calculez votre capacité d'épargne.",
   },
   {
     href: "/tools/fee-simulator",
@@ -35,6 +34,13 @@ const simulators = [
     icon: <UserCheck className="h-8 w-8 text-primary" />,
     title: "Quiz Profil d'Investisseur",
     description: "Découvrez quel type d'investisseur vous êtes.",
+  },
+  {
+    href: "/tools/opcvm-comparator",
+    icon: <BarChart3 className="h-8 w-8 text-primary" />,
+    title: "Comparateur d'OPCVM",
+    description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
+    isComingSoon: true,
   },
 ];
 
