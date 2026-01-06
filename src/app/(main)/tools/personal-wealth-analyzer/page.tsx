@@ -121,10 +121,10 @@ export default function PersonalWealthAnalyzerPage() {
                   <h3 className="text-lg font-medium mb-2 font-headline">Passifs (Dettes)</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField control={form.control} name="shortTermDebt" render={({ field }) => (
-                      <FormItem><FormLabel>Dettes à Court Terme</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                      <FormItem><FormLabel>Crédit Consommation & Découverts</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                     <FormField control={form.control} name="longTermDebt" render={({ field }) => (
-                      <FormItem><FormLabel>Dettes à Long Terme</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                      <FormItem><FormLabel>Crédit Immobilier</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                   </div>
                 </div>

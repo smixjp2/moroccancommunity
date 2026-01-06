@@ -58,8 +58,8 @@ Input Data (in MAD):
 - Stocks: {{{stocks}}}
 - Real Estate: {{{realEstate}}}
 - Other Assets: {{{otherAssets}}}
-- Short-Term Debt: {{{shortTermDebt}}}
-- Long-Term Debt: {{{longTermDebt}}}
+- Consumer Credit & Overdrafts (short-term debt): {{{shortTermDebt}}}
+- Mortgage (long-term debt): {{{longTermDebt}}}
 
 Calculations to be performed by you before generating analysis:
 1.  **Total Assets**: cash + savings + stocks + realEstate + otherAssets
