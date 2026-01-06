@@ -23,11 +23,11 @@ const PersonalWealthInputSchema = z.object({
 export type PersonalWealthInput = z.infer<typeof PersonalWealthInputSchema>;
 
 const AssetAllocationSchema = z.object({
-    cash: z.number(),
-    savings: z.number(),
-    stocks: z.number(),
-    realEstate: z.number(),
-    other: z.number(),
+    cash: z.number().describe("The percentage of cash in the asset allocation."),
+    savings: z.number().describe("The percentage of savings in the asset allocation."),
+    stocks: z.number().describe("The percentage of stocks in the asset allocation."),
+    realEstate: z.number().describe("The percentage of real estate in the asset allocation."),
+    other: z.number().describe("The percentage of other assets in the asset allocation."),
 });
 
 const PersonalWealthOutputSchema = z.object({
