@@ -79,8 +79,8 @@ export default function PersonalWealthAnalyzerPage() {
   ] : [];
 
   return (
-    <>
-      <div className="text-center max-w-3xl mx-auto my-12">
+    <div className="container py-12">
+      <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="font-headline text-4xl font-bold md:text-5xl">Analyse de Patrimoine Personnel</h1>
         <p className="mt-4 text-muted-foreground md:text-lg">
           Obtenez une vue claire de votre situation financière. Saisissez vos actifs et passifs pour recevoir une analyse IA de votre patrimoine et des conseils pour l'optimiser.
@@ -124,7 +124,7 @@ export default function PersonalWealthAnalyzerPage() {
                       <FormItem><FormLabel>Crédit Consommation & Découverts</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                     <FormField control={form.control} name="longTermDebt" render={({ field }) => (
-                      <FormItem><FormLabel>Crédit Immobilier</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormMessage>
+                      <FormItem><FormLabel>Crédit Immobilier</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function PersonalWealthAnalyzerPage() {
                 <Card>
                     <CardHeader><CardTitle className="text-lg">Total Actifs</CardTitle></CardHeader>
                     <CardContent>
-                        <p className="text-3xl font-bold">{formatCurrency(debtAssetChartData[1].value)}</p>
+                        <p className="text-3xl font-bold">{formatCurrency(debtAssetChartData.find(d => d.name === 'Actifs')?.value || 0)}</p>
                     </CardContent>
                 </Card>
               </div>
@@ -180,7 +180,7 @@ export default function PersonalWealthAnalyzerPage() {
                           <Cell key={`cell-${index}`} fill={ASSET_COLORS[entry.name as keyof typeof ASSET_COLORS]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value, name) => [`${(value as number).toFixed(2)}%`, name]}/>
+                      <Tooltip formatter={(value, name, props) => [`${(props.payload.percent * 100).toFixed(2)}%`, name]}/>
                     </PieChart>
                   </ResponsiveContainer>
                    <div className="flex flex-wrap justify-center gap-4 text-xs mt-4">
@@ -203,7 +203,6 @@ export default function PersonalWealthAnalyzerPage() {
                 <p>Vos résultats d'analyse apparaîtront ici.</p>
              </div>
           )}
-
            <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 font-headline">
@@ -235,6 +234,6 @@ export default function PersonalWealthAnalyzerPage() {
             </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 }
