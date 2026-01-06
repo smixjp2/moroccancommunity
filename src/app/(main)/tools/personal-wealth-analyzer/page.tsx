@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Loader2, TrendingUp, TrendingDown, Info, Wallet, PiggyBank, Briefcase, Home, Car, Landmark } from "lucide-react";
+import { Loader2, TrendingUp, TrendingDown, Info, Wallet, PiggyBank, Briefcase, Home, Car, Landmark, HelpCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const formSchema = z.object({
@@ -124,7 +124,7 @@ export default function PersonalWealthAnalyzerPage() {
                       <FormItem><FormLabel>Crédit Consommation & Découverts</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                     <FormField control={form.control} name="longTermDebt" render={({ field }) => (
-                      <FormItem><FormLabel>Crédit Immobilier</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                      <FormItem><FormLabel>Crédit Immobilier</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormMessage>
                     )} />
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export default function PersonalWealthAnalyzerPage() {
           {loading && <div className="flex justify-center items-center h-full"><Loader2 className="h-12 w-12 animate-spin text-primary" /></div>}
           {error && <Alert variant="destructive"><AlertTitle>Erreur</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
           
-          {result && (
+          {result ? (
             <div className="space-y-8">
               <Card>
                 <CardHeader>
@@ -198,7 +198,41 @@ export default function PersonalWealthAnalyzerPage() {
               <Alert><TrendingDown className="h-4 w-4" /><AlertTitle className="font-headline">Analyse de Risque</AlertTitle><AlertDescription>{result.riskAnalysis}</AlertDescription></Alert>
               <Alert><TrendingUp className="h-4 w-4" /><AlertTitle className="font-headline">Recommandations</AlertTitle><AlertDescription>{result.recommendation}</AlertDescription></Alert>
             </div>
+          ) : !loading && (
+             <div className="text-center text-muted-foreground h-full flex items-center justify-center border rounded-lg">
+                <p>Vos résultats d'analyse apparaîtront ici.</p>
+             </div>
           )}
+
+           <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2 font-headline">
+                        <HelpCircle className="h-6 w-6 text-primary"/>
+                        Guide d'Utilisation
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4 text-muted-foreground">
+                    <p>Cet outil vous donne une vision à 360° de votre santé financière. Voici comment remplir les champs :</p>
+                    <div>
+                        <h4 className="font-semibold text-foreground">Actifs</h4>
+                        <ul className="list-disc pl-6 space-y-2 mt-2">
+                            <li><strong>Liquidités :</strong> Argent disponible sur vos comptes courants.</li>
+                            <li><strong>Épargne :</strong> Argent sur vos livrets (Livret A, etc.) et comptes à terme.</li>
+                            <li><strong>Actions & Placements :</strong> Valeur de votre portefeuille boursier (actions, OPCVM).</li>
+                            <li><strong>Immobilier :</strong> Valeur marchande de votre résidence principale et autres biens immobiliers.</li>
+                            <li><strong>Autres Actifs :</strong> Valeur de vos voitures, objets de valeur, etc.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold text-foreground">Passifs (Dettes)</h4>
+                        <ul className="list-disc pl-6 space-y-2 mt-2">
+                             <li><strong>Crédit Consommation & Découverts :</strong> Total des crédits à la consommation, prêts personnels et découverts bancaires.</li>
+                            <li><strong>Crédit Immobilier :</strong> Le capital restant dû de votre crédit immobilier.</li>
+                        </ul>
+                    </div>
+                    <p className="pt-2"><strong>Analyse des Résultats :</strong> L'outil calcule votre <strong>patrimoine net</strong> (ce que vous possédez réellement), votre <strong>répartition d'actifs</strong> (comment votre richesse est diversifiée) et votre <strong>ratio d'endettement</strong>. Les analyses de liquidité, de risque et les recommandations de l'IA vous aideront à identifier les points forts et les faiblesses de votre situation pour prendre de meilleures décisions. </p>
+                </CardContent>
+            </Card>
         </div>
       </div>
     </>
