@@ -38,7 +38,7 @@
     },
     {
       "id": "resource-psychology-arabic",
-      "description": "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
+      "description": "Image for the arabic guide about opening an account, showing financial documents.",
       "imageUrl": "https://images.unsplash.com/photo-1554224154-26032f3a62d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaW5hbmNpYWwlMjBkb2N1bWVudHxlbnwwfHx8fDE3Njc5NzgwMTd8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "financial document"
     },
@@ -50,8 +50,8 @@
     },
     {
       "id": "resource-account-opening",
-      "description": "Image for a guide on opening a brokerage account.",
-      "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaWduaW5nJTIwY29udHJhY3R8ZW58MHx8fHwxNzIzMTEwNjM5fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "description": "Image for a guide on opening a brokerage account, showing a person signing a contract.",
+      "imageUrl": "https://images.unsplash.com/photo-1560520031-3a4dc4e2a738?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtYW4lMjBzaWduaW5nJTIwY29udHJhY3R8ZW58MHx8fHwxNzIzMTEwNzUxfDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "signing contract"
     },
     {
