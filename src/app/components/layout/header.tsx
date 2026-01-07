@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Scaling, ChevronDown } from "lucide-react";
+import { Menu, Scaling, ChevronDown, Info } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -176,6 +176,10 @@ export function Header() {
         </div>
       </div>
       <TradingViewTicker />
+      <div className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 py-2 text-center text-sm font-semibold flex items-center justify-center gap-2">
+        <Info className="h-4 w-4" />
+        Version Beta : The Moroccan Community est actuellement en version bêta.
+      </div>
     </header>
   );
 }
