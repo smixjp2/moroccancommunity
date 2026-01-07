@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/accordion";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 import { useToast } from "@/hooks/use-toast";
-import React from "react";
+import React, { useEffect } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const featureImages = {
@@ -69,39 +70,37 @@ const faqItems = [
   },
 ];
 
+function SubmitButton() {
+    const { pending } = useFormStatus();
+    return (
+        <Button type="submit" size="lg" disabled={pending}>
+            {pending ? "Inscription..." : "S'abonner"}
+        </Button>
+    );
+}
 
 export default function Home() {
-  const { toast } = useToast();
-  const formRef = React.useRef<HTMLFormElement>(null);
+    const { toast } = useToast();
+    const formRef = React.useRef<HTMLFormElement>(null);
+    const [state, formAction] = useFormState(subscribeToNewsletter, { success: false, message: "" });
 
-  async function handleSubscription(formData: FormData) {
-    const email = formData.get('email') as string;
-    if (!email) return;
-
-    try {
-        const result = await subscribeToNewsletter(email);
-
-        if (result.success) {
-          toast({
-            title: "Inscription réussie !",
-            description: result.message,
-          });
-          formRef.current?.reset();
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Erreur d'inscription",
-            description: result.message,
-          });
+    useEffect(() => {
+        if (state.message) {
+            if (state.success) {
+                toast({
+                    title: "Inscription réussie !",
+                    description: state.message,
+                });
+                formRef.current?.reset();
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Erreur d'inscription",
+                    description: state.message,
+                });
+            }
         }
-    } catch (error) {
-        toast({
-            variant: "destructive",
-            title: "Erreur inattendue",
-            description: "Une erreur s'est produite. Veuillez réessayer plus tard.",
-        });
-    }
-  }
+    }, [state, toast]);
 
   return (
     <>
@@ -218,9 +217,9 @@ export default function Home() {
                       Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.
                   </p>
               </div>
-              <form action={handleSubscription} ref={formRef} className="flex w-full max-w-md items-center space-x-2 mx-auto">
+              <form action={formAction} ref={formRef} className="flex w-full max-w-md items-center space-x-2 mx-auto">
                 <Input name="email" type="email" placeholder="Votre meilleure adresse e-mail" className="flex-1 py-6" required />
-                <Button type="submit" size="lg">S'abonner</Button>
+                <SubmitButton />
               </form>
           </div>
         </section>

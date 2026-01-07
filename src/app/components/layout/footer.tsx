@@ -7,40 +7,40 @@ import { Scaling, Instagram, Youtube } from "lucide-react";
 import Link from "next/link";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 import { useToast } from "@/hooks/use-toast";
-import React from "react";
+import React, { useEffect } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+
+function SubmitButton() {
+    const { pending } = useFormStatus();
+    return (
+        <Button type="submit" variant="default" disabled={pending}>
+            {pending ? "Envoi..." : "S'abonner"}
+        </Button>
+    );
+}
 
 export function Footer() {
   const { toast } = useToast();
   const formRef = React.useRef<HTMLFormElement>(null);
+  const [state, formAction] = useFormState(subscribeToNewsletter, { success: false, message: "" });
 
-  async function handleSubscription(formData: FormData) {
-    const email = formData.get('email') as string;
-    if (!email) return;
-
-    try {
-        const result = await subscribeToNewsletter(email);
-
-        if (result.success) {
-          toast({
-            title: "Inscription réussie !",
-            description: result.message,
-          });
-          formRef.current?.reset();
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Erreur d'inscription",
-            description: result.message,
-          });
-        }
-    } catch (error) {
+  useEffect(() => {
+    if (state.message) {
+      if (state.success) {
         toast({
-            variant: "destructive",
-            title: "Erreur inattendue",
-            description: "Une erreur s'est produite. Veuillez réessayer plus tard.",
+          title: "Inscription réussie !",
+          description: state.message,
         });
+        formRef.current?.reset();
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Erreur d'inscription",
+          description: state.message,
+        });
+      }
     }
-  }
+  }, [state, toast]);
 
   return (
     <footer className="border-t bg-card">
@@ -71,11 +71,9 @@ export function Footer() {
             <p className="text-muted-foreground text-sm">
                 Recevez chaque mois des informations sur le marché, des offres promotionnelles et des mises à jour sur les nouveaux services directement dans votre boîte de réception.
             </p>
-            <form action={handleSubscription} ref={formRef} className="flex w-full max-w-md items-center space-x-2">
+            <form action={formAction} ref={formRef} className="flex w-full max-w-md items-center space-x-2">
               <Input name="email" type="email" placeholder="Entrez votre email" className="flex-1" required />
-              <Button type="submit" variant="default">
-                S'abonner
-              </Button>
+              <SubmitButton />
             </form>
           </div>
         </div>
