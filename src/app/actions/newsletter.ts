@@ -8,7 +8,7 @@ import * as Brevo from '@getbrevo/brevo';
  * @returns An object indicating success or failure.
  */
 export async function subscribeToNewsletter(email: string): Promise<{ success: boolean; message: string }> {
-  const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY;
+  const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     console.error('Brevo API key is not configured.');
     return { success: false, message: 'La configuration de la newsletter est incomplète.' };
