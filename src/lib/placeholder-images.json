@@ -27,7 +27,7 @@
     {
       "id": "course-1",
       "description": "Image for a course on how to invest your first salary.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "young professional"
     },
     {
@@ -38,20 +38,20 @@
     },
     {
       "id": "resource-psychology-arabic",
-      "description": "Image for the arabic guide about opening an account, showing arabic documents and stock charts.",
-      "imageUrl": "https://images.unsplash.com/photo-1620207412836-162138a39f41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb25leSUyMGFyYWJpY3xlbnwwfHx8fDE3MjM1OTA4NDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "stock charts"
+      "description": "Image for the arabic guide about opening an account, showing a stock market graph.",
+      "imageUrl": "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzdG9jayUyMGNoYXJ0fGVufDB8fHx8MTc2NzY5Mjc5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stock chart"
     },
     {
       "id": "resource-2",
       "description": "Image for a digital product, a comparison list.",
-      "imageUrl": "https://images.unsplash.com/photo-1554224155-cfa08c2a758f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVja2xpc3QlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-cfa08c2a758f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVja2xpc3QlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "checklist document"
     },
     {
       "id": "resource-account-opening",
       "description": "Image for a guide on opening a brokerage account, showing a person signing a contract.",
-      "imageUrl": "https://images.unsplash.com/photo-1568933264877-f343e746d5b9?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmFiaWMlMjBkb2N1bWVudHxlbnwwfHx8fDE3MjM1OTAwMDl8MA",
+      "imageUrl": "https://images.unsplash.com/photo-1562564055-71e051d33c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzaWduaW5nJTIwY29udHJhY3R8ZW58MHx8fHwxNzY3NzgxMDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "signing contract"
     },
     {
@@ -69,13 +69,13 @@
     {
       "id": "feature-tools",
       "description": "Image for the tools feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "gears tools"
     },
     {
       "id": "feature-courses",
       "description": "Image for the courses feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBzZW1pbmFyfGVufDB8fHx8MTcyMzEwOTgwNHww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBzZW1pbmFyfGVufDB8fHx8MTcyMzEwOTgwNHww&ixlib-rb-4.0.3&q=80&w=1080",
       "imageHint": "financial seminar"
     },
     {
