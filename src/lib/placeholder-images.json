@@ -38,9 +38,9 @@
     },
     {
       "id": "resource-psychology-arabic",
-      "description": "Image for the arabic guide about opening an account, showing an arabic document.",
-      "imageUrl": "https://images.unsplash.com/photo-1568933264877-f343e746d5b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmFiaWMlMjBkb2N1bWVudHxlbnwwfHx8fDE3MjM1ODk5MDZ8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "arabic document"
+      "description": "Image for the arabic guide about opening an account, showing arabic documents and stock charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1620207412836-162138a39f41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb25leSUyMGFyYWJpY3xlbnwwfHx8fDE3MjM1OTA4NDB8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "stock charts"
     },
     {
       "id": "resource-2",
@@ -51,7 +51,7 @@
     {
       "id": "resource-account-opening",
       "description": "Image for a guide on opening a brokerage account, showing a person signing a contract.",
-      "imageUrl": "https://images.unsplash.com/photo-1562564055-71e051d33c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzaWduaW5nJTIwY29udHJhY3R8ZW58MHx8fHwxNzY3NzgxMDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1568933264877-f343e746d5b9?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmFiaWMlMjBkb2N1bWVudHxlbnwwfHx8fDE3MjM1OTAwMDl8MA",
       "imageHint": "signing contract"
     },
     {
