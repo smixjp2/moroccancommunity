@@ -15,8 +15,10 @@ export async function subscribeToNewsletter(prevState: any, formData: FormData):
   }
 
   const apiKey = process.env.BREVO_API_KEY;
-  if (!apiKey) {
-    console.error('Brevo API key is not configured.');
+  const listId = process.env.BREVO_LIST_ID ? parseInt(process.env.BREVO_LIST_ID, 10) : null;
+
+  if (!apiKey || !listId) {
+    console.error('Brevo API key or List ID is not configured.');
     return { success: false, message: 'La configuration de la newsletter est incomplète.' };
   }
   
@@ -29,7 +31,7 @@ export async function subscribeToNewsletter(prevState: any, formData: FormData):
   const createContact = new Brevo.CreateContact();
   createContact.email = email;
   // Add the contact to a specific list.
-  createContact.listIds = [2];
+  createContact.listIds = [listId];
 
   try {
     await contactsApi.createContact(createContact);
