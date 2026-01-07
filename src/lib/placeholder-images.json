@@ -33,7 +33,7 @@
     {
       "id": "course-excel-power-bi",
       "description": "Image representing data analysis with spreadsheets and charts.",
-      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib-rb-4.0.3&q=80&w=1080",
       "imageHint": "excel dashboard"
     },
     {
@@ -51,8 +51,8 @@
     {
       "id": "resource-account-opening",
       "description": "Image for a guide on opening a brokerage account.",
-      "imageUrl": "https://images.unsplash.com/photo-1600880292210-f7611c78b659?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmaW5hbmNpYWwlMjBhZHZpc29yfGVufDB8fHx8MTc2Nzk3ODAxN3ww&ixlib-rb-4.0.3&q=80&w=1080",
-      "imageHint": "financial advisor"
+      "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaWduaW5nJTIwY29udHJhY3R8ZW58MHx8fHwxNzIzMTEwNjM5fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "signing contract"
     },
     {
       "id": "resource-compound-interest",
@@ -75,7 +75,7 @@
     {
       "id": "feature-courses",
       "description": "Image for the courses feature card on the homepage.",
-      "imageUrl": "https://images.unsplash.com/photo-1542744095-291d1f67b221?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzEzfDB8MHxwaG90by1yZWxhdGVkfDF8fHx8ZW58MHx8fHx8&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBzZW1pbmFyfGVufDB8fHx8MTcyMzEwOTgwNHww&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "financial seminar"
     },
     {
@@ -93,7 +93,7 @@
     {
       "id": "course-dca",
       "description": "Image for a course about Dollar Cost Averaging strategy.",
-      "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib-rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "piggy bank"
     },
     {
