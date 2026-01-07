@@ -28,8 +28,8 @@ const resources: Resource[] = [
   },
    {
     id: "resource-psychology-arabic",
-    title: "كيفية فتح حساب في بورصة (Titres-Compte) الدار البيضاء",
-    description: "Un guide essentiel pour comprendre la psychologie derrière le trading et maîtriser vos émotions pour prendre de meilleures décisions sur le marché.",
+    title: "كيفية فتح حساب في بورصة الدار البيضاء (Titres-Compte)",
+    description: "دليل PDF مفصل خطوة بخطوة لمساعدتك في فتح أول حساب أوراق مالية لك مع وسيط مغربي.",
     price: "Gratuit",
     href: "https://drive.google.com/uc?export=download&id=1SJMxRYWXLN84R-ELkFZcc_-QcqwEJZYY",
     imageUrl: PlaceHolderImages.find(p => p.id === 'resource-psychology-arabic')?.imageUrl || '',

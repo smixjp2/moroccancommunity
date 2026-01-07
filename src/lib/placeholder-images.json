@@ -38,9 +38,9 @@
     },
     {
       "id": "resource-psychology-arabic",
-      "description": "Image for the arabic guide about opening an account, showing financial documents.",
-      "imageUrl": "https://images.unsplash.com/photo-1720700955550-0b3bbe66b093?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxhcmFiaWMlMjBjb250cmFjdHxlbnwwfHx8fDE3Njc3ODEwMjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "arabic contract"
+      "description": "Image for the arabic guide about opening an account, showing an arabic document.",
+      "imageUrl": "https://images.unsplash.com/photo-1568933264877-f343e746d5b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmFiaWMlMjBkb2N1bWVudHxlbnwwfHx8fDE3MjM1ODk5MDZ8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "arabic document"
     },
     {
       "id": "resource-2",
@@ -57,7 +57,7 @@
     {
       "id": "resource-compound-interest",
       "description": "Image for a compound interest simulation spreadsheet.",
-      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGdyYXBoJTIwdXB8ZW58MHx8fHwxNzIyMzc5MDUzfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGdyYXBoJTIwdXB8ZW58MHx8fHwxNzIyMzc5MDUzfDA&ixlibrb-4.0.3&q=80&w=1080",
       "imageHint": "investment graph"
     },
     {
@@ -81,19 +81,19 @@
     {
       "id": "private-community",
       "description": "Image for the private community section.",
-      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract background"
     },
     {
       "id": "course-casablanca-bourse",
       "description": "Image for a course about Casablanca stock exchange.",
-      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "Casablanca building"
     },
     {
       "id": "course-dca",
       "description": "Image for a course about Dollar Cost Averaging strategy.",
-      "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib-rb-4.0.3&q=80&w=1080",
       "imageHint": "piggy bank"
     },
     {
