@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useUser, useFirestore, useMemoFirebase } from '@/firebase';
@@ -5,19 +6,23 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Loader2, ArrowRight, User, Target, BarChart, GraduationCap } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
-import { collection, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import type { UserCourse } from '@/lib/types';
+import ProfileSetup from './profile-setup';
+import { Badge } from '@/components/ui/badge';
 
 // Define a type for the user profile data from Firestore
-interface UserProfile {
+export interface UserProfile {
   id: string;
   email: string;
   role: 'user' | 'admin';
   firstName: string;
   lastName: string;
+  objective?: string;
+  investorProfile?: string;
 }
 
 export default function DashboardPage() {
@@ -37,6 +42,15 @@ export default function DashboardPage() {
     return null;
   }, [user, firestore]);
 
+  const refetchUserProfile = async () => {
+     if (userDocRef) {
+      const userDocSnap = await getDoc(userDocRef);
+      if (userDocSnap.exists()) {
+        setUserProfile(userDocSnap.data() as UserProfile);
+      }
+    }
+  }
+
   useEffect(() => {
     if (!isUserLoading && !user) {
       router.push('/login');
@@ -48,21 +62,7 @@ export default function DashboardPage() {
       const setupUserAndCourses = async () => {
         setLoadingData(true);
         try {
-          // 1. Fetch or create user document
-          const userDocSnap = await getDoc(userDocRef);
-          if (!userDocSnap.exists()) {
-            const newUserProfile: UserProfile = {
-              id: user.uid,
-              email: user.email || 'inconnu',
-              role: 'user', // default role
-              firstName: user.displayName?.split(' ')[0] || '',
-              lastName: user.displayName?.split(' ')[1] || '',
-            };
-            await setDoc(userDocRef, newUserProfile);
-            setUserProfile(newUserProfile);
-          } else {
-            setUserProfile(userDocSnap.data() as UserProfile);
-          }
+          await refetchUserProfile();
 
           // 2. Fetch user's enrolled courses from Firestore
           const userCoursesColRef = collection(firestore, `users/${user.uid}/userCourses`);
@@ -83,6 +83,7 @@ export default function DashboardPage() {
       };
       setupUserAndCourses();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, firestore, userDocRef]);
 
   const handleLogout = async () => {
@@ -96,44 +97,88 @@ export default function DashboardPage() {
 
   const isLoading = isUserLoading || loadingData;
 
-  if (isLoading || !user) {
+  if (isLoading || !user || !userProfile) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
   }
-
-  const isAdmin = userProfile?.role === 'admin';
+  
+  // If user profile is not complete, show the setup form
+  if (!userProfile.firstName || !userProfile.objective) {
+      return <ProfileSetup user={user} userProfile={userProfile} onProfileUpdate={refetchUserProfile} />;
+  }
 
   return (
     <div className="container py-12">
-      <header className="mb-8 flex items-center justify-between">
+      <header className="mb-8 flex flex-col sm:flex-row items-start sm:items-center sm:justify-between">
         <div>
             <h1 className="text-3xl font-bold font-headline">Mon Espace</h1>
-            <p className="text-muted-foreground">Bienvenue, {userProfile?.firstName || user.email || 'Investisseur'} !</p>
+            <p className="text-muted-foreground">Bienvenue, {userProfile.firstName} !</p>
         </div>
-        <div className="flex items-center gap-2">
-            {isAdmin && (
-                 <Button variant="destructive" asChild>
-                    <Link href="/admin/dashboard">
-                        <ShieldCheck className="mr-2 h-4 w-4" />
-                        Dashboard Admin
-                    </Link>
-                </Button>
-            )}
-            <Button variant="outline" asChild>
-              <Link href="/">Accueil</Link>
-            </Button>
+        <div className="flex items-center gap-2 mt-4 sm:mt-0">
             <Button variant="outline" onClick={handleLogout}>
               Déconnexion
+            </Button>
+            <Button asChild>
+                <Link href="/">Retour à l'accueil</Link>
             </Button>
         </div>
       </header>
 
+      {/* Profile and Objective Section */}
+      <section className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card>
+          <CardHeader className="flex-row items-center gap-4 space-y-0">
+             <User className="h-8 w-8 text-primary"/>
+            <CardTitle>Mon Profil</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="font-semibold">{userProfile.firstName} {userProfile.lastName}</p>
+            <p className="text-sm text-muted-foreground">{userProfile.email}</p>
+             <Button variant="link" className="p-0 h-auto text-xs mt-2" onClick={() => setUserProfile(prev => ({...prev!, firstName: ''}))}>Modifier</Button>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex-row items-center gap-4 space-y-0">
+             <Target className="h-8 w-8 text-primary"/>
+            <CardTitle>Mon Objectif</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="font-semibold">{userProfile.objective}</p>
+             <Button variant="link" className="p-0 h-auto text-xs mt-2" onClick={() => setUserProfile(prev => ({...prev!, objective: ''}))}>Modifier</Button>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex-row items-center gap-4 space-y-0">
+             <BarChart className="h-8 w-8 text-primary"/>
+            <CardTitle>Profil d'Investisseur</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {userProfile.investorProfile ? (
+                <>
+                    <Badge variant="secondary" className="text-base">{userProfile.investorProfile}</Badge>
+                    <Button variant="link" className="p-0 h-auto text-xs mt-2 block" asChild>
+                        <Link href="/tools/investor-profile-quiz">Refaire le quiz</Link>
+                    </Button>
+                </>
+            ) : (
+                 <div className="flex flex-col items-start gap-2">
+                    <p className="text-sm text-muted-foreground">Définissez votre profil pour des conseils adaptés.</p>
+                    <Button asChild size="sm">
+                        <Link href="/tools/investor-profile-quiz">Faire le quiz</Link>
+                    </Button>
+                </div>
+            )}
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Courses Section */}
       <Card>
         <CardHeader>
-          <CardTitle>Mes Formations</CardTitle>
+          <CardTitle className="flex items-center gap-3"><GraduationCap />Mes Formations</CardTitle>
           <CardDescription>
             Accédez à toutes les formations que vous avez achetées.
           </CardDescription>
