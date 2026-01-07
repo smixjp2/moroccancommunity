@@ -17,7 +17,8 @@ import {
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 import { useToast } from "@/hooks/use-toast";
 import React, { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const featureImages = {
@@ -82,7 +83,7 @@ function SubmitButton() {
 export default function Home() {
     const { toast } = useToast();
     const formRef = React.useRef<HTMLFormElement>(null);
-    const [state, formAction] = useFormState(subscribeToNewsletter, { success: false, message: "" });
+    const [state, formAction] = useActionState(subscribeToNewsletter, { success: false, message: "" });
 
     useEffect(() => {
         if (state.message) {
