@@ -7,8 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useAuth, useFirestore } from '@/firebase';
+import { signInWithEmailAndPassword, User } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -39,6 +40,7 @@ type FormValues = z.infer<typeof formSchema>;
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const auth = useAuth();
+  const firestore = useFirestore();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -50,15 +52,31 @@ export default function LoginPage() {
     },
   });
 
-  const onSubmit = async (values: FormValues) => {
-    setLoading(true);
+  const handleLoginSuccess = async (user: User) => {
+    const userDocRef = doc(firestore, 'users', user.uid);
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      const userDocSnap = await getDoc(userDocRef);
+      if (userDocSnap.exists() && userDocSnap.data().role === 'admin') {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/dashboard');
+      }
       toast({
         title: 'Connexion réussie !',
         description: 'Vous allez être redirigé vers votre tableau de bord.',
       });
+    } catch (dbError) {
+      console.error("Erreur lors de la lecture du profil utilisateur:", dbError);
+      // Fallback to regular dashboard if profile read fails
       router.push('/dashboard');
+    }
+  };
+
+  const onSubmit = async (values: FormValues) => {
+    setLoading(true);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+      await handleLoginSuccess(userCredential.user);
     } catch (error: any) {
       let errorMessage = "Une erreur inconnue est survenue.";
       switch (error.code) {
@@ -80,9 +98,9 @@ export default function LoginPage() {
         title: 'Erreur de connexion',
         description: errorMessage,
       });
-    } finally {
-        setLoading(false);
+      setLoading(false);
     }
+    // No setLoading(false) here, as redirection will unmount the component
   };
 
   return (
