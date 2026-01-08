@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Loader2, ArrowRight, User, Target, BarChart, GraduationCap } from 'lucide-react';
+import { Loader2, ArrowRight, User, Target, BarChart, GraduationCap, Sparkles } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
@@ -172,6 +172,30 @@ export default function DashboardPage() {
                 </div>
             )}
           </CardContent>
+        </Card>
+      </section>
+
+      {/* AI Tools Section */}
+      <section className="mb-8">
+        <Card className="bg-primary/10 border-primary">
+            <CardHeader>
+                <CardTitle className="font-headline flex items-center gap-3"><Sparkles /> Outils Exclusifs IA</CardTitle>
+                <CardDescription>Accédez à nos outils d'analyse avancés basés sur l'IA.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                 <Card className="flex flex-col sm:flex-row items-start justify-between p-6">
+                    <div>
+                        <h3 className="text-xl font-bold font-headline">Analyseur d'Actions par IA</h3>
+                        <p className="text-muted-foreground mt-1">Obtenez une analyse financière détaillée d'une action de la Bourse de Casablanca.</p>
+                    </div>
+                    <Button asChild className="mt-4 sm:mt-0 sm:ml-4 flex-shrink-0">
+                        <Link href="/dashboard/stock-analyzer">
+                            Lancer l'Analyse
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </Card>
+            </CardContent>
         </Card>
       </section>
 

@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
@@ -36,6 +36,13 @@ const simulators = [
     description: "Découvrez quel type d'investisseur vous êtes.",
   },
   {
+    href: "/dashboard/stock-analyzer",
+    icon: <Sparkles className="h-8 w-8 text-primary" />,
+    title: "Analyseur d'Actions par IA",
+    description: "Obtenez une analyse financière IA pour les actions marocaines.",
+    isMemberOnly: true,
+  },
+  {
     href: "/tools/opcvm-comparator",
     icon: <BarChart3 className="h-8 w-8 text-primary" />,
     title: "Comparateur d'OPCVM",
@@ -61,9 +68,9 @@ export default function ToolsPage() {
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
               <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable ? 'opacity-60' : ''}`}>
-                {(tool.isComingSoon) && (
+                {(tool.isComingSoon || tool.isMemberOnly) && (
                     <Badge variant={"secondary"} className="absolute top-4 right-4 z-10">
-                        {"Bientôt disponible"}
+                        {tool.isComingSoon ? "Bientôt disponible" : "Membre Uniquement"}
                     </Badge>
                 )}
                 <CardHeader className="p-6">

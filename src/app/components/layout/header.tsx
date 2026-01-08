@@ -32,6 +32,7 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
     { href: "/tools/retirement-planner", label: "Planificateur de Retraite"},
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
+    { href: "/dashboard/stock-analyzer", label: "Analyseur d'Actions IA" },
     { href: "/tools/opcvm-comparator", label: "Comparateur d'OPCVM"},
 ];
 
@@ -65,7 +66,7 @@ export function Header() {
         <DropdownMenuTrigger asChild>
             <Button variant="link" className={cn(
                 "text-sm font-medium transition-colors hover:text-primary p-0 h-auto",
-                pathname.startsWith('/tools') ? "text-primary" : "text-muted-foreground"
+                pathname.startsWith('/tools') || pathname.startsWith('/dashboard/stock-analyzer') ? "text-primary" : "text-muted-foreground"
             )}>
                <span className="flex items-center gap-1">Outils <ChevronDown className="h-4 w-4" /></span>
             </Button>
