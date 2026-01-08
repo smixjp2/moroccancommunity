@@ -10,6 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {googleAI} from '@genkit-ai/google-genai';
 
 const StockAnalysisInputSchema = z.object({
   stockSymbol: z.string().describe('The stock ticker symbol (e.g., ATW, IAM).'),
@@ -37,6 +38,7 @@ const prompt = ai.definePrompt({
   name: 'stockAnalyzerPrompt',
   input: {schema: StockAnalysisInputSchema},
   output: {schema: StockAnalysisOutputSchema},
+  model: googleAI.model('gemini-pro'),
   prompt: `You are a top-tier financial analyst specializing in the Moroccan stock market (Bourse de Casablanca). Your task is to provide a comprehensive and clear analysis of a given stock for an individual investor.
 
 Analyze the following company:

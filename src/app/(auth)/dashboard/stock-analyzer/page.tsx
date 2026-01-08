@@ -35,11 +35,30 @@ import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 const availableStocks = [
   { symbol: 'ATW', name: 'Attijariwafa Bank' },
   { symbol: 'BCP', name: 'Banque Centrale Populaire' },
+  { symbol: 'BOA', name: 'Bank of Africa' },
   { symbol: 'IAM', name: 'Maroc Telecom' },
   { symbol: 'LHM', name: 'LafargeHolcim Maroc' },
   { symbol: 'CSR', name: 'Cosumar' },
   { symbol: 'HPS', name: 'HPS' },
+  { symbol: 'ACI', name: 'Akdital' },
+  { symbol: 'TQM', name: 'Taqa Morocco' },
+  { symbol: 'MSA', name: 'Marsa Maroc' },
+  { symbol: 'LBV', name: 'Label Vie' },
+  { symbol: 'GAZ', name: 'Afriquia Gaz' },
+  { symbol: 'ADI', name: 'Aradei Capital' },
+  { symbol: 'WAA', name: 'Wafa Assurance' },
+  { symbol: 'SNA', name: 'Sanlam Maroc' },
+  { symbol: 'TGC', name: 'TGCC' },
+  { symbol: 'SNI', name: 'Al Mada (ex-SNI)' },
+  { symbol: 'RIS', name: 'Risma' },
+  { symbol: 'SID', name: 'Sonasid' },
+  { symbol: 'DHO', name: 'Douja Prom Addoha' },
+  { symbol: 'ALU', name: 'Aluminium du Maroc' },
+  { symbol: 'CTM', name: 'CTM' },
+  { symbol: 'NKL', name: 'Nekl' },
+  { symbol: 'MIC', name: 'Microdata' },
 ];
+
 
 const formSchema = z.object({
   stockSymbol: z.string({ required_error: 'Veuillez sélectionner une action.' }),
@@ -98,7 +117,7 @@ export default function StockAnalyzerPage() {
   return (
     <div className="container py-12">
       <header className="mb-8 max-w-3xl mx-auto text-center">
-        <h1 className="text-4xl font-bold font-headline">Analyse d'Actions par IA</h1>
+        <h1 className="text-4xl font-bold font-headline flex items-center justify-center gap-3"><Sparkles className="text-primary" />Analyse d'Actions par IA</h1>
         <p className="text-muted-foreground mt-2">
           Obtenez une analyse financière complète d'une action de la Bourse de Casablanca, générée par notre IA.
         </p>
@@ -164,7 +183,7 @@ export default function StockAnalyzerPage() {
         <div className="max-w-4xl mx-auto space-y-6">
             <Alert>
                 <Sparkles className="h-4 w-4" />
-                <AlertTitle className="font-headline">Résumé de l'Analyse</AlertTitle>
+                <AlertTitle className="font-headline">Résumé de l'Analyse IA</AlertTitle>
                 <AlertDescription>{analysis.analysisSummary}</AlertDescription>
             </Alert>
             
@@ -177,7 +196,7 @@ export default function StockAnalyzerPage() {
 
              <Alert variant="default" className="bg-primary/10 border-primary">
                 <Goal className="h-4 w-4" />
-                <AlertTitle className="font-headline text-primary">Recommandation Finale</AlertTitle>
+                <AlertTitle className="font-headline text-primary">Recommandation Finale de l'IA</AlertTitle>
                 <AlertDescription>{analysis.finalRecommendation}</AlertDescription>
             </Alert>
         </div>
