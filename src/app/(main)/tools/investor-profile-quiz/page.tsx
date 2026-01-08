@@ -6,17 +6,20 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { useUser, useFirestore } from "@/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown, HelpCircle, Info } from "lucide-react";
+import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown, HelpCircle, Info, Target } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useToast } from "@/hooks/use-toast";
 
-// Define the output type manually as we are no longer using the AI flow
 export interface InvestorProfileQuizOutput {
   profile: string;
   description: string;
@@ -40,12 +43,16 @@ const formSteps = [
     { id: "riskTolerance", label: "Tolérance au Risque", icon: TrendingDown },
     { id: "marketDropResponse", label: "Réaction à la Baisse", icon: TrendingDown },
     { id: "investmentKnowledge", label: "Connaissances", icon: Brain },
-]
+];
 
 export default function InvestorProfileQuizPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [result, setResult] = useState<InvestorProfileQuizOutput | null>(null);
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
+  const firestore = useFirestore();
+  const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -79,28 +86,28 @@ export default function InvestorProfileQuizPage() {
     if (data.riskTolerance === 'Modérée') score += 1;
     if (data.riskTolerance === 'Élevée') score += 2;
     if (data.marketDropResponse === 'Ne rien faire et attendre') score += 1;
-    if (data.marketDropResponse === 'Acheter plus car c\'est une opportunité') score += 2;
+    if (data.marketDropResponse === "Acheter plus car c'est une opportunité") score += 2;
     if (data.investmentKnowledge === 'Intermédiaire') score += 1;
     if (data.investmentKnowledge === 'Avancé') score += 2;
     if (data.age < 40) score += 1;
 
-    let profile: InvestorProfileQuizOutput;
+    let profileData: InvestorProfileQuizOutput;
     if (score <= 3) {
-      profile = {
+      profileData = {
         profile: 'Prudent',
         description: "Votre priorité est la sécurité du capital. Vous préférez des rendements stables et un risque minimal.",
         analysis: "Votre profil prudent est principalement défini par une faible tolérance au risque et un horizon de placement potentiellement court. Votre réaction face à une baisse de marché et vos connaissances en investissement confirment cette tendance à la prudence.",
         recommendation: "Allocation suggérée : 60% Obligations/Fonds monétaires, 20% OPCVM Actions, 10% Immobilier (OPCI), 10% Liquidités. Concentrez-vous sur des entreprises solides et bien établies avec des dividendes réguliers."
       };
     } else if (score <= 6) {
-      profile = {
+      profileData = {
         profile: 'Équilibré',
         description: "Vous recherchez un équilibre entre croissance et sécurité. Vous êtes prêt à accepter un risque modéré pour un meilleur rendement.",
         analysis: "Votre profil équilibré montre que vous comprenez la nécessité de prendre un certain risque pour obtenir de la croissance, tout en restant mesuré. Votre horizon de placement à moyen ou long terme vous le permet. Votre réponse à une baisse de marché est rationnelle.",
         recommendation: "Allocation suggérée : 40% OPCVM Actions, 40% Obligations, 15% Immobilier (OPCI), 5% Liquidités. Un portefeuille diversifié entre actions de croissance et de valeur est idéal."
       };
     } else {
-      profile = {
+      profileData = {
         profile: 'Dynamique',
         description: "Vous êtes à l'aise avec le risque et visez une croissance significative de votre capital à long terme.",
         analysis: "Votre profil dynamique est caractérisé par un horizon de placement long, une bonne tolérance au risque et une vision opportuniste des baisses de marché. Votre niveau de connaissance vous permet d'envisager des stratégies plus audacieuses.",
@@ -108,10 +115,28 @@ export default function InvestorProfileQuizPage() {
       };
     }
 
-    setTimeout(() => {
-      setResult(profile);
-      setLoading(false);
-    }, 500);
+    // Save profile to Firestore if user is logged in
+    if (user) {
+      try {
+        const userDocRef = doc(firestore, "users", user.uid);
+        await setDoc(userDocRef, { investorProfile: profileData.profile }, { merge: true });
+        toast({
+          title: "Profil sauvegardé !",
+          description: "Votre profil d'investisseur a été mis à jour sur votre tableau de bord.",
+        });
+        setTimeout(() => router.push('/dashboard'), 2000);
+      } catch (error) {
+        console.error("Erreur lors de la sauvegarde du profil:", error);
+        toast({
+            variant: "destructive",
+            title: "Erreur",
+            description: "Impossible de sauvegarder votre profil. Veuillez réessayer.",
+        });
+      }
+    }
+
+    setResult(profileData);
+    setLoading(false);
   };
 
   const progress = (currentStep / formSteps.length) * 100;
@@ -241,19 +266,21 @@ export default function InvestorProfileQuizPage() {
                 {loading && (
                     <motion.div key="loading" className="flex flex-col items-center justify-center h-48 space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <Loader2 className="h-12 w-12 animate-spin text-primary" />
-                        <p className="text-muted-foreground">Analyse de votre profil en cours...</p>
+                        <p className="text-muted-foreground">Analyse et sauvegarde de votre profil...</p>
                     </motion.div>
                 )}
 
                 {result && !loading && (
                     <motion.div key="result" className="space-y-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <Card className="bg-primary/10">
+                        <Card className="bg-primary/10 border-primary">
                             <CardHeader>
-                                <CardTitle className="text-primary text-center font-headline text-3xl">{result.profile}</CardTitle>
+                                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+                                    <Target className="h-8 w-8 text-primary"/>
+                                    <p className="text-muted-foreground">Votre Profil d'Investisseur</p>
+                                </CardHeader>
+                                <h2 className="text-primary text-center font-headline text-3xl">{result.profile}</h2>
+                                <p className="text-center text-muted-foreground pt-2">{result.description}</p>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-center text-muted-foreground">{result.description}</p>
-                            </CardContent>
                         </Card>
                          <Alert>
                           <Info className="h-4 w-4" />
@@ -285,17 +312,33 @@ export default function InvestorProfileQuizPage() {
                       Suivant <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   ) : (
-                    <Button type="submit" disabled={loading}>
+                    <Button type="submit" disabled={loading || !user}>
                       {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Découvrir mon Profil"}
                     </Button>
                   )}
                 </div>
               )}
+              
+               {!user && !loading && !result && currentStep === formSteps.length - 1 && (
+                  <Alert variant="destructive" className="mt-4">
+                    <Info className="h-4 w-4" />
+                    <AlertTitle>Connexion requise</AlertTitle>
+                    <AlertDescription>
+                      Vous devez être <a href="/login" className="underline font-bold">connecté</a> pour sauvegarder et voir votre profil sur votre tableau de bord.
+                    </AlertDescription>
+                  </Alert>
+               )}
 
               {result && !loading && (
-                 <div className="text-center pt-4">
-                     <Button type="button" onClick={() => { setCurrentStep(0); setResult(null); form.reset(); }}>
-                        Recommencer le quiz
+                 <div className="text-center pt-6 space-y-2">
+                     <Button type="button" onClick={() => {
+                         if (user) {
+                             router.push('/dashboard');
+                         } else {
+                            setCurrentStep(0); setResult(null); form.reset();
+                         }
+                     }}>
+                        {user ? "Voir mon Tableau de Bord" : "Recommencer le quiz"}
                     </Button>
                  </div>
               )}
@@ -306,7 +349,10 @@ export default function InvestorProfileQuizPage() {
       
        <Card className="max-w-2xl mx-auto mt-8">
             <CardHeader>
-                <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Guide d'Utilisation</CardTitle>
+                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+                    <HelpCircle className="h-6 w-6 text-primary"/>
+                    <h3 className="font-headline text-lg">Guide d'Utilisation</h3>
+                </CardHeader>
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
                 <p>Ce quiz vous aide à mieux comprendre votre attitude face à l'investissement et au risque. Il n'y a pas de bonnes ou de mauvaises réponses.</p>
@@ -321,5 +367,3 @@ export default function InvestorProfileQuizPage() {
     </div>
   );
 }
-
-    
