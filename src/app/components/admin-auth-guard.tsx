@@ -62,6 +62,8 @@ export default function AdminAuthGuard({ children }: AdminAuthGuardProps) {
         checkAdminRole();
       } else {
         // Gérer le cas où la référence au document n'est pas encore prête
+        // et que l'utilisateur n'est pas en cours de chargement.
+        // Cela peut arriver si l'utilisateur est `null`.
          setIsVerifying(false);
          if(!user) router.replace('/login');
       }
