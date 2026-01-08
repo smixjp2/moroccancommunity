@@ -29,12 +29,15 @@ export interface Course {
 }
 
 export interface UserCourse {
-    id: string; // This will be the userCourse document ID
-    courseId: string; // This will be the course ID like 'dca-strategie'
+    id: string; // This will be the course ID from ALL_COURSES
     title: string;
     description: string;
     href: string;
+    // The following fields are from the userCourses subcollection doc
+    courseId?: string; 
+    purchaseDate?: string;
 }
+
 
 export interface Resource {
   id: string;
@@ -86,3 +89,5 @@ export interface OpcvmCategory {
   icon: LucideIcon | ((props: any) => JSX.Element);
   funds: Opcvm[];
 }
+
+    

@@ -37,6 +37,7 @@ function ManageUserPage({ params }: ManageUserPageProps) {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!firestore) return;
       setLoading(true);
       try {
         // Fetch user profile
@@ -62,8 +63,7 @@ function ManageUserPage({ params }: ManageUserPageProps) {
     };
 
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, firestore]);
+  }, [userId, firestore, form, toast]);
 
   const onSubmit = async (data: { courses: string[] }) => {
      setLoading(true);
@@ -82,6 +82,7 @@ function ManageUserPage({ params }: ManageUserPageProps) {
                         title: courseData.title,
                         description: courseData.description,
                         href: courseData.href,
+                        purchaseDate: new Date().toISOString(),
                     });
                 }
             }
@@ -166,7 +167,7 @@ function ManageUserPage({ params }: ManageUserPageProps) {
                                 <Link href="/admin/users">Annuler</Link>
                             </Button>
                             <Button type="submit" disabled={loading}>
-                                <Save className="mr-2" />
+                                <Save className="mr-2 h-4 w-4" />
                                 {loading ? 'Sauvegarde...' : 'Enregistrer les Accès'}
                             </Button>
                         </div>
@@ -186,3 +187,4 @@ export default function ProtectedManageUserPage(props: ManageUserPageProps) {
         </AdminAuthGuard>
     );
 }
+    

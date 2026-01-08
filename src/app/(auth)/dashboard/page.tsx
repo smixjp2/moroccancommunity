@@ -11,6 +11,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import type { UserCourse } from '@/lib/types';
+import { ALL_COURSES } from '@/lib/course-data';
 import ProfileSetup from './profile-setup';
 import { Badge } from '@/components/ui/badge';
 
@@ -64,15 +65,17 @@ export default function DashboardPage() {
         try {
           await refetchUserProfile();
 
-          // 2. Fetch user's enrolled courses from Firestore
+          // Fetch user's enrolled course IDs from Firestore
           const userCoursesColRef = collection(firestore, `users/${user.uid}/userCourses`);
           const querySnapshot = await getDocs(userCoursesColRef);
           
-          const coursesFromDb: UserCourse[] = [];
-          querySnapshot.forEach(doc => {
-            const data = doc.data() as Omit<UserCourse, 'id'>;
-            coursesFromDb.push({ ...data, id: doc.id });
-          });
+          const enrolledCourseIds = querySnapshot.docs.map(doc => doc.id);
+
+          // Map IDs to full course data from ALL_COURSES
+          const coursesFromDb = enrolledCourseIds
+            .map(id => ALL_COURSES.find(course => course.id === id))
+            .filter((course): course is UserCourse => !!course);
+
           setUserCourses(coursesFromDb);
 
         } catch (error) {
@@ -250,3 +253,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    
