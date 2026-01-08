@@ -4,14 +4,25 @@
 import AdminAuthGuard from '@/app/components/admin-auth-guard';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { PlusCircle, Edit } from 'lucide-react';
+import { PlusCircle, Edit, Users } from 'lucide-react';
 import Link from 'next/link';
 
 // Données statiques pour l'exemple
-const courses = [
-  { id: '1', name: 'Formation Bourse de Casablanca', status: 'Publié' },
-  { id: '2', name: 'Stratégie DCA', status: 'Publié' },
-  { id: '3', name: 'Excel & Power BI pour la Finance', status: 'Brouillon' },
+const features = [
+  { 
+    id: 'users', 
+    name: 'Gestion des Utilisateurs', 
+    description: 'Ajoutez, modifiez et assignez des formations aux utilisateurs.',
+    icon: Users,
+    href: '/admin/users'
+  },
+  { 
+    id: 'courses', 
+    name: 'Gestion des Formations', 
+    description: 'Ajoutez ou modifiez les formations disponibles.',
+    icon: Edit,
+    href: '#'
+  },
 ];
 
 function AdminDashboardPage() {
@@ -20,43 +31,31 @@ function AdminDashboardPage() {
         <header className="mb-8 flex items-center justify-between">
             <div>
                 <h1 className="text-3xl font-bold font-headline">Tableau de Bord Admin</h1>
-                <p className="text-muted-foreground">Gérez le contenu de la plateforme.</p>
+                <p className="text-muted-foreground">Gérez le contenu et les utilisateurs de la plateforme.</p>
             </div>
              <Button asChild>
                 <Link href="/dashboard">Retour à mon espace</Link>
             </Button>
         </header>
 
-        <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                    <CardTitle>Gestion des Formations</CardTitle>
-                    <CardDescription>Ajoutez, modifiez ou supprimez des formations.</CardDescription>
-                </div>
-                <Button>
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Ajouter une Formation
-                </Button>
-            </CardHeader>
-            <CardContent>
-                <div className="divide-y divide-border">
-                    {courses.map(course => (
-                        <div key={course.id} className="flex items-center justify-between py-4">
-                            <div>
-                                <p className="font-semibold">{course.name}</p>
-                                <p className={`text-sm ${course.status === 'Publié' ? 'text-green-600' : 'text-yellow-600'}`}>{course.status}</p>
-                            </div>
-                            <Button variant="outline" size="sm">
-                                <Edit className="mr-2 h-4 w-4" />
-                                Modifier
-                            </Button>
-                        </div>
-                    ))}
-                </div>
-            </CardContent>
-        </Card>
-        
-        {/* Ajouter d'autres cartes de gestion ici (Utilisateurs, Articles, etc.) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {features.map(feature => (
+             <Card key={feature.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                        <feature.icon className="h-6 w-6 text-primary" />
+                        {feature.name}
+                    </CardTitle>
+                    <CardDescription>{feature.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Button asChild>
+                        <Link href={feature.href}>Accéder</Link>
+                    </Button>
+                </CardContent>
+            </Card>
+          ))}
+        </div>
     </div>
   );
 }
