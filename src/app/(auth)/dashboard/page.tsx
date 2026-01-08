@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Loader2, ArrowRight, User, Target, BarChart, GraduationCap, Briefcase } from 'lucide-react';
+import { Loader2, ArrowRight, User, Target, BarChart, GraduationCap, Briefcase, Users } from 'lucide-react';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
@@ -175,22 +175,34 @@ export default function DashboardPage() {
         </Card>
       </section>
 
-      {/* AI Tools Section */}
+      {/* Exclusive Tools & Community Section */}
       <section className="mb-8">
         <Card className="bg-primary/10 border-primary">
             <CardHeader>
-                <CardTitle className="font-headline flex items-center gap-3"><Briefcase /> Outils Exclusifs</CardTitle>
-                <CardDescription>Accédez à nos outils d'analyse avancés.</CardDescription>
+                <CardTitle className="font-headline flex items-center gap-3">Fonctionnalités Exclusives</CardTitle>
+                <CardDescription>Accédez à nos outils d'analyse et à la communauté.</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="grid md:grid-cols-2 gap-4">
                  <Card className="flex flex-col sm:flex-row items-start justify-between p-6">
                     <div>
-                        <h3 className="text-xl font-bold font-headline">Analyseur d'Actions</h3>
-                        <p className="text-muted-foreground mt-1">Obtenez une analyse financière détaillée d'une action de la Bourse de Casablanca.</p>
+                        <h3 className="text-xl font-bold font-headline flex items-center gap-2"><Briefcase /> Analyseur d'Actions</h3>
+                        <p className="text-muted-foreground mt-1">Obtenez une analyse financière détaillée d'une action.</p>
                     </div>
                     <Button asChild className="mt-4 sm:mt-0 sm:ml-4 flex-shrink-0">
                         <Link href="/dashboard/stock-analyzer">
-                            Lancer l'Analyse
+                            Lancer
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </Card>
+                <Card className="flex flex-col sm:flex-row items-start justify-between p-6">
+                    <div>
+                        <h3 className="text-xl font-bold font-headline flex items-center gap-2"><Users /> Communauté</h3>
+                        <p className="text-muted-foreground mt-1">Échangez avec les autres membres de vos formations.</p>
+                    </div>
+                    <Button asChild className="mt-4 sm:mt-0 sm:ml-4 flex-shrink-0">
+                        <Link href="/dashboard/community">
+                            Rejoindre
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>

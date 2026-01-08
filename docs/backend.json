@@ -101,6 +101,65 @@
         "courseId",
         "purchaseDate"
       ]
+    },
+    "ChatRoom": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ChatRoom",
+      "type": "object",
+      "description": "Represents a chat room, usually linked to a course.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ChatRoom, often matching the courseId."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the chat room."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the chat room's purpose."
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "ChatMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ChatMessage",
+      "type": "object",
+      "description": "Represents a single message within a chat room.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ChatMessage."
+        },
+        "text": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The UID of the user who sent the message."
+        },
+        "userName": {
+          "type": "string",
+          "description": "Denormalized first name of the user for display purposes."
+        },
+        "createdAt": {
+          "type": "object",
+          "description": "Firestore server timestamp of when the message was created."
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "userId",
+        "userName",
+        "createdAt"
+      ]
     }
   },
   "auth": {
@@ -162,8 +221,44 @@
             }
           ]
         }
+      },
+      {
+        "path": "/chatRooms/{chatRoomId}",
+        "definition": {
+          "entityName": "ChatRoom",
+          "schema": {
+            "$ref": "#/backend/entities/ChatRoom"
+          },
+          "description": "Stores information about a chat room. Chat rooms are generally public to read but secured on write.",
+          "params": [
+            {
+              "name": "chatRoomId",
+              "description": "The unique identifier for the chat room, often a courseId."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/chatRooms/{chatRoomId}/messages/{messageId}",
+        "definition": {
+          "entityName": "ChatMessage",
+          "schema": {
+            "$ref": "#/backend/entities/ChatMessage"
+          },
+          "description": "Stores individual messages for a given chat room. Access is controlled based on the user's enrollment in the corresponding course.",
+          "params": [
+            {
+              "name": "chatRoomId",
+              "description": "The identifier of the parent chat room."
+            },
+            {
+              "name": "messageId",
+              "description": "The unique identifier for the message."
+            }
+          ]
+        }
       }
     ],
-    "reasoning": "This Firestore structure prioritizes security and scalability for the MASI Insights platform, focusing on user authentication and access control to courses. It leverages Authorization Independence by avoiding `get()` calls in security rules, ensuring atomic operations. Homogeneous Security Posture is achieved by segregating data with different access requirements into separate collections.\n\n*   **Users**: User data is stored in a dedicated collection, enabling straightforward authentication via email/password using Firebase Authentication and DBAC based authorization using `role` field.\n*   **Courses**: Courses are stored in a dedicated collection, accessible for listing. Course details are public.\n*   **UserCourses**: Grants users access to courses, ensuring users can only access the courses they have purchased. The `userId` is used to secure access via path-based rules to only the current user's courses. A QAP is supported because listing courses is permitted and access to `UserCourse` documents are secured by the `userId`.\n\nThis design provides a solid foundation for the MASI Insights platform, facilitating secure access control and scalable data management. The denormalization of authorization data within the `UserCourse` documents is critical for ensuring authorization independence and simplifying security rules. This will allow for atomic operations and predictable authorization logic without relying on complex `get()` calls."
+    "reasoning": "This Firestore structure prioritizes security and scalability for the MASI Insights platform, focusing on user authentication and access control to courses. It leverages Authorization Independence by avoiding `get()` calls in security rules, ensuring atomic operations. Homogeneous Security Posture is achieved by segregating data with different access requirements into separate collections.\n\n*   **Users**: User data is stored in a dedicated collection, enabling straightforward authentication via email/password using Firebase Authentication and DBAC based authorization using `role` field.\n*   **Courses**: Courses are stored in a dedicated collection, accessible for listing. Course details are public.\n*   **UserCourses**: Grants users access to courses, ensuring users can only access the courses they have purchased. The `userId` is used to secure access via path-based rules to only the current user's courses. A QAP is supported because listing courses is permitted and access to `UserCourse` documents are secured by the `userId`.\n*   **ChatRooms & Messages**: The new chat functionality is built around a `chatRooms` collection. Access to read/write messages in a room is secured by checking if a `userCourse` document exists for that user and course (`chatRoomId` is the `courseId`). This avoids `get()` calls in rules, maintaining Authorization Independence. Denormalizing `userName` on messages improves performance by avoiding extra client-side lookups.\n\nThis design provides a solid foundation for the MASI Insights platform, facilitating secure access control and scalable data management. The denormalization of authorization data within the `UserCourse` documents is critical for ensuring authorization independence and simplifying security rules. This will allow for atomic operations and predictable authorization logic without relying on complex `get()` calls."
   }
 }

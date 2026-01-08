@@ -10,6 +10,9 @@
  *   but write access is restricted to administrators.
  * - /users/{userId}/userCourses/{userCourseId}: A subcollection storing records of courses a user
  *   has access to. This data is private and only accessible to the parent user.
+ * - /chatRooms/{chatRoomId}: Contains metadata about chat rooms.
+ * - /chatRooms/{chatRoomId}/messages/{messageId}: Contains chat messages. Access is restricted
+ *   to users who are enrolled in the corresponding course.
  *
  * Key Security Decisions:
  * - User Isolation: Users can only access their own data within their `/users/{userId}` tree.
@@ -18,18 +21,10 @@
  *   Only users with a `role` of 'admin' on their user document can create, modify, or delete courses.
  * - Immutable Entitlements: To prevent tampering, `userCourse` documents, which represent a user's
  *   access to a course, are made immutable. Once created, they cannot be updated or deleted by the user.
+ * - Chat Access Control: Access to a chat room is granted only if the user has a corresponding
+ *   document in their `userCourses` subcollection, linking them to the course. This is checked
+ *   using `exists()`, which is a highly performant and secure way to enforce access rules.
  * - Default Secure: Any path not explicitly defined is inaccessible by default.
- *
- * Denormalization for Authorization:
- * - The `role` field is denormalized onto each `/users/{userId}` document. This allows a single `get()`
- *   call in the rules to check for admin privileges when securing the top-level `/courses` collection.
- * - The `userId` is denormalized into each `userCourse` document. This allows for path-based security
- *   while also enabling validation on creation to ensure a user can only create entitlements for themselves.
- *
- * Structural Segregation:
- * - The ruleset leverages structural segregation by separating the publicly readable `/courses` collection
- *   from the private, user-specific `/users/{userId}/userCourses` subcollection. This makes public
- *   listing queries simple and performant without compromising the security of private user data.
  */
 rules_version = '2';
 service cloud.firestore {
@@ -71,20 +66,20 @@ service cloud.firestore {
       return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
 
+    /**
+     * Checks if the currently authenticated user is enrolled in a specific course.
+     * This is used to control access to chat rooms.
+     * @param courseId The ID of the course to check enrollment for.
+     */
+    function isEnrolledInCourse(courseId) {
+      return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)/userCourses/$(courseId));
+    }
+
+
     // -------------------------------------------------------------------------
     // Collection Rules
     // -------------------------------------------------------------------------
 
-    /**
-     * @description Secures user profile documents. A user can create their own profile,
-     *   and can only read or update their own data thereafter. Listing users is forbidden.
-     * @path /users/{userId}
-     * @allow (create) A new user signing up creates their own document at `/users/NEW_USER_ID`.
-     * @allow (get) An authenticated user with UID 'USER_123' reads their own profile at `/users/USER_123`.
-     * @deny (list) Any user, including admins, attempting to list all documents in the `/users` collection.
-     * @deny (update) User 'USER_123' trying to modify the profile of 'USER_456'.
-     * @principle Restricts access to a user's own data tree.
-     */
     match /users/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
@@ -93,17 +88,6 @@ service cloud.firestore {
       allow delete: if isOwner(userId) && isExistingDoc();
     }
 
-    /**
-     * @description Defines rules for the public course catalog. All users (including unauthenticated)
-     *   can read course information, but only admins can create, update, or delete courses.
-     * @path /courses/{courseId}
-     * @allow (list) An anonymous visitor lists all courses.
-     * @allow (get) Any signed-in user reads the details of `/courses/COURSE_ABC`.
-     * @allow (create) An admin user creates a new course document.
-     * @deny (update) A regular, non-admin user attempts to change the price of a course.
-     * @deny (delete) A regular, non-admin user attempts to delete a course.
-     * @principle Public Read with Role-Based Writes.
-     */
     match /courses/{courseId} {
       allow get: if true;
       allow list: if true;
@@ -112,22 +96,41 @@ service cloud.firestore {
       allow delete: if isAdmin() && isExistingDoc();
     }
 
-    /**
-     * @description Secures user-specific course entitlements. A user can read their own entitlements
-     *   and create new ones (simulating a purchase), but cannot modify or delete them after creation.
-     * @path /users/{userId}/userCourses/{userCourseId}
-     * @allow (list) User 'USER_123' lists all their course entitlements under `/users/USER_123/userCourses`.
-     * @allow (create) User 'USER_123' creates a new entitlement for themselves.
-     * @deny (get) User 'USER_456' attempts to read an entitlement belonging to 'USER_123'.
-     * @deny (update) User 'USER_123' attempts to change the `courseId` on an existing entitlement record.
-     * @principle Enforces document ownership via path nesting and ensures data immutability post-creation.
-     */
     match /users/{userId}/userCourses/{userCourseId} {
       allow get: if isOwner(userId);
       allow list: if isOwner(userId);
       allow create: if isOwner(userId) && request.resource.data.userId == userId;
       allow update: if false;
       allow delete: if false;
+    }
+
+    /**
+     * @description Secures chat rooms. Reading chat room metadata is allowed for any signed-in user.
+     * Writing (creating/updating rooms) is restricted to admins.
+     * @path /chatRooms/{chatRoomId}
+     */
+    match /chatRooms/{chatRoomId} {
+        allow get: if isSignedIn();
+        allow list: if isSignedIn();
+        allow create, update, delete: if isAdmin();
+
+        /**
+         * @description Secures chat messages. A user can only read/write messages in a room
+         * if they are enrolled in the corresponding course.
+         * @path /chatRooms/{chatRoomId}/messages/{messageId}
+         * @allow (read, write) A user enrolled in 'course-abc' can read/write to `/chatRooms/course-abc/messages`.
+         * @deny (read, write) A user not enrolled in 'course-abc' tries to access messages.
+         * @principle Authorization Independence via `exists()`.
+         */
+        match /messages/{messageId} {
+            allow read: if isEnrolledInCourse(chatRoomId);
+            allow create: if isEnrolledInCourse(chatRoomId)
+                            && request.resource.data.userId == request.auth.uid // User can only post as themselves
+                            && request.resource.data.text is string // Message must have text
+                            && request.resource.data.userName is string // User name must be present
+                            && request.resource.data.createdAt == request.time; // Must use server timestamp
+            allow update, delete: if false; // Messages are immutable
+        }
     }
   }
 }
