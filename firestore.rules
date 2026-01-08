@@ -1,3 +1,4 @@
+
 /**
  * Core Philosophy: This ruleset establishes a robust security model for a learning platform.
  * It strictly enforces user ownership of personal data and course entitlements, while
@@ -81,11 +82,11 @@ service cloud.firestore {
     // -------------------------------------------------------------------------
 
     match /users/{userId} {
-      allow get: if isOwner(userId);
-      allow list: if false;
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
       allow create: if isOwner(userId) && request.resource.data.id == userId;
-      allow update: if isOwner(userId) && isExistingDoc() && request.resource.data.id == resource.data.id;
-      allow delete: if isOwner(userId) && isExistingDoc();
+      allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && request.resource.data.id == resource.data.id;
+      allow delete: if isAdmin() && isExistingDoc();
     }
 
     match /courses/{courseId} {
@@ -97,8 +98,8 @@ service cloud.firestore {
     }
 
     match /users/{userId}/userCourses/{userCourseId} {
-      allow get: if isOwner(userId);
-      allow list: if isOwner(userId);
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isOwner(userId) || isAdmin();
       allow create: if isOwner(userId) && request.resource.data.userId == userId;
       allow update: if false;
       allow delete: if false;
@@ -123,7 +124,7 @@ service cloud.firestore {
          * @principle Authorization Independence via `exists()`.
          */
         match /messages/{messageId} {
-            allow read: if isEnrolledInCourse(chatRoomId);
+            allow read: if isEnrolledInCourse(chatRoomId) || isAdmin();
             allow create: if isEnrolledInCourse(chatRoomId)
                             && request.resource.data.userId == request.auth.uid // User can only post as themselves
                             && request.resource.data.text is string // Message must have text
