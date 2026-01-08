@@ -71,13 +71,18 @@ export interface Module {
 export interface Opcvm {
   id: string;
   name: string;
+  managementCompany: string;
   description: string;
   ytd: number;
+  perf1Y: number;
+  perf3Y: number;
   logo?: string;
 }
 
 export interface OpcvmCategory {
+  id: string;
   title: string;
+  description: string;
   icon: LucideIcon | ((props: any) => JSX.Element);
   funds: Opcvm[];
 }

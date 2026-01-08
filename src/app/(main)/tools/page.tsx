@@ -36,18 +36,17 @@ const simulators = [
     description: "Découvrez quel type d'investisseur vous êtes.",
   },
   {
+    href: "/tools/opcvm-comparator",
+    icon: <BarChart3 className="h-8 w-8 text-primary" />,
+    title: "Comparateur d'OPCVM",
+    description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
+  },
+  {
     href: "/dashboard/stock-analyzer",
     icon: <Briefcase className="h-8 w-8 text-primary" />,
     title: "Analyseur d'Actions",
     description: "Obtenez une analyse financière pour les actions marocaines.",
     isMemberOnly: true,
-  },
-  {
-    href: "/tools/opcvm-comparator",
-    icon: <BarChart3 className="h-8 w-8 text-primary" />,
-    title: "Comparateur d'OPCVM",
-    description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
-    isComingSoon: true,
   },
 ];
 
@@ -63,14 +62,14 @@ export default function ToolsPage() {
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {simulators.map((tool) => {
-          const isClickable = !tool.isComingSoon;
+          const isClickable = !tool.isMemberOnly; // OPCVM is now clickable
           const Wrapper = isClickable ? Link : 'div';
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
               <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable ? 'opacity-60' : ''}`}>
-                {(tool.isComingSoon || tool.isMemberOnly) && (
+                {(tool.isMemberOnly) && (
                     <Badge variant={"secondary"} className="absolute top-4 right-4 z-10">
-                        {tool.isComingSoon ? "Bientôt disponible" : "Membre Uniquement"}
+                        {tool.isMemberOnly ? "Membre Uniquement" : ""}
                     </Badge>
                 )}
                 <CardHeader className="p-6">
