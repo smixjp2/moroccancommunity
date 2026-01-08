@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -7,7 +8,7 @@ import { z } from 'zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/firebase';
-import { initiateEmailSignIn } from '@/firebase/non-blocking-login';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -52,22 +53,35 @@ export default function LoginPage() {
   const onSubmit = async (values: FormValues) => {
     setLoading(true);
     try {
-      // We don't await this, the state change will be handled by the auth listener
-      initiateEmailSignIn(auth, values.email, values.password);
+      await signInWithEmailAndPassword(auth, values.email, values.password);
       toast({
-        title: 'Connexion en cours...',
+        title: 'Connexion réussie !',
         description: 'Vous allez être redirigé vers votre tableau de bord.',
       });
-      // The redirect will be handled by a protected route layout or a hook watching user state
-      // For now, we'll optimistically push to the dashboard.
-       router.push('/dashboard');
+      router.push('/dashboard');
     } catch (error: any) {
-      setLoading(false);
+      let errorMessage = "Une erreur inconnue est survenue.";
+      switch (error.code) {
+        case 'auth/user-not-found':
+          errorMessage = "Aucun compte n'a été trouvé avec cet e-mail.";
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Mot de passe incorrect. Veuillez réessayer.';
+          break;
+        case 'auth/invalid-credential':
+             errorMessage = 'Les informations d\'identification sont invalides.';
+             break;
+        default:
+          console.error("Login Error:", error);
+          break;
+      }
       toast({
         variant: 'destructive',
         title: 'Erreur de connexion',
-        description: error.message || 'Une erreur inconnue est survenue.',
+        description: errorMessage,
       });
+    } finally {
+        setLoading(false);
     }
   };
 
