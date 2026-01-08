@@ -7,7 +7,8 @@ function TradingViewTicker() {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (container.current && container.current.children.length === 0) {
+    // Check if the script is already added to avoid duplicates
+    if (container.current && !container.current.querySelector('script')) {
       const script = document.createElement('script');
       script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
       script.type = 'text/javascript';
@@ -32,16 +33,28 @@ function TradingViewTicker() {
           { "description": "Sanlam Maroc", "proName": "CSE:SNA" },
           { "description": "TGCC", "proName": "CSE:TGC" },
           { "description": "Aluminium du Maroc", "proName": "CSE:ALU" },
-          { "description": "Sonasid", "proname": "CSE:SID"},
+          { "description": "Sonasid", "proName": "CSE:SID" },
           { "description": "Douja Prom Addoha", "proName": "CSE:DHO" },
           { "description": "CTM", "proName": "CSE:CTM" },
           { "description": "Mutandis", "proName": "CSE:MUT" },
           { "description": "SMI", "proName": "CSE:SMI" },
-          { "description": "Disway", "proName": "CSE:DSW" }
+          { "description": "Disway", "proName": "CSE:DSW" },
+          { "description": "TotalEnergies Maroc", "proName": "CSE:TMA" },
+          { "description": "Auto Hall", "proName": "CSE:ATH" },
+          { "description": "Managem", "proName": "CSE:MNG" },
+          { "description": "CIH Bank", "proName": "CSE:CIH" },
+          { "description": "Crédit du Maroc", "proName": "CSE:CDM" },
+          { "description": "Sothema", "proName": "CSE:SOT" },
+          { "description": "Alliances", "proName": "CSE:ADI" },
+          { "description": "Jet Contractors", "proName": "CSE:JET" },
+          { "description": "Risma", "proName": "CSE:RIS" },
+          { "description": "Colorado", "proName": "CSE:COL" },
+          { "description": "Salafin", "proName": "CSE:SLF" }
         ],
         "showSymbolLogo": true,
-        "isTransparent": false,
+        "isTransparent": true,
         "displayMode": "adaptive",
+        "colorTheme": "light",
         "locale": "fr"
       });
       container.current.appendChild(script);
