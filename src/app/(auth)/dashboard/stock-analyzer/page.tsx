@@ -109,7 +109,7 @@ export default function StockAnalyzerPage() {
       setAnalysis(result);
     } catch (e: any) {
       console.error(e);
-      setError("Une erreur est survenue lors de l'analyse. Le modèle est peut-être indisponible. Veuillez réessayer plus tard.");
+      setError("Une erreur est survenue lors de l'analyse. Le service est peut-être momentanément indisponible ou une clé API est manquante. Veuillez réessayer plus tard.");
     } finally {
       setLoading(false);
     }
