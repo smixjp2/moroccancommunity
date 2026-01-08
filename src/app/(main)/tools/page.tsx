@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Sparkles } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
@@ -37,9 +37,9 @@ const simulators = [
   },
   {
     href: "/dashboard/stock-analyzer",
-    icon: <Sparkles className="h-8 w-8 text-primary" />,
-    title: "Analyseur d'Actions par IA",
-    description: "Obtenez une analyse financière IA pour les actions marocaines.",
+    icon: <Briefcase className="h-8 w-8 text-primary" />,
+    title: "Analyseur d'Actions",
+    description: "Obtenez une analyse financière pour les actions marocaines.",
     isMemberOnly: true,
   },
   {

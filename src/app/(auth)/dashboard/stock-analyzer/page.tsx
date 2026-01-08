@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -29,7 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Loader2, Sparkles, BarChart, Activity, Briefcase, Gem, Goal, Info } from 'lucide-react';
+import { Loader2, BarChart, Activity, Briefcase, Gem, Goal, Info } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const availableStocks = [
@@ -108,7 +109,7 @@ export default function StockAnalyzerPage() {
       setAnalysis(result);
     } catch (e: any) {
       console.error(e);
-      setError("Une erreur est survenue lors de l'analyse. Le modèle IA est peut-être indisponible. Veuillez réessayer plus tard.");
+      setError("Une erreur est survenue lors de l'analyse. Le modèle est peut-être indisponible. Veuillez réessayer plus tard.");
     } finally {
       setLoading(false);
     }
@@ -117,9 +118,9 @@ export default function StockAnalyzerPage() {
   return (
     <div className="container py-12">
       <header className="mb-8 max-w-3xl mx-auto text-center">
-        <h1 className="text-4xl font-bold font-headline flex items-center justify-center gap-3"><Sparkles className="text-primary" />Analyse d'Actions par IA</h1>
+        <h1 className="text-4xl font-bold font-headline flex items-center justify-center gap-3"><Briefcase className="text-primary" />Analyseur d'Actions</h1>
         <p className="text-muted-foreground mt-2">
-          Obtenez une analyse financière complète d'une action de la Bourse de Casablanca, générée par notre IA.
+          Obtenez une analyse financière complète d'une action de la Bourse de Casablanca.
         </p>
       </header>
 
@@ -155,7 +156,7 @@ export default function StockAnalyzerPage() {
                 )}
               />
               <Button type="submit" disabled={loading} className="w-full sm:w-auto">
-                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <BarChart className="mr-2 h-4 w-4" />}
                 Analyser
               </Button>
             </form>
@@ -167,7 +168,7 @@ export default function StockAnalyzerPage() {
         <div className="flex flex-col items-center justify-center text-center py-16">
             <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
             <p className="font-semibold text-lg">Analyse en cours...</p>
-            <p className="text-muted-foreground">Notre IA prépare votre rapport financier.</p>
+            <p className="text-muted-foreground">Préparation de votre rapport financier.</p>
         </div>
       )}
 
@@ -182,8 +183,8 @@ export default function StockAnalyzerPage() {
       {analysis && (
         <div className="max-w-4xl mx-auto space-y-6">
             <Alert>
-                <Sparkles className="h-4 w-4" />
-                <AlertTitle className="font-headline">Résumé de l'Analyse IA</AlertTitle>
+                <Info className="h-4 w-4" />
+                <AlertTitle className="font-headline">Résumé de l'Analyse</AlertTitle>
                 <AlertDescription>{analysis.analysisSummary}</AlertDescription>
             </Alert>
             
@@ -196,7 +197,7 @@ export default function StockAnalyzerPage() {
 
              <Alert variant="default" className="bg-primary/10 border-primary">
                 <Goal className="h-4 w-4" />
-                <AlertTitle className="font-headline text-primary">Recommandation Finale de l'IA</AlertTitle>
+                <AlertTitle className="font-headline text-primary">Recommandation Finale</AlertTitle>
                 <AlertDescription>{analysis.finalRecommendation}</AlertDescription>
             </Alert>
         </div>
