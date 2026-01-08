@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth, useFirestore } from '@/firebase';
 import { signInWithEmailAndPassword, User } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -55,7 +55,21 @@ export default function LoginPage() {
   const handleLoginSuccess = async (user: User) => {
     const userDocRef = doc(firestore, 'users', user.uid);
     try {
-      const userDocSnap = await getDoc(userDocRef);
+      let userDocSnap = await getDoc(userDocRef);
+      
+      // Si le document n'existe pas, on le crée. C'est la correction clé.
+      if (!userDocSnap.exists()) {
+        await setDoc(userDocRef, {
+          id: user.uid,
+          email: user.email,
+          role: 'user', // Rôle par défaut
+          firstName: '',
+          lastName: '',
+        });
+        // On relit le document pour avoir les données à jour
+        userDocSnap = await getDoc(userDocRef);
+      }
+
       if (userDocSnap.exists() && userDocSnap.data().role === 'admin') {
         router.push('/admin/dashboard');
       } else {
@@ -66,8 +80,8 @@ export default function LoginPage() {
         description: 'Vous allez être redirigé vers votre tableau de bord.',
       });
     } catch (dbError) {
-      console.error("Erreur lors de la lecture du profil utilisateur:", dbError);
-      // Fallback to regular dashboard if profile read fails
+      console.error("Erreur lors de la lecture ou création du profil utilisateur:", dbError);
+      // Fallback vers le dashboard normal en cas d'erreur
       router.push('/dashboard');
     }
   };
@@ -100,7 +114,7 @@ export default function LoginPage() {
       });
       setLoading(false);
     }
-    // No setLoading(false) here, as redirection will unmount the component
+    // No setLoading(false) here on success, as redirection will unmount the component
   };
 
   return (
