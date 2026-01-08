@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -15,8 +16,6 @@ import {googleAI} from '@genkit-ai/google-genai';
 const StockAnalysisInputSchema = z.object({
   stockSymbol: z.string().describe('The stock ticker symbol (e.g., ATW, IAM).'),
   stockName: z.string().describe('The full name of the company (e.g., Attijariwafa Bank).'),
-  // In a real scenario, we'd pass more data like financial statements.
-  // For this demo, we'll let the AI use its knowledge based on the name.
 });
 export type StockAnalysisInput = z.infer<typeof StockAnalysisInputSchema>;
 
@@ -31,7 +30,20 @@ const StockAnalysisOutputSchema = z.object({
 export type StockAnalysisOutput = z.infer<typeof StockAnalysisOutputSchema>;
 
 export async function analyzeStock(input: StockAnalysisInput): Promise<StockAnalysisOutput> {
-  return stockAnalyzerFlow(input);
+  try {
+    return await stockAnalyzerFlow(input);
+  } catch (error) {
+    console.error("AI analysis failed, returning fallback data.", error);
+    // En cas d'échec de l'IA, renvoyer une réponse structurée pour ne pas planter l'interface.
+     return {
+      analysisSummary: `L'analyse pour ${input.stockName} n'a pas pu être complétée.`,
+      financialHealth: "Les données sur la santé financière ne sont pas disponibles pour le moment. Veuillez réessayer.",
+      growthPotential: "L'évaluation du potentiel de croissance est actuellement indisponible.",
+      dividendAnalysis: "L'analyse des dividendes n'a pas pu être effectuée.",
+      valuation: "L'évaluation de la valorisation est indisponible.",
+      finalRecommendation: "Aucune recommandation ne peut être fournie pour le moment en raison d'une erreur technique. Veuillez vérifier votre clé API et réessayer plus tard."
+    };
+  }
 }
 
 const prompt = ai.definePrompt({
@@ -66,6 +78,9 @@ const stockAnalyzerFlow = ai.defineFlow(
     // In a real-world scenario, you might fetch live data here and pass it to the prompt.
     // For now, the prompt relies on the model's existing knowledge.
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error("AI model returned no output.");
+    }
+    return output;
   }
 );
