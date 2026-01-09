@@ -1,3 +1,4 @@
+
 // TradingViewWidget.tsx
 'use client';
 
@@ -37,36 +38,36 @@ function TradingViewMarketOverview() {
           {
             "title": "Les Plus Actives",
             "symbols": [
-              { "s": "CSE:ATW", "d": "Attijariwafa Bank" },
-              { "s": "CSE:BCP", "d": "BCP" },
-              { "s": "CSE:BOA", "d": "Bank Of Africa" },
-              { "s": "CSE:IAM", "d": "Maroc Telecom" },
-              { "s": "CSE:TQM", "d": "Taqa Morocco" },
-              { "s": "CSE:AKD", "d": "Akdital" }
+              { "s": "ATW", "d": "Attijariwafa Bank" },
+              { "s": "BCP", "d": "BCP" },
+              { "s": "BOA", "d": "Bank Of Africa" },
+              { "s": "IAM", "d": "Maroc Telecom" },
+              { "s": "TQM", "d": "Taqa Morocco" },
+              { "s": "ACI", "d": "Akdital" }
             ],
             "originalTitle": "Les Plus Actives"
           },
           {
             "title": "Hausses %",
             "symbols": [
-              { "s": "CSE:MNG", "d": "Managem" },
-              { "s": "CSE:GAZ", "d": "Afriquia Gaz" },
-              { "s": "CSE:SNA", "d": "Sanlam Maroc" },
-              { "s": "CSE:WAA", "d": "Wafa Assurance" },
-              { "s": "CSE:ADI", "d": "Aradei Capital" },
-              { "s": "CSE:LBV", "d": "Label Vie" }
+              { "s": "MNG", "d": "Managem" },
+              { "s": "GAZ", "d": "Afriquia Gaz" },
+              { "s": "SNA", "d": "Sanlam Maroc" },
+              { "s": "WAA", "d": "Wafa Assurance" },
+              { "s": "ADI", "d": "Aradei Capital" },
+              { "s": "LBV", "d": "Label Vie" }
             ],
             "originalTitle": "Hausses %"
           },
           {
             "title": "Baisses %",
             "symbols": [
-              { "s": "CSE:ALL", "d": "Alliances" },
-              { "s": "CSE:DHO", "d": "Addoha" },
-              { "s": "CSE:TGC", "d": "TGCC" },
-              { "s": "CSE:JET", "d": "Jet Contractors" },
-              { "s": "CSE:RIS", "d": "Risma" },
-              { "s": "CSE:HPS", "d": "HPS" }
+              { "s": "ALL", "d": "Alliances" },
+              { "s": "DHO", "d": "Addoha" },
+              { "s": "TGC", "d": "TGCC" },
+              { "s": "JET", "d": "Jet Contractors" },
+              { "s": "RIS", "d": "Risma" },
+              { "s": "HPS", "d": "HPS" }
             ],
             "originalTitle": "Baisses %"
           }
