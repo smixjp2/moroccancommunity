@@ -56,7 +56,7 @@ const features = [
 const faqItems = [
   {
     question: "Qu'est-ce que The Moroccan Community ?",
-    answer: "C'est une plateforme éducative qui fournit des analyses, des outils et des cours pour aider les Marocains à investir en bourse, à gérer leurs finances et à développer leurs compétences professionnelles.",
+    answer: "C'est une plateforme éducative qui fournit des analyses, des outils et des cours pour aider les Marocains à mieux gérer leurs finances et à développer leurs compétences professionnelles.",
   },
   {
     question: "Vos cours sont-ils adaptés aux débutants ?",
@@ -124,7 +124,7 @@ export default function Home() {
               Débloquez le Potentiel du Marché Marocain
             </h1>
             <p className="mt-4 max-w-xl mx-auto text-lg text-primary-foreground/90 md:text-xl">
-              Votre source d'analyses d'experts, d'outils puissants et de ressources pédagogiques pour investir au Maroc.
+              Votre source d'analyses, d'outils et de ressources pour comprendre l'économie et la finance au Maroc.
             </p>
             <div className="mt-8 flex justify-center gap-4">
               <Button asChild size="lg" className="font-bold">
@@ -142,9 +142,9 @@ export default function Home() {
         <section className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">Des Outils pour Chaque Investisseur</h2>
+              <h2 className="font-headline text-3xl font-bold md:text-4xl">Des Outils pour Chaque Objectif</h2>
               <p className="mt-4 text-muted-foreground md:text-lg">
-                Que vous soyez débutant ou professionnel chevronné, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.
+                Que vous soyez débutant ou professionnel, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.
               </p>
             </div>
             <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
