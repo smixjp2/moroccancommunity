@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const courses: Course[] = [
   {
-    id: "3",
+    id: "formation-bourse-casablanca",
     title: "De Zéro à Héros : La Formation Complète sur la Bourse de Casablanca",
     description: "Une formation exhaustive de +12 heures avec des cas pratiques 100% marocains pour maîtriser la Bourse de Casablanca, de l'analyse fondamentale à la construction de portefeuille.",
     level: "Tous Niveaux",
@@ -19,7 +20,7 @@ const courses: Course[] = [
     href: "/courses/formation-bourse-casablanca"
   },
   {
-    id: "4",
+    id: "formation-excel-power-bi",
     title: "Excel & Power BI pour la Finance : de Débutant à Avancé",
     description: "Maîtrisez Excel, Power Query et Power BI pour l'analyse de données financières. Une compétence très demandée, incluant un coaching carrière.",
     level: "Tous Niveaux",
@@ -29,7 +30,7 @@ const courses: Course[] = [
     href: "/courses/formation-excel-power-bi"
   },
    {
-    id: "5",
+    id: "formation-dca",
     title: "La Stratégie DCA : Investir Simplement et Efficacement",
     description: "Découvrez la puissance de l'investissement programmé (DCA) pour construire votre patrimoine sans stress et en battant l'inflation. 8 modules pour devenir un expert.",
     level: "Débutant",
@@ -62,7 +63,7 @@ export default function CoursesPage() {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {courses.map((course) => (
           <Card key={course.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            {(course.id === "3" || course.id === "4" || course.id === "5") && (
+            {(course.id.startsWith("formation-")) && (
                 <Badge className="absolute top-4 right-4 flex items-center gap-1 z-10 bg-yellow-400 text-yellow-900">
                     <Star className="h-4 w-4" /> NOUVEAU
                 </Badge>
@@ -102,5 +103,3 @@ export default function CoursesPage() {
     </div>
   );
 }
-
-    
