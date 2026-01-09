@@ -15,7 +15,7 @@ function TradingViewSymbolOverview() {
       script.async = true;
       script.innerHTML = JSON.stringify({
         "symbols": [
-          ["MASI", "CSE:MASI|1D"],
+          ["MASI", "MASI|1D"],
           ["EURMAD", "FX_IDC:EURMAD|1D"],
           ["USDMAD", "FX_IDC:USDMAD|1D"]
         ],
