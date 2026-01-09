@@ -7,7 +7,8 @@ function TradingViewSymbolOverview() {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (container.current && !container.current.querySelector('script')) {
+    const currentContainer = container.current;
+    if (currentContainer && !currentContainer.querySelector('script')) {
       const script = document.createElement('script');
       script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
       script.type = 'text/javascript';
@@ -43,15 +44,22 @@ function TradingViewSymbolOverview() {
         "lineType": 2,
         "dateRanges": ["1d|1", "1m|30", "3m|60", "12m|1D", "60m|1W", "all|1M"],
         "lineWidth": 2,
-        "lineColor": "rgba(67, 72, 41, 1)"
+        "lineColor": "rgba(67, 72, 41, 1)",
+        "isTransparent": true
       });
-      container.current.appendChild(script);
+      currentContainer.appendChild(script);
+
+      return () => {
+        if (currentContainer && currentContainer.contains(script)) {
+            currentContainer.removeChild(script);
+        }
+      };
     }
   }, []);
 
   return (
     <div className="tradingview-widget-container" ref={container} style={{ height: "450px", width: "100%" }}>
-      <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
+      <div className="tradingview-widget-container__widget" style={{ height: "100%", width: "100%" }}></div>
     </div>
   );
 }

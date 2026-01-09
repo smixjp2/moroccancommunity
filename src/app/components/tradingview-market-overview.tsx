@@ -7,7 +7,8 @@ function TradingViewMarketOverview() {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (container.current && !container.current.querySelector('script')) {
+    const currentContainer = container.current;
+    if (currentContainer && !currentContainer.querySelector('script')) {
       const script = document.createElement('script');
       script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js';
       script.type = 'text/javascript';
@@ -71,13 +72,19 @@ function TradingViewMarketOverview() {
           }
         ]
       });
-      container.current.appendChild(script);
+      currentContainer.appendChild(script);
+
+      return () => {
+        if (currentContainer && currentContainer.contains(script)) {
+            currentContainer.removeChild(script);
+        }
+      };
     }
   }, []);
 
   return (
     <div className="tradingview-widget-container" ref={container} style={{ height: "450px", width: "100%" }}>
-      <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
+      <div className="tradingview-widget-container__widget" style={{ height: "100%", width: "100%" }}></div>
     </div>
   );
 }
