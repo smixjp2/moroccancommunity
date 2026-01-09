@@ -168,7 +168,7 @@ export default function StockAnalyzerPage() {
         <Info className="h-4 w-4" />
         <AlertTitle>Avertissement Important</AlertTitle>
         <AlertDescription>
-          Cet outil utilise l'intelligence artificielle pour générer des analyses. Celles-ci sont fournies à titre informatif et éducatif uniquement et peuvent contenir des erreurs. Elles ne constituent en aucun cas un conseil en investissement.
+          Les analyses générées par cet outil sont fournies à titre informatif et éducatif uniquement. Elles peuvent contenir des erreurs et ne constituent en aucun cas un conseil en investissement.
         </AlertDescription>
       </Alert>
       
