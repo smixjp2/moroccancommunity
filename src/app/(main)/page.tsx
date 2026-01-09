@@ -121,7 +121,7 @@ export default function Home() {
         <div className="relative z-10 container px-4 md:px-6">
           <div className="max-w-3xl mx-auto">
             <h1 className="font-headline text-4xl font-bold md:text-6xl lg:text-7xl drop-shadow-md">
-              Débloquez le Potentiel du Marché Marocain
+              Maîtrisez Vos Finances au Maroc
             </h1>
             <p className="mt-4 max-w-xl mx-auto text-lg text-primary-foreground/90 md:text-xl">
               Votre source d'analyses, d'outils et de ressources pour comprendre l'économie et la finance au Maroc.
