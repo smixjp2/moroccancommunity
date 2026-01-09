@@ -141,12 +141,13 @@ function ManageUserPage({ params }: ManageUserPageProps) {
                                         <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 hover:bg-muted/50 transition-colors">
                                              <FormControl>
                                                 <Checkbox
-                                                    checked={field.value?.includes(course.id)}
+                                                    checked={(field.value || []).includes(course.id)}
                                                     onCheckedChange={(checked) => {
+                                                        const currentValue = field.value || [];
                                                         return checked
-                                                        ? field.onChange([...field.value, course.id])
+                                                        ? field.onChange([...currentValue, course.id])
                                                         : field.onChange(
-                                                            field.value?.filter(
+                                                            currentValue.filter(
                                                                 (value) => value !== course.id
                                                             )
                                                             )
