@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import React from 'react';
 
 export default async function ArticlePage({ params }: { params: { id: string } }) {
   const article = articles.find((a) => a.id === params.id);
@@ -74,3 +75,4 @@ export default async function ArticlePage({ params }: { params: { id: string } }
     </div>
   );
 }
+
