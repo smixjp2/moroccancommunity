@@ -56,13 +56,13 @@ Analysez la société suivante :
 - Nom : {{{stockName}}}
 - Symbole : {{{stockSymbol}}}
 
-En vous basant sur vos connaissances actuelles de cette entreprise et du marché marocain, fournissez une analyse détaillée couvrant les points suivants. Soyez précis et utilisez des données chiffrées (chiffre d'affaires, bénéfice, ratios clés comme le P/E, rendement du dividende) lorsque c'est pertinent.
+En vous basant sur vos connaissances actuelles de cette entreprise et du marché marocain, fournissez une analyse détaillée couvrant les points suivants. Soyez précis et utilisez des données chiffrées (chiffre d'affaires, bénéfice, ratios clés comme le P/E, rendement du dividende) lorsque c'est pertinent. Utilisez des listes à puces (avec des tirets -) pour structurer vos points clés dans chaque section pour une meilleure lisibilité.
 
 1.  **Résumé de l'Analyse**: Un aperçu rapide et percutant.
 2.  **Santé Financière**: Commentez le bilan, les tendances du chiffre d'affaires, la rentabilité (marges), et le niveau d'endettement. Citez des chiffres récents si vous en avez.
 3.  **Potentiel de Croissance**: Quelles sont les perspectives futures ? Position de leader ? Nouveaux projets, expansion ?
 4.  **Analyse du Dividende**: Est-ce une bonne action de rendement ? Le dividende est-il fiable et a-t-il un historique de croissance ? Quel est le rendement approximatif ?
-5.  **Valorisation**: L'action est-elle actuellement bon marché, chère, ou à son juste prix ? Mentionnez le P/E ratio et comparez-le à son secteur.
+5.  **Valorisation**: L'action est-elle actuellement bon marché, chère, ou à son juste prix ? Mentionnez le P/E ratio et le comparez à son secteur.
 6.  **Recommandation Finale**: Concluez avec une recommandation claire et nuancée, adaptée à différents profils d'investisseurs marocains (par exemple : 'Pour un profil prudent...', 'Pour un investisseur dynamique...').
 
 Votre ton doit être expert mais facile à comprendre. La réponse DOIT être en français. Structurez la sortie au format JSON requis.

@@ -67,21 +67,46 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const AnalysisSection = ({ icon, title, content }: { icon: React.ReactNode, title: string, content: string }) => (
-    <Card>
-        <CardHeader className="flex-row items-center gap-4 space-y-0 pb-2">
-            {icon}
-            <CardTitle className="font-headline text-xl">{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-            <div className="text-muted-foreground space-y-2">
-                {content.split('\n').map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                ))}
-            </div>
-        </CardContent>
-    </Card>
-);
+const AnalysisSection = ({ icon, title, content }: { icon: React.ReactNode, title: string, content: string }) => {
+    // Process content to render paragraphs and bullet points
+    const renderContent = () => {
+        const lines = content.split('\n').filter(line => line.trim() !== '');
+        const elements = [];
+        let listItems = [];
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
+                listItems.push(<li key={`li-${i}`}>{line.trim().substring(2)}</li>);
+            } else {
+                if (listItems.length > 0) {
+                    elements.push(<ul key={`ul-${i}`} className="list-disc list-inside space-y-1 my-2">{listItems}</ul>);
+                    listItems = [];
+                }
+                elements.push(<p key={i}>{line}</p>);
+            }
+        }
+        if (listItems.length > 0) {
+            elements.push(<ul key="ul-last" className="list-disc list-inside space-y-1 my-2">{listItems}</ul>);
+        }
+
+        return elements;
+    };
+
+    return (
+        <Card>
+            <CardHeader className="flex-row items-center gap-4 space-y-0 pb-2">
+                {icon}
+                <CardTitle className="font-headline text-xl">{title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="text-muted-foreground space-y-3">
+                    {renderContent()}
+                </div>
+            </CardContent>
+        </Card>
+    );
+};
 
 
 export default function StockAnalyzerPage() {
@@ -172,7 +197,7 @@ export default function StockAnalyzerPage() {
         <Info className="h-4 w-4" />
         <AlertTitle>Avertissement Important</AlertTitle>
         <AlertDescription>
-          Les analyses fournies par cet outil sont à titre informatif et éducatif uniquement. Elles peuvent contenir des erreurs et ne constituent en aucun cas un conseil en investissement.
+           Les analyses fournies par cet outil sont à titre informatif et éducatif uniquement. Elles peuvent contenir des erreurs et ne constituent en aucun cas un conseil en investissement.
         </AlertDescription>
       </Alert>
       
