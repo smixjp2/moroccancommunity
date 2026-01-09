@@ -20,12 +20,12 @@ const StockAnalysisInputSchema = z.object({
 export type StockAnalysisInput = z.infer<typeof StockAnalysisInputSchema>;
 
 const StockAnalysisOutputSchema = z.object({
-  analysisSummary: z.string().describe("A high-level summary of the stock's current situation."),
-  financialHealth: z.string().describe("An analysis of the company's financial health, including debt, revenue, and profitability."),
-  growthPotential: z.string().describe("An evaluation of the company's future growth prospects and market position."),
-  dividendAnalysis: z.string().describe("An analysis of the company's dividend policy, its sustainability, and its attractiveness for income investors."),
-  valuation: z.string().describe("An assessment of the stock's current valuation (e.g., overvalued, undervalued, fairly valued) based on common metrics like P/E ratio."),
-  finalRecommendation: z.string().describe("A concluding recommendation for different types of Moroccan investors (e.g., prudent, dynamic)."),
+  analysisSummary: z.string().describe("Un résumé de haut niveau de la situation actuelle de l'action."),
+  financialHealth: z.string().describe("Une analyse de la santé financière de l'entreprise, incluant la dette, le chiffre d'affaires, et la rentabilité, avec des chiffres clés si possible."),
+  growthPotential: z.string().describe("Une évaluation des perspectives de croissance future de l'entreprise et de sa position sur le marché."),
+  dividendAnalysis: z.string().describe("Une analyse de la politique de dividende de l'entreprise, sa pérennité et son attrait pour les investisseurs de revenu."),
+  valuation: z.string().describe("Une évaluation de la valorisation actuelle de l'action (par exemple, surévaluée, sous-évaluée, correctement évaluée) basée sur des métriques communes comme le ratio P/E."),
+  finalRecommendation: z.string().describe("Une recommandation finale pour différents types d'investisseurs marocains (prudent, dynamique)."),
 });
 export type StockAnalysisOutput = z.infer<typeof StockAnalysisOutputSchema>;
 
@@ -50,21 +50,22 @@ const prompt = ai.definePrompt({
   name: 'stockAnalyzerPrompt',
   input: {schema: StockAnalysisInputSchema},
   output: {schema: StockAnalysisOutputSchema},
-  prompt: `You are a top-tier financial analyst specializing in the Moroccan stock market (Bourse de Casablanca). Your task is to provide a comprehensive and clear analysis of a given stock for an individual investor.
+  prompt: `Vous êtes un analyste financier expert spécialisé dans la Bourse de Casablanca. Votre tâche est de fournir une analyse complète en FRANÇAIS, détaillée et chiffrée pour un investisseur individuel.
 
-Analyze the following company:
-- Company Name: {{{stockName}}}
-- Ticker Symbol: {{{stockSymbol}}}
+Analysez la société suivante :
+- Nom : {{{stockName}}}
+- Symbole : {{{stockSymbol}}}
 
-Based on your knowledge of this company and the Moroccan market, please provide a detailed analysis covering the following points:
-1.  **Analysis Summary**: A quick, high-level overview.
-2.  **Financial Health**: Discuss its balance sheet, revenue trends, and profitability.
-3.  **Growth Potential**: What are its future prospects? Market leadership? New projects?
-4.  **Dividend Analysis**: Is it a good stock for income? Is the dividend reliable?
-5.  **Valuation**: Is the stock currently cheap, expensive, or fairly priced? Mention relevant ratios if possible.
-6.  **Final Recommendation**: Conclude with a clear recommendation tailored to different investor profiles (prudent, balanced, dynamic) in the Moroccan context.
+En vous basant sur vos connaissances actuelles de cette entreprise et du marché marocain, fournissez une analyse détaillée couvrant les points suivants. Soyez précis et utilisez des données chiffrées (chiffre d'affaires, bénéfice, ratios clés comme le P/E, rendement du dividende) lorsque c'est pertinent.
 
-Your tone should be expert, but easy to understand. Output the result in the required JSON format.
+1.  **Résumé de l'Analyse**: Un aperçu rapide et percutant.
+2.  **Santé Financière**: Commentez le bilan, les tendances du chiffre d'affaires, la rentabilité (marges), et le niveau d'endettement. Citez des chiffres récents si vous en avez.
+3.  **Potentiel de Croissance**: Quelles sont les perspectives futures ? Position de leader ? Nouveaux projets, expansion ?
+4.  **Analyse du Dividende**: Est-ce une bonne action de rendement ? Le dividende est-il fiable et a-t-il un historique de croissance ? Quel est le rendement approximatif ?
+5.  **Valorisation**: L'action est-elle actuellement bon marché, chère, ou à son juste prix ? Mentionnez le P/E ratio et comparez-le à son secteur.
+6.  **Recommandation Finale**: Concluez avec une recommandation claire et nuancée, adaptée à différents profils d'investisseurs marocains (par exemple : 'Pour un profil prudent...', 'Pour un investisseur dynamique...').
+
+Votre ton doit être expert mais facile à comprendre. La réponse DOIT être en français. Structurez la sortie au format JSON requis.
 `,
 });
 
