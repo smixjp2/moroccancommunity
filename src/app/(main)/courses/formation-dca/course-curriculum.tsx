@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -141,11 +142,10 @@ export function CourseCurriculum() {
         <DialogFooter className="flex-col sm:flex-col sm:space-x-0 items-center pt-4 border-t">
             <div className="text-center">
                  <p className="text-sm text-muted-foreground">Accès à vie à la formation et aux futures mises à jour</p>
-                 <p className="text-4xl font-bold font-headline my-2 text-primary">499 MAD</p>
-                 <p className="text-xs text-muted-foreground">(Paiement unique)</p>
+                 <p className="text-4xl font-bold font-headline my-2 text-primary">Bientôt disponible</p>
             </div>
-          <Button type="button" size="lg" asChild className="w-full mt-4">
-            <a href="#">S'inscrire Maintenant</a>
+          <Button type="button" size="lg" className="w-full mt-4" disabled>
+            S'inscrire Maintenant
           </Button>
            <DialogClose asChild>
                 <Button type="button" variant="ghost" className="text-xs text-muted-foreground">
