@@ -163,6 +163,14 @@ export default function StockAnalyzerPage() {
           </Form>
         </CardContent>
       </Card>
+
+      <Alert variant="destructive" className="max-w-3xl mx-auto mb-8">
+        <Info className="h-4 w-4" />
+        <AlertTitle>Avertissement Important</AlertTitle>
+        <AlertDescription>
+          Cet outil utilise l'intelligence artificielle pour générer des analyses. Celles-ci sont fournies à titre informatif et éducatif uniquement et peuvent contenir des erreurs. Elles ne constituent en aucun cas un conseil en investissement.
+        </AlertDescription>
+      </Alert>
       
       {loading && (
         <div className="flex flex-col items-center justify-center text-center py-16">
