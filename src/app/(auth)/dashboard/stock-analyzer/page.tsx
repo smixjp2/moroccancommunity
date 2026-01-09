@@ -32,6 +32,7 @@ import {
 } from '@/components/ui/select';
 import { Loader2, BarChart, Activity, Briefcase, Gem, Goal, Info } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import Link from 'next/link';
 
 const availableStocks = [
   { symbol: 'ATW', name: 'Attijariwafa Bank' },
@@ -50,7 +51,7 @@ const availableStocks = [
   { symbol: 'WAA', name: 'Wafa Assurance' },
   { symbol: 'SNA', name: 'Sanlam Maroc' },
   { symbol: 'TGC', name: 'TGCC' },
-  { symbol: 'SNI', name: 'Al Mada (ex-SNI)' },
+  { symbol: 'MNG', name: 'Managem'},
   { symbol: 'RIS', name: 'Risma' },
   { symbol: 'SID', name: 'Sonasid' },
   { symbol: 'DHO', name: 'Douja Prom Addoha' },
@@ -58,6 +59,8 @@ const availableStocks = [
   { symbol: 'CTM', name: 'CTM' },
   { symbol: 'NKL', name: 'Nekl' },
   { symbol: 'MIC', name: 'Microdata' },
+  { symbol: 'CIH', name: 'CIH Bank'},
+  { symbol: 'CDM', name: 'Crédit du Maroc'},
 ];
 
 
@@ -68,6 +71,9 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const AnalysisSection = ({ icon, title, content }: { icon: React.ReactNode, title: string, content: string }) => {
+    // This is a simple but unsafe way to render HTML.
+    // In a real-world app, you should use a library like 'sanitize-html'
+    // to prevent XSS attacks.
     return (
         <Card>
             <CardHeader className="flex-row items-center gap-4 space-y-0 pb-2">
@@ -76,7 +82,7 @@ const AnalysisSection = ({ icon, title, content }: { icon: React.ReactNode, titl
             </CardHeader>
             <CardContent>
                 <div 
-                    className="text-muted-foreground space-y-3 [&_ul]:list-disc [&_ul]:list-inside [&_ul]:space-y-1 [&_b]:font-semibold [&_b]:text-foreground"
+                    className="text-muted-foreground space-y-3 prose dark:prose-invert prose-sm max-w-none [&_ul]:list-disc [&_ul]:list-inside [&_ul]:space-y-1 [&_b]:font-semibold [&_b]:text-foreground"
                     dangerouslySetInnerHTML={{ __html: content }} 
                 />
             </CardContent>
@@ -122,11 +128,16 @@ export default function StockAnalyzerPage() {
 
   return (
     <div className="container py-12">
-      <header className="mb-8 max-w-3xl mx-auto text-center">
-        <h1 className="text-4xl font-bold font-headline flex items-center justify-center gap-3"><Briefcase className="text-primary" />Analyseur d'Actions</h1>
-        <p className="text-muted-foreground mt-2">
-          Obtenez une analyse financière complète d'une action de la Bourse de Casablanca.
-        </p>
+      <header className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-bold font-headline flex items-center gap-3"><Briefcase className="text-primary" />Analyseur d'Actions</h1>
+          <p className="text-muted-foreground mt-2">
+            Obtenez une analyse financière complète d'une action de la Bourse de Casablanca.
+          </p>
+        </div>
+        <Button asChild variant="outline">
+            <Link href="/dashboard">Retour au tableau de bord</Link>
+        </Button>
       </header>
 
       <Card className="max-w-2xl mx-auto mb-8">
