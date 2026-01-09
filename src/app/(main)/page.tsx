@@ -56,7 +56,7 @@ const features = [
 const faqItems = [
   {
     question: "Qu'est-ce que The Moroccan Community ?",
-    answer: "C'est une plateforme éducative qui fournit des analyses, des outils et des cours pour aider les Marocains à mieux gérer leurs finances et à développer leurs compétences professionnelles.",
+    answer: "C'est une plateforme éducative dédiée à la finance au Maroc. Nous fournissons des analyses de marché, des outils de finance personnelle et des formations techniques (Excel, Power BI) pour aider les Marocains à mieux gérer leur argent et à développer des compétences financières pointues.",
   },
   {
     question: "Vos cours sont-ils adaptés aux débutants ?",
