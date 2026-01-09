@@ -74,7 +74,11 @@ const AnalysisSection = ({ icon, title, content }: { icon: React.ReactNode, titl
             <CardTitle className="font-headline text-xl">{title}</CardTitle>
         </CardHeader>
         <CardContent>
-            <p className="text-muted-foreground">{content}</p>
+            <div className="text-muted-foreground space-y-2">
+                {content.split('\n').map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                ))}
+            </div>
         </CardContent>
     </Card>
 );
@@ -168,7 +172,7 @@ export default function StockAnalyzerPage() {
         <Info className="h-4 w-4" />
         <AlertTitle>Avertissement Important</AlertTitle>
         <AlertDescription>
-          Les analyses générées par cet outil sont fournies à titre informatif et éducatif uniquement. Elles peuvent contenir des erreurs et ne constituent en aucun cas un conseil en investissement.
+          Les analyses fournies par cet outil sont à titre informatif et éducatif uniquement. Elles peuvent contenir des erreurs et ne constituent en aucun cas un conseil en investissement.
         </AlertDescription>
       </Alert>
       
