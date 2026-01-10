@@ -35,7 +35,7 @@ export async function sendContactEmail(
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     console.error('Brevo API key is not configured.');
-    return { success: false, message: 'La configuration du service de messagerie est incomplète.' };
+    return { success: false, message: "La configuration du service d'envoi d'e-mails est incomplète. (Clé API manquante)" };
   }
 
   const transactionalEmailsApi = new Brevo.TransactionalEmailsApi();
