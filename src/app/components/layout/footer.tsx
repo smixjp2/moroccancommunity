@@ -3,7 +3,8 @@
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Scaling, Instagram, Youtube } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
+import { Logo } from "./logo";
 import Link from "next/link";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 import { useToast } from "@/hooks/use-toast";
@@ -49,7 +50,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2">
-                <Scaling className="h-6 w-6 text-primary" />
+                <Logo />
                 <span className="font-headline text-lg font-bold">The Moroccan Community</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm">

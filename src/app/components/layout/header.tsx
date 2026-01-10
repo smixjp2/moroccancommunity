@@ -3,7 +3,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Scaling, ChevronDown, Info } from "lucide-react";
+import { Menu, ChevronDown, Info } from "lucide-react";
+import { Logo } from "./logo";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -126,7 +127,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
-          <Scaling className="h-6 w-6 text-primary" />
+          <Logo />
           <span className="font-headline text-lg font-bold">The Moroccan Community</span>
         </Link>
 
@@ -147,7 +148,7 @@ export function Header() {
                 </SheetTrigger>
                 <SheetContent side="left">
                 <Link href="/" className="mr-6 flex items-center gap-2 mb-6">
-                    <Scaling className="h-6 w-6 text-primary" />
+                    <Logo />
                     <span className="font-headline text-lg font-bold">The Moroccan Community</span>
                 </Link>
                 <nav className="flex flex-col items-start space-y-4 text-lg">
