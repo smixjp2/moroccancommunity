@@ -5,41 +5,19 @@ import { cn } from '@/lib/utils';
 export function Logo({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width="104"
-      height="29"
-      viewBox="0 0 104 29"
+      width="151"
+      height="42"
+      viewBox="0 0 151 42"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={cn("h-8 w-auto", className)}
       {...props}
     >
-      <path
-        d="M25.7539 28.5V0.5H41.5539V5.7H31.3539V11.5H40.4539V16.7H31.3539V23.3H41.5539V28.5H25.7539Z"
-        fill="hsl(var(--foreground))"
-        fillOpacity="0.8"
-      />
-      <path
-        d="M45.6914 28.5V0.5H66.4914V5.7H58.9914L55.5914 10.1H64.9914V16.6H54.6914L45.6914 28.5Z"
-        fill="hsl(var(--foreground))"
-        fillOpacity="0.8"
-      />
-      <path
-        d="M68.791 28.5V0.5H74.391V28.5H68.791Z"
-        fill="hsl(var(--foreground))"
-        fillOpacity="0.8"
-      />
-      <path
-        d="M82.3539 0.5L88.9539 10.4L95.5539 0.5H103.054L92.7539 16V28.5H86.9539V16L76.6539 0.5H82.3539Z"
-        fill="hsl(var(--foreground))"
-        fillOpacity="0.8"
-      />
-      <path
-        d="M100 11.4L92.1 0H86.9L96.4 15.3V29H102V15.3L111.5 0H105.9L100 8.5V0H94.4V11.4H100Z"
-        fill="hsl(var(--foreground))"
-        fillOpacity="0.8"
-      />
-      <path d="M96 11V5H102V11H96Z" fill="hsl(var(--primary))" />
-      <path d="M102 5V0H108L102 8.4V5Z" fill="hsl(var(--primary))" />
+        <path d="M25.333 1.58331H12.2913V40.25H25.333V26.2083H34.4997V16.0833H25.333V1.58331Z" fill="hsl(var(--foreground))" fillOpacity="0.8"/>
+        <path d="M49.0413 1.58331H36V40.25H49.0413V26.2083H58.208V16.0833H49.0413V1.58331Z" fill="hsl(var(--foreground))" fillOpacity="0.8"/>
+        <path d="M96.3332 40.25L75.9165 1.58331H87.0832L101.416 24.9166L115.75 1.58331H126.916L106.5 40.25H96.3332Z" fill="hsl(var(--foreground))" fillOpacity="0.8"/>
+        <path d="M149.333 26.2083V1.58331H134.75V11.7083H128.5V40.25H142V16.0833H149.333V26.2083Z" fill="hsl(var(--foreground))" fillOpacity="0.8"/>
+        <path d="M132.083 31.9167L138.916 22.0833H144L136.166 33.5833L144.416 45H138L132.083 35.5V31.9167Z" fill="#00C48C"/>
     </svg>
   );
 }
