@@ -8,7 +8,7 @@ export const articles: Article[] = [
     category: "Analyse Sectorielle",
     excerpt: "Après plusieurs mois d’attente, le complexe hospitalier Akdital de Rabat a obtenu les autorisations pour sa réouverture. Un signal positif pour les investisseurs et le secteur.",
     author: "L'équipe de TMC",
-    date: "2024-07-25",
+    date: "2026-01-10",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-4')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'article-4')?.imageHint || ''
   },

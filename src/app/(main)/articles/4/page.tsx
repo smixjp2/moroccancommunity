@@ -72,13 +72,13 @@ export default function ArticlePage() {
                          <h2 className="font-headline text-2xl font-bold flex items-center gap-3 mb-4"><Activity className="text-primary"/>Lecture boursière : quel impact pour Akdital en Bourse ?</h2>
                         <p className="mb-4">Le point clé pour les investisseurs est que Akdital est une société cotée à la Bourse de Casablanca. À ce titre, la réouverture du complexe hospitalier de Rabat revêt une importance particulière sur plusieurs plans :</p>
                         
-                        <h4 className="font-semibold text-lg mt-4">📈 Visibilité et crédibilité</h4>
+                        <h4 className="font-semibold text-lg mt-4">Visibilité et crédibilité</h4>
                         <p>La résolution rapide des blocages administratifs réduit le risque réglementaire perçu. Elle renforce la crédibilité du management et la capacité du groupe à gérer ses projets à grande échelle.</p>
 
-                        <h4 className="font-semibold text-lg mt-4">💰 Impact sur les fondamentaux</h4>
+                        <h4 className="font-semibold text-lg mt-4">Impact sur les fondamentaux</h4>
                         <p>La mise en exploitation effective de l’hôpital permet la génération de nouveaux revenus, une meilleure absorption des investissements déjà engagés, et une amélioration progressive de la rentabilité des actifs.</p>
                         
-                        <h4 className="font-semibold text-lg mt-4">🧠 Message envoyé au marché</h4>
+                        <h4 className="font-semibold text-lg mt-4">Message envoyé au marché</h4>
                         <p>Pour le marché boursier, cette réouverture est interprétée comme un signal positif sur la continuité du plan de développement du groupe et une confirmation de sa stratégie d’expansion nationale.</p>
                     </div>
 
