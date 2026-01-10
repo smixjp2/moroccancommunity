@@ -128,7 +128,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
           <Logo />
-          <span className="font-headline text-lg font-bold">The Moroccan Community</span>
+          <span className="font-headline font-bold">The Moroccan Community</span>
         </Link>
 
         <div className="hidden md:flex flex-1 items-center justify-center">
@@ -149,7 +149,7 @@ export function Header() {
                 <SheetContent side="left">
                 <Link href="/" className="mr-6 flex items-center gap-2 mb-6">
                     <Logo />
-                    <span className="font-headline text-lg font-bold">The Moroccan Community</span>
+                    <span className="font-headline font-bold">The Moroccan Community</span>
                 </Link>
                 <nav className="flex flex-col items-start space-y-4 text-lg">
                     {navLinks.map((link) => (

@@ -51,7 +51,7 @@ export function Footer() {
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2">
                 <Logo />
-                <span className="font-headline text-lg font-bold">The Moroccan Community</span>
+                <span className="font-headline font-bold">The Moroccan Community</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm">
               Votre source de premier plan pour l'analyse du marché marocain et l'intelligence d'investissement.
