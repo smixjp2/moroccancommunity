@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase, Home } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
@@ -10,6 +10,12 @@ const simulators = [
     icon: <Wallet className="h-8 w-8 text-primary" />,
     title: "Simulateur de Budget Mensuel",
     description: "Analysez vos revenus, charges et calculez votre capacité d'épargne.",
+  },
+   {
+    href: "/tools/loan-simulator",
+    icon: <Home className="h-8 w-8 text-primary" />,
+    title: "Simulateur de Crédit Immobilier",
+    description: "Calculez vos mensualités et le coût total de votre crédit immobilier.",
   },
   {
     href: "/tools/fee-simulator",
@@ -63,7 +69,7 @@ export default function ToolsPage() {
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
         {simulators.map((tool) => {
-          const isClickable = !tool.isMemberOnly; // OPCVM is now clickable
+          const isClickable = !tool.isMemberOnly;
           const Wrapper = isClickable ? Link : 'div';
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
