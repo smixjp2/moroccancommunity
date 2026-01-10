@@ -173,9 +173,9 @@ export default function LoginPage() {
           </Form>
           <div className="mt-4 text-center text-sm">
             Vous n'avez pas de compte ?{' '}
-            <Link href="#" className="underline">
+            <a href="mailto:themoroccancommunity@gmail.com" className="underline">
               Contactez-nous
-            </Link>
+            </a>
           </div>
         </CardContent>
       </Card>
