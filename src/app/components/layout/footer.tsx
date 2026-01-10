@@ -46,13 +46,13 @@ export function Footer() {
   return (
     <footer className="border-t bg-card">
       <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2">
                 <Scaling className="h-6 w-6 text-primary" />
                 <span className="font-headline text-lg font-bold">The Moroccan Community</span>
             </Link>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm max-w-sm">
               Votre source de premier plan pour l'analyse du marché marocain et l'intelligence d'investissement.
             </p>
             <div className="flex space-x-4">
@@ -67,13 +67,23 @@ export function Footer() {
               </Button>
             </div>
           </div>
-          <div className="md:col-span-2 space-y-4">
-            <h3 className="font-headline font-semibold">Abonnez-vous à notre newsletter mensuelle</h3>
+          <div className="space-y-4">
+             <h3 className="font-headline font-semibold">Navigation</h3>
+             <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/articles" className="hover:text-primary">Articles</Link></li>
+                <li><Link href="/courses" className="hover:text-primary">Cours</Link></li>
+                <li><Link href="/tools" className="hover:text-primary">Outils</Link></li>
+                <li><Link href="/about" className="hover:text-primary">À Propos</Link></li>
+                <li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
+             </ul>
+          </div>
+          <div className="space-y-4">
+            <h3 className="font-headline font-semibold">Abonnez-vous</h3>
             <p className="text-muted-foreground text-sm">
-                Recevez chaque mois des informations sur le marché, des offres promotionnelles et des mises à jour sur les nouveaux services directement dans votre boîte de réception.
+                Recevez notre newsletter mensuelle avec les dernières analyses.
             </p>
-            <form action={formAction} ref={formRef} className="flex w-full max-w-md items-center space-x-2">
-              <Input name="email" type="email" placeholder="Entrez votre email" className="flex-1" required />
+            <form action={formAction} ref={formRef} className="flex w-full items-center space-x-2">
+              <Input name="email" type="email" placeholder="Votre email" className="flex-1" required />
               <SubmitButton />
             </form>
           </div>

@@ -37,6 +37,7 @@ const toolsLinks: NavLink[] = [
 ];
 
 const aboutLink: NavLink = { href: "/about", label: "À propos" };
+const contactLink: NavLink = { href: "/contact", label: "Contact" };
 
 
 export function Header() {
@@ -109,6 +110,15 @@ export function Header() {
         >
             {aboutLink.label}
         </Link>
+        <Link
+            href={contactLink.href}
+            className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === contactLink.href ? "text-primary" : "text-muted-foreground"
+            )}
+        >
+            {contactLink.label}
+        </Link>
     </nav>
   );
 
@@ -167,6 +177,15 @@ export function Header() {
                         )}
                         >
                         {aboutLink.label}
+                    </Link>
+                     <Link
+                        href={contactLink.href}
+                        className={cn(
+                            "font-medium transition-colors hover:text-primary",
+                            pathname === contactLink.href ? "text-primary" : "text-muted-foreground"
+                        )}
+                        >
+                        {contactLink.label}
                     </Link>
                 </nav>
                  <div className="mt-6">
