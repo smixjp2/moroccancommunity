@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useActionState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -11,8 +11,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, Loader2 } from "lucide-react";
 import { useToast } from '@/hooks/use-toast';
+import { sendContactEmail } from '@/app/actions/contact';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Le nom est requis." }),
@@ -25,6 +26,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactPage() {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -34,21 +36,30 @@ export default function ContactPage() {
       message: '',
     },
   });
+  
+  const { formState: { isSubmitting } } = form;
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const recipientEmail = "themoroccananalyst@gmail.com";
-    const subject = `[${data.subject}] - Demande de contact de ${data.name}`;
-    const body = `Nom: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`;
-
-    const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Open the user's default email client
-    window.location.href = mailtoLink;
-
-    toast({
-      title: "Prêt à envoyer !",
-      description: "Votre client de messagerie s'est ouvert pour que vous puissiez envoyer votre message.",
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
     });
+
+    const result = await sendContactEmail(null, formData);
+
+    if (result.success) {
+      toast({
+        title: "Message envoyé !",
+        description: result.message,
+      });
+      form.reset();
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Erreur d'envoi",
+        description: result.message,
+      });
+    }
   };
 
   return (
@@ -68,7 +79,7 @@ export default function ContactPage() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
                     control={form.control}
@@ -141,8 +152,13 @@ export default function ContactPage() {
                   )}
                 />
 
-                <Button type="submit" size="lg" className="w-full">
-                  <Send className="mr-2" /> Préparer l'envoi
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                   {isSubmitting ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                        <Send className="mr-2" />
+                    )}
+                  Envoyer le message
                 </Button>
               </form>
             </Form>
