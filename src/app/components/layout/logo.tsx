@@ -1,4 +1,3 @@
-
 // This component is not imported anywhere yet.
 // It will be used in the header and footer in subsequent steps.
 import { cn } from '@/lib/utils';
@@ -14,9 +13,9 @@ export function Logo({ className, ...props }: React.SVGProps<SVGSVGElement>) {
       className={cn("h-8 w-auto", className)}
       {...props}
     >
-        <path d="M0 0H18V18H0V0Z" fill="hsl(var(--foreground))" fillOpacity="0.8"/>
-        <path d="M24 24H42V42H24V24Z" fill="hsl(var(--foreground))" fillOpacity="0.8"/>
-        <path d="M0 24H18V42H0V24Z" fill="hsl(var(--primary))"/>
+      <rect width="10" height="42" rx="2" fill="hsl(var(--foreground))" fillOpacity="0.9" />
+      <rect x="16" y="12" width="10" height="30" rx="2" fill="hsl(var(--primary))" />
+      <rect x="32" width="10" height="42" rx="2" fill="hsl(var(--foreground))" fillOpacity="0.9" />
     </svg>
   );
 }
