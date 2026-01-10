@@ -5,11 +5,12 @@ import * as Brevo from '@getbrevo/brevo';
 import { z } from 'zod';
 
 const formSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  subject: z.string(),
-  message: z.string(),
+  name: z.string().min(2, "Le nom est requis."),
+  email: z.string().email("Veuillez entrer une adresse email valide."),
+  subject: z.string({ required_error: "Veuillez sélectionner un sujet." }).min(1, "Le sujet est requis."),
+  message: z.string().min(10, "Votre message doit contenir au moins 10 caractères."),
 });
+
 
 interface FormState {
   success: boolean;
@@ -24,6 +25,7 @@ export async function sendContactEmail(
   const parsed = formSchema.safeParse(Object.fromEntries(formData.entries()));
 
   if (!parsed.success) {
+    console.log(parsed.error.errors);
     return { success: false, message: 'Données du formulaire invalides.' };
   }
   
@@ -62,3 +64,4 @@ export async function sendContactEmail(
     return { success: false, message: "Une erreur est survenue lors de l'envoi de l'e-mail." };
   }
 }
+

@@ -18,7 +18,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 const formSchema = z.object({
   name: z.string().min(2, "Le nom est requis."),
   email: z.string().email("Veuillez entrer une adresse email valide."),
-  subject: z.string({ required_error: "Veuillez sélectionner un sujet." }),
+  subject: z.string({ required_error: "Veuillez sélectionner un sujet." }).min(1, "Le sujet est requis."),
   message: z.string().min(10, "Votre message doit contenir au moins 10 caractères."),
 });
 
@@ -41,13 +41,14 @@ export default function ContactPage() {
   const [state, formAction, isPending] = useActionState(sendContactEmail, null);
 
   useEffect(() => {
-    if (state?.success === true) {
+    if (!state) return;
+    if (state.success) {
       toast({
         title: "Message envoyé !",
         description: "Merci de nous avoir contactés. Nous vous répondrons bientôt.",
       });
       form.reset();
-    } else if (state?.success === false) {
+    } else {
       toast({
         variant: "destructive",
         title: "Erreur",
@@ -55,6 +56,14 @@ export default function ContactPage() {
       });
     }
   }, [state, form, toast]);
+  
+  const onSubmit = (data: FormValues) => {
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value);
+    });
+    formAction(formData);
+  };
 
   return (
     <div className="container py-12 md:py-24">
@@ -73,7 +82,7 @@ export default function ContactPage() {
           </CardHeader>
           <CardContent>
              <Form {...form}>
-              <form ref={formRef} action={formAction} className="space-y-6">
+              <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField control={form.control} name="name" render={({ field }) => (
                     <FormItem><FormLabel>Nom Complet</FormLabel><FormControl><Input {...field} placeholder="Votre nom" /></FormControl><FormMessage /></FormItem>
