@@ -3,9 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Download } from "lucide-react";
+import { Download, Youtube } from "lucide-react";
 import type { Resource } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Separator } from "@/components/ui/separator";
+
 
 const resources: Resource[] = [
     {
@@ -44,6 +53,20 @@ const resources: Resource[] = [
     imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
   },
+];
+
+const analystVideos = [
+    { id: "JbU8a_2g4eU", title: "Le Guide ULTIME pour investir dans l'immobilier au Maroc" },
+    { id: "d_2y2oQY0wI", title: "Comment investir 1000 DH par mois en bourse ?" },
+    { id: "84t6A6PVI7c", title: "Le guide ULTIME pour devenir rentier au Maroc" },
+    { id: "GzXG6o-g42U", title: "Le guide ULTIME pour épargner au Maroc" },
+];
+
+const cfoVideos = [
+    { id: "vD24lsohAAs", title: "Le guide ULTIME du contrôle de gestion au Maroc" },
+    { id: "T6V6XKEnaN0", title: "Comment réussir son entretien d'embauche en finance" },
+    { id: "X8-zq-wO_x4", title: "Analyse financière : Le guide ULTIME" },
+    { id: "sE_AIjB7Prk", title: "Le guide ULTIME de la comptabilité pour les nuls" },
 ];
 
 export default function ResourcesPage() {
@@ -86,6 +109,95 @@ export default function ResourcesPage() {
           </Card>
         ))}
       </div>
+
+      <Separator className="my-16" />
+
+        <section className="space-y-12">
+            <div className="text-center max-w-3xl mx-auto">
+                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Youtube className="h-10 w-10 text-red-600"/>Nos Chaînes YouTube</h2>
+                <p className="mt-4 text-muted-foreground md:text-lg">
+                Découvrez nos analyses, tutoriels et guides en format vidéo.
+                </p>
+            </div>
+
+            {/* The Moroccan Analyst Section */}
+            <div className="space-y-4">
+                 <h3 className="font-headline text-2xl font-bold">The Moroccan Analyst</h3>
+                 <Carousel
+                    opts={{
+                        align: "start",
+                        loop: true,
+                    }}
+                    className="w-full"
+                    >
+                    <CarouselContent>
+                        {analystVideos.map((video) => (
+                        <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
+                            <Card className="overflow-hidden">
+                                <CardContent className="p-0">
+                                     <div className="aspect-video">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={`https://www.youtube.com/embed/${video.id}`}
+                                            title={video.title}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                    <div className="p-4">
+                                        <p className="font-semibold text-sm truncate">{video.title}</p>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                    </Carousel>
+            </div>
+
+             {/* The Moroccan CFO Section */}
+            <div className="space-y-4">
+                 <h3 className="font-headline text-2xl font-bold">The Moroccan CFO</h3>
+                 <Carousel
+                    opts={{
+                        align: "start",
+                        loop: true,
+                    }}
+                    className="w-full"
+                    >
+                    <CarouselContent>
+                        {cfoVideos.map((video) => (
+                        <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
+                            <Card className="overflow-hidden">
+                                <CardContent className="p-0">
+                                     <div className="aspect-video">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={`https://www.youtube.com/embed/${video.id}`}
+                                            title={video.title}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                     <div className="p-4">
+                                        <p className="font-semibold text-sm truncate">{video.title}</p>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                    </Carousel>
+            </div>
+        </section>
+
     </div>
   );
 }
+
