@@ -65,6 +65,7 @@ const analystVideos = [
 const cfoVideos = [
     { id: "MUuiJETTMPM", title: "Le guide ULTIME pour lire un bilan et un compte de résultat" },
     { id: "se3FHTgLbAI", title: "Le guide ULTIME du cash-flow (Flux de trésorerie)" },
+    { id: "4aFiKzB3xKg", title: "La psychologie de l'argent (pour les nuls)" },
 ];
 
 export default function ResourcesPage() {
