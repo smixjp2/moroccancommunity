@@ -9,7 +9,7 @@ export const articles: Article[] = [
     category: "Réglementation",
     excerpt: "La nouvelle loi 03-25 vise à diversifier l'offre de produits financiers, renforcer l'attractivité du marché et attirer de nouveaux investisseurs.",
     author: "L'équipe de TMC",
-    date: "2024-08-25",
+    date: "2026-01-13",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-7')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'article-7')?.imageHint || ''
   },
