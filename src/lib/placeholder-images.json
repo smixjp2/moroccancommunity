@@ -43,6 +43,12 @@
       "imageHint": "mobile payment"
     },
     {
+      "id": "article-7",
+      "description": "Image for an article about financial market reform and OPCVM in Morocco.",
+      "imageUrl": "https://images.unsplash.com/photo-1554224154-260325c05938?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmaW5hbmNpYWwlMjBkb2N1bWVudHN8ZW58MHx8fHwxNzI0NjEwMzk4fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "financial documents"
+    },
+    {
       "id": "course-1",
       "description": "Image for a course on how to invest your first salary.",
       "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",

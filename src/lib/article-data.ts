@@ -4,10 +4,20 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const articles: Article[] = [
   {
+    id: "7",
+    title: "Réforme des OPCVM au Maroc : une étape structurante",
+    category: "Réglementation",
+    excerpt: "La nouvelle loi 03-25 vise à diversifier l'offre de produits financiers, renforcer l'attractivité du marché et attirer de nouveaux investisseurs.",
+    author: "L'équipe de TMC",
+    date: "2024-08-25",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'article-7')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'article-7')?.imageHint || ''
+  },
+  {
     id: "6",
     title: "Cash Plus : quels leviers pour la trajectoire du titre",
     category: "Analyse d'actions",
-    excerpt: "Analyse fondamentale et perspectives après l’IPO de Cash Plus. Quels sont les leviers qui influenceront la trajectoire du titre ?",
+    excerpt: "Notre analyse fondamentale et perspectives après l’IPO de Cash Plus. Quels sont les leviers qui influenceront la trajectoire du titre ?",
     author: "L'équipe de TMC",
     date: "2026-01-13",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-6')?.imageUrl || '',
@@ -17,7 +27,7 @@ export const articles: Article[] = [
     id: "5",
     title: "Quels moteurs pour le marché actions marocain en 2026 ?",
     category: "Analyse de Marché",
-    excerpt: "Une lecture économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
+    excerpt: "Notre lecture économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
     author: "L'équipe de TMC",
     date: "2024-08-25",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-5')?.imageUrl || '',
