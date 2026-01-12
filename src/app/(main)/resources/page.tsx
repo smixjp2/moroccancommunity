@@ -143,9 +143,6 @@ export default function ResourcesPage() {
                                             allowFullScreen
                                         ></iframe>
                                     </div>
-                                    <div className="p-4">
-                                        
-                                    </div>
                                 </CardContent>
                             </Card>
                         </CarouselItem>
