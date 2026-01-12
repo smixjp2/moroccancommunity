@@ -2,8 +2,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useFirestore, useMemoFirebase } from '@/firebase';
-import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, getDoc, doc, Timestamp } from 'firebase/firestore';
+import { useFirestore } from '@/firebase';
+import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, getDoc, doc, Timestamp, limit } from 'firebase/firestore';
 import type { User } from 'firebase/auth';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -34,17 +34,11 @@ export default function ChatRoom({ room, user }: ChatRoomProps) {
   const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const messagesColRef = useMemoFirebase(() => {
-    if (firestore) {
-      return collection(firestore, `chatRooms/${room.id}/messages`);
-    }
-    return null;
-  }, [firestore, room.id]);
-
   useEffect(() => {
-    if (!messagesColRef) return;
+    if (!firestore || !room.id) return;
 
     setLoading(true);
+    const messagesColRef = collection(firestore, `chatRooms/${room.id}/messages`);
     const q = query(messagesColRef, orderBy('createdAt', 'asc'), limit(50));
     
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -57,7 +51,7 @@ export default function ChatRoom({ room, user }: ChatRoomProps) {
     });
 
     return () => unsubscribe();
-  }, [messagesColRef]);
+  }, [firestore, room.id]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -65,12 +59,14 @@ export default function ChatRoom({ room, user }: ChatRoomProps) {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newMessage.trim() === '' || !user || !messagesColRef) return;
+    if (newMessage.trim() === '' || !user || !firestore) return;
     
+    // Get user's first name from their profile
     const userDocRef = doc(firestore, 'users', user.uid);
     const userDocSnap = await getDoc(userDocRef);
     const userName = userDocSnap.exists() ? userDocSnap.data().firstName : 'Anonyme';
 
+    const messagesColRef = collection(firestore, `chatRooms/${room.id}/messages`);
     const messageData = {
       text: newMessage,
       userId: user.uid,
