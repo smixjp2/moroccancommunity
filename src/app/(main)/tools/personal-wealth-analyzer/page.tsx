@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -374,7 +375,7 @@ export default function PersonalWealthAnalyzerPage() {
                     votre richesse (Actifs - Dettes).
                   </li>
                    <li>
-                    <strong>Ratio d'endettement :</strong> Un ratio élevé (ex: > 50%) peut indiquer un risque financier.
+                    <strong>Ratio d'endettement :</strong> Un ratio élevé (ex: &gt; 50%) peut indiquer un risque financier.
                   </li>
                 </ul>
               </CardContent>
@@ -385,3 +386,5 @@ export default function PersonalWealthAnalyzerPage() {
     </>
   );
 }
+
+    
