@@ -58,6 +58,7 @@ const resources: Resource[] = [
 
 const analystVideos = [
     { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
+    { id: "jUvqLYAWp8U", title: "Le Guide ULTIME pour investir en Bourse (de 0 à 1 million de DH)" },
     { id: "JbU8a_2g4eU", title: "Le Guide ULTIME pour investir dans l'immobilier au Maroc" },
     { id: "d_2y2oQY0wI", title: "Comment investir 1000 DH par mois en bourse ?" },
     { id: "84t6A6PVI7c", title: "Le guide ULTIME pour devenir rentier au Maroc" },
@@ -66,6 +67,8 @@ const analystVideos = [
 
 const cfoVideos = [
     { id: "vD24lsohAAs", title: "Le guide ULTIME du contrôle de gestion au Maroc" },
+    { id: "MUuiJETTMPM", title: "Le guide ULTIME pour lire un bilan et un compte de résultat" },
+    { id: "se3FHTgLbAI", title: "Le guide ULTIME du cash-flow (Flux de trésorerie)" },
     { id: "T6V6XKEnaN0", title: "Comment réussir son entretien d'embauche en finance" },
     { id: "X8-zq-wO_x4", title: "Analyse financière : Le guide ULTIME" },
     { id: "sE_AIjB7Prk", title: "Le guide ULTIME de la comptabilité pour les nuls" },
