@@ -14,10 +14,6 @@ import {
   Legend,
 } from 'recharts';
 
-import {
-  analyzePersonalWealth,
-  type PersonalWealthOutput,
-} from '@/ai/flows/personal-wealth-analyzer';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -39,6 +35,23 @@ import { Loader2, HelpCircle, Wallet, Sparkles, BarChart, TrendingUp, TrendingDo
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { formatCurrency } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
+
+// Define the output type manually as we are no longer using an AI flow
+export interface PersonalWealthOutput {
+    netWorth: number;
+    assetAllocation: {
+        cash: number;
+        savings: number;
+        stocks: number;
+        realEstate: number;
+        other: number;
+    };
+    debtToAssetRatio: number;
+    liquidityAnalysis: string;
+    riskAnalysis: string;
+    recommendation: string;
+}
+
 
 const formSchema = z.object({
   cash: z.coerce.number().min(0),
@@ -76,17 +89,57 @@ export default function PersonalWealthAnalyzerPage() {
     setLoading(true);
     setError(null);
     setResult(null);
-    try {
-      const response = await analyzePersonalWealth(values);
-      setResult(response);
-    } catch (e) {
-      setError(
-        "Une erreur est survenue lors de l'analyse. Veuillez réessayer."
-      );
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
+
+    // Simulate a short delay to mimic API call
+    setTimeout(() => {
+        try {
+            const { cash, savings, stocks, realEstate, otherAssets, shortTermDebt, longTermDebt } = values;
+
+            // 1. Calculations
+            const totalAssets = cash + savings + stocks + realEstate + otherAssets;
+            const totalDebts = shortTermDebt + longTermDebt;
+            const netWorth = totalAssets - totalDebts;
+            const debtToAssetRatio = totalAssets > 0 ? totalDebts / totalAssets : 0;
+            
+            const assetAllocation = totalAssets > 0 ? {
+                cash: (cash / totalAssets) * 100,
+                savings: (savings / totalAssets) * 100,
+                stocks: (stocks / totalAssets) * 100,
+                realEstate: (realEstate / totalAssets) * 100,
+                other: (otherAssets / totalAssets) * 100,
+            } : { cash: 0, savings: 0, stocks: 0, realEstate: 0, other: 0 };
+            
+            // 2. Static Analysis Generation
+            const liquidAssetsRatio = totalAssets > 0 ? ((cash + savings) / totalAssets) * 100 : 0;
+            const liquidityAnalysis = liquidAssetsRatio < 10 
+                ? "Votre liquidité semble faible. Avoir un 'fonds d'urgence' plus conséquent (cash, épargne) est recommandé pour faire face aux imprévus."
+                : "Votre niveau de liquidités (cash et épargne) est sain. Il vous permet de faire face aux dépenses imprévues sans avoir à vendre des actifs à long terme.";
+
+            const riskyAssetsRatio = totalAssets > 0 ? (stocks / totalAssets) * 100 : 0;
+            const riskAnalysis = riskyAssetsRatio > 50 
+                ? "Votre patrimoine est fortement exposé aux marchés actions. Cela offre un potentiel de croissance élevé, mais aussi une volatilité importante. Assurez-vous que cela correspond à votre profil de risque et votre horizon de placement."
+                : "Votre exposition au risque via les actions est modérée, ce qui suggère une approche équilibrée entre sécurité et croissance. Cela peut être adapté à un profil prudent ou équilibré.";
+            
+            const recommendation = debtToAssetRatio > 0.5 
+                ? "Votre ratio d'endettement est supérieur à 50%, ce qui est un point de vigilance. Il serait judicieux de mettre en place un plan pour accélérer le remboursement de vos dettes, en commençant par les plus coûteuses (crédits à la consommation)."
+                : "Votre niveau d'endettement est maîtrisé. Si vous avez une bonne visibilité sur vos revenus, vous pourriez envisager un 'effet de levier' contrôlé (nouvel emprunt) pour un investissement immobilier locatif, par exemple.";
+
+            setResult({
+                netWorth,
+                assetAllocation,
+                debtToAssetRatio,
+                liquidityAnalysis,
+                riskAnalysis,
+                recommendation,
+            });
+
+        } catch (e) {
+            setError("Une erreur est survenue lors du calcul. Veuillez vérifier les valeurs entrées.");
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    }, 500);
   }
 
   const assetData = result
@@ -105,7 +158,7 @@ export default function PersonalWealthAnalyzerPage() {
           </h1>
           <p className="mt-4 text-muted-foreground md:text-lg">
             Obtenez une vue d'ensemble de votre situation financière et des
-            recommandations personnalisées par IA pour optimiser votre
+            recommandations pour optimiser votre
             patrimoine.
           </p>
         </div>
@@ -245,7 +298,7 @@ export default function PersonalWealthAnalyzerPage() {
               <CardHeader>
                 <CardTitle className="font-headline flex items-center gap-2">
                   <Sparkles className="h-6 w-6 text-primary" />
-                  Analyse par IA
+                  Votre Analyse
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -386,5 +439,3 @@ export default function PersonalWealthAnalyzerPage() {
     </>
   );
 }
-
-    
