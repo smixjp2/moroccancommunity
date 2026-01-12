@@ -4,12 +4,22 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const articles: Article[] = [
   {
+    id: "6",
+    title: "Cash Plus : quels leviers pour la trajectoire du titre",
+    category: "Analyse d'actions",
+    excerpt: "Analyse fondamentale et perspectives après l’IPO de Cash Plus. Quels sont les leviers qui influenceront la trajectoire du titre ?",
+    author: "L'équipe de TMC",
+    date: "2024-08-25",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'article-6')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'article-6')?.imageHint || ''
+  },
+  {
     id: "5",
     title: "Quels moteurs pour le marché actions marocain en 2026 ?",
     category: "Analyse de Marché",
     excerpt: "Lecture économique et boursière à partir de l’analyse d’ID Bourse sur les perspectives du marché marocain pour 2026.",
     author: "L'équipe de TMC",
-    date: "2024-08-23",
+    date: "2024-08-25",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-5')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'article-5')?.imageHint || ''
   },
@@ -54,3 +64,5 @@ export const articles: Article[] = [
     imageHint: PlaceHolderImages.find(p => p.id === 'article-3')?.imageHint || ''
   },
 ];
+
+    
