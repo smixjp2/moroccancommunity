@@ -7,24 +7,6 @@
       "imageHint": "abstract finance"
     },
     {
-      "id": "article-1",
-      "description": "Image for an article about MASI index analysis.",
-      "imageUrl": "https://images.unsplash.com/photo-1649003515353-c58a239cf662?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMGNoYXJ0fGVufDB8fHx8MTc2NjY5NjM1OHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "stock chart"
-    },
-    {
-      "id": "article-2",
-      "description": "Image for an article about Moroccan banking sector.",
-      "imageUrl": "https://images.unsplash.com/photo-1644093387522-b1be6de270a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtb2Rlcm4lMjBiYW5rfGVufDB8fHx8MTc2NjcwNDk3M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "modern bank"
-    },
-    {
-      "id": "article-3",
-      "description": "Image for an article about real estate investment in Morocco.",
-      "imageUrl": "https://images.unsplash.com/photo-1643875402004-22631ef914aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjaXR5JTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2NjY3NDk3MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "city architecture"
-    },
-    {
       "id": "article-4",
       "description": "Image of a modern hospital for the Akdital article.",
       "imageUrl": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3NwaXRhbHxlbnwwfHx8fDE3MjM3NDM5NzR8MA&ixlib=rb-4.0.3&q=80&w=1080",

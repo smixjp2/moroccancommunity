@@ -27,7 +27,7 @@ export const articles: Article[] = [
     id: "5",
     title: "Quels moteurs pour le marché actions marocain en 2026 ?",
     category: "Analyse de Marché",
-    excerpt: "Notre lecture économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
+    excerpt: "Notre analyse économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
     author: "L'équipe de TMC",
     date: "2024-08-25",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-5')?.imageUrl || '',
@@ -42,35 +42,5 @@ export const articles: Article[] = [
     date: "2026-01-10",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-4')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'article-4')?.imageHint || ''
-  },
-  {
-    id: "1",
-    title: "Analyse du MASI : Tendances du T3 et Perspectives",
-    category: "Analyse de Marché",
-    excerpt: "Une analyse approfondie de la performance de l'indice Moroccan All Shares au troisième trimestre et les prévisions à venir.",
-    author: "Fatima Zahra",
-    date: "2023-10-15",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-1')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-1')?.imageHint || ''
-  },
-  {
-    id: "2",
-    title: "Secteur Bancaire Marocain : Analyse et Perspectives",
-    category: "Analyse Sectorielle",
-    excerpt: "Plongez dans l'analyse du secteur bancaire, un pilier de l'économie marocaine. Découvrez les forces, les faiblesses et les opportunités.",
-    author: "Karim El-Idrissi",
-    date: "2023-11-02",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-2')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-2')?.imageHint || ''
-  },
-  {
-    id: "3",
-    title: "Investir dans l'Immobilier Marocain via les OPCI",
-    category: "Guide d'Investissement",
-    excerpt: "Les Organismes de Placement Collectif en Immobilier (OPCI) démocratisent l'accès à l'investissement immobilier. Est-ce le bon choix pour vous ?",
-    author: "Amina Alami",
-    date: "2023-10-28",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-3')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-3')?.imageHint || ''
   },
 ];
