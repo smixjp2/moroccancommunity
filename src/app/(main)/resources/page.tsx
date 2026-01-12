@@ -1,4 +1,5 @@
 
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -57,12 +58,12 @@ const resources: Resource[] = [
 
 const allVideos = [
     { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
-    { id: "OSwdZSkwvgk", title: "AKDITAL : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
     { id: "jUvqLYAWp8U", title: "Le Guide ULTIME pour investir en Bourse (de 0 à 1 million de DH)" },
     { id: "nUg6o50JVNQ", title: "Le guide ULTIME pour investir dans l'immobilier au Maroc" },
     { id: "MUuiJETTMPM", title: "Le guide ULTIME pour lire un bilan et un compte de résultat" },
     { id: "se3FHTgLbAI", title: "Le guide ULTIME du cash-flow (Flux de trésorerie)" },
     { id: "4aFiKzB3xKg", title: "La psychologie de l'argent (pour les nuls)" },
+    { id: "OSwdZSkwvgk", title: "AKDITAL : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
 ];
 
 const premiumVideos = [
@@ -82,7 +83,7 @@ export default function ResourcesPage() {
           Accélérez votre analyse et votre prise de décision avec nos produits numériques téléchargeables.
         </p>
       </div>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {resources.map((resource) => (
           <Card key={resource.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
              <CardHeader className="p-0">
@@ -116,92 +117,104 @@ export default function ResourcesPage() {
 
       <Separator className="my-16" />
 
-        <section className="space-y-12">
-            <div className="text-center max-w-3xl mx-auto">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Youtube className="h-10 w-10 text-red-600"/>Nos Vidéos YouTube Gratuites</h2>
-                <p className="mt-4 text-muted-foreground md:text-lg">
-                Découvrez nos analyses, tutoriels et guides directement sur notre site.
-                </p>
-            </div>
+      <section className="space-y-12">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3">
+            <Youtube className="h-10 w-10 text-red-600" />
+            Nos Vidéos YouTube Gratuites
+          </h2>
+          <p className="mt-4 text-muted-foreground md:text-lg">
+            Découvrez nos analyses, tutoriels et guides directement sur notre
+            site.
+          </p>
+        </div>
 
-            <div className="space-y-4">
-                 <Carousel
-                    opts={{
-                        align: "start",
-                        loop: true,
-                    }}
-                    className="w-full"
-                    >
-                    <CarouselContent>
-                        {allVideos.map((video) => (
-                        <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
-                            <Card className="overflow-hidden">
-                                <CardContent className="p-0">
-                                    <div className="aspect-video">
-                                        <iframe
-                                            className="w-full h-full"
-                                            src={`https://www.youtube.com/embed/${video.id}`}
-                                            title={video.title}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                    </Carousel>
-            </div>
-        </section>
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {allVideos.map((video) => (
+              <CarouselItem
+                key={video.id}
+                className="md:basis-1/2 lg:basis-1/3"
+              >
+                <Card className="overflow-hidden">
+                  <CardContent className="p-0 aspect-video">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </section>
 
-        <Separator className="my-16" />
+      <Separator className="my-16" />
 
-        <section className="space-y-12">
-            <div className="text-center max-w-3xl mx-auto">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Award className="h-10 w-10 text-primary"/>Contenu Premium</h2>
-                <p className="mt-4 text-muted-foreground md:text-lg">
-                Passez au niveau supérieur avec des stratégies avancées, des modèles Excel et du contenu exclusif pour accélérer votre maîtrise de la finance.
-                </p>
-                 <Button asChild className="mt-6" size="lg">
-                    <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">Rejoindre la Communauté Privée</a>
-                </Button>
-            </div>
-             <Carousel
-                opts={{
-                    align: "start",
-                    loop: true,
-                }}
-                className="w-full"
-                >
-                <CarouselContent>
-                    {premiumVideos.map((video) => (
-                    <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
-                        <Card className="overflow-hidden">
-                            <CardContent className="p-0">
-                                <div className="aspect-video">
-                                    <iframe
-                                        className="w-full h-full"
-                                        src={`https://www.youtube.com/embed/${video.id}`}
-                                        title={video.title}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    ></iframe>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </CarouselItem>
-                    ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-                </Carousel>
-        </section>
-
+      <section className="space-y-12">
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3">
+            <Award className="h-10 w-10 text-primary" />
+            Contenu Premium
+          </h2>
+          <p className="mt-4 text-muted-foreground md:text-lg">
+            Passez au niveau supérieur avec des stratégies avancées, des modèles
+            Excel et du contenu exclusif pour accélérer votre maîtrise de la
+            finance.
+          </p>
+          <Button asChild className="mt-6" size="lg">
+            <a
+              href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Rejoindre la Communauté Privée
+            </a>
+          </Button>
+        </div>
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {premiumVideos.map((video) => (
+              <CarouselItem
+                key={video.id}
+                className="md:basis-1/2 lg:basis-1/3"
+              >
+                <Card className="overflow-hidden">
+                  <CardContent className="p-0 aspect-video">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </section>
     </div>
   );
 }
