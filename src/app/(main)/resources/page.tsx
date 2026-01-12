@@ -55,7 +55,7 @@ export default function ResourcesPage() {
           Accélérez votre analyse et votre prise de décision avec nos produits numériques téléchargeables.
         </p>
       </div>
-      <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {resources.map((resource) => (
           <Card key={resource.id} className="flex flex-col overflow-hidden hover:shadow-xl transition-shadow duration-300">
              <CardHeader className="p-0">
