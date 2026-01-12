@@ -3,6 +3,16 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const articles: Article[] = [
   {
+    id: "5",
+    title: "Quels moteurs pour le marché actions marocain en 2026 ?",
+    category: "Analyse de Marché",
+    excerpt: "Lecture économique et boursière à partir de l’analyse d’ID Bourse sur les perspectives du marché marocain pour 2026.",
+    author: "L'équipe de TMC",
+    date: "2024-08-23",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'article-5')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'article-5')?.imageHint || ''
+  },
+  {
     id: "4",
     title: "Réouverture du complexe hospitalier Akdital à Rabat : un signal fort pour le secteur privé de la santé",
     category: "Analyse Sectorielle",
