@@ -18,7 +18,6 @@ import {
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/lib/types";
 import { useUser } from "@/firebase";
-import TradingViewTicker from "@/app/components/tradingview-ticker";
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Accueil" },
@@ -128,7 +127,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
           <Logo />
-          <span className="font-bold">The Moroccan Community</span>
+          <span className="font-bold text-sm">The Moroccan Community</span>
         </Link>
 
         <div className="hidden md:flex flex-1 items-center justify-center">
@@ -195,9 +194,6 @@ export function Header() {
                 </SheetContent>
             </Sheet>
         </div>
-      </div>
-      <div className="bg-card">
-        <TradingViewTicker />
       </div>
       <div className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 py-2 text-center text-sm font-semibold flex items-center justify-center gap-2">
         <Info className="h-4 w-4" />
