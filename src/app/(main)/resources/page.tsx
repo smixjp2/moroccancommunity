@@ -162,9 +162,9 @@ export default function ResourcesPage() {
 
         <section className="space-y-12">
             <div className="text-center max-w-3xl mx-auto">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Award className="h-10 w-10 text-primary"/>Contenu Premium et Accompagnement</h2>
+                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Award className="h-10 w-10 text-primary"/>Contenu Premium</h2>
                 <p className="mt-4 text-muted-foreground md:text-lg">
-                Passez au niveau supérieur avec des stratégies avancées, des modèles Excel, et un support direct pour accélérer votre maîtrise de la finance.
+                Passez au niveau supérieur avec des stratégies avancées, des modèles Excel et du contenu exclusif pour accélérer votre maîtrise de la finance.
                 </p>
                  <Button asChild className="mt-6" size="lg">
                     <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">Rejoindre la Communauté Privée</a>
