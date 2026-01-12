@@ -1,3 +1,4 @@
+
 import type { Article } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
@@ -8,7 +9,7 @@ export const articles: Article[] = [
     category: "Analyse d'actions",
     excerpt: "Analyse fondamentale et perspectives après l’IPO de Cash Plus. Quels sont les leviers qui influenceront la trajectoire du titre ?",
     author: "L'équipe de TMC",
-    date: "2024-08-25",
+    date: "2026-01-13",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-6')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'article-6')?.imageHint || ''
   },
