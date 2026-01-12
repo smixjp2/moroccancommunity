@@ -32,15 +32,15 @@
     },
     {
       "id": "course-1",
-      "description": "Image for a course on how to invest your first salary.",
-      "imageUrl": "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Image for a course on how to invest your first salary, showing a young professional looking forward.",
+      "imageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3MjU4NTAwNzl8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "young professional"
     },
     {
       "id": "course-excel-power-bi",
-      "description": "Image representing data analysis with spreadsheets and charts.",
-      "imageUrl": "https://images.unsplash.com/photo-1611926653458-09294b3142bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxleGNlbCUyMGRhc2hib2FyZHxlbnwwfHx8fDE3MjE4MTg0OTN8MA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "excel dashboard"
+      "description": "Image representing data analysis with spreadsheets and charts for the Excel & Power BI course.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MHx8fHwxNzI1ODUwMDI0fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "dashboard analytics"
     },
     {
       "id": "resource-psychology-arabic",
@@ -98,15 +98,15 @@
     },
     {
       "id": "course-casablanca-bourse",
-      "description": "Image for a course about Casablanca stock exchange.",
-      "imageUrl": "https://images.unsplash.com/photo-1617294255092-2b6e15490a03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxDYXNhYmxhbmNhJTIwYnVpbGRpbmd8ZW58MHx8fHwxNzE4NzQ3ODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "Casablanca building"
+      "description": "Image for a course about Casablanca stock exchange, showing stock market charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNoYXJ0fGVufDB8fHx8MTcyNTg1MDA3OXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "stock market"
     },
     {
       "id": "course-dca",
-      "description": "Image for a course about Dollar Cost Averaging strategy.",
-      "imageUrl": "https://images.unsplash.com/photo-1589532133423-0cf3b08ee0b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwaWdneSUyMGJhbmt8ZW58MHx8fHwxNzIyMjcwMjk5fDA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "piggy bank"
+      "description": "Image for a course about Dollar Cost Averaging strategy, showing steady growth.",
+      "imageUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwZ3Jvd3RofGVufDB8fHx8MTcyNTg1MDA3OXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "investment growth"
     }
   ]
 }
