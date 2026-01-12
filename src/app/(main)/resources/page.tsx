@@ -143,7 +143,7 @@ export default function ResourcesPage() {
                                         ></iframe>
                                     </div>
                                     <div className="p-4">
-                                        <p className="font-semibold text-sm truncate">{video.title}</p>
+                                        
                                     </div>
                                 </CardContent>
                             </Card>
