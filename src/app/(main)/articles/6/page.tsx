@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -24,7 +25,7 @@ export default function ArticlePage() {
                     </h1>
                      <p className="text-muted-foreground">Analyse fondamentale et perspectives après l’IPO</p>
                     <p className="text-sm text-muted-foreground mt-2">
-                        Publié le {new Date(article.date).toLocaleDateString('fr-FR')} par {article.author}
+                        Par {article.author}
                     </p>
                 </header>
 

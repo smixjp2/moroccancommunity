@@ -1,3 +1,4 @@
+
 import { articles } from '@/lib/article-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -34,7 +35,7 @@ export default async function ArticlePage({ params }: { params: { id: string } }
             {article.title}
           </h1>
           <p className="text-sm text-muted-foreground">
-             Publié le {new Date(article.date).toLocaleDateString('fr-FR')}
+             Par {article.author}
           </p>
         </header>
 

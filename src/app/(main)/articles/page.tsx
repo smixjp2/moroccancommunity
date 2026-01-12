@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -38,7 +39,7 @@ export default function ArticlesPage() {
                 </h2>
                 <p className="text-muted-foreground text-sm mb-4">{article.excerpt}</p>
                 <div className="text-xs text-muted-foreground">
-                  Publié le {new Date(article.date).toLocaleDateString('fr-FR')}
+                  Par {article.author}
                 </div>
               </CardContent>
             </Card>
