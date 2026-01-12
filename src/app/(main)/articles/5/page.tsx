@@ -40,7 +40,7 @@ export default function ArticlePage() {
                     </div>
                 </Card>
 
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-lg dark:prose-invert max-w-none no-select">
                     <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
                         Le marché actions marocain poursuit une dynamique haussière engagée depuis la mi-2023. Après plusieurs années marquées par l’incertitude, les perspectives pour 2026 apparaissent plus lisibles, portées par un environnement macroéconomique plus stable et une amélioration progressive des fondamentaux des entreprises cotées.
                     </blockquote>

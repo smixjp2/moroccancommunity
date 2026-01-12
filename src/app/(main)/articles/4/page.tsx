@@ -40,7 +40,7 @@ export default function ArticlePage() {
                     </div>
                 </Card>
 
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-lg dark:prose-invert max-w-none no-select">
                     <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
                         Après plusieurs mois d’attente et de procédures administratives, le complexe hospitalier Akdital de Rabat a officiellement obtenu l’ensemble des autorisations nécessaires à sa réouverture. Cette validation marque une étape clé pour le groupe, mais aussi pour le secteur de la santé privée au Maroc.
                     </blockquote>

@@ -41,7 +41,7 @@ export default function ArticlePage() {
                     </div>
                 </Card>
 
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-lg dark:prose-invert max-w-none no-select">
                     <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
                         Peu après son introduction en Bourse, Cash Plus entre dans une phase où le comportement de son action se détache progressivement de l’effet d’introduction pour se reconnecter aux fondamentaux économiques et financiers de son modèle d’activité.
                     </blockquote>

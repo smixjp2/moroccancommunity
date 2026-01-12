@@ -1,4 +1,3 @@
-
 import { articles } from '@/lib/article-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -52,7 +51,7 @@ export default async function ArticlePage({ params }: { params: { id: string } }
             </div>
         </Card>
 
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        <div className="prose prose-lg dark:prose-invert max-w-none no-select">
             {/* Introduction */}
             <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
               {content.introduction}
@@ -75,4 +74,3 @@ export default async function ArticlePage({ params }: { params: { id: string } }
     </div>
   );
 }
-

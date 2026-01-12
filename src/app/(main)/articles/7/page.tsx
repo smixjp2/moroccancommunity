@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -41,7 +40,7 @@ export default function ArticlePage() {
                     </div>
                 </Card>
 
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-lg dark:prose-invert max-w-none no-select">
                     <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
                         L’entrée en vigueur de la loi 03-25 représente une étape importante dans l’évolution du cadre réglementaire des Organismes de Placement Collectif en Valeurs Mobilières (OPCVM) au Maroc.
                     </blockquote>
