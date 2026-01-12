@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { articles } from '@/lib/article-data';
-import { BookOpen, TrendingUp, BarChart, Globe, Target, Building } from 'lucide-react';
+import { BookOpen, TrendingUp, Globe, Target, Building } from 'lucide-react';
 
 export default function ArticlePage() {
     const articleId = "6";
@@ -48,7 +47,7 @@ export default function ArticlePage() {
                     </blockquote>
 
                     <p className="mt-6">
-                        L’article publié par ID Bourse propose une analyse des principaux leviers susceptibles d’influencer la trajectoire du titre dans les prochains trimestres.
+                        Notre analyse propose une vue des principaux leviers susceptibles d’influencer la trajectoire du titre dans les prochains trimestres.
                     </p>
 
                     <h2 className="font-headline text-2xl font-bold mt-8">Une phase post-IPO davantage axée sur la création de valeur</h2>
@@ -68,7 +67,7 @@ export default function ArticlePage() {
 
                      <h2 className="font-headline text-2xl font-bold">Comptes de paiement : un relais de croissance stratégique</h2>
                     <p>
-                        Un des éléments les plus intéressant dans le modèle de Cash Plus est la montée en puissance des comptes de paiement, un segment qui était inexistant il y a quelques années mais qui a déjà atteint environ 16 % du chiffre d’affaires à fin 2024.
+                        Un des éléments les plus intéressants dans le modèle de Cash Plus est la montée en puissance des comptes de paiement, un segment qui était inexistant il y a quelques années mais qui a déjà atteint environ 16 % du chiffre d’affaires à fin 2024.
                     </p>
                     <p>Ce développement traduit deux dynamiques :</p>
                     <ul className="list-disc pl-5 mt-2 space-y-1">
@@ -80,7 +79,7 @@ export default function ArticlePage() {
                     
                     <div className="my-8 p-6 rounded-lg border">
                          <h2 className="font-headline text-2xl font-bold flex items-center gap-3 mb-4"><TrendingUp className="text-primary"/>Ressources financières : levier pour la feuille de route</h2>
-                        <p className="mb-4">Un autre levier identifié par ID Bourse est la structure financière renforcée de l’entreprise. Cash Plus a levé environ 200 millions de dirhams (MDH) lors de sa préparation à l’IPO, puis environ 400 MDH supplémentaires au moment de l’introduction.</p>
+                        <p className="mb-4">Un autre levier est la structure financière renforcée de l’entreprise. Cash Plus a levé environ 200 millions de dirhams (MDH) lors de sa préparation à l’IPO, puis environ 400 MDH supplémentaires au moment de l’introduction.</p>
                         <p>Ces ressources offrent à l’entreprise une flexibilité stratégique importante, notamment pour :</p>
                         <ul className="list-disc pl-5 mt-2 space-y-1">
                             <li>accélérer l’ouverture de nouvelles agences,</li>
@@ -127,5 +126,3 @@ export default function ArticlePage() {
         </div>
     );
 }
-
-    

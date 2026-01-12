@@ -46,7 +46,7 @@ export default function ArticlePage() {
                     </blockquote>
 
                     <p className="mt-6">
-                        L’analyse publiée par ID Bourse met en lumière les principaux moteurs susceptibles de soutenir cette dynamique à moyen terme.
+                       Notre analyse met en lumière les principaux moteurs susceptibles de soutenir cette dynamique à moyen terme.
                     </p>
 
                     <h2 className="font-headline text-2xl font-bold mt-8">Un cycle haussier désormais structurel</h2>
@@ -71,7 +71,7 @@ export default function ArticlePage() {
 
                     <h2 className="font-headline text-2xl font-bold">La progression des bénéfices comme moteur principal</h2>
                     <p>
-                        Au-delà de la macroéconomie, la dynamique boursière est étroitement liée à l’évolution des résultats des sociétés cotées. Selon l’analyse d’ID Bourse, la masse bénéficiaire globale des entreprises cotées a connu une forte progression entre 2022 et 2025, et cette tendance devrait se prolonger en 2026 et 2027. Sur le long terme, ce sont les bénéfices qui justifient la valorisation des actions. Tant que cette dynamique reste intacte, le marché conserve des bases solides.
+                        Au-delà de la macroéconomie, la dynamique boursière est étroitement liée à l’évolution des résultats des sociétés cotées. Selon notre analyse, la masse bénéficiaire globale des entreprises cotées a connu une forte progression entre 2022 et 2025, et cette tendance devrait se prolonger en 2026 et 2027. Sur le long terme, ce sont les bénéfices qui justifient la valorisation des actions. Tant que cette dynamique reste intacte, le marché conserve des bases solides.
                     </p>
                     
                     <div className="my-8 p-6 rounded-lg border">
@@ -87,7 +87,7 @@ export default function ArticlePage() {
 
                     <h2 className="font-headline text-2xl font-bold">Sélectivité et différenciation sectorielle</h2>
                     <p>
-                        Même dans un marché globalement bien orienté, toutes les valeurs ne présentent pas les mêmes perspectives. Certaines sociétés bénéficient d’une forte croissance, d’autres offrent une meilleure visibilité ou des valorisations plus attractives. L’analyse souligne ainsi l’importance de la sélectivité sectorielle et de l’étude des fondamentaux pour capter la performance à moyen et long terme.
+                        Même dans un marché globalement bien orienté, toutes les valeurs ne présentent pas les mêmes perspectives. Certaines sociétés bénéficient d’une forte croissance, d’autres offrent une meilleure visibilité ou des valorisations plus attractives. Notre analyse souligne ainsi l’importance de la sélectivité sectorielle et de l’étude des fondamentaux pour capter la performance à moyen et long terme.
                     </p>
 
                     <div className="my-8 p-6 rounded-lg bg-card grid md:grid-cols-2 gap-8">

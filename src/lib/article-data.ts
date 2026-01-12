@@ -1,4 +1,3 @@
-
 import type { Article } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
@@ -17,7 +16,7 @@ export const articles: Article[] = [
     id: "5",
     title: "Quels moteurs pour le marché actions marocain en 2026 ?",
     category: "Analyse de Marché",
-    excerpt: "Lecture économique et boursière à partir de l’analyse d’ID Bourse sur les perspectives du marché marocain pour 2026.",
+    excerpt: "Une lecture économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
     author: "L'équipe de TMC",
     date: "2024-08-25",
     imageUrl: PlaceHolderImages.find(p => p.id === 'article-5')?.imageUrl || '',
@@ -64,5 +63,3 @@ export const articles: Article[] = [
     imageHint: PlaceHolderImages.find(p => p.id === 'article-3')?.imageHint || ''
   },
 ];
-
-    
