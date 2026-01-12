@@ -28,10 +28,12 @@ const navLinks: NavLink[] = [
 
 const toolsLinks: NavLink[] = [
     { href: "/tools/monthly-budget-simulator", label: "Simulateur de Budget" },
+    { href: "/tools/loan-simulator", label: "Simulateur de Crédit"},
     { href: "/tools/fee-simulator", label: "Simulateur d'Impact des Frais"},
     { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
     { href: "/tools/retirement-planner", label: "Planificateur de Retraite"},
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
+    { href: "/tools/personal-wealth-analyzer", label: "Analyseur de Patrimoine" },
     { href: "/dashboard/stock-analyzer", label: "Analyseur d'Actions" },
     { href: "/tools/opcvm-comparator", label: "Comparateur d'OPCVM"},
 ];
@@ -194,10 +196,6 @@ export function Header() {
                 </SheetContent>
             </Sheet>
         </div>
-      </div>
-      <div className="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 py-2 text-center text-sm font-semibold flex items-center justify-center gap-2">
-        <Info className="h-4 w-4" />
-        Version Beta : The Moroccan Community est actuellement en version bêta.
       </div>
     </header>
   );

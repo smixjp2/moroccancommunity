@@ -42,6 +42,13 @@ const simulators = [
     description: "Découvrez quel type d'investisseur vous êtes.",
   },
   {
+    href: "/tools/personal-wealth-analyzer",
+    icon: <Wallet className="h-8 w-8 text-primary" />,
+    title: "Analyseur de Patrimoine",
+    description: "Obtenez une analyse IA de votre situation financière.",
+    isNew: true,
+  },
+  {
     href: "/tools/opcvm-comparator",
     icon: <BarChart3 className="h-8 w-8 text-primary" />,
     title: "Comparateur d'OPCVM",
@@ -74,9 +81,9 @@ export default function ToolsPage() {
           return (
             <Wrapper href={isClickable ? tool.href : ''} key={tool.href} className={isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}>
               <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable ? 'opacity-60' : ''}`}>
-                {(tool.isMemberOnly) && (
-                    <Badge variant={"secondary"} className="absolute top-4 right-4 z-10">
-                        {tool.isMemberOnly ? "Membre Uniquement" : ""}
+                {(tool.isMemberOnly || tool.isNew) && (
+                    <Badge variant={tool.isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
+                        {tool.isMemberOnly ? "Membre" : "Nouveau"}
                     </Badge>
                 )}
                 <CardHeader className="p-6">
