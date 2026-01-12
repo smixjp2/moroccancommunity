@@ -39,9 +39,6 @@ function TradingViewTicker() {
           { "description": "Alliances", "proName": "CSE:ALL" },
           { "description": "Sonasid", "proName": "CSE:SID" },
           { "description": "CTM", "proName": "CSE:CTM" },
-          { "description": "Mutandis", "proName": "CSE:MUT" },
-          { "description": "SMI", "proName": "CSE:SMI" },
-          { "description": "TotalEnergies Maroc", "proName": "CSE:TMA" },
           { "description": "Disway", "proName": "CSE:DWY" },
           { "description": "Auto Hall", "proName": "CSE:ATH" },
           { "description": "Salafin", "proName": "CSE:SLF" },
@@ -52,11 +49,7 @@ function TradingViewTicker() {
           { "description": "Aluminium du Maroc", "proName": "CSE:ALU" },
           { "description": "Jet Contractors", "proName": "CSE:JET" },
           { "description": "Immorente Invest", "proName": "CSE:IMO" },
-          { "description": "Sothema", "proName": "CSE:SOT" },
-          { "description": "Oulmes", "proName": "CSE:OUL" },
-          { "description": "Miniere Touissit", "proName": "CSE:CMT" },
-          { "description": "Maghrebail", "proName": "CSE:MAB" },
-          { "description": "IB Maroc.com", "proName": "CSE:IBM" }
+          { "description": "Sothema", "proName": "CSE:SOT" }
         ],
         "showSymbolLogo": true,
         "isTransparent": true,
