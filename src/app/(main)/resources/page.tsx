@@ -56,13 +56,11 @@ const resources: Resource[] = [
   },
 ];
 
-const analystVideos = [
+const allVideos = [
     { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
+    { id: "OSwdZSkwvgk", title: "AKDITAL : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
     { id: "jUvqLYAWp8U", title: "Le Guide ULTIME pour investir en Bourse (de 0 à 1 million de DH)" },
     { id: "nUg6o50JVNQ", title: "Le guide ULTIME pour investir dans l'immobilier au Maroc" },
-];
-
-const cfoVideos = [
     { id: "MUuiJETTMPM", title: "Le guide ULTIME pour lire un bilan et un compte de résultat" },
     { id: "se3FHTgLbAI", title: "Le guide ULTIME du cash-flow (Flux de trésorerie)" },
     { id: "4aFiKzB3xKg", title: "La psychologie de l'argent (pour les nuls)" },
@@ -129,7 +127,7 @@ export default function ResourcesPage() {
                     className="w-full"
                     >
                     <CarouselContent>
-                        {[...analystVideos, ...cfoVideos].map((video) => (
+                        {allVideos.map((video) => (
                         <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
                             <Card className="overflow-hidden">
                                 <CardContent className="p-0">
