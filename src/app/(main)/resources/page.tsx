@@ -1,10 +1,9 @@
 
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Download, Youtube } from "lucide-react";
+import { Download, Youtube, Award } from "lucide-react";
 import type { Resource } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import {
@@ -66,6 +65,14 @@ const allVideos = [
     { id: "4aFiKzB3xKg", title: "La psychologie de l'argent (pour les nuls)" },
 ];
 
+const premiumVideos = [
+    { id: "jrQmUPfpGXs", title: "Le guide ULTIME des dividendes en bourse" },
+    { id: "tBkZ6D873lk", title: "Le guide ULTIME pour préparer sa retraite" },
+    { id: "4Yix-mCzoM8", title: "Le guide ULTIME du PER (taux de rendement, avantages fiscaux, etc.)" },
+    { id: "3cLwEiJCuNQ", title: "Le guide ULTIME pour investir dans les OPCI au Maroc" },
+];
+
+
 export default function ResourcesPage() {
   return (
     <div className="container py-12 md:py-16">
@@ -111,13 +118,12 @@ export default function ResourcesPage() {
 
         <section className="space-y-12">
             <div className="text-center max-w-3xl mx-auto">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Youtube className="h-10 w-10 text-red-600"/>Nos Vidéos YouTube</h2>
+                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Youtube className="h-10 w-10 text-red-600"/>Nos Vidéos YouTube Gratuites</h2>
                 <p className="mt-4 text-muted-foreground md:text-lg">
-                Découvrez nos analyses, tutoriels et guides directement ici.
+                Découvrez nos analyses, tutoriels et guides directement sur notre site.
                 </p>
             </div>
 
-            {/* Analyst & CFO Videos Section */}
             <div className="space-y-4">
                  <Carousel
                     opts={{
@@ -150,6 +156,50 @@ export default function ResourcesPage() {
                     <CarouselNext />
                     </Carousel>
             </div>
+        </section>
+
+        <Separator className="my-16" />
+
+        <section className="space-y-12">
+            <div className="text-center max-w-3xl mx-auto">
+                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Award className="h-10 w-10 text-primary"/>Contenu Premium et Accompagnement</h2>
+                <p className="mt-4 text-muted-foreground md:text-lg">
+                Passez au niveau supérieur avec des stratégies avancées, des modèles Excel, et un support direct pour accélérer votre maîtrise de la finance.
+                </p>
+                 <Button asChild className="mt-6" size="lg">
+                    <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">Rejoindre la Communauté Privée</a>
+                </Button>
+            </div>
+             <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+                className="w-full"
+                >
+                <CarouselContent>
+                    {premiumVideos.map((video) => (
+                    <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
+                        <Card className="overflow-hidden">
+                            <CardContent className="p-0">
+                                <div className="aspect-video">
+                                    <iframe
+                                        className="w-full h-full"
+                                        src={`https://www.youtube.com/embed/${video.id}`}
+                                        title={video.title}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+                </Carousel>
         </section>
 
     </div>
