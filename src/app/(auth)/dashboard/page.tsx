@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useUser, useFirestore, useMemoFirebase } from '@/firebase';
@@ -13,7 +14,6 @@ import type { UserCourse } from '@/lib/types';
 import { ALL_COURSES } from '@/lib/course-data';
 import ProfileSetup from './profile-setup';
 import { Badge } from '@/components/ui/badge';
-import TradingViewMarketOverview from '@/app/components/tradingview-market-overview';
 import TradingViewSymbolOverview from '@/app/components/tradingview-symbol-overview';
 
 // Define a type for the user profile data from Firestore
@@ -181,14 +181,7 @@ export default function DashboardPage() {
 
       {/* TradingView Widgets Section */}
       <section className="mb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1">
-                <TradingViewMarketOverview />
-            </div>
-            <div className="lg:col-span-2">
-                <TradingViewSymbolOverview />
-            </div>
-        </div>
+        <TradingViewSymbolOverview />
       </section>
 
       {/* Exclusive Tools & Community Section */}
