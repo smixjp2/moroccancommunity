@@ -59,7 +59,7 @@ const resources: Resource[] = [
 const analystVideos = [
     { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
     { id: "jUvqLYAWp8U", title: "Le Guide ULTIME pour investir en Bourse (de 0 à 1 million de DH)" },
-    { id: "JbU8a_2g4eU", title: "Le Guide ULTIME pour investir dans l'immobilier au Maroc" },
+    { id: "JbU8a_2g4eU", title: "Le guide ULTIME pour investir dans l'immobilier au Maroc" },
     { id: "d_2y2oQY0wI", title: "Comment investir 1000 DH par mois en bourse ?" },
     { id: "84t6A6PVI7c", title: "Le guide ULTIME pour devenir rentier au Maroc" },
     { id: "GzXG6o-g42U", title: "Le guide ULTIME pour épargner au Maroc" },
@@ -119,15 +119,14 @@ export default function ResourcesPage() {
 
         <section className="space-y-12">
             <div className="text-center max-w-3xl mx-auto">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Youtube className="h-10 w-10 text-red-600"/>Nos Chaînes YouTube</h2>
+                <h2 className="font-headline text-3xl md:text-4xl font-bold flex items-center justify-center gap-3"><Youtube className="h-10 w-10 text-red-600"/>Nos Vidéos YouTube</h2>
                 <p className="mt-4 text-muted-foreground md:text-lg">
-                Découvrez nos analyses, tutoriels et guides en format vidéo.
+                Découvrez nos analyses, tutoriels et guides directement ici.
                 </p>
             </div>
 
-            {/* The Moroccan Analyst Section */}
+            {/* Analyst & CFO Videos Section */}
             <div className="space-y-4">
-                 <h3 className="font-headline text-2xl font-bold">The Moroccan Analyst</h3>
                  <Carousel
                     opts={{
                         align: "start",
@@ -136,63 +135,25 @@ export default function ResourcesPage() {
                     className="w-full"
                     >
                     <CarouselContent>
-                        {analystVideos.map((video) => (
+                        {[...analystVideos, ...cfoVideos].map((video) => (
                         <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
-                            <Link href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="group">
-                                <Card className="overflow-hidden">
-                                    <CardContent className="p-0">
-                                        <div className="aspect-video relative">
-                                            <Image
-                                                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                                                alt={video.title}
-                                                fill
-                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                            />
-                                        </div>
-                                        <div className="p-4">
-                                            <p className="font-semibold text-sm truncate group-hover:text-primary">{video.title}</p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                    </Carousel>
-            </div>
-
-             {/* The Moroccan CFO Section */}
-            <div className="space-y-4">
-                 <h3 className="font-headline text-2xl font-bold">The Moroccan CFO</h3>
-                 <Carousel
-                    opts={{
-                        align: "start",
-                        loop: true,
-                    }}
-                    className="w-full"
-                    >
-                    <CarouselContent>
-                        {cfoVideos.map((video) => (
-                        <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
-                            <Link href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="group">
-                                <Card className="overflow-hidden">
-                                    <CardContent className="p-0">
-                                        <div className="aspect-video relative">
-                                            <Image
-                                                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                                                alt={video.title}
-                                                fill
-                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                            />
-                                        </div>
-                                        <div className="p-4">
-                                            <p className="font-semibold text-sm truncate group-hover:text-primary">{video.title}</p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </Link>
+                            <Card className="overflow-hidden">
+                                <CardContent className="p-0">
+                                    <div className="aspect-video">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={`https://www.youtube.com/embed/${video.id}`}
+                                            title={video.title}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                    <div className="p-4">
+                                        <p className="font-semibold text-sm truncate">{video.title}</p>
+                                    </div>
+                                </CardContent>
+                            </Card>
                         </CarouselItem>
                         ))}
                     </CarouselContent>
