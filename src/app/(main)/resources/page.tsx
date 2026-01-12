@@ -57,6 +57,7 @@ const resources: Resource[] = [
 ];
 
 const analystVideos = [
+    { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
     { id: "JbU8a_2g4eU", title: "Le Guide ULTIME pour investir dans l'immobilier au Maroc" },
     { id: "d_2y2oQY0wI", title: "Comment investir 1000 DH par mois en bourse ?" },
     { id: "84t6A6PVI7c", title: "Le guide ULTIME pour devenir rentier au Maroc" },
