@@ -1,4 +1,5 @@
 
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -133,23 +134,23 @@ export default function ResourcesPage() {
                     <CarouselContent>
                         {analystVideos.map((video) => (
                         <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
-                            <Card className="overflow-hidden">
-                                <CardContent className="p-0">
-                                     <div className="aspect-video">
-                                        <iframe
-                                            className="w-full h-full"
-                                            src={`https://www.youtube.com/embed/${video.id}`}
-                                            title={video.title}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                    <div className="p-4">
-                                        <p className="font-semibold text-sm truncate">{video.title}</p>
-                                    </div>
-                                </CardContent>
-                            </Card>
+                            <Link href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="group">
+                                <Card className="overflow-hidden">
+                                    <CardContent className="p-0">
+                                        <div className="aspect-video relative">
+                                            <Image
+                                                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                                                alt={video.title}
+                                                fill
+                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+                                        </div>
+                                        <div className="p-4">
+                                            <p className="font-semibold text-sm truncate group-hover:text-primary">{video.title}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         </CarouselItem>
                         ))}
                     </CarouselContent>
@@ -171,23 +172,23 @@ export default function ResourcesPage() {
                     <CarouselContent>
                         {cfoVideos.map((video) => (
                         <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/3">
-                            <Card className="overflow-hidden">
-                                <CardContent className="p-0">
-                                     <div className="aspect-video">
-                                        <iframe
-                                            className="w-full h-full"
-                                            src={`https://www.youtube.com/embed/${video.id}`}
-                                            title={video.title}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                     <div className="p-4">
-                                        <p className="font-semibold text-sm truncate">{video.title}</p>
-                                    </div>
-                                </CardContent>
-                            </Card>
+                            <Link href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer" className="group">
+                                <Card className="overflow-hidden">
+                                    <CardContent className="p-0">
+                                        <div className="aspect-video relative">
+                                            <Image
+                                                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                                                alt={video.title}
+                                                fill
+                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+                                        </div>
+                                        <div className="p-4">
+                                            <p className="font-semibold text-sm truncate group-hover:text-primary">{video.title}</p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         </CarouselItem>
                         ))}
                     </CarouselContent>
@@ -200,4 +201,3 @@ export default function ResourcesPage() {
     </div>
   );
 }
-
