@@ -35,6 +35,7 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
     { href: "/tools/personal-wealth-analyzer", label: "Analyseur de Patrimoine" },
     { href: "/dashboard/stock-analyzer", label: "Analyseur d'Actions" },
+    { href: "/dashboard/portfolio-allocator", label: "Simulateur d'Allocation" },
     { href: "/tools/opcvm-comparator", label: "Comparateur d'OPCVM"},
 ];
 
