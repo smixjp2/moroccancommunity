@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -5,10 +6,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
-import {
-  allocatePortfolio,
-  type PortfolioAllocatorOutput,
-} from '@/ai/flows/portfolio-allocator';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -37,9 +34,18 @@ import {
 import { Loader2, Briefcase, Sparkles, BarChart, Info, Target, TrendingUp } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import Link from 'next/link';
-import AdminAuthGuard from '@/app/components/admin-auth-guard'; // Reuse for member check
 import { useUser } from '@/firebase';
-import { Separator } from '@/components/ui/separator';
+
+// Types pour la sortie de l'analyse
+interface Allocation {
+  category: string;
+  percentage: number;
+}
+interface PortfolioAllocatorOutput {
+  allocation: Allocation[];
+  analysis: string;
+  recommendation: string;
+}
 
 const formSchema = z.object({
   initialInvestment: z.coerce.number().min(1000, 'Minimum 1000 MAD'),
@@ -56,7 +62,6 @@ function PortfolioAllocatorPage() {
   const [analysis, setAnalysis] = useState<PortfolioAllocatorOutput | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useUser();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -66,20 +71,68 @@ function PortfolioAllocatorPage() {
     },
   });
 
+  const generateAnalysis = (values: FormValues): PortfolioAllocatorOutput => {
+    const { riskProfile } = values;
+
+    if (riskProfile === 'Prudent') {
+      return {
+        allocation: [
+          { category: 'OPCVM Obligataire/Monétaire', percentage: 60 },
+          { category: 'OPCVM Actions', percentage: 20 },
+          { category: 'OPCI (Immobilier)', percentage: 15 },
+          { category: 'Liquidités', percentage: 5 },
+        ],
+        analysis:
+          "Votre profil prudent privilégie la sécurité du capital. Cette allocation est donc majoritairement investie dans des produits de taux (obligations, fonds monétaires) qui offrent une volatilité faible et des rendements réguliers. L'exposition aux actions est limitée à 20% pour capter une partie de la performance du marché sans prendre de risque excessif. Les OPCI apportent une diversification décorrélée des marchés financiers, et les liquidités assurent une poche de sécurité.",
+        recommendation:
+          "Pour les OPCVM Actions, privilégiez des fonds investis dans des 'blue chips' de la Bourse de Casablanca (grandes capitalisations solides). Pour la partie obligataire, des fonds 'Obligataire Moyen & Long Terme' sont adaptés. Les OPCI comme 'Aradei Capital' ou 'Immorente Invest' sont des exemples pour l'exposition immobilière. Maintenez vos liquidités sur un compte sur carnet ou un OPCVM monétaire pour un accès facile.",
+      };
+    } else if (riskProfile === 'Équilibré') {
+      return {
+        allocation: [
+          { category: 'OPCVM Actions', percentage: 50 },
+          { category: 'OPCVM Obligataire', percentage: 35 },
+          { category: 'OPCI (Immobilier)', percentage: 10 },
+          { category: 'Liquidités', percentage: 5 },
+        ],
+        analysis:
+          "En tant que profil équilibré, vous recherchez un juste milieu entre croissance et sécurité. Cette allocation répartit le risque de manière équilibrée avec 50% en actions pour le potentiel de croissance et 35% en obligations pour la stabilité. L'horizon de placement à moyen/long terme est compatible avec cette exposition au marché actions. L'immobilier via les OPCI et les liquidités complètent la diversification.",
+        recommendation:
+          "Vous pouvez diversifier votre poche 'Actions' entre des OPCVM 'Actions' classiques et des OPCVM 'Diversifiés' pour une meilleure gestion du risque. Considérez des secteurs porteurs comme les banques, les télécoms ou la consommation. La partie obligataire peut être investie dans des fonds 'OMLT'. Surveillez les publications des entreprises pour ajuster votre perception du marché.",
+      };
+    } else { // Dynamique
+      return {
+        allocation: [
+          { category: 'OPCVM Actions', percentage: 70 },
+          { category: 'OPCVM Obligataire', percentage: 15 },
+          { category: 'OPCI (Immobilier)', percentage: 10 },
+          { category: 'Actifs Alternatifs/Liquidités', percentage: 5 },
+        ],
+        analysis:
+          "Votre profil dynamique et votre horizon long terme vous permettent de viser une performance élevée en acceptant une volatilité plus forte. L'allocation est donc fortement pondérée en actions (70%) pour maximiser le potentiel de croissance du capital. La part obligataire est réduite au profit d'une exposition plus forte aux actifs risqués. L'immobilier et une petite poche d'alternatifs (ou liquidités) permettent une légère diversification.",
+        recommendation:
+          "Pour votre poche actions, vous pouvez combiner des OPCVM Actions et investir directement dans des titres vifs ('stock-picking') si vous avez le temps et les connaissances. Ciblez des entreprises avec un fort potentiel de croissance, y compris des valeurs technologiques comme HPS. La diversification internationale via des OPCVM spécialisés peut aussi être une option. Restez discipliné et ne paniquez pas lors des baisses de marché, qui peuvent être des opportunités d'achat.",
+      };
+    }
+  };
+
   const onSubmit = async (values: FormValues) => {
     setLoading(true);
     setError(null);
     setAnalysis(null);
 
-    try {
-      const result = await allocatePortfolio(values);
-      setAnalysis(result);
-    } catch (e: any) {
-      console.error(e);
-      setError("Une erreur est survenue lors de l'analyse. Le service est peut-être momentanément indisponible. Veuillez réessayer plus tard.");
-    } finally {
-      setLoading(false);
-    }
+    // Simulate API call delay
+    setTimeout(() => {
+      try {
+        const result = generateAnalysis(values);
+        setAnalysis(result);
+      } catch (e: any) {
+        console.error(e);
+        setError("Une erreur est survenue lors de la génération de l'analyse.");
+      } finally {
+        setLoading(false);
+      }
+    }, 500);
   };
 
   return (
@@ -186,7 +239,7 @@ function PortfolioAllocatorPage() {
                 <div className="flex flex-col items-center justify-center text-center py-16 h-full">
                     <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
                     <p className="font-semibold text-lg">Génération de votre allocation sur-mesure...</p>
-                    <p className="text-muted-foreground">L'IA analyse votre profil pour construire la meilleure stratégie.</p>
+                    <p className="text-muted-foreground">Analyse de votre profil pour construire la meilleure stratégie.</p>
                 </div>
             )}
 
@@ -232,7 +285,7 @@ function PortfolioAllocatorPage() {
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>
-                                <Tooltip formatter={(value, name) => [`${value.toFixed(2)}%`, name]} />
+                                <Tooltip formatter={(value, name) => [`${(value as number).toFixed(2)}%`, name]} />
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
@@ -281,7 +334,7 @@ function PortfolioAllocatorPage() {
                  <Card className="flex flex-col items-center justify-center min-h-[60vh] text-center">
                     <Briefcase className="h-16 w-16 text-muted-foreground mb-4" />
                     <h3 className="text-xl font-semibold">Votre allocation personnalisée</h3>
-                    <p className="text-muted-foreground max-w-sm">Remplissez le formulaire pour que notre IA génère une stratégie de portefeuille adaptée à votre profil et au marché marocain.</p>
+                    <p className="text-muted-foreground max-w-sm">Remplissez le formulaire pour que notre système génère une stratégie de portefeuille adaptée à votre profil et au marché marocain.</p>
                 </Card>
             )}
         </div>
