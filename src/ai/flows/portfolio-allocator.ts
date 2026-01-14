@@ -10,7 +10,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {z} from 'zod';
 
 const PortfolioAllocatorInputSchema = z.object({
   initialInvestment: z.number().describe("Le montant de l'investissement initial en MAD."),
@@ -73,9 +73,6 @@ const portfolioAllocatorFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    if (!output) {
-      throw new Error("Le modèle IA n'a retourné aucune sortie.");
-    }
-    return output;
+    return output!;
   }
 );
