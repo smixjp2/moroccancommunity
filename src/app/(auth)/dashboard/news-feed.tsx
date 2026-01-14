@@ -3,7 +3,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Newspaper, ExternalLink } from 'lucide-react';
-import { newsItems } from '@/lib/dashboard-news-data';
+import { articles } from '@/lib/article-data';
 import Link from 'next/link';
 
 export default function NewsFeed() {
@@ -12,26 +12,24 @@ export default function NewsFeed() {
       <CardHeader>
         <CardTitle className="flex items-center gap-3 font-headline">
           <Newspaper className="text-primary" />
-          Actualités du Marché
+          Actualités &amp; Analyses du Marché
         </CardTitle>
         <CardDescription>
-          Les dernières informations pouvant impacter la Bourse de Casablanca et
+          Les dernières analyses pouvant impacter la Bourse de Casablanca et
           vos investissements.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {newsItems.map((item, index) => (
+          {articles.map((item, index) => (
             <Link
               key={index}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/articles/${item.id}`}
               className="block rounded-lg border p-4 transition-colors hover:bg-muted/50"
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="font-semibold text-primary">{item.source}</p>
+                  <p className="font-semibold text-primary">{item.category}</p>
                   <h3 className="font-bold">{item.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
                     {item.excerpt}
