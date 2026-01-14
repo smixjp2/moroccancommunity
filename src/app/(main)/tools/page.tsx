@@ -86,12 +86,11 @@ export default function ToolsPage() {
         {simulators.map((tool) => {
           const isClickable = !tool.isMemberOnly;
           const Wrapper = isClickable ? Link : 'div';
-          const href = tool.isMemberOnly ? '/dashboard/portfolio-allocator' : tool.href; // Corrected this line for member-only tools
           const finalHref = tool.href;
           
           return (
-            <Link href={finalHref} key={tool.href} className={!isClickable && !tool.isMemberOnly ? 'cursor-not-allowed' : 'cursor-pointer'}>
-              <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable && !tool.isMemberOnly ? 'opacity-60' : ''}`}>
+            <Link href={finalHref} key={tool.href} className={!isClickable ? 'cursor-not-allowed' : 'cursor-pointer'}>
+              <Card className={`h-full hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col relative ${!isClickable ? 'opacity-60' : ''}`}>
                 {(tool.isMemberOnly || tool.isNew) && (
                     <Badge variant={tool.isNew ? "default" : "secondary"} className="absolute top-4 right-4 z-10">
                         {tool.isMemberOnly ? "Membre" : "Nouveau"}
