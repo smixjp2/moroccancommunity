@@ -15,6 +15,7 @@ import { ALL_COURSES } from '@/lib/course-data';
 import ProfileSetup from './profile-setup';
 import { Badge } from '@/components/ui/badge';
 import TradingViewSymbolOverview from '@/app/components/tradingview-symbol-overview';
+import NewsFeed from './news-feed';
 
 // Define a type for the user profile data from Firestore
 export interface UserProfile {
@@ -230,6 +231,11 @@ export default function DashboardPage() {
                 </Card>
             </CardContent>
         </Card>
+      </section>
+
+      {/* News Feed Section */}
+      <section className="mb-8">
+        <NewsFeed />
       </section>
 
       {/* Courses Section */}
