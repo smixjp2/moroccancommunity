@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -9,7 +10,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'zod';
+import {z} from 'genkit';
 
 const PortfolioAllocatorInputSchema = z.object({
   initialInvestment: z.number().describe("Le montant de l'investissement initial en MAD."),
