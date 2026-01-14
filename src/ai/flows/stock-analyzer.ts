@@ -37,11 +37,7 @@ const prompt = ai.definePrompt({
   name: 'stockAnalyzerPrompt',
   input: {schema: StockAnalysisInputSchema},
   output: {schema: StockAnalysisOutputSchema},
-  model: googleAI.model('gemini-2.5-flash', {
-    output: {
-        format: 'json',
-    }
-  }),
+  model: googleAI.model('gemini-2.5-flash'),
   prompt: `Vous êtes un analyste financier expert spécialisé dans la Bourse de Casablanca. Votre tâche est de fournir une analyse complète en FRANÇAIS, détaillée et chiffrée pour un investisseur individuel.
 
 Analysez la société suivante :
