@@ -9,7 +9,7 @@ import {
   allocatePortfolio,
   type PortfolioAllocatorOutput,
 } from '@/ai/flows/portfolio-allocator';
-
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   Card,
