@@ -37,6 +37,11 @@ const prompt = ai.definePrompt({
   name: 'stockAnalyzerPrompt',
   input: {schema: StockAnalysisInputSchema},
   output: {schema: StockAnalysisOutputSchema},
+  model: googleAI.model('gemini-2.5-flash', {
+    output: {
+        format: 'json',
+    }
+  }),
   prompt: `Vous êtes un analyste financier expert spécialisé dans la Bourse de Casablanca. Votre tâche est de fournir une analyse complète en FRANÇAIS, détaillée et chiffrée pour un investisseur individuel.
 
 Analysez la société suivante :
@@ -69,8 +74,6 @@ const stockAnalyzerFlow = ai.defineFlow(
     outputSchema: StockAnalysisOutputSchema,
   },
   async input => {
-    // In a real-world scenario, you might fetch live data here and pass it to the prompt.
-    // For now, the prompt relies on the model's existing knowledge.
     const {output} = await prompt(input);
     if (!output) {
       throw new Error("AI model returned no output.");
