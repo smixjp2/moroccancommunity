@@ -30,20 +30,7 @@ const StockAnalysisOutputSchema = z.object({
 export type StockAnalysisOutput = z.infer<typeof StockAnalysisOutputSchema>;
 
 export async function analyzeStock(input: StockAnalysisInput): Promise<StockAnalysisOutput> {
-  try {
-    return await stockAnalyzerFlow(input);
-  } catch (error) {
-    console.error("AI analysis failed, returning fallback data.", error);
-    // En cas d'échec de l'IA, renvoyer une réponse structurée pour ne pas planter l'interface.
-     return {
-      analysisSummary: `L'analyse pour ${input.stockName} n'a pas pu être complétée.`,
-      financialHealth: "Les données sur la santé financière ne sont pas disponibles pour le moment. Veuillez réessayer.",
-      growthPotential: "L'évaluation du potentiel de croissance est actuellement indisponible.",
-      dividendAnalysis: "L'analyse des dividendes n'a pas pu être effectuée.",
-      valuation: "L'évaluation de la valorisation est indisponible.",
-      finalRecommendation: "Aucune recommandation ne peut être fournie pour le moment en raison d'une erreur technique. Veuillez vérifier votre clé API et réessayer plus tard."
-    };
-  }
+    return stockAnalyzerFlow(input);
 }
 
 const prompt = ai.definePrompt({
@@ -91,4 +78,3 @@ const stockAnalyzerFlow = ai.defineFlow(
     return output;
   }
 );
-
