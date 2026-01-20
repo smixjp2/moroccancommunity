@@ -15,6 +15,7 @@ export interface Article {
   imageHint: string;
   author: string;
   date: string;
+  content?: string;
 }
 
 export interface Course {
