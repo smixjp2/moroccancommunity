@@ -4,6 +4,16 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const articles: Article[] = [
   {
+    id: "8",
+    title: "LafargeHolcim Maroc : perspectives de cours en Bourse en 2026",
+    category: "Analyse d'actions",
+    excerpt: "Après une correction en 2025, l'action LafargeHolcim Maroc montre un potentiel de hausse notable pour 2026, soutenu par la reprise du secteur cimentier et des fondamentaux solides.",
+    author: "L'équipe de TMC",
+    date: "2026-01-20",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'article-8')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'article-8')?.imageHint || ''
+  },
+  {
     id: "7",
     title: "Réforme des OPCVM au Maroc : une étape structurante",
     category: "Réglementation",

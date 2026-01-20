@@ -31,6 +31,12 @@
       "imageHint": "regulation finance"
     },
     {
+      "id": "article-8",
+      "description": "Image for an article about LafargeHolcim Maroc, showing a cement factory.",
+      "imageUrl": "https://images.unsplash.com/photo-1588574472383-9118b1c71367?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjZW1lbnQlMjBmYWN0b3J5fGVufDB8fHx8MTcyODM4NjI3MXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "cement factory"
+    },
+    {
       "id": "course-1",
       "description": "Image for a course on how to invest your first salary, showing a young professional looking forward.",
       "imageUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx5b3VuZyUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3MjU4NTAwNzl8MA&ixlib=rb-4.0.3&q=80&w=1080",
