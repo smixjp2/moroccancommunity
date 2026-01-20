@@ -1,6 +1,5 @@
 
 import type { Article } from "@/lib/types";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const articles: Article[] = [
   {
@@ -10,8 +9,8 @@ export const articles: Article[] = [
     excerpt: "Après une correction en 2025, l'action LafargeHolcim Maroc montre un potentiel de hausse notable pour 2026, soutenu par la reprise du secteur cimentier et des fondamentaux solides.",
     author: "L'équipe de TMC",
     date: "2026-01-20",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-8')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-8')?.imageHint || '',
+    imageUrl: "https://images.unsplash.com/photo-1559135169-9a746a506e78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGNvbmNyZXRlfGVufDB8fHx8MTcyNTg1MDA3OXww&ixlib=rb-4.0.3&q=80&w=1080",
+    imageHint: "abstract concrete",
     content: `
         <blockquote>
             L’action LafargeHolcim Maroc, l’un des principaux piliers du marché de la Bourse de Casablanca, attire une attention particulière des investisseurs à l’aube de 2026. Après une année 2025 marquée par une légère correction du titre, les anticipations de marché permettent d’esquisser des trajectoires possibles pour le cours de l’action.
@@ -68,8 +67,8 @@ export const articles: Article[] = [
     excerpt: "La nouvelle loi 03-25 vise à diversifier l'offre de produits financiers, renforcer l'attractivité du marché et attirer de nouveaux investisseurs.",
     author: "L'équipe de TMC",
     date: "2026-01-13",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-7')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-7')?.imageHint || '',
+    imageUrl: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZWd1bGF0aW9uJTIwZmluYW5jZXxlbnwwfHx8fDE3MjQ5OTczMDd8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    imageHint: "regulation finance",
     content: `
         <blockquote>
             L’entrée en vigueur de la loi 03-25 représente une étape importante dans l’évolution du cadre réglementaire des Organismes de Placement Collectif en Valeurs Mobilières (OPCVM) au Maroc.
@@ -129,8 +128,8 @@ export const articles: Article[] = [
     excerpt: "Notre analyse fondamentale et perspectives après l’IPO de Cash Plus. Quels sont les leviers qui influenceront la trajectoire du titre ?",
     author: "L'équipe de TMC",
     date: "2026-01-13",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-6')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-6')?.imageHint || '',
+    imageUrl: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBwYXltZW50fGVufDB8fHx8MTcyNDU1NDI1Nnww&ixlib=rb-4.0.3&q=80&w=1080",
+    imageHint: "mobile payment",
     content: `
         <blockquote>
             Peu après son introduction en Bourse, Cash Plus entre dans une phase où le comportement de son action se détache progressivement de l’effet d’introduction pour se reconnecter aux fondamentaux économiques et financiers de son modèle d’activité.
@@ -198,8 +197,8 @@ export const articles: Article[] = [
     excerpt: "Notre analyse économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
     author: "L'équipe de TMC",
     date: "2024-08-25",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-5')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-5')?.imageHint || '',
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYXJrZXQlMjBhbmFseXNpc3xlbnwwfHx8fDE3MjQ0NDQ5OTR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    imageHint: "market analysis",
     content: `
         <blockquote>
             Le marché actions marocain poursuit une dynamique haussière engagée depuis la mi-2023. Après plusieurs années marquées par l’incertitude, les perspectives pour 2026 apparaissent plus lisibles, portées par un environnement macroéconomique plus stable et une amélioration progressive des fondamentaux des entreprises cotées.
@@ -271,8 +270,8 @@ export const articles: Article[] = [
     excerpt: "Après plusieurs mois d’attente, le complexe hospitalier Akdital de Rabat a obtenu les autorisations pour sa réouverture. Un signal positif pour les investisseurs et le secteur.",
     author: "L'équipe de TMC",
     date: "2026-01-10",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'article-4')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'article-4')?.imageHint || '',
+    imageUrl: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3NwaXRhbHxlbnwwfHx8fDE3MjM3NDM5NzR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+    imageHint: "modern hospital",
     content: `
         <blockquote>
             Après plusieurs mois d’attente et de procédures administratives, le complexe hospitalier Akdital de Rabat a officiellement obtenu l’ensemble des autorisations nécessaires à sa réouverture. Cette validation marque une étape clé pour le groupe, mais aussi pour le secteur de la santé privée au Maroc.
