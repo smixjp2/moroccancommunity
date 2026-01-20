@@ -9,8 +9,8 @@ export const articles: Article[] = [
     excerpt: "Après une correction en 2025, l'action LafargeHolcim Maroc montre un potentiel de hausse notable pour 2026, soutenu par la reprise du secteur cimentier et des fondamentaux solides.",
     author: "L'équipe de TMC",
     date: "2026-01-20",
-    imageUrl: "https://images.unsplash.com/photo-1628921869850-2f94b3c6f440?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    imageHint: "cement factory",
+    imageUrl: "https://picsum.photos/seed/cementworks/1200/800",
+    imageHint: "abstract concrete",
     content: `
         <blockquote>
             L’action LafargeHolcim Maroc, l’un des principaux piliers du marché de la Bourse de Casablanca, attire une attention particulière des investisseurs à l’aube de 2026. Après une année 2025 marquée par une légère correction du titre, les anticipations de marché, fondées sur l’évolution des fondamentaux de l’entreprise et sur les dynamiques sectorielles, permettent d’esquisser des trajectoires possibles pour le cours de l’action dans les prochains mois.
@@ -290,5 +290,3 @@ export const articles: Article[] = [
     `
   },
 ];
-
-    
