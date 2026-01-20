@@ -38,7 +38,7 @@ export default async function ArticlePage({ params }: { params: { id: string } }
 
         {article.content ? (
             <div
-                className="max-w-none"
+                className="article-content"
                 dangerouslySetInnerHTML={{ __html: article.content }}
             />
         ) : (
