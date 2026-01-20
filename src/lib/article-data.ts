@@ -9,8 +9,8 @@ export const articles: Article[] = [
     excerpt: "Après une correction en 2025, l'action LafargeHolcim Maroc montre un potentiel de hausse notable pour 2026, soutenu par la reprise du secteur cimentier et des fondamentaux solides.",
     author: "L'équipe de TMC",
     date: "2026-01-20",
-    imageUrl: "https://picsum.photos/seed/cement/1080/608",
-    imageHint: "abstract concrete",
+    imageUrl: "https://picsum.photos/seed/cement-factory/1080/608",
+    imageHint: "cement factory",
     content: `
         <blockquote>
             L’action LafargeHolcim Maroc, l’un des principaux piliers du marché de la Bourse de Casablanca, attire une attention particulière des investisseurs à l’aube de 2026. Après une année 2025 marquée par une légère correction du titre, les anticipations de marché, fondées sur l’évolution des fondamentaux de l’entreprise et sur les dynamiques sectorielles, permettent d’esquisser des trajectoires possibles pour le cours de l’action dans les prochains mois.
@@ -26,7 +26,7 @@ export const articles: Article[] = [
         <p>Sur la base des anticipations 2026, l’action se négocierait à un PER (Price Earnings Ratio) autour de 19 fois les bénéfices, légèrement inférieur à la moyenne du marché marocain estimée à environ 20,6 fois, ce qui peut signifier un potentiel de rattrapage si les résultats opérationnels se confirment. Les perspectives de dividende sont également jugées attractives, avec un rendement attendu autour de 4,5 %, soutenu par une politique de distribution relativement stable.</p>
         <h4>Points forts structurels</h4>
         <p>Parmi les éléments positifs, le groupe bénéficie d’un leadership territorial fort, avec une couverture étendue de l’ensemble du Royaume, facilitant la captation de la demande locale. Sur le plan industriel, LafargeHolcim se distingue par des efforts structurant en matière de ciment vert et de recours aux énergies renouvelables, ce qui contribue à préserver les marges dans un secteur cyclique.</p>
-        <p>La visibilité sur la demande est également soutenue par les attentes d’une reprise durable de l’activité immobilière — qui représente plus de 70 % de la consommation nationale de ciment — combinée à l’accélération de projets d’infrastructures publics et privés.</p>
+        <p>La visibilité sur la demande est également soutenue par les attentes d’une reprise durable de l’activité immobilière - qui représente plus de 70 % de la consommation nationale de ciment - combinée à l’accélération de projets d’infrastructures publics et privés.</p>
         <h3>Risques à considérer</h3>
         <p>Malgré ces arguments positifs, plusieurs risques méritent d’être pris en compte :</p>
         <ul>
@@ -126,7 +126,7 @@ export const articles: Article[] = [
             L’introduction en Bourse d’une société provoque souvent une forte volatilité initiale. Cette phase est généralement marquée par des mouvements de prix liés à l’actualité de la cotation elle-même plutôt qu’à la performance opérationnelle réelle. Pour Cash Plus, c’est désormais la capacité du groupe à traduire ses fondamentaux économiques en croissance durable qui devient déterminante pour la trajectoire du cours de l’action.
         </p>
         <h3>Activité de transfert d’argent : le cœur du modèle</h3>
-        <p>L’activité historique de Cash Plus — le transfert d’argent national et international — constitue encore le socle du modèle économique, représentant environ 63 % du chiffre d’affaires. Elle reste fortement corrélée aux flux domestiques et à ceux de la diaspora marocaine.</p>
+        <p>L’activité historique de Cash Plus - le transfert d’argent national et international - constitue encore le socle du modèle économique, représentant environ 63 % du chiffre d’affaires. Elle reste fortement corrélée aux flux domestiques et à ceux de la diaspora marocaine.</p>
         <p>Cette activité a montré une croissance régulière des volumes traités ces dernières années, portée par l’élargissement du réseau d’agences, un maillage territorial étendu et des partenariats internationaux structurants. Sur la base des données historiques, ce segment continue de générer des flux de trésorerie significatifs et offre une bonne visibilité sur les revenus à court terme.</p>
         <h2>Comptes de paiement : un relais de croissance stratégique</h2>
         <p>
@@ -290,3 +290,5 @@ export const articles: Article[] = [
     `
   },
 ];
+
+    
