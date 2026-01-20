@@ -66,11 +66,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@layer utilities {
-  .no-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10+ */
-    user-select: none; /* Standard syntax */
-  }
-}
