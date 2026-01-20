@@ -4,7 +4,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export const articles: Article[] = [
   {
-    id: "8",
+    id: "article-8",
     title: "LafargeHolcim Maroc : perspectives de cours en Bourse en 2026",
     category: "Analyse d'actions",
     excerpt: "Après une correction en 2025, l'action LafargeHolcim Maroc montre un potentiel de hausse notable pour 2026, soutenu par la reprise du secteur cimentier et des fondamentaux solides.",
@@ -70,7 +70,7 @@ export const articles: Article[] = [
     `
   },
   {
-    id: "7",
+    id: "article-7",
     title: "Réforme des OPCVM au Maroc : une étape structurante",
     category: "Réglementation",
     excerpt: "La nouvelle loi 03-25 vise à diversifier l'offre de produits financiers, renforcer l'attractivité du marché et attirer de nouveaux investisseurs.",
@@ -141,7 +141,7 @@ export const articles: Article[] = [
     `
   },
   {
-    id: "6",
+    id: "article-6",
     title: "Cash Plus : quels leviers pour la trajectoire du titre",
     category: "Analyse d'actions",
     excerpt: "Notre analyse fondamentale et perspectives après l’IPO de Cash Plus. Quels sont les leviers qui influenceront la trajectoire du titre ?",
@@ -217,7 +217,7 @@ export const articles: Article[] = [
     `
   },
   {
-    id: "5",
+    id: "article-5",
     title: "Quels moteurs pour le marché actions marocain en 2026 ?",
     category: "Analyse de Marché",
     excerpt: "Notre analyse économique et boursière sur les perspectives du marché marocain pour 2026, analysant les moteurs de croissance potentiels.",
@@ -295,7 +295,7 @@ export const articles: Article[] = [
     `
   },
   {
-    id: "4",
+    id: "article-4",
     title: "Réouverture du complexe hospitalier Akdital à Rabat : un signal fort pour le secteur privé de la santé",
     category: "Analyse Sectorielle",
     excerpt: "Après plusieurs mois d’attente, le complexe hospitalier Akdital de Rabat a obtenu les autorisations pour sa réouverture. Un signal positif pour les investisseurs et le secteur.",
