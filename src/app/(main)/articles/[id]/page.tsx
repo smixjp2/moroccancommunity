@@ -38,7 +38,7 @@ export default async function ArticlePage({ params }: { params: { id: string } }
 
         {article.content ? (
             <div
-                className="prose prose-lg dark:prose-invert max-w-none"
+                className="max-w-none"
                 dangerouslySetInnerHTML={{ __html: article.content }}
             />
         ) : (
