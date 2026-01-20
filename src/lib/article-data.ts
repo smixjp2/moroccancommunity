@@ -9,7 +9,7 @@ export const articles: Article[] = [
     excerpt: "Après une correction en 2025, l'action LafargeHolcim Maroc montre un potentiel de hausse notable pour 2026, soutenu par la reprise du secteur cimentier et des fondamentaux solides.",
     author: "L'équipe de TMC",
     date: "2026-01-20",
-    imageUrl: "https://picsum.photos/seed/cement-factory/1080/608",
+    imageUrl: "https://images.unsplash.com/photo-1628921869850-2f94b3c6f440?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
     imageHint: "cement factory",
     content: `
         <blockquote>
