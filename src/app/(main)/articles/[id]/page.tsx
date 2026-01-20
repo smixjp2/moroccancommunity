@@ -38,11 +38,11 @@ export default async function ArticlePage({ params }: { params: { id: string } }
 
         {article.content ? (
             <div
-                className="prose prose-lg dark:prose-invert max-w-none no-select"
+                className="prose prose-lg dark:prose-invert max-w-none"
                 dangerouslySetInnerHTML={{ __html: article.content }}
             />
         ) : (
-             <div className="prose prose-lg dark:prose-invert max-w-none no-select">
+             <div className="prose prose-lg dark:prose-invert max-w-none">
                 <blockquote className="border-l-4 border-primary pl-6 text-xl italic text-foreground">
                   {article.excerpt}
                 </blockquote>
