@@ -71,7 +71,6 @@ export default function PeRatioAnalyzerPage() {
     const selectedSector = sectors.find(s => s.id === sectorId);
 
     if (!selectedSector) {
-        // This should not happen with the form validation
         setLoading(false);
         return;
     }
@@ -84,16 +83,15 @@ export default function PeRatioAnalyzerPage() {
 
     if (peRatio < sectorPE * 0.8) {
         verdict = 'Sous-évaluée';
-        analysis = `Avec un P/E de ${peRatio.toFixed(2)}, cette action semble sous-évaluée par rapport à la moyenne de son secteur (${sectorPE}). Cela pourrait indiquer une opportunité d'achat, mais nécessite une analyse plus approfondie pour comprendre les raisons de cette décote (ex: problèmes temporaires, manque de confiance du marché).`;
+        analysis = `Avec un P/E de ${peRatio.toFixed(2)}x, votre action se négocie avec une décote significative par rapport à la moyenne de son secteur (${sectorPE}x). Cela peut suggérer une opportunité d'achat potentielle. Cependant, une analyse plus approfondie est indispensable pour déterminer si cette décote est due à une sous-évaluation par le marché ou à des problèmes fondamentaux propres à l'entreprise (croissance faible, endettement élevé, etc.).`;
     } else if (peRatio > sectorPE * 1.2) {
         verdict = 'Sur-évaluée';
-        analysis = `Le P/E de ${peRatio.toFixed(2)} est nettement supérieur à la moyenne du secteur (${sectorPE}). Cela suggère que le marché a des attentes de croissance très élevées pour cette entreprise. Soyez prudent, car l'action pourrait être chère et vulnérable à une correction si ces attentes ne sont pas satisfaites.`;
+        analysis = `Le P/E de ${peRatio.toFixed(2)}x est considérablement plus élevé que la moyenne sectorielle de ${sectorPE}x. Cela indique que les investisseurs ont des attentes de croissance très optimistes pour cette entreprise, ce qui la rend potentiellement "chère". La prudence est de mise : si l'entreprise ne parvient pas à délivrer la croissance attendue, son cours pourrait subir une correction.`;
     } else {
         verdict = 'Correctement évaluée';
-        analysis = `Le P/E de ${peRatio.toFixed(2)} est proche de la moyenne du secteur (${sectorPE}), ce qui indique que l'action est probablement valorisée de manière juste par le marché. Elle reflète les attentes de croissance actuelles pour ce secteur.`;
+        analysis = `Le P/E de ${peRatio.toFixed(2)}x est en ligne avec la moyenne de son secteur (${sectorPE}x). Cela signifie que le marché valorise cette action de manière cohérente avec ses pairs. La performance future de l'action dépendra probablement de sa capacité à croître au même rythme, voire plus rapidement, que le reste du secteur.`;
     }
 
-    // Simulate API call
     setTimeout(() => {
         setResult({
             peRatio,
@@ -108,11 +106,11 @@ export default function PeRatioAnalyzerPage() {
   const getVerdictStyles = (verdict: AnalysisResult['verdict'] | null) => {
     switch (verdict) {
       case 'Sous-évaluée':
-        return { icon: <CheckCircle className="text-green-500" />, textColor: 'text-green-500' };
+        return { icon: <CheckCircle className="h-8 w-8 text-green-500" />, textColor: 'text-green-500' };
       case 'Sur-évaluée':
-        return { icon: <AlertCircle className="text-red-500" />, textColor: 'text-red-500' };
+        return { icon: <AlertCircle className="h-8 w-8 text-red-500" />, textColor: 'text-red-500' };
       case 'Correctement évaluée':
-        return { icon: <Search className="text-blue-500" />, textColor: 'text-blue-500' };
+        return { icon: <Search className="h-8 w-8 text-blue-500" />, textColor: 'text-blue-500' };
       default:
         return { icon: null, textColor: '' };
     }
@@ -202,39 +200,43 @@ export default function PeRatioAnalyzerPage() {
                         {loading && <div className="flex justify-center items-center h-48"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}
                         
                         {result && (
-                            <div className="space-y-4">
-                                <Card className="bg-muted">
-                                    <CardHeader className="text-center">
-                                        <CardTitle className="font-headline text-lg">Verdict</CardTitle>
-                                        <div className={`flex items-center justify-center gap-2 text-3xl font-bold ${verdictStyles.textColor}`}>
+                            <div className="space-y-6">
+                                <Card className="bg-muted text-center">
+                                    <CardHeader>
+                                        <CardDescription>Verdict de l'Analyse</CardDescription>
+                                        <CardTitle className={`flex items-center justify-center gap-3 text-4xl font-bold ${verdictStyles.textColor}`}>
                                             {verdictStyles.icon}
                                             {result.verdict}
-                                        </div>
+                                        </CardTitle>
                                     </CardHeader>
                                 </Card>
 
-                                <div className="grid grid-cols-2 gap-4 text-center">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
                                     <Card>
                                         <CardHeader>
-                                            <CardTitle className="text-base">P/E de l'Action</CardTitle>
+                                            <CardTitle className="text-lg">P/E de l'Action</CardTitle>
+                                            <CardDescription>Votre calcul</CardDescription>
                                         </CardHeader>
                                         <CardContent>
-                                            <p className="text-3xl font-bold">{result.peRatio.toFixed(2)}x</p>
+                                            <p className="text-4xl font-bold">{result.peRatio.toFixed(2)}x</p>
                                         </CardContent>
                                     </Card>
                                     <Card>
                                         <CardHeader>
-                                            <CardTitle className="text-base">P/E Moyen du Secteur</CardTitle>
+                                            <CardTitle className="text-lg">P/E Moyen du Secteur</CardTitle>
+                                            <CardDescription>Référence du marché</CardDescription>
                                         </CardHeader>
                                         <CardContent>
-                                            <p className="text-3xl font-bold">{result.sector.averagePE}x</p>
+                                            <p className="text-4xl font-bold">{result.sector.averagePE}x</p>
                                         </CardContent>
                                     </Card>
                                 </div>
-                                <Alert>
-                                    <Info className="h-4 w-4" />
-                                    <AlertTitle>Analyse Détaillée</AlertTitle>
-                                    <AlertDescription>{result.analysis}</AlertDescription>
+                                <Alert variant="default" className="bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700">
+                                    <Search className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                                    <AlertTitle className="font-headline text-blue-800 dark:text-blue-300">Analyse Détaillée</AlertTitle>
+                                    <AlertDescription className="text-blue-700 dark:text-blue-500">
+                                        {result.analysis}
+                                    </AlertDescription>
                                 </Alert>
                             </div>
                         )}
@@ -244,9 +246,17 @@ export default function PeRatioAnalyzerPage() {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Guide d'Utilisation</CardTitle>
+                        <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Comment Interpréter cet Outil ?</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4 text-muted-foreground text-sm">
+                         <Alert variant="destructive" className="bg-yellow-50 dark:bg-yellow-900/30 border-yellow-200 text-yellow-800 dark:text-yellow-300">
+                            <Info className="h-4 w-4" />
+                            <AlertTitle className="text-yellow-900 dark:text-yellow-200">Données Illustratives</AlertTitle>
+                            <AlertDescription>
+                                Les P/E moyens des secteurs sont des <strong>estimations à but éducatif</strong> et ne reflètent pas les données de marché en temps réel. Ils servent de point de référence pour le calcul.
+                            </AlertDescription>
+                        </Alert>
+
                         <p>Le <strong>Price-to-Earnings Ratio (P/E)</strong> est l'un des indicateurs les plus utilisés pour évaluer la valorisation d'une entreprise. Il compare le prix de l'action au bénéfice généré par l'entreprise.</p>
                         <ul className="list-disc pl-5 space-y-2">
                             <li><strong className="text-foreground">P/E = Prix de l'action / Bénéfice Par Action (BPA)</strong></li>
