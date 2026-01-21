@@ -33,6 +33,7 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
     { href: "/tools/retirement-planner", label: "Planificateur de Retraite"},
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
+    { href: "/tools/pe-ratio-analyzer", label: "Analyseur de P/E Ratio" },
     { href: "/tools/personal-wealth-analyzer", label: "Analyseur de Patrimoine" },
     { href: "/dashboard/stock-analyzer", label: "Analyseur d'Actions" },
     { href: "/dashboard/portfolio-allocator", label: "Simulateur d'Allocation" },

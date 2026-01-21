@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase, Home } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase, Home, Ratio } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
@@ -40,6 +40,13 @@ const simulators = [
     icon: <UserCheck className="h-8 w-8 text-primary" />,
     title: "Quiz Profil d'Investisseur",
     description: "Découvrez quel type d'investisseur vous êtes.",
+  },
+  {
+    href: "/tools/pe-ratio-analyzer",
+    icon: <Ratio className="h-8 w-8 text-primary" />,
+    title: "Analyseur de Ratio P/E",
+    description: "Évaluez si une action est chère en comparant son P/E à la moyenne de son secteur.",
+    isNew: true,
   },
   {
     href: "/tools/personal-wealth-analyzer",

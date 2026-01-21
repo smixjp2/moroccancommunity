@@ -91,4 +91,9 @@ export interface OpcvmCategory {
   funds: Opcvm[];
 }
 
-    
+export interface Sector {
+  id: string;
+  name: string;
+  averagePE: number;
+  icon: LucideIcon;
+}
