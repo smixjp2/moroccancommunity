@@ -3,6 +3,106 @@ import type { Article } from "@/lib/types";
 
 export const articles: Article[] = [
   {
+    id: "article-9",
+    title: "La faillite d’une entreprise cotée en Bourse : risques, conséquences et stratégies de protection",
+    category: "Éducation Financière",
+    excerpt: "Découvrez ce que signifie la faillite d’une entreprise cotée à la Bourse de Casablanca, ses conséquences pour l’investisseur, et les meilleures stratégies pour protéger votre portefeuille.",
+    author: "L'équipe de TMC",
+    date: "2026-02-15",
+    imageUrl: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNyYXNofGVufDB8fHx8MTcyNTg1MDA3OXww",
+    imageHint: "stock market crash",
+    content: `
+        <blockquote>
+            La faillite d’une entreprise cotée en Bourse est l’un des risques les plus graves auxquels peut faire face un investisseur. À la Bourse de Casablanca, plusieurs cas réels ont montré que la perte peut atteindre 100 % du capital investi. Contrairement aux dépôts bancaires, l’investissement en actions ne bénéficie d’aucune garantie.
+        </blockquote>
+        <p>Dans cet article, nous allons expliquer ce qu’est une faillite boursière, comment elle se déroule au Maroc, quelles sont ses conséquences pour l’investisseur particulier, et surtout quelles stratégies adopter pour réduire ce risque.</p>
+        
+        <h2>Qu’est-ce que la faillite d’une entreprise cotée en Bourse ?</h2>
+        <p>La faillite d’une entreprise cotée correspond à une situation dans laquelle celle-ci n’est plus en mesure d’honorer ses engagements financiers. Elle peut alors faire l’objet d’une procédure judiciaire menant à une restructuration ou à une liquidation.</p>
+        <p>En tant qu’actionnaire, vous êtes copropriétaire de l’entreprise. Cela signifie que votre rémunération dépend de la performance de celle-ci, mais aussi que vous supportez le risque ultime en cas d’échec.</p>
+
+        <h2>Le risque de capital : pourquoi l’investisseur peut perdre 100 %</h2>
+        <p>L’un des principes fondamentaux de l’investissement en Bourse est le risque de perte en capital. Contrairement aux dépôts bancaires protégés par le Fonds Collectif de Garantie des Dépôts (FCGD), les actions ne bénéficient d’aucune protection.</p>
+        <p>En cas de liquidation, l’actionnaire est ce que l’on appelle un créancier résiduel. Il ne peut être remboursé qu’après :</p>
+        <ul>
+            <li>Les salariés,</li>
+            <li>L’État et les organismes sociaux,</li>
+            <li>Les banques et créanciers garantis,</li>
+            <li>Les fournisseurs.</li>
+        </ul>
+        <p>Dans la majorité des cas, le passif dépasse l’actif, ce qui signifie qu’il ne reste rien pour les actionnaires.</p>
+
+        <h2>Suspension de cotation et radiation : deux conséquences majeures</h2>
+        <h3>Suspension de cotation</h3>
+        <p>La suspension de cotation correspond à l’arrêt temporaire de la négociation d’un titre. Elle est décidée par l’Autorité Marocaine du Marché des Capitaux (AMMC) afin de protéger les investisseurs lorsque l’information financière devient insuffisante ou incertaine. Durant cette période, l’investisseur ne peut plus vendre ses actions, ce qui entraîne un gel de ses fonds.</p>
+        <h3>Radiation de la cote</h3>
+        <p>La radiation est la sortie définitive de l’entreprise de la Bourse de Casablanca. Le titre n’est plus coté, perd sa liquidité et, dans la majorité des cas, sa valeur. Pour l’investisseur, cela se traduit par une perte quasi totale du capital.</p>
+
+        <h2>Le cadre légal marocain : comment sont traitées les entreprises en difficulté ?</h2>
+        <p>Au Maroc, le traitement des entreprises en difficulté est encadré par le Livre V du Code de Commerce. Trois principales procédures existent :</p>
+        <ul>
+            <li><strong>Procédure d’alerte :</strong> Déclenchée par le commissaire aux comptes lorsqu’il détecte des difficultés financières graves. Elle vise à prévenir la direction avant que la situation ne devienne irréversible.</li>
+            <li><strong>Redressement judiciaire :</strong> Ouvert lorsque l’entreprise est en difficulté mais que son activité reste viable. L’objectif est de restructurer l’entreprise, préserver l’emploi et assurer la continuité de l’activité.</li>
+            <li><strong>Liquidation judiciaire :</strong> Prononcée lorsque l’entreprise n’est plus viable. L’activité cesse, les actifs sont vendus et les fonds sont répartis entre les créanciers selon un ordre légal strict.</li>
+        </ul>
+
+        <h2>Hiérarchie des remboursements : pourquoi l’actionnaire est le dernier servi</h2>
+        <p>En cas de liquidation, la loi établit une hiérarchie claire des créanciers :</p>
+        <ol>
+            <li>Salariés (super-privilège),</li>
+            <li>Trésor public et organismes sociaux,</li>
+            <li>Banques et créanciers garantis,</li>
+            <li>Créanciers chirographaires (fournisseurs),</li>
+            <li>Actionnaires.</li>
+        </ol>
+        <p>L’actionnaire est donc le dernier servi, avec une probabilité de remboursement proche de zéro.</p>
+
+        <h3>Le boni de liquidation : une exception rare</h3>
+        <p>Le boni de liquidation correspond au surplus d’actifs restant après le paiement de toutes les dettes. Théoriquement, ce surplus est distribué aux actionnaires.</p>
+        <p>En pratique, dans environ 98 % des cas de liquidation, le passif est supérieur à l’actif. L’actionnaire perd donc la totalité de son investissement.</p>
+
+        <h2>Cas réels à la Bourse de Casablanca</h2>
+        <h3>Le cas SAMIR</h3>
+        <p>SAMIR, seul raffineur du Royaume, a vu son cours suspendu en août 2015 à 42 dirhams en raison d’un endettement dépassant 40 milliards de dirhams. Des milliers d’investisseurs ont vu leur épargne gelée pendant plusieurs années sans perspective claire de remboursement.</p>
+        <h3>Le cas Diac Salaf</h3>
+        <p>Ancienne figure du crédit à la consommation, Diac Salaf a connu une dégradation progressive de sa situation financière, marquée par l’accumulation de créances en souffrance et l’incapacité à certifier ses comptes. L’AMMC a finalement prononcé sa radiation définitive.</p>
+
+        <h2>Mythes sur la protection des investisseurs en Bourse</h2>
+        <ul>
+            <li><strong>Le fonds de garantie protège les actionnaires :</strong> Faux. Le fonds de garantie marocain protège contre la faillite de la société de bourse (courtier), pas contre celle de l’entreprise cotée.</li>
+            <li><strong>L’État rembourse les actionnaires :</strong> Faux. L’État n’intervient jamais pour indemniser les actionnaires d’une entreprise privée cotée.</li>
+            <li><strong>Une action en justice garantit un remboursement :</strong> Faux. Les actions en justice sont longues, coûteuses et offrent de faibles chances de recouvrement.</li>
+        </ul>
+
+        <h2>L’impact de la faillite sur la liquidité du titre</h2>
+        <p>Avant une faillite, on observe souvent :</p>
+        <ul>
+            <li>Une baisse progressive des volumes,</li>
+            <li>Une augmentation des écarts entre prix d’achat et de vente,</li>
+            <li>Une difficulté croissante à céder les actions.</li>
+        </ul>
+        <p>Lorsque la suspension intervient, la liquidité devient nulle et l’investisseur est totalement bloqué.</p>
+
+        <h2>Stratégies pour se protéger contre le risque de faillite</h2>
+        <h3>1. Analyse fondamentale rigoureuse</h3>
+        <p>Surveiller les indicateurs clés, notamment le ratio Dette / EBITDA, qui mesure la capacité de l’entreprise à rembourser sa dette avec ses résultats opérationnels.</p>
+        <h3>2. Diversification du portefeuille</h3>
+        <p>Ne jamais investir plus de 10 à 15 % du portefeuille dans une seule valeur afin de limiter l’impact d’une faillite.</p>
+        <h3>3. Veille réglementaire et financière</h3>
+        <p>Lire régulièrement les communiqués de l’AMMC, les rapports financiers et les publications officielles des entreprises pour détecter les signaux d’alerte précoces.</p>
+        
+        <h2>Conclusion</h2>
+        <p>La faillite d’une entreprise cotée en Bourse est un risque réel et structurel, notamment à la Bourse de Casablanca. L’actionnaire est le dernier servi et, dans la majorité des cas, il perd la totalité de son investissement. Les exemples de SAMIR et de Diac Salaf en sont des illustrations concrètes.</p>
+        <p>La seule véritable protection repose sur :</p>
+        <ul>
+            <li>Une analyse financière rigoureuse,</li>
+            <li>Une diversification intelligente,</li>
+            <li>Une discipline constante.</li>
+        </ul>
+        <p>Connaître le risque est le premier pas vers un investissement rentable et durable.</p>
+    `
+  },
+  {
     id: "article-8",
     title: "LafargeHolcim Maroc : perspectives de cours en Bourse en 2026",
     category: "Analyse d'actions",

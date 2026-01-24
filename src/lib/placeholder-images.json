@@ -33,8 +33,14 @@
     {
       "id": "article-8",
       "description": "Image for an article about LafargeHolcim Maroc, showing an abstract concrete texture.",
-      "imageUrl": "https://images.unsplash.com/photo-1559135169-9a746a506e78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGNvbmNyZXRlfGVufDB8fHx8MTcyNTg1MDA3OXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1600424595342-726ed737f1e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxhYnN0cmFjdCUyMGNvbmNyZXRlfGVufDB8fHx8MTc2OTI5NzI5OXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "abstract concrete"
+    },
+    {
+      "id": "article-9",
+      "description": "Image for an article about stock market bankruptcy and risk.",
+      "imageUrl": "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNyYXNofGVufDB8fHx8MTcyNTg1MDA3OXww",
+      "imageHint": "stock market crash"
     },
     {
       "id": "course-1",
@@ -111,7 +117,7 @@
     {
       "id": "course-dca",
       "description": "Image for a course about Dollar Cost Averaging strategy, showing steady growth.",
-      "imageUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwZ3Jvd3RofGVufDB8fHx8MTcyNTg1MDA3OXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwZ3Jvd3RofGVufDB8fHx8MTcyNTg1MDA3OXww",
       "imageHint": "investment growth"
     }
   ]
