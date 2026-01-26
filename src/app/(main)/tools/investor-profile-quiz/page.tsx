@@ -13,9 +13,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown, HelpCircle, Info, Target } from "lucide-react";
+import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown, HelpCircle, Info, Target, PieChartIcon, Gem } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
@@ -23,26 +22,26 @@ import { useToast } from "@/hooks/use-toast";
 export interface InvestorProfileQuizOutput {
   profile: string;
   description: string;
-  recommendation: string;
   analysis: string;
+  recommendation: string;
 }
 
 const formSchema = z.object({
-  age: z.coerce.number().min(18, "L'âge doit être d'au moins 18 ans"),
+  investmentGoal: z.string({required_error: "Veuillez sélectionner une option."}),
   investmentHorizon: z.string({required_error: "Veuillez sélectionner une option."}),
-  riskTolerance: z.string({required_error: "Veuillez sélectionner une option."}),
-  marketDropResponse: z.string({required_error: "Veuillez sélectionner une option."}),
   investmentKnowledge: z.string({required_error: "Veuillez sélectionner une option."}),
+  marketDropResponse: z.string({required_error: "Veuillez sélectionner une option."}),
+  volatilityTolerance: z.string({required_error: "Veuillez sélectionner une option."}),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
 const formSteps = [
-    { id: "age", label: "Votre Âge", icon: User },
+    { id: "investmentGoal", label: "Objectif Principal", icon: Target },
     { id: "investmentHorizon", label: "Horizon de Placement", icon: BarChart },
-    { id: "riskTolerance", label: "Tolérance au Risque", icon: TrendingDown },
-    { id: "marketDropResponse", label: "Réaction à la Baisse", icon: TrendingDown },
     { id: "investmentKnowledge", label: "Connaissances", icon: Brain },
+    { id: "marketDropResponse", label: "Réaction à la Baisse", icon: TrendingDown },
+    { id: "volatilityTolerance", label: "Tolérance à la Volatilité", icon: Gem },
 ];
 
 export default function InvestorProfileQuizPage() {
@@ -56,9 +55,7 @@ export default function InvestorProfileQuizPage() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-        age: 30,
-    },
+    defaultValues: {},
   });
 
   const { trigger } = form;
@@ -79,43 +76,59 @@ export default function InvestorProfileQuizPage() {
     setLoading(true);
     setResult(null);
 
-    // Simple logic to determine profile
     let score = 0;
-    if (data.investmentHorizon === 'Moyen terme (3-7 ans)') score += 1;
-    if (data.investmentHorizon === 'Long terme (> 7 ans)') score += 2;
-    if (data.riskTolerance === 'Modérée') score += 1;
-    if (data.riskTolerance === 'Élevée') score += 2;
-    if (data.marketDropResponse === 'Ne rien faire et attendre') score += 1;
-    if (data.marketDropResponse === "Acheter plus car c'est une opportunité") score += 2;
+    // Scoring logic based on new questions
+    if (data.investmentGoal === 'Revenu complémentaire') score += 1;
+    if (data.investmentGoal === 'Fructifier à long terme') score += 2;
+    if (data.investmentGoal === 'Maximiser la croissance') score += 3;
+
+    if (data.investmentHorizon === '3-7 ans') score += 1;
+    if (data.investmentHorizon === '7-15 ans') score += 2;
+    if (data.investmentHorizon === '> 15 ans') score += 3;
+    
     if (data.investmentKnowledge === 'Intermédiaire') score += 1;
     if (data.investmentKnowledge === 'Avancé') score += 2;
-    if (data.age < 40) score += 1;
+
+    if (data.marketDropResponse === 'Ne rien faire') score += 1;
+    if (data.marketDropResponse === 'Maintenir la stratégie') score += 2;
+    if (data.marketDropResponse === 'Acheter plus') score += 3;
+
+    if (data.volatilityTolerance === 'Accepter de légères baisses') score += 1;
+    if (data.volatilityTolerance === 'Accepter des fluctuations importantes') score += 2;
+    if (data.volatilityTolerance === 'Rechercher le rendement maximal') score += 3;
+
 
     let profileData: InvestorProfileQuizOutput;
     if (score <= 3) {
       profileData = {
         profile: 'Prudent',
-        description: "Votre priorité est la sécurité du capital. Vous préférez des rendements stables et un risque minimal.",
-        analysis: "Votre profil prudent est principalement défini par une faible tolérance au risque et un horizon de placement potentiellement court. Votre réaction face à une baisse de marché et vos connaissances en investissement confirment cette tendance à la prudence.",
-        recommendation: "Allocation suggérée : 60% Obligations/Fonds monétaires, 20% OPCVM Actions, 10% Immobilier (OPCI), 10% Liquidités. Concentrez-vous sur des entreprises solides et bien établies avec des dividendes réguliers."
+        description: "Votre priorité absolue est la préservation de votre capital. Vous préférez des placements à faible risque, même si cela signifie un rendement plus modeste.",
+        analysis: "Vos réponses indiquent une faible tolérance au risque et un besoin de sécurité. Vous êtes peu à l'aise avec la volatilité et préférez des stratégies qui minimisent les pertes potentielles.",
+        recommendation: "Allocation suggérée pour le marché marocain :\n- 60% OPCVM Monétaires ou Obligataires\n- 20% OPCI (Immobilier)\n- 15% Actions de grandes entreprises stables (blue chips) à dividende\n- 5% Liquidités"
       };
-    } else if (score <= 6) {
+    } else if (score <= 7) {
       profileData = {
         profile: 'Équilibré',
-        description: "Vous recherchez un équilibre entre croissance et sécurité. Vous êtes prêt à accepter un risque modéré pour un meilleur rendement.",
-        analysis: "Votre profil équilibré montre que vous comprenez la nécessité de prendre un certain risque pour obtenir de la croissance, tout en restant mesuré. Votre horizon de placement à moyen ou long terme vous le permet. Votre réponse à une baisse de marché est rationnelle.",
-        recommendation: "Allocation suggérée : 40% OPCVM Actions, 40% Obligations, 15% Immobilier (OPCI), 5% Liquidités. Un portefeuille diversifié entre actions de croissance et de valeur est idéal."
+        description: "Vous recherchez un juste milieu entre la sécurité de votre capital et un potentiel de croissance. Vous êtes prêt à accepter un risque modéré pour obtenir un meilleur rendement à moyen/long terme.",
+        analysis: "Vous montrez une approche réfléchie. Vous comprenez que la croissance nécessite une part de risque, mais vous restez mesuré. Votre horizon de placement vous permet d'absorber une certaine volatilité.",
+        recommendation: "Allocation suggérée pour le marché marocain :\n- 45% OPCVM Actions (diversifiés)\n- 35% OPCVM Obligataires\n- 15% OPCI (Immobilier)\n- 5% Liquidités"
       };
+    } else if (score <= 11) {
+        profileData = {
+        profile: 'Dynamique',
+        description: "Votre objectif est la croissance de votre capital sur le long terme. Vous êtes à l'aise avec un niveau de risque significatif pour aller chercher des rendements plus élevés.",
+        analysis: "Vos choix révèlent une bonne tolérance au risque et une vision à long terme. Vous percevez les baisses de marché comme des opportunités plutôt que des menaces, ce qui est une caractéristique des investisseurs axés sur la croissance.",
+        recommendation: "Allocation suggérée pour le marché marocain :\n- 70% OPCVM Actions (incluant des secteurs de croissance)\n- 15% OPCVM Obligataires\n- 10% OPCI (Immobilier)\n- 5% Actifs alternatifs ou diversification internationale (via OPCVM)"
+        };
     } else {
       profileData = {
-        profile: 'Dynamique',
-        description: "Vous êtes à l'aise avec le risque et visez une croissance significative de votre capital à long terme.",
-        analysis: "Votre profil dynamique est caractérisé par un horizon de placement long, une bonne tolérance au risque et une vision opportuniste des baisses de marché. Votre niveau de connaissance vous permet d'envisager des stratégies plus audacieuses.",
-        recommendation: "Allocation suggérée : 70% Actions (Marocaines et Internationales via OPCVM), 15% Obligations, 15% Immobilier/Alternatifs. Vous pouvez inclure des secteurs de croissance comme la technologie et les énergies renouvelables."
+        profile: 'Agressif',
+        description: "Vous visez la performance maximale et êtes prêt à accepter une volatilité très élevée. Vous êtes à la recherche d'opportunités de croissance exceptionnelles, même si cela comporte des risques importants.",
+        analysis: "Votre profil est celui d'un investisseur très expérimenté ou ayant une très forte tolérance au risque. Vous êtes prêt à vous concentrer sur des actifs à fort potentiel, en acceptant la possibilité de pertes importantes à court terme.",
+        recommendation: "Allocation suggérée pour le marché marocain :\n- 85% Actions (en direct 'stock-picking' et/ou OPCVM spécialisés sur des secteurs de croissance comme la technologie)\n- 10% Actifs Alternatifs/International\n- 5% OPCI ou immobilier"
       };
     }
 
-    // Save profile to Firestore if user is logged in
     if (user) {
       try {
         const userDocRef = doc(firestore, "users", user.uid);
@@ -146,29 +159,46 @@ export default function InvestorProfileQuizPage() {
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="font-headline text-4xl font-bold md:text-5xl">Quiz : Quel est votre Profil d'Investisseur ?</h1>
         <p className="mt-4 text-muted-foreground md:text-lg">
-          Répondez à quelques questions pour découvrir votre profil d'investisseur et recevoir des recommandations adaptées au marché marocain.
+          Répondez à ces 5 questions pour découvrir votre profil d'investisseur et recevoir des recommandations adaptées au marché marocain.
         </p>
       </div>
 
-      <Card className="max-w-2xl mx-auto">
+      <Card className="max-w-3xl mx-auto">
         <CardHeader>
            <Progress value={result ? 100 : progress} className="mb-4" />
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 min-h-[350px]">
               <AnimatePresence mode="wait">
                 
                 {currentStep === 0 && (
                     <motion.div key="step-0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
                         <FormField
                             control={form.control}
-                            name="age"
+                            name="investmentGoal"
                             render={({ field }) => (
-                                <FormItem>
-                                <FormLabel className="text-lg">Quel âge avez-vous ?</FormLabel>
+                                <FormItem className="space-y-4">
+                                <FormLabel className="text-lg font-semibold">1. Quel est votre objectif principal d'investissement ?</FormLabel>
                                 <FormControl>
-                                    <Input type="number" {...field} />
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Protéger de l'inflation" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Préserver mon capital et le protéger de l'inflation.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Revenu complémentaire" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Générer un revenu complémentaire régulier (via les dividendes ou intérêts).</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Fructifier à long terme" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Faire fructifier mon capital sur le long terme, avec une croissance équilibrée.</FormLabel>
+                                        </FormItem>
+                                         <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Maximiser la croissance" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Maximiser la croissance de mon capital, en acceptant un risque élevé.</FormLabel>
+                                        </FormItem>
+                                    </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
                                 </FormItem>
@@ -183,22 +213,26 @@ export default function InvestorProfileQuizPage() {
                             control={form.control}
                             name="investmentHorizon"
                             render={({ field }) => (
-                                <FormItem className="space-y-3">
-                                <FormLabel className="text-lg">Quel est votre horizon de placement ?</FormLabel>
+                                <FormItem className="space-y-4">
+                                <FormLabel className="text-lg font-semibold">2. Dans combien de temps prévoyez-vous avoir besoin de cet argent ?</FormLabel>
                                 <FormControl>
-                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-1">
-                                    <FormItem className="flex items-center space-x-3 space-y-0">
-                                        <FormControl><RadioGroupItem value="Court terme (< 3 ans)" /></FormControl>
-                                        <FormLabel className="font-normal">Court terme (&lt; 3 ans)</FormLabel>
-                                    </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0">
-                                        <FormControl><RadioGroupItem value="Moyen terme (3-7 ans)" /></FormControl>
-                                        <FormLabel className="font-normal">Moyen terme (3-7 ans)</FormLabel>
-                                    </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0">
-                                        <FormControl><RadioGroupItem value="Long terme (> 7 ans)" /></FormControl>
-                                        <FormLabel className="font-normal">Long terme (&gt; 7 ans)</FormLabel>
-                                    </FormItem>
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
+                                        <FormItem className="flex items-center space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="< 3 ans" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Moins de 3 ans</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="3-7 ans" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Entre 3 et 7 ans</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-center space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="7-15 ans" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Entre 7 et 15 ans</FormLabel>
+                                        </FormItem>
+                                         <FormItem className="flex items-center space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="> 15 ans" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Plus de 15 ans</FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
@@ -210,15 +244,23 @@ export default function InvestorProfileQuizPage() {
 
                 {currentStep === 2 && (
                     <motion.div key="step-2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
-                        <FormField control={form.control} name="riskTolerance" render={({ field }) => (
-                             <FormItem className="space-y-3">
-                                <FormLabel className="text-lg">Comment décririez-vous votre tolérance au risque ?</FormLabel>
+                       <FormField control={form.control} name="investmentKnowledge" render={({ field }) => (
+                             <FormItem className="space-y-4">
+                                <FormLabel className="text-lg font-semibold">3. Comment décririez-vous votre niveau de connaissance en matière de placements ?</FormLabel>
                                  <FormControl>
-                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-1">
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Très faible" /></FormControl><FormLabel className="font-normal">Très faible : La préservation du capital est ma priorité absolue.</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Faible" /></FormControl><FormLabel className="font-normal">Faible : Je préfère des gains modestes avec un risque minimal.</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Modérée" /></FormControl><FormLabel className="font-normal">Modérée : Je suis prêt à prendre un risque calculé pour un rendement plus élevé.</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Élevée" /></FormControl><FormLabel className="font-normal">Élevée : Je vise des rendements élevés et j'accepte une volatilité importante.</FormLabel></FormItem>
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Débutant" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Débutant : Je ne connais que les placements de base comme les comptes sur carnet.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Intermédiaire" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Intermédiaire : Je comprends les concepts d'actions, d'obligations et d'OPCVM.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Avancé" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Avancé : Je suis familier avec l'analyse financière et les stratégies de portefeuille.</FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                  </FormControl>
                                 <FormMessage />
@@ -230,13 +272,26 @@ export default function InvestorProfileQuizPage() {
                 {currentStep === 3 && (
                     <motion.div key="step-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
                         <FormField control={form.control} name="marketDropResponse" render={({ field }) => (
-                             <FormItem className="space-y-3">
-                                <FormLabel className="text-lg">Si le marché chutait de 20%, que feriez-vous ?</FormLabel>
+                             <FormItem className="space-y-4">
+                                <FormLabel className="text-lg font-semibold">4. Si votre portefeuille perdait 20% de sa valeur en quelques mois, que feriez-vous ?</FormLabel>
                                  <FormControl>
-                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-1">
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Vendre pour limiter les pertes" /></FormControl><FormLabel className="font-normal">Je vends pour limiter mes pertes.</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Ne rien faire et attendre" /></FormControl><FormLabel className="font-normal">Je ne fais rien et j'attends que ça remonte.</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Acheter plus car c'est une opportunité" /></FormControl><FormLabel className="font-normal">J'achète plus, c'est une opportunité !</FormLabel></FormItem>
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Vendre pour limiter les pertes" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je vends une partie pour limiter d'autres pertes.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Ne rien faire" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je suis inquiet mais je ne vends rien, j'attends.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Maintenir la stratégie" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je maintiens ma stratégie, les baisses font partie du processus.</FormLabel>
+                                        </FormItem>
+                                         <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Acheter plus" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je vois cela comme une opportunité et j'investis davantage.</FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                  </FormControl>
                                 <FormMessage />
@@ -247,14 +302,27 @@ export default function InvestorProfileQuizPage() {
 
                 {currentStep === 4 && (
                     <motion.div key="step-4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
-                       <FormField control={form.control} name="investmentKnowledge" render={({ field }) => (
-                             <FormItem className="space-y-3">
-                                <FormLabel className="text-lg">Quel est votre niveau de connaissance en investissement ?</FormLabel>
+                       <FormField control={form.control} name="volatilityTolerance" render={({ field }) => (
+                             <FormItem className="space-y-4">
+                                <FormLabel className="text-lg font-semibold">5. Lequel de ces compromis rendement/risque vous convient le mieux ?</FormLabel>
                                  <FormControl>
-                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-1">
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Débutant" /></FormControl><FormLabel className="font-normal">Débutant : Je commence tout juste à apprendre.</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Intermédiaire" /></FormControl><FormLabel className="font-normal">Intermédiaire : Je connais les bases (actions, obligations).</FormLabel></FormItem>
-                                        <FormItem className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value="Avancé" /></FormControl><FormLabel className="font-normal">Avancé : Je suis à l'aise avec des concepts complexes (options, analyse technique).</FormLabel></FormItem>
+                                    <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex flex-col space-y-2">
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Rendement faible et stable" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je ne suis pas à l'aise avec la volatilité. Je préfère un rendement faible mais stable.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Accepter de légères baisses" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je peux accepter de légères baisses de valeur à court terme pour un potentiel de gain un peu plus élevé.</FormLabel>
+                                        </FormItem>
+                                        <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Accepter des fluctuations importantes" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je suis prêt à voir la valeur de mon portefeuille fluctuer de manière significative pour viser un rendement élevé à long terme.</FormLabel>
+                                        </FormItem>
+                                         <FormItem className="flex items-start space-x-3 space-y-0 rounded-md border p-4 transition-all hover:bg-muted/50 has-[[data-state=checked]]:bg-primary/10 has-[[data-state=checked]]:border-primary">
+                                            <FormControl><RadioGroupItem value="Rechercher le rendement maximal" /></FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">Je recherche le rendement le plus élevé possible et je comprends que cela implique des baisses potentiellement importantes et fréquentes.</FormLabel>
+                                        </FormItem>
                                     </RadioGroup>
                                  </FormControl>
                                 <FormMessage />
@@ -266,20 +334,18 @@ export default function InvestorProfileQuizPage() {
                 {loading && (
                     <motion.div key="loading" className="flex flex-col items-center justify-center h-48 space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <Loader2 className="h-12 w-12 animate-spin text-primary" />
-                        <p className="text-muted-foreground">Analyse et sauvegarde de votre profil...</p>
+                        <p className="text-muted-foreground">Analyse de votre profil...</p>
                     </motion.div>
                 )}
 
                 {result && !loading && (
                     <motion.div key="result" className="space-y-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                        <Card className="bg-primary/10 border-primary">
+                        <Card className="bg-primary/10 border-primary text-center">
                             <CardHeader>
-                                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                                    <Target className="h-8 w-8 text-primary"/>
-                                    <p className="text-muted-foreground">Votre Profil d'Investisseur</p>
-                                </CardHeader>
-                                <h2 className="text-primary text-center font-headline text-3xl">{result.profile}</h2>
-                                <p className="text-center text-muted-foreground pt-2">{result.description}</p>
+                                <Target className="h-10 w-10 text-primary mx-auto mb-2"/>
+                                <p className="text-muted-foreground">Votre Profil d'Investisseur</p>
+                                <h2 className="text-primary font-headline text-4xl font-bold">{result.profile}</h2>
+                                <p className="text-center text-muted-foreground pt-2 max-w-xl mx-auto">{result.description}</p>
                             </CardHeader>
                         </Card>
                          <Alert>
@@ -290,8 +356,8 @@ export default function InvestorProfileQuizPage() {
                           </AlertDescription>
                         </Alert>
                          <Alert>
-                          <BarChart className="h-4 w-4" />
-                          <AlertTitle className="font-headline">Recommandations</AlertTitle>
+                          <PieChartIcon className="h-4 w-4" />
+                          <AlertTitle className="font-headline">Suggestion d'Allocation (Marché Marocain)</AlertTitle>
                           <AlertDescription>
                             <p className="whitespace-pre-line">{result.recommendation}</p>
                           </AlertDescription>
@@ -303,7 +369,7 @@ export default function InvestorProfileQuizPage() {
               </AnimatePresence>
 
               {!result && !loading && (
-                <div className="flex justify-between items-center pt-4">
+                <div className="flex justify-between items-center pt-4 mt-8 border-t">
                   <Button type="button" variant="outline" onClick={handlePrev} disabled={currentStep === 0}>
                     <ArrowLeft className="mr-2 h-4 w-4" /> Précédent
                   </Button>
@@ -312,7 +378,7 @@ export default function InvestorProfileQuizPage() {
                       Suivant <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   ) : (
-                    <Button type="submit" disabled={loading || !user}>
+                    <Button type="submit" disabled={loading}>
                       {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Découvrir mon Profil"}
                     </Button>
                   )}
@@ -322,15 +388,15 @@ export default function InvestorProfileQuizPage() {
                {!user && !loading && !result && currentStep === formSteps.length - 1 && (
                   <Alert variant="destructive" className="mt-4">
                     <Info className="h-4 w-4" />
-                    <AlertTitle>Connexion requise</AlertTitle>
+                    <AlertTitle>Connexion Recommandée</AlertTitle>
                     <AlertDescription>
-                      Vous devez être <a href="/login" className="underline font-bold">connecté</a> pour sauvegarder et voir votre profil sur votre tableau de bord.
+                      <a href="/login" className="underline font-bold">Connectez-vous</a> pour sauvegarder votre profil et le retrouver sur votre tableau de bord.
                     </AlertDescription>
                   </Alert>
                )}
 
               {result && !loading && (
-                 <div className="text-center pt-6 space-y-2">
+                 <div className="text-center pt-6 mt-8 border-t space-y-2">
                      <Button type="button" onClick={() => {
                          if (user) {
                              router.push('/dashboard');
@@ -338,7 +404,7 @@ export default function InvestorProfileQuizPage() {
                             setCurrentStep(0); setResult(null); form.reset();
                          }
                      }}>
-                        {user ? "Voir mon Tableau de Bord" : "Recommencer le quiz"}
+                        {user ? "Aller à mon Tableau de Bord" : "Recommencer le quiz"}
                     </Button>
                  </div>
               )}
@@ -347,23 +413,21 @@ export default function InvestorProfileQuizPage() {
         </CardContent>
       </Card>
       
-       <Card className="max-w-2xl mx-auto mt-8">
+       <Card className="max-w-3xl mx-auto mt-8">
             <CardHeader>
-                <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                    <HelpCircle className="h-6 w-6 text-primary"/>
-                    <h3 className="font-headline text-lg">Guide d'Utilisation</h3>
-                </CardHeader>
+                <CardTitle className="flex items-center gap-2 font-headline"><HelpCircle className="h-6 w-6 text-primary"/>Comment fonctionne ce quiz ?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
-                <p>Ce quiz vous aide à mieux comprendre votre attitude face à l'investissement et au risque. Il n'y a pas de bonnes ou de mauvaises réponses.</p>
+                <p>Ce quiz a pour but de vous aider à mieux comprendre votre propre psychologie d'investisseur. Il n'y a pas de "bon" ou de "mauvais" profil, seulement celui qui vous correspond le mieux.</p>
                 <ul className="list-disc pl-6 space-y-2">
-                    <li><strong>Horizon de placement :</strong> C'est la durée pendant laquelle vous prévoyez d'investir. Un horizon long permet de prendre plus de risques car vous avez le temps de récupérer d'éventuelles baisses.</li>
-                    <li><strong>Tolérance au risque :</strong> C'est votre capacité émotionnelle et financière à supporter les fluctuations du marché. Soyez honnête avec vous-même.</li>
-                    <li><strong>Réaction à la baisse :</strong> Cette question est un excellent indicateur de votre comportement en situation de stress sur les marchés.</li>
+                    <li><strong>Horizon de placement :</strong> C'est la durée pendant laquelle vous pouvez vous permettre de laisser votre argent investi. Un horizon long (plus de 7 ans) permet de prendre plus de risques car vous avez le temps de surmonter les baisses du marché.</li>
+                    <li><strong>Tolérance au risque :</strong> Elle mesure votre capacité, tant émotionnelle que financière, à supporter les fluctuations de la valeur de votre portefeuille.</li>
+                    <li><strong>Réaction à la baisse :</strong> Cette question révèle votre comportement instinctif face au stress du marché, un facteur clé dans la réussite à long terme.</li>
                 </ul>
-                <p><strong>Analyse :</strong> Le profil déterminé est une indication de votre comportement général. Les recommandations d'allocation sont des exemples classiques et doivent être adaptées à votre situation personnelle et à vos recherches.</p>
-            </CardContent>
-        </Card>
-    </div>
-  );
-}
+                <p className="font-semibold text-foreground pt-2">Important :</p>
+                <Alert variant="default">
+                    <Info className="h-4 w-4" />
+                    <AlertTitle>Avertissement</AlertTitle>
+                    <AlertDescription>
+                        Les résultats et les allocations suggérées sont fournis à titre purement indicatif et éducatif. Ils ne constituent en aucun cas un conseil en investissement personnalisé. Faites toujours vos propres recherches avant de prendre une décision financière.
+                    </Aler
