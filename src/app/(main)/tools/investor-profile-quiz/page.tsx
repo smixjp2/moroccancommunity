@@ -430,4 +430,10 @@ export default function InvestorProfileQuizPage() {
                     <AlertTitle>Avertissement</AlertTitle>
                     <AlertDescription>
                         Les résultats et les allocations suggérées sont fournis à titre purement indicatif et éducatif. Ils ne constituent en aucun cas un conseil en investissement personnalisé. Faites toujours vos propres recherches avant de prendre une décision financière.
-                    </Aler
+                    </AlertDescription>
+                </Alert>
+            </CardContent>
+        </Card>
+    </div>
+  );
+}
