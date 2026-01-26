@@ -29,26 +29,6 @@ const courses: Course[] = [
     imageHint: PlaceHolderImages.find(p => p.id === 'course-excel-power-bi')?.imageHint || '',
     href: "/courses/formation-excel-power-bi"
   },
-   {
-    id: "formation-dca",
-    title: "La Stratégie DCA : Investir Simplement et Efficacement",
-    description: "Découvrez la puissance de l'investissement programmé (DCA) pour construire votre patrimoine sans stress et en battant l'inflation. 8 modules pour devenir un expert.",
-    level: "Débutant",
-    duration: "2-3 Heures",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageHint || '',
-    href: "/courses/formation-dca"
-  },
-  {
-    id: "1",
-    title: "Comment Investir Votre Premier Salaire",
-    description: "Un guide pour débutants pour commencer votre parcours d'investissement au Maroc. Apprenez les bases des actions, des obligations et de la création d'un portefeuille équilibré.",
-    level: "Débutant",
-    duration: "4 Semaines",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'course-1')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'course-1')?.imageHint || '',
-    href: "#"
-  },
 ];
 
 export default function CoursesPage() {
