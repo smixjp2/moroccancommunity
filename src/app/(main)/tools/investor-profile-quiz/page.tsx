@@ -11,7 +11,7 @@ import { useUser, useFirestore } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Loader2, ArrowRight, ArrowLeft, User, BarChart, Brain, TrendingDown, HelpCircle, Info, Target, PieChartIcon, Gem } from "lucide-react";
@@ -437,3 +437,5 @@ export default function InvestorProfileQuizPage() {
     </div>
   );
 }
+
+    
