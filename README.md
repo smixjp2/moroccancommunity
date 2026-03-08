@@ -21,4 +21,4 @@ npm run dev
 ```
 
 ## Sécurité
-Ce projet utilise les standards de sécurité modernes. Ne jamais inclure de clés d'API ou de jetons d'accès dans le code source. Utilisez les variables d'environnement (`.env`).
+Ce projet utilise les standards de sécurité modernes. Ne jamais inclure de clés d'API ou de jetons d'accès dans le code source. Utilisez les variables d'environnement (`.env`) ou configurez vos accès Git via le terminal uniquement.
