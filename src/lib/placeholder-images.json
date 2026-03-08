@@ -1,0 +1,136 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "Arrière-plan abstrait représentant la croissance financière et les données.",
+      "imageUrl": "https://images.unsplash.com/photo-1762279389002-7b6abd7bd6c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGZpbmFuY2V8ZW58MHx8fHwxNzY2NzA0OTczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract finance"
+    },
+    {
+      "id": "article-4",
+      "description": "Image of a modern hospital for the Akdital article.",
+      "imageUrl": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3NwaXRhbHxlbnwwfHx8fDE3MjM3NDM5NzR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "modern hospital"
+    },
+    {
+      "id": "article-5",
+      "description": "Image for an article about Moroccan stock market drivers in 2026.",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYXJrZXQlMjBhbmFseXNpc3xlbnwwfHx8fDE3MjQ0NDQ5OTR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "market analysis"
+    },
+    {
+      "id": "article-6",
+      "description": "Image representing mobile payment and financial technology.",
+      "imageUrl": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBwYXltZW50fGVufDB8fHx8MTcyNDU1NDI1Nnww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "mobile payment"
+    },
+    {
+      "id": "article-7",
+      "description": "Image for an article about financial market reform and OPCVM in Morocco.",
+      "imageUrl": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZWd1bGF0aW9uJTIwZmluYW5jZXxlbnwwfHx8fDE3MjQ5OTczMDd8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "regulation finance"
+    },
+    {
+      "id": "article-8",
+      "description": "Image for an article about LafargeHolcim Maroc, showing an abstract concrete texture.",
+      "imageUrl": "https://images.unsplash.com/photo-1600424595342-726ed737f1e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxhYnN0cmFjdCUyMGNvbmNyZXRlfGVufDB8fHx8MTc2OTI5NzI5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract concrete"
+    },
+    {
+      "id": "article-9",
+      "description": "Image for an article about stock market bankruptcy and risk.",
+      "imageUrl": "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNyYXNofGVufDB8fHx8MTcyNTg1MDA3OXww",
+      "imageHint": "stock market crash"
+    },
+    {
+      "id": "course-excel-power-bi",
+      "description": "Image representing data analysis with spreadsheets and charts for the Excel & Power BI course.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MHx8fHwxNzI1ODUwMDI0fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "dashboard analytics"
+    },
+    {
+      "id": "resource-psychology-arabic",
+      "description": "Image for the arabic guide about opening an account, showing a stock market graph.",
+      "imageUrl": "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzdG9jayUyMGNoYXJ0fGVufDB8fHx8MTc2NzY5Mjc5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stock chart"
+    },
+    {
+      "id": "resource-2",
+      "description": "Image for a digital product, a comparison list.",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-cfa08c2a758f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjaGVja2xpc3QlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "checklist document"
+    },
+    {
+      "id": "resource-account-opening",
+      "description": "Image for a guide on opening a brokerage account, showing a person signing a contract.",
+      "imageUrl": "https://images.unsplash.com/photo-1562564055-71e051d33c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzaWduaW5nJTIwY29udHJhY3R8ZW58MHx8fHwxNzY3NzgxMDI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "signing contract"
+    },
+    {
+      "id": "resource-compound-interest",
+      "description": "Image for a compound interest simulation spreadsheet.",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGdyYXBoJTIwdXB8ZW58MHx8fHwxNzIyMzc5MDUzfDA&ixlibrb-4.0.3&q=80&w=1080",
+      "imageHint": "investment graph"
+    },
+    {
+      "id": "feature-articles",
+      "description": "Image for the articles feature card on the homepage.",
+      "imageUrl": "https://images.unsplash.com/photo-1734080512636-2741e9e3a2bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxuZXdzcGFwZXIlMjByZWFkaW5nfGVufDB8fHx8fDE3NjY2NjE3Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "newspaper reading"
+    },
+    {
+      "id": "feature-tools",
+      "description": "Image for the tools feature card on the homepage.",
+      "imageUrl": "https://images.unsplash.com/photo-1581166418878-11f0dde922c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2VhcnMlMjB0b29sc3xlbnwwfHx8fDE3NjY3MDQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gears tools"
+    },
+    {
+      "id": "feature-courses",
+      "description": "Image for the courses feature card on the homepage.",
+      "imageUrl": "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBzZW1pbmFyfGVufDB8fHx8MTcyMzEwOTgwNHww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "financial seminar"
+    },
+    {
+      "id": "private-community",
+      "description": "Image for the private community section.",
+      "imageUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY2NzEzMjQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract background"
+    },
+    {
+      "id": "about-us",
+      "description": "Image for the about us page, showing a modern city skyline.",
+      "imageUrl": "https://images.unsplash.com/photo-1573426137648-22369d194532?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzEzfDB8MHxwaG90by1yZWxhdGVkfDE5fHx8ZW58MHx8fHx8&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "city skyline"
+    },
+    {
+      "id": "course-casablanca-bourse",
+      "description": "Image for a course about Casablanca stock exchange, showing stock market charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNoYXJ0fGVufDB8fHx8MTcyNTg1MDA3OXww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "stock market"
+    },
+    {
+      "id": "course-dca",
+      "description": "Image for a course about Dollar Cost Averaging strategy, showing steady growth.",
+      "imageUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZlc3RtZW50JTIwZ3Jvd3RofGVufDB8fHx8MTcyNTg1MDA3OXww",
+      "imageHint": "investment growth"
+    },
+    {
+      "id": "shop-ebook",
+      "description": "Image for the investment ebook.",
+      "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib29rJTIwZmluYW5jZXxlbnwwfHx8fDE3NjY3MTMyNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book finance"
+    },
+    {
+      "id": "shop-excel-template",
+      "description": "Image for the Excel portfolio template.",
+      "imageUrl": "https://images.unsplash.com/photo-1543286386-713bdd548da4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBleGNlbHxlbnwwfHx8fDE3NjY3MTMyNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard excel"
+    },
+    {
+      "id": "shop-checklist",
+      "description": "Image for the analysis checklist.",
+      "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGVja2xpc3QlMjBwYXBlcnxlbnwwfHx8fDE3NjY3MTMyNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "checklist paper"
+    }
+  ]
+}

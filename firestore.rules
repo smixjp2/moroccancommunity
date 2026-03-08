@@ -1,0 +1,137 @@
+
+/**
+ * Core Philosophy: This ruleset establishes a robust security model for a learning platform.
+ * It strictly enforces user ownership of personal data and course entitlements, while
+ * making the general course catalog publicly visible. It also introduces a privileged
+ * 'admin' role responsible for managing course content.
+ *
+ * Data Structure:
+ * - /users/{userId}: Contains private user profiles. Access is restricted to the document owner.
+ * - /courses/{courseId}: A public collection of all available courses. Read access is open,
+ *   but write access is restricted to administrators.
+ * - /users/{userId}/userCourses/{userCourseId}: A subcollection storing records of courses a user
+ *   has access to. This data is private and only accessible to the parent user.
+ * - /chatRooms/{chatRoomId}: Contains metadata about chat rooms.
+ * - /chatRooms/{chatRoomId}/messages/{messageId}: Contains chat messages. Access is restricted
+ *   to users who are enrolled in the corresponding course.
+ *
+ * Key Security Decisions:
+ * - User Isolation: Users can only access their own data within their `/users/{userId}` tree.
+ *   Listing all users is explicitly disallowed to protect privacy.
+ * - Admin-Managed Content: The `/courses` collection is treated as administrative content.
+ *   Only users with a `role` of 'admin' on their user document can create, modify, or delete courses.
+ * - Immutable Entitlements: To prevent tampering, `userCourse` documents, which represent a user's
+ *   access to a course, are made immutable. Once created, they cannot be updated or deleted by the user.
+ * - Chat Access Control: Access to a chat room is granted only if the user has a corresponding
+ *   document in their `userCourses` subcollection, linking them to the course. This is checked
+ *   using `exists()`, which is a highly performant and secure way to enforce access rules.
+ * - Default Secure: Any path not explicitly defined is inaccessible by default.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -------------------------------------------------------------------------
+    // Helper Functions
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns true if the user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Returns true if the authenticated user's UID matches the provided userId.
+     * This is the foundation of the ownership model.
+     * @param userId The UID of the resource owner.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Returns true if the document being operated on already exists.
+     * Used to protect against updates or deletes of non-existent documents.
+     */
+    function isExistingDoc() {
+      return resource != null;
+    }
+
+    /**
+     * Checks if a user has the 'admin' role.
+     * Requires one document read to the user's own profile.
+     */
+    function isAdmin() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    /**
+     * Checks if the currently authenticated user is enrolled in a specific course.
+     * This is used to control access to chat rooms.
+     * @param courseId The ID of the course to check enrollment for.
+     */
+    function isEnrolledInCourse(courseId) {
+      return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)/userCourses/$(courseId));
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Collection Rules
+    // -------------------------------------------------------------------------
+
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && request.resource.data.id == resource.data.id;
+      allow delete: if isAdmin() && isExistingDoc();
+    }
+
+    match /courses/{courseId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin() && request.resource.data.id == courseId;
+      allow update: if isAdmin() && isExistingDoc() && request.resource.data.id == resource.data.id;
+      allow delete: if isAdmin() && isExistingDoc();
+    }
+
+    match /users/{userId}/userCourses/{userCourseId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Secures chat rooms. Reading chat room metadata is allowed for any signed-in user.
+     * Writing (creating/updating rooms) is restricted to admins.
+     * @path /chatRooms/{chatRoomId}
+     */
+    match /chatRooms/{chatRoomId} {
+        allow get: if isSignedIn();
+        allow list: if isSignedIn();
+        allow create, update, delete: if isAdmin();
+
+        /**
+         * @description Secures chat messages. A user can only read/write messages in a room
+         * if they are enrolled in the corresponding course.
+         * @path /chatRooms/{chatRoomId}/messages/{messageId}
+         * @allow (read, write) A user enrolled in 'course-abc' can read/write to `/chatRooms/course-abc/messages`.
+         * @deny (read, write) A user not enrolled in 'course-abc' tries to access messages.
+         * @principle Authorization Independence via `exists()`.
+         */
+        match /messages/{messageId} {
+            allow read: if isEnrolledInCourse(chatRoomId) || isAdmin();
+            allow create: if isEnrolledInCourse(chatRoomId)
+                            && request.resource.data.userId == request.auth.uid // User can only post as themselves
+                            && request.resource.data.text is string // Message must have text
+                            && request.resource.data.userName is string // User name must be present
+                            && request.resource.data.createdAt == request.time; // Must use server timestamp
+            allow update, delete: if false; // Messages are immutable
+        }
+    }
+  }
+}
