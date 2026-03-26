@@ -5,14 +5,18 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { articles } from "@/lib/article-data";
 import type { Article } from "@/lib/types";
+import { getDictionary, getLocaleFromCookie } from "@/lib/i18n";
 
 export default function ArticlesPage() {
+  const locale = getLocaleFromCookie();
+  const t = getDictionary(locale);
+
   return (
     <div className="container py-12 md:py-16">
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="font-headline text-4xl font-bold md:text-5xl">Aperçus et Analyses du Marché</h1>
+        <h1 className="font-headline text-4xl font-bold md:text-5xl">{t.articles.pageTitle}</h1>
         <p className="mt-4 text-muted-foreground md:text-lg">
-          Restez informé grâce à nos analyses d'experts sur le marché boursier marocain, les actions individuelles et les secteurs clés.
+          {t.articles.pageSubtitle}
         </p>
       </div>
 

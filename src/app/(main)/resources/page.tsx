@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Download, Youtube, Award } from "lucide-react";
 import type { Resource } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { getDictionary, getLocaleFromCookie } from "@/lib/i18n";
 import {
   Carousel,
   CarouselContent,
@@ -84,12 +85,15 @@ const premiumVideos = [
 
 
 export default function ResourcesPage() {
+  const locale = getLocaleFromCookie();
+  const t = getDictionary(locale);
+
   return (
     <div className="container py-12 md:py-16">
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="font-headline text-4xl font-bold md:text-5xl">Outils et Ressources Numériques</h1>
+        <h1 className="font-headline text-4xl font-bold md:text-5xl">{t.resources.pageTitle}</h1>
         <p className="mt-4 text-muted-foreground md:text-lg">
-          Accélérez votre analyse et votre prise de décision avec nos produits numériques téléchargeables.
+          {t.resources.pageSubtitle}
         </p>
       </div>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

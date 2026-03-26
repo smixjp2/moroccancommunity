@@ -15,13 +15,27 @@ export const metadata: Metadata = {
   },
 };
 
+import { headers } from "next/headers";
+
+import { cookies } from "next/headers";
+
+function getLocale(): string {
+  const locale = cookies().get("locale")?.value;
+  if (!locale || (locale !== "fr" && locale !== "en")) {
+    return "fr";
+  }
+  return locale;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = getLocale();
+
   return (
-    <html lang="fr">
+    <html lang={locale}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

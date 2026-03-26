@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Calculator, Percent, ShieldCheck, UserCheck, Wallet, Briefcase, Home, Ratio, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { getDictionary, getLocaleFromCookie } from "@/lib/i18n";
 
 const simulators = [
     {
@@ -71,12 +72,15 @@ const simulators = [
 ];
 
 export default function ToolsPage() {
+  const locale = getLocaleFromCookie();
+  const t = getDictionary(locale);
+
   return (
     <div className="container py-12 md:py-16">
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="font-headline text-4xl font-bold md:text-5xl">Outils Financiers et Simulateurs</h1>
+        <h1 className="font-headline text-4xl font-bold md:text-5xl">{t.tools.pageTitle}</h1>
         <p className="mt-4 text-muted-foreground md:text-lg">
-          Prenez des décisions basées sur les données. Explorez nos outils pour analyser, comparer et planifier vos investissements au Maroc.
+          {t.tools.pageSubtitle}
         </p>
       </div>
 

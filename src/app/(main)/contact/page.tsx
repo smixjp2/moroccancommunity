@@ -6,6 +6,9 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import fr from '@/locales/fr.json';
+import en from '@/locales/en.json';
+import { useLocale } from '@/hooks/use-locale';
 import { Button } from "@/components/ui/button";
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -25,6 +28,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactPage() {
+  const locale = useLocale();
+  const t = locale === 'en' ? en : fr;
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   
@@ -75,9 +80,9 @@ export default function ContactPage() {
                 <Mail className="h-8 w-8 text-primary" />
               </div>
             </div>
-            <CardTitle className="font-headline text-3xl">Nous Contacter</CardTitle>
+            <CardTitle className="font-headline text-3xl">{t.contact.title}</CardTitle>
             <CardDescription className="pt-2">
-              Remplissez le formulaire ci-dessous. Nous lirons votre message avec attention.
+              {t.contact.description}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -85,15 +90,15 @@ export default function ContactPage() {
               <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField control={form.control} name="name" render={({ field }) => (
-                    <FormItem><FormLabel>Nom Complet</FormLabel><FormControl><Input {...field} placeholder="Votre nom" /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel>{t.contact.fields.name}</FormLabel><FormControl><Input {...field} placeholder={locale === 'en' ? 'Your name' : 'Votre nom'} /></FormControl><FormMessage /></FormItem>
                   )} />
                   <FormField control={form.control} name="email" render={({ field }) => (
-                    <FormItem><FormLabel>Votre E-mail</FormLabel><FormControl><Input {...field} type="email" placeholder="votre@email.com" /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel>{t.contact.fields.email}</FormLabel><FormControl><Input {...field} type="email" placeholder={locale === 'en' ? 'you@example.com' : 'votre@email.com'} /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
                 <FormField control={form.control} name="subject" render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Sujet de votre demande</FormLabel>
+                    <FormLabel>{t.contact.fields.subject}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger><SelectValue placeholder="Sélectionnez un sujet" /></SelectTrigger>
@@ -110,11 +115,11 @@ export default function ContactPage() {
                   </FormItem>
                 )} />
                 <FormField control={form.control} name="message" render={({ field }) => (
-                  <FormItem><FormLabel>Votre Message</FormLabel><FormControl><Textarea {...field} placeholder="Écrivez votre message ici..." className="min-h-[120px]" /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>{t.contact.fields.message}</FormLabel><FormControl><Textarea {...field} placeholder={locale === 'en' ? 'Write your message here...' : 'Écrivez votre message ici...'} className="min-h-[120px]" /></FormControl><FormMessage /></FormItem>
                 )} />
                 <Button type="submit" size="lg" className="w-full" disabled={isPending}>
                    {isPending ? <Loader2 className="mr-2 animate-spin" /> : <Send className="mr-2" />}
-                  {isPending ? 'Envoi en cours...' : 'Envoyer le message'}
+                  {isPending ? t.contact.sending : t.contact.submit}
                 </Button>
               </form>
             </Form>

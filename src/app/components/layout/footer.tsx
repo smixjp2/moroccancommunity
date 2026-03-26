@@ -11,6 +11,9 @@ import { useToast } from "@/hooks/use-toast";
 import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
+import fr from "@/locales/fr.json";
+import en from "@/locales/en.json";
+import { useLocale } from "@/hooks/use-locale";
 
 function SubmitButton() {
     const { pending } = useFormStatus();
@@ -22,6 +25,8 @@ function SubmitButton() {
 }
 
 export function Footer() {
+  const locale = useLocale();
+  const t = locale === "en" ? en : fr;
   const { toast } = useToast();
   const formRef = React.useRef<HTMLFormElement>(null);
   const [state, formAction] = useActionState(subscribeToNewsletter, { success: false, message: "" });
@@ -30,19 +35,19 @@ export function Footer() {
     if (state.message) {
       if (state.success) {
         toast({
-          title: "Inscription réussie !",
+          title: locale === "en" ? "Subscription successful!" : "Inscription réussie !",
           description: state.message,
         });
         formRef.current?.reset();
       } else {
         toast({
           variant: "destructive",
-          title: "Erreur d'inscription",
+          title: locale === "en" ? "Subscription error" : "Erreur d'inscription",
           description: state.message,
         });
       }
     }
-  }, [state, toast]);
+  }, [state, toast, locale]);
 
   return (
     <footer className="border-t bg-card">
@@ -54,7 +59,9 @@ export function Footer() {
                 <span className="font-bold">The Moroccan Community</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm">
-              Votre source de premier plan pour l'analyse du marché marocain et l'intelligence d'investissement.
+              {locale === "en"
+                ? "Your go-to source for Moroccan market analysis and investment intelligence."
+                : "Votre source de premier plan pour l'analyse du marché marocain et l'intelligence d'investissement."}
             </p>
             <div className="flex space-x-4">
               <Button variant="ghost" size="icon" asChild>
@@ -75,30 +82,31 @@ export function Footer() {
             </div>
           </div>
           <div className="space-y-4">
-             <h3 className="font-headline font-semibold">Navigation</h3>
+             <h3 className="font-headline font-semibold">{t.nav.about}</h3>
              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/articles" className="hover:text-primary">Articles</Link></li>
-                <li><Link href="/tools" className="hover:text-primary">Outils</Link></li>
-                <li><Link href="/resources" className="hover:text-primary">Ressources</Link></li>
-                <li><Link href="/about" className="hover:text-primary">À Propos</Link></li>
-                <li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
+                <li><Link href="/articles" className="hover:text-primary">{t.nav.articles}</Link></li>
+                <li><Link href="/tools" className="hover:text-primary">{t.nav.tools}</Link></li>
+                <li><Link href="/resources" className="hover:text-primary">{t.nav.resources}</Link></li>
+                <li><Link href="/about" className="hover:text-primary">{t.nav.about}</Link></li>
+                <li><Link href="/contact" className="hover:text-primary">{t.nav.contact}</Link></li>
              </ul>
           </div>
           <div className="space-y-4">
-            <h3 className="font-headline font-semibold">Abonnez-vous</h3>
+            <h3 className="font-headline font-semibold">{t.footer.newsletterTitle}</h3>
             <p className="text-muted-foreground text-sm">
-                Recevez notre newsletter mensuelle avec les dernières analyses.
+                {t.footer.newsletterDescription}
             </p>
             <form action={formAction} ref={formRef} className="flex w-full items-center space-x-2">
-              <Input name="email" type="email" placeholder="Votre email" className="flex-1" required />
+              <Input name="email" type="email" placeholder={locale === 'en' ? 'Your email' : 'Votre email'} className="flex-1" required />
               <SubmitButton />
             </form>
           </div>
         </div>
         <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} The Moroccan Community. Tous droits réservés.</p>
+          <p dangerouslySetInnerHTML={{ __html: t.footer.copyright.replace('{year}', `${new Date().getFullYear()}`) }} />
         </div>
       </div>
     </footer>
   );
+
 }

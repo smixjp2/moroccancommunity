@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Home",
+    "articles": "Articles",
+    "tools": "Tools",
+    "resources": "Resources",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "fr": "FR",
+    "en": "EN"
+  },
+  "footer": {
+    "newsletterTitle": "Subscribe",
+    "newsletterDescription": "Get our monthly newsletter with the latest analysis.",
+    "copyright": "&copy; {year} The Moroccan Community. All rights reserved."
+  },
+  "home": {
+    "heroTitle": "Master Your Finances in Morocco",
+    "heroSubtitle": "Your source for analyses, tools and resources to understand the economy and finance in Morocco.",
+    "heroCtaArticles": "Explore Analysis",
+    "heroCtaTools": "Discover Tools",
+    "featuresTitle": "Tools for Every Goal",
+    "featuresSubtitle": "Whether you are a beginner or professional, The Moroccan Community brings the clarity you need to navigate the Moroccan market.",
+    "communityTitle": "Join our Private Community",
+    "communityDescription": "Access exclusive content, deep analysis and interact directly by becoming a paying member on YouTube.",
+    "communityCta": "Become a Member",
+    "newsletterTitle": "Stay Ahead of the Market",
+    "newsletterSubtitle": "Subscribe to our free monthly newsletter to receive the latest market news, analysis and exclusive offers.",
+    "faqTitle": "Frequently Asked Questions",
+    "faqSubtitle": "Find quick answers to the most common questions."
+  },
+  "about": {
+    "title": "What is The Moroccan Community?",
+    "intro": "The Moroccan Community is an educational platform dedicated to helping every Moroccan better manage their finances, save effectively and invest in Morocco with confidence.",
+    "missionTitle": "Our Mission",
+    "missionText": "We contribute to financial education and inclusion by offering clear visibility and in-depth analysis of the Moroccan market. We give you the keys to make informed decisions, but do not provide personalized financial advice.",
+    "processTitle": "Our Process",
+    "processSteps": [
+      "We help you understand the mechanics of the stock market and finance in Morocco.",
+      "Based on your objectives, we provide tools to improve your financial health.",
+      "We then help you find the best saving and investment strategies tailored to your needs.",
+      "We update our analysis based on market developments and new opportunities."
+    ]
+  },
+  "company": {
+    "warningTitle": "Disclaimer",
+    "warningText": "The information and tools on this site are for educational purposes only. They do not constitute investment advice."
+  },
+  "articles": {
+    "pageTitle": "Market Insights and Analysis",
+    "pageSubtitle": "Stay informed with our expert analysis on the Moroccan stock market, individual stocks and key sectors."
+  },
+  "tools": {
+    "pageTitle": "Financial Tools and Simulators",
+    "pageSubtitle": "Make data-driven decisions. Explore our tools to analyze, compare and plan your investments in Morocco."
+  },
+  "resources": {
+    "pageTitle": "Digital Tools and Resources",
+    "pageSubtitle": "Speed up your analysis and decision-making with our downloadable digital products."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Fill in the form below. We will read your message carefully.",
+    "fields": {
+      "name": "Full Name",
+      "email": "Your Email",
+      "subject": "Subject",
+      "message": "Your Message"
+    },
+    "submit": "Send Message",
+    "sending": "Sending..."
+  },
+  "faq": {
+    "q1": "What is The Moroccan Community?",
+    "a1": "It is an educational platform focused on finance in Morocco. We provide market analysis, personal finance tools and technical courses (Excel, Power BI) to help Moroccans manage their money better and develop strong financial skills.",
+    "q2": "Are your courses suitable for beginners?",
+    "a2": "Absolutely. We offer courses for all levels, including beginner programs starting from zero, such as our Casablanca Stock Exchange training.",
+    "q3": "Does the analysis focus only on the Moroccan market?",
+    "a3": "Yes, our main expertise is 100% on the Moroccan market, its companies, economy and skills in demand by Moroccan employers.",
+    "q4": "How can I access exclusive content?",
+    "a4": "You can join our private community by becoming a paying member on our YouTube channel. This gives access to in-depth analysis, exclusive content and direct interaction."
+  }
+}

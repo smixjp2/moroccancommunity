@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "articles": "Articles",
+    "tools": "Outils",
+    "resources": "Ressources",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "localeSwitcher": {
+    "label": "Langue",
+    "fr": "FR",
+    "en": "EN"
+  },
+  "footer": {
+    "newsletterTitle": "Abonnez-vous",
+    "newsletterDescription": "Recevez notre newsletter mensuelle avec les dernières analyses.",
+    "copyright": "&copy; {year} The Moroccan Community. Tous droits réservés."
+  },
+  "home": {
+    "heroTitle": "Maîtrisez Vos Finances au Maroc",
+    "heroSubtitle": "Votre source d'analyses, d'outils et de ressources pour comprendre l'économie et la finance au Maroc.",
+    "heroCtaArticles": "Explorer les Analyses",
+    "heroCtaTools": "Découvrir les Outils",
+    "featuresTitle": "Des Outils pour Chaque Objectif",
+    "featuresSubtitle": "Que vous soyez débutant ou professionnel, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.",
+    "communityTitle": "Rejoignez notre Communauté Privée",
+    "communityDescription": "Accédez à du contenu exclusif, des analyses approfondies et interagissez directement avec nous en devenant membre payant sur YouTube.",
+    "communityCta": "Devenir Membre",
+    "newsletterTitle": "Restez à l'Avant-Garde du Marché",
+    "newsletterSubtitle": "Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.",
+    "faqTitle": "Foire Aux Questions",
+    "faqSubtitle": "Trouvez des réponses rapides aux questions les plus courantes."
+  },
+  "about": {
+    "title": "Qu'est-ce que The Moroccan Community ?",
+    "intro": "The Moroccan Community est une plateforme éducative dédiée à aider chaque Marocain(e) à mieux gérer ses finances, à épargner efficacement et à investir au Maroc en toute confiance.",
+    "missionTitle": "Notre Mission",
+    "missionText": "Nous contribuons à l'éducation et à l'inclusion financière en offrant une visibilité claire et des analyses approfondies sur le marché marocain. Nous vous donnons les clés pour prendre des décisions éclairées, mais nous ne fournissons pas de conseils financiers personnalisés.",
+    "processTitle": "Notre Processus",
+    "processSteps": [
+      "Nous vous aidons à comprendre les mécanismes de la bourse et de la finance au Maroc.",
+      "En fonction de vos objectifs, nous vous donnons les outils pour améliorer votre santé financière.",
+      "Nous vous aidons ensuite à trouver les meilleures stratégies d'épargne et d'investissement adaptées à vos besoins.",
+      "Nous mettons à jour nos analyses en fonction de l'évolution du marché et des nouvelles opportunités."
+    ]
+  },
+  "company": {
+    "warningTitle": "Avertissement",
+    "warningText": "Les informations et outils sur ce site sont à but éducatif. Ils ne constituent pas des conseils en investissement."
+  },
+  "articles": {
+    "pageTitle": "Aperçus et Analyses du Marché",
+    "pageSubtitle": "Restez informé grâce à nos analyses d'experts sur le marché boursier marocain, les actions individuelles et les secteurs clés."
+  },
+  "tools": {
+    "pageTitle": "Outils Financiers et Simulateurs",
+    "pageSubtitle": "Prenez des décisions basées sur les données. Explorez nos outils pour analyser, comparer et planifier vos investissements au Maroc."
+  },
+  "resources": {
+    "pageTitle": "Outils et Ressources Numériques",
+    "pageSubtitle": "Accélérez votre analyse et votre prise de décision avec nos produits numériques téléchargeables."
+  },
+  "contact": {
+    "title": "Nous Contacter",
+    "description": "Remplissez le formulaire ci-dessous. Nous lirons votre message avec attention.",
+    "fields": {
+      "name": "Nom Complet",
+      "email": "Votre E-mail",
+      "subject": "Sujet de votre demande",
+      "message": "Votre Message"
+    },
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours..."
+  },
+  "faq": {
+    "q1": "Qu'est-ce que The Moroccan Community ?",
+    "a1": "C'est une plateforme éducative dédiée à la finance au Maroc. Nous fournissons des analyses de marché, des outils de finance personnelle et des formations techniques (Excel, Power BI) pour aider les Marocains à mieux gérer leur argent et à développer des compétences financières pointues.",
+    "q2": "Vos cours sont-ils adaptés aux débutants ?",
+    "a2": "Absolument. Nous proposons des formations pour tous les niveaux, y compris des cours spécialement conçus pour les débutants qui partent de zéro, comme notre formation sur la Bourse de Casablanca.",
+    "q3": "Les analyses se concentrent-elles uniquement sur le marché marocain ?",
+    "a3": "Oui, notre expertise principale se concentre à 100% sur le marché marocain, ses entreprises, son économie et les compétences recherchées par les employeurs au Maroc.",
+    "q4": "Comment puis-je accéder à du contenu exclusif ?",
+    "a4": "Vous pouvez rejoindre notre communauté privée en devenant membre payant sur notre chaîne YouTube. Cela vous donne accès à des analyses approfondies, du contenu exclusif et des interactions directes."
+  }
+}

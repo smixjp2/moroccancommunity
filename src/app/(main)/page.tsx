@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Newspaper, Wrench, Crown, Star } from "lucide-react";
+import { ArrowRight, Newspaper, Wrench, Crown } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Input } from "@/components/ui/input";
 import {
@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/accordion";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
 import { useToast } from "@/hooks/use-toast";
+import fr from "@/locales/fr.json";
+import en from "@/locales/en.json";
+import { useLocale } from "@/hooks/use-locale";
 import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
@@ -45,24 +48,7 @@ const features = [
   },
 ];
 
-const faqItems = [
-  {
-    question: "Qu'est-ce que The Moroccan Community ?",
-    answer: "C'est une plateforme éducative dédiée à la finance au Maroc. Nous fournissons des analyses de marché, des outils de finance personnelle et des formations techniques (Excel, Power BI) pour aider les Marocains à mieux gérer leur argent et à développer des compétences financières pointues.",
-  },
-  {
-    question: "Vos cours sont-ils adaptés aux débutants ?",
-    answer: "Absolument. Nous proposons des formations pour tous les niveaux, y compris des cours spécialement conçus pour les débutants qui partent de zéro, comme notre formation sur la Bourse de Casablanca.",
-  },
-  {
-    question: "Les analyses se concentrent-elles uniquement sur le marché marocain ?",
-    answer: "Oui, notre expertise principale se concentre à 100% sur le marché marocain, ses entreprises, son économie et les compétences recherchées par les employeurs au Maroc.",
-  },
-  {
-    question: "Comment puis-je accéder à du contenu exclusif ?",
-    answer: "Vous pouvez rejoindre notre communauté privée en devenant membre payant sur notre chaîne YouTube. Cela vous donne accès à des analyses approfondies, du contenu exclusif et des interactions directes.",
-  },
-];
+// FAQ items are built dynamically inside the component from locale dictionaries.
 
 function SubmitButton() {
     const { pending } = useFormStatus();
@@ -75,6 +61,14 @@ function SubmitButton() {
 
 export default function Home() {
     const { toast } = useToast();
+    const locale = useLocale();
+    const t = locale === "en" ? en : fr;
+    const faqItems = [
+      { question: t.faq.q1, answer: t.faq.a1 },
+      { question: t.faq.q2, answer: t.faq.a2 },
+      { question: t.faq.q3, answer: t.faq.a3 },
+      { question: t.faq.q4, answer: t.faq.a4 },
+    ];
     const formRef = React.useRef<HTMLFormElement>(null);
     const [state, formAction] = useActionState(subscribeToNewsletter, { success: false, message: "" });
 
@@ -113,17 +107,17 @@ export default function Home() {
         <div className="relative z-10 container px-4 md:px-6">
           <div className="max-w-3xl mx-auto">
             <h1 className="font-headline text-4xl font-bold md:text-6xl lg:text-7xl drop-shadow-md">
-              Maîtrisez Vos Finances au Maroc
+              {t.home.heroTitle}
             </h1>
             <p className="mt-4 max-w-xl mx-auto text-lg text-primary-foreground/90 md:text-xl">
-              Votre source d'analyses, d'outils et de ressources pour comprendre l'économie et la finance au Maroc.
+              {t.home.heroSubtitle}
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg" className="font-bold text-lg px-8">
-                <Link href="/articles">Explorer les Analyses <ArrowRight className="ml-2" /></Link>
+                <Link href="/articles">{t.home.heroCtaArticles} <ArrowRight className="ml-2" /></Link>
               </Button>
               <Button asChild size="lg" variant="secondary" className="font-bold text-lg px-8">
-                <Link href="/tools">Découvrir les Outils</Link>
+                <Link href="/tools">{t.home.heroCtaTools}</Link>
               </Button>
             </div>
           </div>
@@ -135,9 +129,9 @@ export default function Home() {
         <section className="py-16 md:py-24 bg-background">
           <div className="container px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">Des Outils pour Chaque Objectif</h2>
+              <h2 className="font-headline text-3xl font-bold md:text-4xl">{t.home.featuresTitle}</h2>
               <p className="mt-4 text-muted-foreground md:text-lg">
-                Que vous soyez débutant ou professionnel, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.
+                {t.home.featuresSubtitle}
               </p>
             </div>
             <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -190,14 +184,14 @@ export default function Home() {
                         <Crown className="h-12 w-12 mx-auto text-yellow-300" />
                     </div>
                     <h2 className="font-headline text-3xl font-bold md:text-4xl text-primary-foreground">
-                        Rejoignez notre Communauté Privée
+                        {t.home.communityTitle}
                     </h2>
                     <p className="mt-4 text-lg text-primary-foreground/90">
-                        Accédez à du contenu exclusif, des analyses approfondies et interagissez directement avec nous en devenant membre payant sur YouTube.
+                        {t.home.communityDescription}
                     </p>
                     <Button asChild size="lg" className="mt-8 font-bold bg-background text-foreground hover:bg-background/90">
                         <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">
-                            Devenir Membre
+                            {t.home.communityCta}
                         </a>
                     </Button>
                 </div>
@@ -209,9 +203,9 @@ export default function Home() {
         <section className="bg-card py-16 md:py-24 border-y">
           <div className="container grid md:grid-cols-2 gap-8 items-center">
               <div>
-                  <h2 className="font-headline text-3xl font-bold md:text-4xl">Restez à l'Avant-Garde du Marché</h2>
+                  <h2 className="font-headline text-3xl font-bold md:text-4xl">{t.home.newsletterTitle}</h2>
                   <p className="mt-4 text-muted-foreground md:text-lg">
-                      Abonnez-vous à notre newsletter mensuelle gratuite pour recevoir les dernières actualités du marché, des analyses et des offres exclusives.
+                      {t.home.newsletterSubtitle}
                   </p>
               </div>
               <form action={formAction} ref={formRef} className="flex w-full max-w-md items-center space-x-2 mx-auto">
@@ -225,9 +219,9 @@ export default function Home() {
         <section className="py-16 md:py-24 bg-background">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="font-headline text-3xl font-bold md:text-4xl">Foire Aux Questions</h2>
+              <h2 className="font-headline text-3xl font-bold md:text-4xl">{t.home.faqTitle}</h2>
               <p className="mt-4 text-muted-foreground md:text-lg">
-                Trouvez des réponses rapides aux questions les plus courantes.
+                {t.home.faqSubtitle}
               </p>
             </div>
             <div className="max-w-3xl mx-auto">

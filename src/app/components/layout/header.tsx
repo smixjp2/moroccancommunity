@@ -17,12 +17,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/lib/types";
+import fr from "@/locales/fr.json";
+import en from "@/locales/en.json";
+import { useLocale } from "@/hooks/use-locale";
 
-const navLinks: NavLink[] = [
-  { href: "/", label: "Accueil" },
-  { href: "/articles", label: "Articles" },
-  { href: "/resources", label: "Ressources" },
-];
 
 const toolsLinks: NavLink[] = [
     { href: "/tools/monthly-budget-simulator", label: "Simulateur de Budget" },
@@ -37,12 +35,30 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
 ];
 
-const aboutLink: NavLink = { href: "/about", label: "À propos" };
-const contactLink: NavLink = { href: "/contact", label: "Contact" };
-
-
 export function Header() {
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = locale === "en" ? en : fr;
+
+  const navLinks: NavLink[] = [
+    { href: "/", label: t.nav.home },
+    { href: "/articles", label: t.nav.articles },
+    { href: "/resources", label: t.nav.resources },
+  ];
+
+  const toolsLinks: NavLink[] = [
+    { href: "/tools/monthly-budget-simulator", label: locale === "en" ? "Monthly Budget" : "Simulateur de Budget" },
+    { href: "/tools/loan-simulator", label: locale === "en" ? "Loan Simulator" : "Simulateur de Crédit" },
+    { href: "/tools/fee-simulator", label: locale === "en" ? "Fee Impact" : "Simulateur d'Impact des Frais" },
+    { href: "/tools/dividend-yield-calculator", label: locale === "en" ? "Dividend Yield" : "Calculateur de Rendement" },
+    { href: "/tools/retirement-planner", label: locale === "en" ? "Retirement Planner" : "Planificateur de Retraite" },
+    { href: "/tools/investor-profile-quiz", label: locale === "en" ? "Investor Quiz" : "Quiz Profil d'Investisseur" },
+    { href: "/tools/pe-ratio-analyzer", label: locale === "en" ? "P/E Ratio" : "Analyseur de P/E Ratio" },
+    { href: "/tools/personal-wealth-analyzer", label: locale === "en" ? "Wealth Analyzer" : "Analyseur de Patrimoine" },
+  ];
+
+  const aboutLink: NavLink = { href: "/about", label: t.nav.about };
+  const contactLink: NavLink = { href: "/contact", label: t.nav.contact };
 
   const ToolsDropdown = () => (
     <DropdownMenu>
@@ -119,11 +135,19 @@ export function Header() {
         </div>
         
         <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
+              <Link href={pathname} locale="fr" className={cn("text-sm font-medium px-2 py-1 rounded", locale === 'fr' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-primary')}>
+                FR
+              </Link>
+              <Link href={pathname} locale="en" className={cn("text-sm font-medium px-2 py-1 rounded", locale === 'en' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-primary')}>
+                EN
+              </Link>
+            </div>
             <Sheet>
                 <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
                     <Menu className="h-6 w-6" />
-                    <span className="sr-only">Ouvrir le menu de navigation</span>
+                    <span className="sr-only">Open navigation menu</span>
                 </Button>
                 </SheetTrigger>
                 <SheetContent side="left">
