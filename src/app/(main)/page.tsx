@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Newspaper, Wrench, GraduationCap, Crown, ShoppingBag, Star, UserPlus } from "lucide-react";
+import { ArrowRight, Newspaper, Wrench, GraduationCap, Crown, Star, UserPlus } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,21 +29,6 @@ const featureImages = {
   courses: PlaceHolderImages.find(p => p.id === 'feature-courses'),
 }
 const privateCommunityImage = PlaceHolderImages.find(p => p.id === 'private-community');
-
-const featuredProducts = [
-    {
-        id: "shop-ebook",
-        title: "E-book : Réussir en Bourse",
-        price: "199 MAD",
-        image: PlaceHolderImages.find(p => p.id === 'shop-ebook'),
-    },
-    {
-        id: "shop-excel",
-        title: "Master Template Excel Pro",
-        price: "149 MAD",
-        image: PlaceHolderImages.find(p => p.id === 'shop-excel-template'),
-    }
-];
 
 const features = [
   {
@@ -201,48 +186,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
-
-        {/* Shop Teaser Section */}
-        <section className="py-16 bg-muted/30">
-            <div className="container">
-                <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
-                    <div className="text-left max-w-2xl">
-                        <h2 className="font-headline text-3xl font-bold md:text-4xl">Nos Produits Exclusifs</h2>
-                        <p className="mt-4 text-muted-foreground md:text-lg">
-                            Des ressources prêtes à l'emploi pour booster vos analyses et votre gestion de patrimoine.
-                        </p>
-                    </div>
-                    <Button asChild variant="outline" size="lg" className="font-bold border-primary text-primary hover:bg-primary/10">
-                        <Link href="/shop">Voir toute la boutique <ShoppingBag className="ml-2 h-5 w-5" /></Link>
-                    </Button>
-                </div>
-                <div className="grid md:grid-cols-2 gap-8">
-                    {featuredProducts.map((product) => (
-                        <Card key={product.id} className="flex flex-col sm:flex-row overflow-hidden hover:shadow-lg transition-shadow">
-                            <div className="sm:w-1/2 aspect-video sm:aspect-square relative">
-                                {product.image && (
-                                    <Image
-                                        src={product.image.imageUrl}
-                                        alt={product.title}
-                                        data-ai-hint={product.image.imageHint}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                )}
-                            </div>
-                            <div className="p-6 sm:w-1/2 flex flex-col justify-center">
-                                <Badge className="w-fit mb-2"><Star className="h-3 w-3 mr-1 fill-current" /> Premium</Badge>
-                                <h3 className="font-headline text-xl font-bold mb-2">{product.title}</h3>
-                                <p className="text-2xl font-bold text-primary mb-4">{product.price}</p>
-                                <Button asChild className="font-bold">
-                                    <Link href="/shop">Détails du produit</Link>
-                                </Button>
-                            </div>
-                        </Card>
-                    ))}
-                </div>
-            </div>
         </section>
         
         {/* Community Section */}

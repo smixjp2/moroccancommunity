@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronDown, ShoppingBag, UserCircle } from "lucide-react";
+import { Menu, ChevronDown, UserCircle } from "lucide-react";
 import { Logo } from "./logo";
 
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,6 @@ const navLinks: NavLink[] = [
   { href: "/", label: "Accueil" },
   { href: "/articles", label: "Articles" },
   { href: "/courses", label: "Cours" },
-  { href: "/shop", label: "Boutique" },
   { href: "/resources", label: "Ressources" },
 ];
 
@@ -107,9 +106,7 @@ export function Header() {
             pathname === link.href ? "text-primary" : "text-muted-foreground"
           )}
         >
-          {link.label === "Boutique" ? (
-              <span className="flex items-center gap-1"><ShoppingBag className="h-4 w-4" /> {link.label}</span>
-          ) : link.label}
+          {link.label}
         </Link>
       ))}
       <ToolsDropdown />
