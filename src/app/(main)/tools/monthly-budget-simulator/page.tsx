@@ -76,7 +76,7 @@ const DynamicRecommendations = ({ result }: { result: AnalysisResult }) => {
                         <Goal className="h-4 w-4" />
                         <AlertTitle className="text-green-800 dark:text-green-300">Félicitations ! Capacité d'Épargne Positive</AlertTitle>
                         <AlertDescription className="text-green-700 dark:text-green-400">
-                            Vous dégagez un excédent de <strong>{formatCurrency(result.balance)}</strong> chaque mois. C'est excellent ! C'est la somme que vous pouvez allouer à votre épargne ou à vos investissements. Pensez à des stratégies comme le <Link href="/courses/formation-dca" className="underline font-bold">DCA (Dollar Cost Averaging)</Link> pour faire travailler cet argent pour vous.
+                            Vous dégagez un excédent de <strong>{formatCurrency(result.balance)}</strong> chaque mois. C'est excellent ! C'est la somme que vous pouvez allouer à votre épargne ou à vos investissements.
                         </AlertDescription>
                     </Alert>
                 )}

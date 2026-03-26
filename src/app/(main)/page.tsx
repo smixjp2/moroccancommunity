@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Newspaper, Wrench, GraduationCap, Crown, Star } from "lucide-react";
+import { ArrowRight, Newspaper, Wrench, Crown, Star } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Input } from "@/components/ui/input";
 import {
@@ -25,7 +25,6 @@ const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const featureImages = {
   articles: PlaceHolderImages.find(p => p.id === 'feature-articles'),
   tools: PlaceHolderImages.find(p => p.id === 'feature-tools'),
-  courses: PlaceHolderImages.find(p => p.id === 'feature-courses'),
 }
 const privateCommunityImage = PlaceHolderImages.find(p => p.id === 'private-community');
 
@@ -43,13 +42,6 @@ const features = [
     description: "Comparez les banques, les courtiers et simulez l'impact des frais sur vos investissements avec nos outils performants.",
     link: "/tools",
     image: featureImages.tools,
-  },
-  {
-    icon: <GraduationCap className="h-8 w-8 text-primary" />,
-    title: "Cours d'Investissement",
-    description: "Acquérez des compétences techniques en finance (Excel, Power BI) et maîtrisez l'investissement au Maroc.",
-    link: "/courses",
-    image: featureImages.courses,
   },
 ];
 
