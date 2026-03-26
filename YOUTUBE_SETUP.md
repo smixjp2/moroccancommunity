@@ -26,8 +26,18 @@ Pour activer la récupération automatique des vidéos YouTube, vous devez :
 
 ## Fonctionnalités
 
+- **Lecteur intégré** : Les vidéos se lisent directement sur votre site web
 - Récupération automatique des 10 dernières vidéos de chaque chaîne
 - Tri par date de publication (plus récent en premier)
 - Affichage des vues et dates
-- Liens directs vers YouTube
 - Design responsive avec animations
+- Indicateur visuel pour la vidéo en cours de lecture
+- Bouton pour fermer le lecteur
+
+## Comment ça marche
+
+1. Cliquez sur une miniature de vidéo pour l'ouvrir dans le lecteur intégré
+2. La vidéo commence automatiquement
+3. Un indicateur rouge "LECTURE" apparaît sur la miniature de la vidéo en cours
+4. Cliquez sur le X pour fermer le lecteur
+5. Vous pouvez changer de vidéo en cliquant sur une autre miniature

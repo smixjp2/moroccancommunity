@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Play, Calendar, Eye, ExternalLink } from "lucide-react";
+import { Play, Calendar, Eye, ExternalLink, X, RefreshCw } from "lucide-react";
 
 interface YouTubeVideo {
   id: string;
@@ -38,6 +38,22 @@ export function YouTubeVideos() {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      const response = await fetch('/api/youtube/videos');
+      const data = await response.json();
+      if (data.videos) {
+        setVideos(data.videos);
+      }
+    } catch (err) {
+      console.error('Error refreshing videos:', err);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -102,6 +118,14 @@ export function YouTubeVideos() {
     return num.toString();
   };
 
+  const handleVideoClick = (videoId: string) => {
+    setPlayingVideo(videoId);
+  };
+
+  const closePlayer = () => {
+    setPlayingVideo(null);
+  };
+
   if (loading) {
     return (
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -129,28 +153,71 @@ export function YouTubeVideos() {
 
   return (
     <div className="space-y-8">
-      {/* Chaînes YouTube */}
-      <div className="grid gap-4 md:grid-cols-2 max-w-4xl mx-auto">
-        {CHANNELS.map((channel) => (
-          <Card key={channel.id} className="text-center">
-            <CardContent className="p-6">
-              <h3 className="font-headline text-xl font-bold mb-2">{channel.name}</h3>
-              <p className="text-muted-foreground mb-4">{channel.handle}</p>
-              <Button asChild variant="outline">
-                <a href={channel.url} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Voir la chaîne
-                </a>
+      {/* Lecteur YouTube intégré */}
+      {playingVideo && (
+        <Card className="mb-8">
+          <CardContent className="p-0">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h3 className="text-lg font-semibold">Lecture en cours</h3>
+              <Button variant="ghost" size="sm" onClick={closePlayer}>
+                <X className="h-4 w-4" />
               </Button>
-            </CardContent>
-          </Card>
-        ))}
+            </div>
+            <div className="aspect-video w-full">
+              <iframe
+                src={`https://www.youtube.com/embed/${playingVideo}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Chaînes YouTube */}
+      <div className="space-y-4">
+        <div className="flex justify-between items-center max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold font-headline">Nos Chaînes YouTube</h2>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+            Actualiser
+          </Button>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 max-w-4xl mx-auto">
+          {CHANNELS.map((channel) => (
+            <Card key={channel.id} className="text-center">
+              <CardContent className="p-6">
+                <h3 className="font-headline text-xl font-bold mb-2">{channel.name}</h3>
+                <p className="text-muted-foreground mb-4">{channel.handle}</p>
+                <Button asChild variant="outline">
+                  <a href={channel.url} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    Voir la chaîne
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       {/* Vidéos */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {videos.map((video) => (
-          <Card key={video.id} className="group hover:shadow-lg transition-shadow duration-300">
+          <Card
+            key={video.id}
+            className="group hover:shadow-lg transition-all duration-300 cursor-pointer"
+            onClick={() => handleVideoClick(video.id)}
+          >
             <CardHeader className="p-0">
               <div className="aspect-video relative overflow-hidden rounded-t-lg">
                 <Image
@@ -159,9 +226,14 @@ export function YouTubeVideos() {
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Play className="h-12 w-12 text-white" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Play className="h-16 w-16 text-white drop-shadow-lg" />
                 </div>
+                {playingVideo === video.id && (
+                  <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
+                    LECTURE
+                  </div>
+                )}
               </div>
             </CardHeader>
             <CardContent className="p-4">
@@ -169,14 +241,7 @@ export function YouTubeVideos() {
                 {video.channelTitle}
               </Badge>
               <CardTitle className="text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                <a
-                  href={`https://www.youtube.com/watch?v=${video.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  {video.title}
-                </a>
+                {video.title}
               </CardTitle>
               <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                 {video.description}
