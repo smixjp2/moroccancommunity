@@ -54,6 +54,15 @@ const resources: Resource[] = [
     imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
   },
+  {
+    id: "dca-guide",
+    title: "Guide Ultime du Dollar Cost Averaging (DCA)",
+    description: "Maîtrisez la stratégie d'investissement DCA pour investir régulièrement et réduire les risques de volatilité du marché. Un guide complet avec exemples pratiques pour le marché marocain.",
+    price: "Voir sur Gumroad",
+    href: "https://gum.new/gum/cmn80scfs000p04jfdg3tam4k",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageHint || '',
+  },
 ];
 
 const allVideos = [
@@ -105,8 +114,8 @@ export default function ResourcesPage() {
                 <span className="text-2xl font-bold font-headline text-primary">{resource.price}</span>
                 <Button asChild className="font-bold" disabled={resource.price === 'Bientôt'}>
                   <Link href={resource.href} target="_blank" rel="noopener noreferrer">
-                    {resource.price === 'Gratuit' ? 'Télécharger' : 'Obtenir'} 
-                    {resource.price !== 'Bientôt' && <Download className="ml-2 h-4 w-4" />}
+                    {resource.price === 'Gratuit' ? 'Télécharger' : resource.price === 'Voir sur Gumroad' ? 'Acheter' : 'Obtenir'} 
+                    {resource.price !== 'Bientôt' && resource.price !== 'Voir sur Gumroad' && <Download className="ml-2 h-4 w-4" />}
                   </Link>
                 </Button>
               </div>
