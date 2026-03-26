@@ -7,8 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { useUser, useFirestore } from "@/firebase";
-import { doc, setDoc } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -48,8 +46,6 @@ export default function InvestorProfileQuizPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [result, setResult] = useState<InvestorProfileQuizOutput | null>(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useUser();
-  const firestore = useFirestore();
   const router = useRouter();
   const { toast } = useToast();
 
@@ -127,25 +123,6 @@ export default function InvestorProfileQuizPage() {
         analysis: "Votre profil est celui d'un investisseur très expérimenté ou ayant une très forte tolérance au risque. Vous êtes prêt à vous concentrer sur des actifs à fort potentiel, en acceptant la possibilité de pertes importantes à court terme.",
         recommendation: "Allocation suggérée pour le marché marocain :\n- 85% Actions (en direct 'stock-picking' et/ou OPCVM spécialisés sur des secteurs de croissance comme la technologie)\n- 10% Actifs Alternatifs/International\n- 5% OPCI ou immobilier"
       };
-    }
-
-    if (user) {
-      try {
-        const userDocRef = doc(firestore, "users", user.uid);
-        await setDoc(userDocRef, { investorProfile: profileData.profile }, { merge: true });
-        toast({
-          title: "Profil sauvegardé !",
-          description: "Votre profil d'investisseur a été mis à jour sur votre tableau de bord.",
-        });
-        setTimeout(() => router.push('/dashboard'), 2000);
-      } catch (error) {
-        console.error("Erreur lors de la sauvegarde du profil:", error);
-        toast({
-            variant: "destructive",
-            title: "Erreur",
-            description: "Impossible de sauvegarder votre profil. Veuillez réessayer.",
-        });
-      }
     }
 
     setResult(profileData);
@@ -384,27 +361,13 @@ export default function InvestorProfileQuizPage() {
                   )}
                 </div>
               )}
-              
-               {!user && !loading && !result && currentStep === formSteps.length - 1 && (
-                  <Alert variant="destructive" className="mt-4">
-                    <Info className="h-4 w-4" />
-                    <AlertTitle>Connexion Recommandée</AlertTitle>
-                    <AlertDescription>
-                      <a href="/login" className="underline font-bold">Connectez-vous</a> pour sauvegarder votre profil et le retrouver sur votre tableau de bord.
-                    </AlertDescription>
-                  </Alert>
-               )}
 
               {result && !loading && (
                  <div className="text-center pt-6 mt-8 border-t space-y-2">
                      <Button type="button" onClick={() => {
-                         if (user) {
-                             router.push('/dashboard');
-                         } else {
-                            setCurrentStep(0); setResult(null); form.reset();
-                         }
+                         setCurrentStep(0); setResult(null); form.reset();
                      }}>
-                        {user ? "Aller à mon Tableau de Bord" : "Recommencer le quiz"}
+                        Recommencer le quiz
                     </Button>
                  </div>
               )}

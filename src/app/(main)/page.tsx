@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Newspaper, Wrench, GraduationCap, Crown, Star, UserPlus } from "lucide-react";
+import { ArrowRight, Newspaper, Wrench, GraduationCap, Crown, Star } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Input } from "@/components/ui/input";
 import {
@@ -20,7 +20,6 @@ import { useToast } from "@/hooks/use-toast";
 import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { useUser } from "@/firebase";
 
 const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 const featureImages = {
@@ -84,7 +83,6 @@ function SubmitButton() {
 
 export default function Home() {
     const { toast } = useToast();
-    const { user } = useUser();
     const formRef = React.useRef<HTMLFormElement>(null);
     const [state, formAction] = useActionState(subscribeToNewsletter, { success: false, message: "" });
 
@@ -132,16 +130,9 @@ export default function Home() {
               <Button asChild size="lg" className="font-bold text-lg px-8">
                 <Link href="/articles">Explorer les Analyses <ArrowRight className="ml-2" /></Link>
               </Button>
-              {!user && (
-                <Button asChild size="lg" variant="secondary" className="font-bold text-lg px-8 bg-accent text-accent-foreground hover:bg-accent/90">
-                    <Link href="/register">Créer un compte <UserPlus className="ml-2 h-5 w-5" /></Link>
-                </Button>
-              )}
-              {user && (
-                <Button asChild size="lg" variant="secondary" className="font-bold text-lg px-8">
-                    <Link href="/dashboard">Mon Tableau de Bord</Link>
-                </Button>
-              )}
+              <Button asChild size="lg" variant="secondary" className="font-bold text-lg px-8">
+                <Link href="/tools">Découvrir les Outils</Link>
+              </Button>
             </div>
           </div>
         </div>

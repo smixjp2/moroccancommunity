@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronDown, UserCircle } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { Logo } from "./logo";
 
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import type { NavLink } from "@/lib/types";
-import { useUser } from "@/firebase";
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Accueil" },
   { href: "/articles", label: "Articles" },
+  { href: "/videos", label: "Vidéos" },
   { href: "/courses", label: "Cours" },
   { href: "/resources", label: "Ressources" },
 ];
@@ -46,30 +46,6 @@ const contactLink: NavLink = { href: "/contact", label: "Contact" };
 
 export function Header() {
   const pathname = usePathname();
-  const { user, isUserLoading } = useUser();
-
-  const AuthButton = () => {
-    if (isUserLoading) {
-      return <Button variant="ghost" size="sm">...</Button>
-    }
-    if (user) {
-      return (
-        <Button asChild variant="outline" size="sm" className="hidden sm:flex">
-          <Link href="/dashboard">Mon Espace</Link>
-        </Button>
-      );
-    }
-    return (
-      <div className="flex items-center gap-1 sm:gap-2">
-        <Button asChild variant="ghost" size="sm" className="px-2 sm:px-4">
-          <Link href="/login">Connexion</Link>
-        </Button>
-        <Button asChild size="sm" className="px-2 sm:px-4 bg-accent text-accent-foreground hover:bg-accent/90">
-          <Link href="/register">S'inscrire</Link>
-        </Button>
-      </div>
-    );
-  };
 
   const ToolsDropdown = () => (
     <DropdownMenu>
@@ -146,12 +122,6 @@ export function Header() {
         </div>
         
         <div className="flex items-center gap-2">
-            <AuthButton />
-            {user && (
-                <Button asChild variant="ghost" size="icon" className="sm:hidden">
-                    <Link href="/dashboard"><UserCircle className="h-6 w-6" /></Link>
-                </Button>
-            )}
             <Sheet>
                 <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">

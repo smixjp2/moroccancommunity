@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase, Home, Ratio } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase, Home, Ratio, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
@@ -56,11 +56,10 @@ const simulators = [
     isNew: true,
   },
   {
-    href: "/dashboard/portfolio-allocator",
+    href: "/tools/pe-ratio-analyzer",
     icon: <Briefcase className="h-8 w-8 text-primary" />,
-    title: "Simulateur d'Allocation de Portefeuille",
-    description: "Générez une allocation d'actifs professionnelle basée sur votre profil.",
-    isMemberOnly: true,
+    title: "Analyseur P/E Ratio",
+    description: "Analysez les ratios de valorisation des actions marocaines.",
     isNew: true,
   },
   {
@@ -71,11 +70,10 @@ const simulators = [
     isMemberOnly: true,
   },
   {
-    href: "/dashboard/stock-analyzer",
-    icon: <Briefcase className="h-8 w-8 text-primary" />,
-    title: "Analyseur d'Actions",
-    description: "Obtenez une analyse financière pour les actions marocaines.",
-    isMemberOnly: true,
+    href: "/tools/dividend-yield-calculator",
+    icon: <TrendingUp className="h-8 w-8 text-primary" />,
+    title: "Calculateur de Rendement",
+    description: "Calculez le rendement de vos dividendes et investissements.",
   },
 ];
 
