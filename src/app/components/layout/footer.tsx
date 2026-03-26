@@ -3,7 +3,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Instagram, Youtube, Facebook } from "lucide-react";
+import { Instagram, Youtube, Facebook, Music } from "lucide-react";
 import { Logo } from "./logo";
 import Link from "next/link";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
@@ -68,6 +68,9 @@ export function Footer() {
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <a href="https://web.facebook.com/themoroccananaly/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook className="h-5 w-5" /></a>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <a href="https://www.tiktok.com/@themoroccananalyst" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><Music className="h-5 w-5" /></a>
               </Button>
             </div>
           </div>
