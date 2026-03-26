@@ -33,9 +33,8 @@ const toolsLinks: NavLink[] = [
     { href: "/tools/investor-profile-quiz", label: "Quiz Profil d'Investisseur"},
     { href: "/tools/pe-ratio-analyzer", label: "Analyseur de P/E Ratio" },
     { href: "/tools/personal-wealth-analyzer", label: "Analyseur de Patrimoine" },
-    { href: "/dashboard/stock-analyzer", label: "Analyseur d'Actions" },
-    { href: "/dashboard/portfolio-allocator", label: "Simulateur d'Allocation" },
-    { href: "/tools/opcvm-comparator", label: "Comparateur d'OPCVM"},
+    { href: "/tools/pe-ratio-analyzer", label: "Analyseur de P/E Ratio" },
+    { href: "/tools/dividend-yield-calculator", label: "Calculateur de Rendement"},
 ];
 
 const aboutLink: NavLink = { href: "/about", label: "À propos" };

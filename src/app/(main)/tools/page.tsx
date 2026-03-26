@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Calculator, Percent, ShieldCheck, UserCheck, BarChart3, Wallet, Briefcase, Home, Ratio, TrendingUp } from "lucide-react";
+import { Calculator, Percent, ShieldCheck, UserCheck, Wallet, Briefcase, Home, Ratio, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const simulators = [
@@ -61,13 +61,6 @@ const simulators = [
     title: "Analyseur P/E Ratio",
     description: "Analysez les ratios de valorisation des actions marocaines.",
     isNew: true,
-  },
-  {
-    href: "/tools/opcvm-comparator",
-    icon: <BarChart3 className="h-8 w-8 text-primary" />,
-    title: "Comparateur d'OPCVM",
-    description: "Comparez les fonds OPCVM marocains par catégorie et performance.",
-    isMemberOnly: true,
   },
   {
     href: "/tools/dividend-yield-calculator",
