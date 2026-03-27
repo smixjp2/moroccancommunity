@@ -20,15 +20,6 @@ import { Separator } from "@/components/ui/separator";
 
 const resources: Resource[] = [
     {
-    id: "5",
-    title: "Simulateur d'Intérêts Composés",
-    description: "Un outil Excel puissant pour visualiser la croissance de vos investissements sur le long terme grâce à la magie des intérêts composés.",
-    price: "Gratuit",
-    href: "https://docs.google.com/spreadsheets/d/10hXt59mH8YaJixCOHUZaGyYCKszxtc_Q/edit?usp=sharing&ouid=104577439630191948819&rtpof=true&sd=true",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-compound-interest')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-compound-interest')?.imageHint || '',
-  },
-    {
     id: "resource-account-opening",
     title: "Comment créer un compte-titre à la Bourse de Casablanca",
     description: "Un guide PDF pas à pas pour vous accompagner dans l'ouverture de votre premier compte-titres auprès d'un courtier marocain.",
@@ -59,7 +50,7 @@ const resources: Resource[] = [
     id: "dca-guide",
     title: "Guide Ultime du Dollar Cost Averaging (DCA)",
     description: "Maîtrisez la stratégie d'investissement DCA pour investir régulièrement et réduire les risques de volatilité du marché. Un guide complet avec exemples pratiques pour le marché marocain.",
-    price: "Voir sur Gumroad",
+    price: "49 DH",
     href: "https://gum.new/gum/cmn80scfs000p04jfdg3tam4k",
     imageUrl: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageHint || '',
@@ -118,8 +109,8 @@ export default function ResourcesPage() {
                 <span className="text-2xl font-bold font-headline text-primary">{resource.price}</span>
                 <Button asChild className="font-bold" disabled={resource.price === 'Bientôt'}>
                   <Link href={resource.href} target="_blank" rel="noopener noreferrer">
-                    {resource.price === 'Gratuit' ? 'Télécharger' : resource.price === 'Voir sur Gumroad' ? 'Acheter' : 'Obtenir'} 
-                    {resource.price !== 'Bientôt' && resource.price !== 'Voir sur Gumroad' && <Download className="ml-2 h-4 w-4" />}
+                    {resource.price === 'Gratuit' ? 'Télécharger' : (resource.price.includes('DH') || resource.price === 'Voir sur Gumroad') ? 'Acheter' : 'Obtenir'} 
+                    {resource.price !== 'Bientôt' && !resource.price.includes('DH') && resource.price !== 'Voir sur Gumroad' && <Download className="ml-2 h-4 w-4" />}
                   </Link>
                 </Button>
               </div>
