@@ -18,7 +18,53 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 
-const resources: Resource[] = [];
+const resources: Resource[] = [
+  {
+    id: "dca-product",
+    title: "DCA Strategy Toolkit",
+    description: "Téléchargez un modèle Excel prêt à l'emploi pour appliquer et suivre la stratégie Dollar Cost Averaging sur vos investissements.",
+    price: "49 DH",
+    href: "https://themacommunity.gumroad.com/l/DCA?layout=profile",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
+  },
+  {
+    id: "dcf-product",
+    title: "DCF Valuation Model",
+    description: "Accédez à un modèle Excel de flux de trésorerie actualisés pour évaluer la valeur intrinsèque des entreprises.",
+    price: "49 DH",
+    href: "https://themacommunity.gumroad.com/l/DCF?layout=profile",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
+  },
+  {
+    id: "compound-interest-simulator",
+    title: "Compound Interest Simulator",
+    description: "Produit Excel pour simuler l’intérêt composé, contributions mensuelles et fréquence de capitalisation.",
+    price: "49 DH",
+    href: "https://themacommunity.gumroad.com/l/CompoundInterestSimulator?layout=profile",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
+  },
+  {
+    id: "wealth-tracker",
+    title: "Wealth Tracker",
+    description: "Tableau de bord Excel pour suivre votre patrimoine et vos objectifs financiers.",
+    price: "49 DH",
+    href: "https://themacommunity.gumroad.com/l/wealthtracker?layout=profile",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
+  },
+  {
+    id: "pcidg-product",
+    title: "PCIDG Toolkit",
+    description: "Pack Excel pour le diagnostic financier et l’analyse de performance (PCIDG).",
+    price: "49 DH",
+    href: "https://themacommunity.gumroad.com/l/pcidg?layout=profile",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
+  },
+];
 
 const allVideos = [
     { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
