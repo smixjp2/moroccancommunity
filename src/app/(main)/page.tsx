@@ -165,40 +165,6 @@ export default function Home() {
           </div>
         </section>
         
-        {/* Community Section */}
-        <section className="py-16 md:py-24">
-          <div className="container">
-            <div className="relative rounded-lg overflow-hidden p-8 md:p-12 text-center text-white bg-card">
-                {privateCommunityImage && (
-                  <Image
-                    src={privateCommunityImage.imageUrl}
-                    alt={privateCommunityImage.description}
-                    data-ai-hint={privateCommunityImage.imageHint}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-                <div className="absolute inset-0 bg-primary/80" />
-                <div className="relative z-10 max-w-2xl mx-auto">
-                    <div className="mb-4">
-                        <Crown className="h-12 w-12 mx-auto text-yellow-300" />
-                    </div>
-                    <h2 className="font-headline text-3xl font-bold md:text-4xl text-primary-foreground">
-                        {t.home.communityTitle}
-                    </h2>
-                    <p className="mt-4 text-lg text-primary-foreground/90">
-                        {t.home.communityDescription}
-                    </p>
-                    <Button asChild size="lg" className="mt-8 font-bold bg-background text-foreground hover:bg-background/90">
-                        <a href="https://www.youtube.com/channel/UCK6m2fe2txUxNFxpn65rURg/join" target="_blank" rel="noopener noreferrer">
-                            {t.home.communityCta}
-                        </a>
-                    </Button>
-                </div>
-            </div>
-          </div>
-        </section>
-
         {/* Newsletter Section */}
         <section className="bg-card py-16 md:py-24 border-y">
           <div className="container grid md:grid-cols-2 gap-8 items-center">
