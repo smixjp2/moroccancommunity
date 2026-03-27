@@ -11,36 +11,49 @@ const simulators = [
     icon: <Wallet className="h-8 w-8 text-primary" />,
     title: "Simulateur de Budget Mensuel",
     description: "Analysez vos revenus, charges et calculez votre capacité d'épargne.",
+    isMemberOnly: false,
   },
    {
     href: "/tools/loan-simulator",
     icon: <Home className="h-8 w-8 text-primary" />,
     title: "Simulateur de Crédit Immobilier",
     description: "Calculez vos mensualités et le coût total de votre crédit immobilier.",
+    isMemberOnly: false,
   },
   {
     href: "/tools/fee-simulator",
     icon: <Calculator className="h-8 w-8 text-primary" />,
     title: "Simulateur d'Impact des Frais",
     description: "Analysez l'impact des frais bancaires sur vos rendements.",
+    isMemberOnly: false,
+  },
+  {
+    href: "/tools/compound-interest-simulator",
+    icon: <TrendingUp className="h-8 w-8 text-primary" />,
+    title: "Simulateur d'Intérêt Composé",
+    description: "Découvrez la puissance de l'intérêt composé sur vos investissements.",
+    isMemberOnly: false,
   },
   {
     href: "/tools/dividend-yield-calculator",
     icon: <Percent className="h-8 w-8 text-primary" />,
     title: "Calculateur de Rendement des Dividendes",
     description: "Calculez le rendement de vos investissements en dividendes.",
+    isMemberOnly: false,
   },
   {
     href: "/tools/retirement-planner",
     icon: <ShieldCheck className="h-8 w-8 text-primary" />,
     title: "Planificateur de Retraite",
     description: "Simulez votre épargne retraite pour atteindre vos objectifs.",
+    isMemberOnly: false,
   },
   {
     href: "/tools/investor-profile-quiz",
     icon: <UserCheck className="h-8 w-8 text-primary" />,
     title: "Quiz Profil d'Investisseur",
     description: "Découvrez quel type d'investisseur vous êtes.",
+    isMemberOnly: false,
   },
   {
     href: "/tools/pe-ratio-analyzer",
@@ -48,6 +61,7 @@ const simulators = [
     title: "Analyseur de Ratio P/E",
     description: "Évaluez si une action est chère en comparant son P/E à la moyenne de son secteur.",
     isNew: true,
+    isMemberOnly: false,
   },
   {
     href: "/tools/personal-wealth-analyzer",
@@ -55,6 +69,7 @@ const simulators = [
     title: "Analyseur de Patrimoine",
     description: "Obtenez une analyse IA de votre situation financière.",
     isNew: true,
+    isMemberOnly: false,
   },
   {
     href: "/tools/pe-ratio-analyzer",
@@ -62,12 +77,14 @@ const simulators = [
     title: "Analyseur P/E Ratio",
     description: "Analysez les ratios de valorisation des actions marocaines.",
     isNew: true,
+    isMemberOnly: false,
   },
   {
     href: "/tools/dividend-yield-calculator",
     icon: <TrendingUp className="h-8 w-8 text-primary" />,
     title: "Calculateur de Rendement",
     description: "Calculez le rendement de vos dividendes et investissements.",
+    isMemberOnly: false,
   },
 ];
 
