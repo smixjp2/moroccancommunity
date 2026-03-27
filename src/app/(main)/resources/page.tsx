@@ -55,6 +55,15 @@ const resources: Resource[] = [
     imageUrl: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageUrl || '',
     imageHint: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageHint || '',
   },
+  {
+    id: "free-gumroad-product",
+    title: "Guide Pratique de l'Investissement Débutant",
+    description: "Un guide gratuit complet pour les investisseurs débutants au Maroc. Apprenez les bases de l'investissement en bourse, les stratégies simples et les erreurs à éviter.",
+    price: "Gratuit",
+    href: "https://gum.new/gum/cmn8o5a9z000204jp9t4nh3r9",
+    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
+    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
+  },
 ];
 
 const allVideos = [
