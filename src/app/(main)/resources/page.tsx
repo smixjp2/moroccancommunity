@@ -18,53 +18,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 
-const resources: Resource[] = [
-    {
-    id: "resource-account-opening",
-    title: "Comment créer un compte-titre à la Bourse de Casablanca",
-    description: "Un guide PDF pas à pas pour vous accompagner dans l'ouverture de votre premier compte-titres auprès d'un courtier marocain.",
-    price: "Gratuit",
-    href: "https://drive.google.com/uc?export=download&id=1bL4Yam2LfuJISP0_ExyigJyLpeeLhw7s",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-account-opening')?.imageHint || '',
-  },
-   {
-    id: "resource-psychology-arabic",
-    title: "كيفية فتح حساب في بورصة الدار البيضاء (Titres-Compte)",
-    description: "دليل PDF مفصل خطوة بخطوة لمساعدتك في فتح أول حساب أوراق مالية لك مع وسيط مغربي.",
-    price: "Gratuit",
-    href: "https://drive.google.com/uc?export=download&id=1SJMxRYWXLN84R-ELkFZcc_-QcqwEJZYY",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-psychology-arabic')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-psychology-arabic')?.imageHint || '',
-  },
-  {
-    id: "2",
-    title: "La Liste Comparative Ultime des Courtiers",
-    description: "Un PDF complet comparant tous les courtiers bancaires marocains sur les commissions, les frais, les taxes et les fonctionnalités de la plateforme. Faites un choix éclairé.",
-    price: "Bientôt",
-    href: "#",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
-  },
-  {
-    id: "dca-guide",
-    title: "Guide Ultime du Dollar Cost Averaging (DCA)",
-    description: "Maîtrisez la stratégie d'investissement DCA pour investir régulièrement et réduire les risques de volatilité du marché. Un guide complet avec exemples pratiques pour le marché marocain.",
-    price: "49 DH",
-    href: "https://gum.new/gum/cmn80scfs000p04jfdg3tam4k",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'course-dca')?.imageHint || '',
-  },
-  {
-    id: "free-gumroad-product",
-    title: "Guide Pratique de l'Investissement Débutant",
-    description: "Un guide gratuit complet pour les investisseurs débutants au Maroc. Apprenez les bases de l'investissement en bourse, les stratégies simples et les erreurs à éviter.",
-    price: "Gratuit",
-    href: "https://gum.new/gum/cmn8o5a9z000204jp9t4nh3r9",
-    imageUrl: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageUrl || '',
-    imageHint: PlaceHolderImages.find(p => p.id === 'resource-2')?.imageHint || '',
-  },
-];
+const resources: Resource[] = [];
 
 const allVideos = [
     { id: "aik4x2VzzCI", title: "CIH BANK : LE GUIDE ULTIME DE L'ACTION EN BOURSE" },
