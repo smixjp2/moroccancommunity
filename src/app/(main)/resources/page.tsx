@@ -114,11 +114,10 @@ export default function ResourcesPage() {
             <CardContent className="p-6 flex flex-col flex-1">
               <CardTitle className="font-headline text-2xl mb-2">{resource.title}</CardTitle>
               <CardDescription className="mb-4 flex-1">{resource.description}</CardDescription>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-2xl font-bold font-headline text-primary">{resource.price}</span>
+              <div className="flex justify-end items-center mt-4">
                 <Button asChild className="font-bold" disabled={resource.price === 'Bientôt'}>
                   <Link href={resource.href} target="_blank" rel="noopener noreferrer">
-                    {resource.price === 'Gratuit' ? 'Télécharger' : (resource.price.includes('DH') || resource.price === 'Voir sur Gumroad') ? 'Acheter' : 'Obtenir'} 
+                    {resource.price === 'Gratuit' ? 'Télécharger' : (resource.price.includes('DH') || resource.price === 'Voir sur Gumroad') ? 'Découvrir' : 'Obtenir'}
                     {resource.price !== 'Bientôt' && !resource.price.includes('DH') && resource.price !== 'Voir sur Gumroad' && <Download className="ml-2 h-4 w-4" />}
                   </Link>
                 </Button>
