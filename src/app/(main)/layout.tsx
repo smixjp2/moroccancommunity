@@ -1,5 +1,6 @@
 import { Header } from "@/app/components/layout/header";
 import { Footer } from "@/app/components/layout/footer";
+import StockTicker from "@/components/stock-ticker";
 import { Metadata } from "next";
 import { generateOrganizationSchema, baseUrl } from "@/lib/seo-metadata";
 import { JsonLd } from "@/components/JsonLd";
@@ -28,6 +29,7 @@ export default function MainLayout({
       <JsonLd data={generateOrganizationSchema()} />
       <div className="flex min-h-screen flex-col">
         <Header />
+        <StockTicker refreshInterval={5000} speed={50} />
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
