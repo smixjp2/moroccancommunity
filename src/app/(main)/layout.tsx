@@ -1,6 +1,19 @@
 import { Header } from "@/app/components/layout/header";
 import { Footer } from "@/app/components/layout/footer";
+import { Metadata } from "next";
+import { generateOrganizationSchema, baseUrl } from "@/lib/seo-metadata";
+import { JsonLd } from "@/components/JsonLd";
 
+export const metadata: Metadata = {
+  applicationName: "The Moroccan Community",
+  referrer: "strict-origin-when-cross-origin",
+  creator: "The Moroccan Community",
+  publisher: "The Moroccan Community",
+  metadataBase: new URL(baseUrl),
+  verification: {
+    google: "google-site-verification-code", // Replace with your Google verification code
+  },
+};
 
 export default function MainLayout({
   children,
@@ -8,10 +21,13 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
-    </div>
+    <>
+      <JsonLd data={generateOrganizationSchema()} />
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </div>
+    </>
   );
 }

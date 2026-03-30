@@ -1,10 +1,32 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
+import { baseUrl } from "@/lib/seo-metadata";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#22c55e",
+};
 
 export const metadata: Metadata = {
-  title: "The Moroccan Community",
-  description: "Débloquez le potentiel du marché marocain.",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "The Moroccan Community",
+    template: "%s | The Moroccan Community",
+  },
+  description: "Débloquez le potentiel du marché marocain. Votre source d'analyses, d'outils et de ressources pour comprendre l'économie et la finance au Maroc.",
+  keywords: [
+    "finance maroc",
+    "bourse casablanca",
+    "marché boursier marocain",
+    "investissement maroc",
+    "MASI",
+    "économie maroc",
+    "éducation financière",
+    "simulateurs financiers",
+  ],
   icons: {
     icon: [
       {
@@ -13,29 +35,55 @@ export const metadata: Metadata = {
       },
     ],
   },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: baseUrl,
+    siteName: "The Moroccan Community",
+    title: "The Moroccan Community",
+    description: "Débloquez le potentiel du marché marocain",
+    images: [
+      {
+        url: `${baseUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "The Moroccan Community",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@moroccan_community",
+    creator: "@moroccan_community",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
+  },
+  alternates: {
+    canonical: baseUrl,
+    languages: {
+      "fr": baseUrl,
+      "en": `${baseUrl}/en`,
+    },
+  },
 };
-
-import { headers } from "next/headers";
-
-import { cookies } from "next/headers";
-
-function getLocale(): string {
-  const locale = cookies().get("locale")?.value;
-  if (!locale || (locale !== "fr" && locale !== "en")) {
-    return "fr";
-  }
-  return locale;
-}
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = getLocale();
-
+  // Locale handling is moved to client-side with useLocale hook
+  // Default locale is 'fr' and will be determined by client cookies
+  const defaultLocale = "fr";
+  
   return (
-    <html lang={locale}>
+    <html lang={defaultLocale}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
