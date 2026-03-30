@@ -4,9 +4,10 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import React from 'react';
+import { Suspense } from 'react';
 
-export default async function ArticlePage({ params }: { params: { id: string } }) {
-  const article = articles.find((a) => a.id === params.id);
+async function ArticleContent({ id }: { id: string }) {
+  const article = articles.find((a) => a.id === id);
 
   if (!article) {
     notFound();
@@ -51,6 +52,16 @@ export default async function ArticlePage({ params }: { params: { id: string } }
         )}
       </article>
     </div>
+  );
+}
+
+export default async function ArticlePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+
+  return (
+    <Suspense fallback={<div className="container py-12">Chargement...</div>}>
+      <ArticleContent id={id} />
+    </Suspense>
   );
 }
 

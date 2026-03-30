@@ -4,6 +4,9 @@ import { Metadata } from "next";
 import { generateOrganizationSchema, baseUrl } from "@/lib/seo-metadata";
 import { JsonLd } from "@/components/JsonLd";
 
+// Mark main layout as dynamic to handle client components properly
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   applicationName: "The Moroccan Community",
   referrer: "strict-origin-when-cross-origin",

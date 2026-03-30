@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import { generateOpenGraphMetadata, generateWebpageSchema, baseUrl } from '@/lib/seo-metadata';
 import { JsonLd } from '@/components/JsonLd';
 
+// Mark articles section as dynamic to handle dynamic routes properly
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = generateOpenGraphMetadata({
   title: "Articles | The Moroccan Community",
   description: "Explorez nos articles approfondis sur le marché boursier marocain, l'analyse d'experts et les tendances du secteur financier.",

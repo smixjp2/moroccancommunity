@@ -3,6 +3,9 @@ import { Metadata } from 'next';
 import { generateOpenGraphMetadata, generateWebpageSchema, baseUrl } from '@/lib/seo-metadata';
 import { JsonLd } from '@/components/JsonLd';
 
+// Mark tools section as dynamic to handle client components properly
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = generateOpenGraphMetadata({
   title: "Outils Financiers | The Moroccan Community",
   description: "Découvrez nos simulateurs financiers et comparateurs pour optimiser vos investissements au Maroc.",
