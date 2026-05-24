@@ -4,11 +4,17 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getCourseById } from '@/lib/video-courses-data';
+import { getCourseById, videoCourses } from '@/lib/video-courses-data';
 import { ArrowLeft, BookOpen, Clock, Lock } from 'lucide-react';
 
 interface CoursePageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  return videoCourses.map((course) => ({
+    id: course.id,
+  }));
 }
 
 export async function generateMetadata({
