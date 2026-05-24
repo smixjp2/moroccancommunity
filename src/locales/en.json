@@ -3,6 +3,7 @@
     "home": "Home",
     "articles": "Articles",
     "tools": "Tools",
+    "courses": "Courses",
     "resources": "Resources",
     "about": "About",
     "contact": "Contact"
@@ -22,6 +23,7 @@
     "heroSubtitle": "Your source for analyses, tools and resources to understand the economy and finance in Morocco.",
     "heroCtaArticles": "Explore Analysis",
     "heroCtaTools": "Discover Tools",
+    "heroCtaCourses": "Watch Our Courses",
     "featuresTitle": "Tools for Every Goal",
     "featuresSubtitle": "Whether you are a beginner or professional, The Moroccan Community brings the clarity you need to navigate the Moroccan market.",
     "communityTitle": "Join our Private Community",

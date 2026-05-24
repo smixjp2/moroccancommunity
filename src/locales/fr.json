@@ -3,6 +3,7 @@
     "home": "Accueil",
     "articles": "Articles",
     "tools": "Outils",
+    "courses": "Cours",
     "resources": "Ressources",
     "about": "À propos",
     "contact": "Contact"
@@ -22,6 +23,7 @@
     "heroSubtitle": "Votre source d'analyses, d'outils et de ressources pour comprendre l'économie et la finance au Maroc.",
     "heroCtaArticles": "Explorer les Analyses",
     "heroCtaTools": "Découvrir les Outils",
+    "heroCtaCourses": "Suivre nos Cours",
     "featuresTitle": "Des Outils pour Chaque Objectif",
     "featuresSubtitle": "Que vous soyez débutant ou professionnel, The Moroccan Community vous apporte la clarté dont vous avez besoin pour naviguer sur le marché marocain.",
     "communityTitle": "Rejoignez notre Communauté Privée",

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Newspaper, Wrench, Crown } from "lucide-react";
+import { ArrowRight, Newspaper, Wrench, BookOpen } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Input } from "@/components/ui/input";
 import {
@@ -44,6 +44,13 @@ const features = [
     title: "Simulateurs Puissants",
     description: "Comparez les banques, les courtiers et simulez l'impact des frais sur vos investissements avec nos outils performants.",
     link: "/tools",
+    image: featureImages.tools,
+  },
+  {
+    icon: <BookOpen className="h-8 w-8 text-primary" />,
+    title: "Cours Vidéo Complets",
+    description: "Formez-vous aux investissements avec nos cours vidéo structurés, des débutants jusqu'aux stratégies avancées.",
+    link: "/courses",
     image: featureImages.tools,
   },
 ];
@@ -112,12 +119,15 @@ export default function Home() {
             <p className="mt-4 max-w-xl mx-auto text-lg text-primary-foreground/90 md:text-xl">
               {t.home.heroSubtitle}
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
               <Button asChild size="lg" className="font-bold text-lg px-8">
                 <Link href="/articles">{t.home.heroCtaArticles} <ArrowRight className="ml-2" /></Link>
               </Button>
               <Button asChild size="lg" variant="secondary" className="font-bold text-lg px-8">
                 <Link href="/tools">{t.home.heroCtaTools}</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="font-bold text-lg px-8 text-white border-white hover:bg-white/20">
+                <Link href="/courses">{t.home.heroCtaCourses}</Link>
               </Button>
             </div>
           </div>

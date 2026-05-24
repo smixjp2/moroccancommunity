@@ -43,6 +43,7 @@ export function Header() {
   const navLinks: NavLink[] = [
     { href: "/", label: t.nav.home },
     { href: "/articles", label: t.nav.articles },
+    { href: "/courses", label: t.nav.courses },
     { href: "/resources", label: t.nav.resources },
   ];
 
@@ -172,7 +173,7 @@ export function Header() {
                         "font-medium transition-colors hover:text-primary",
                         pathname.startsWith('/tools') ? "text-primary" : "text-muted-foreground"
                     )}>
-                        Outils
+                        {locale === 'en' ? 'Tools' : 'Outils'}
                     </Link>
                     <Link
                         href={aboutLink.href}
