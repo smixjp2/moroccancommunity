@@ -1,11 +1,14 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCourseById, getLessonById, getCourseLessonIndex, videoCourses } from '@/lib/video-courses-data';
+import { isCourseAccessGranted } from '@/lib/course-access';
 import { VideoPlayer } from '@/components/VideoPlayer';
 import { ArrowLeft, ArrowRight, BookOpen, Clock } from 'lucide-react';
+
+export const dynamic = 'force-dynamic';
 
 interface LessonPageProps {
   params: Promise<{ id: string; lessonId: string }>;
@@ -50,6 +53,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   if (!course || !lesson) {
     notFound();
+  }
+
+  if (!isCourseAccessGranted()) {
+    redirect(`/courses?redirect=${encodeURIComponent(`/courses/${id}/lessons/${lessonId}`)}`);
   }
 
   const lessonIndex = getCourseLessonIndex(id, lessonId);

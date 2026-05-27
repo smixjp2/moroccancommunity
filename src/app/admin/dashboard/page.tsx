@@ -16,13 +16,13 @@ const features = [
     icon: Users,
     href: '/admin/users'
   },
-  // { 
-  //   id: 'courses', 
-  //   name: 'Gestion des Formations', 
-  //   description: 'Ajoutez ou modifiez les formations disponibles.',
-  //   icon: Edit,
-  //   href: '#'
-  // },
+  { 
+    id: 'course-access', 
+    name: 'Accès aux Cours', 
+    description: 'Gérez les noms d’utilisateur et codes qui ouvrent l’accès aux cours.',
+    icon: PlusCircle,
+    href: '/admin/credentials'
+  },
 ];
 
 function AdminDashboardPage() {

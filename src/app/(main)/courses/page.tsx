@@ -1,19 +1,125 @@
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CourseCard } from '@/components/CourseCard';
 import { videoCourses } from '@/lib/video-courses-data';
+import { validateCourseAccess, isCourseAccessGranted } from '@/lib/course-access';
 import { BookOpen, Play } from 'lucide-react';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Cours Vidéo | The Moroccan Community',
   description: 'Formez-vous aux investissements avec nos cours vidéo complets sur le MASI et le marché boursier marocain.',
 };
 
-export default function CoursesPage() {
+interface CoursesPageProps {
+  searchParams?: { redirect?: string; error?: string };
+}
+
+export default function CoursesPage({ searchParams }: CoursesPageProps) {
   const beginnerCourses = videoCourses.filter(c => c.level === 'beginner');
   const intermediateCourses = videoCourses.filter(c => c.level === 'intermediate');
   const advancedCourses = videoCourses.filter(c => c.level === 'advanced');
+
+  const redirectTarget =
+    searchParams?.redirect && searchParams.redirect.startsWith('/courses')
+      ? searchParams.redirect
+      : '/courses';
+
+  const isAuthorized = isCourseAccessGranted();
+
+  if (isAuthorized && redirectTarget !== '/courses') {
+    redirect(redirectTarget);
+  }
+
+  const showInvalidCredentials = searchParams?.error === 'invalid';
+
+  async function grantCourseAccess(formData: FormData) {
+    'use server';
+
+    const username = (formData.get('username') as string | null)?.trim().toLowerCase() ?? '';
+    const code = (formData.get('code') as string | null)?.trim() ?? '';
+    const redirectUrl = (formData.get('redirect') as string | null) ?? '/courses';
+
+    if (validateCourseAccess(username, code)) {
+      cookies().set({
+        name: 'courseAccess',
+        value: `${username}:${code}`,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+        httpOnly: true,
+        sameSite: 'lax',
+      });
+
+      redirect(redirectUrl.startsWith('/courses') ? redirectUrl : '/courses');
+    }
+
+    redirect(
+      `/courses?error=invalid&redirect=${encodeURIComponent(
+        redirectUrl.startsWith('/courses') ? redirectUrl : '/courses',
+      )}`,
+    );
+  }
+
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+        <section className="bg-white border-b py-14 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl font-bold mb-4">Accès réservé aux cours vidéo</h1>
+            <p className="text-gray-600 mb-8">
+              Cette section est accessible uniquement avec un nom d'utilisateur et un code autorisés.
+            </p>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+              <form action={grantCourseAccess} className="space-y-5">
+                {showInvalidCredentials && (
+                  <div className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+                    Nom d'utilisateur ou code incorrect. Réessayez.
+                  </div>
+                )}
+                <div>
+                  <label htmlFor="username" className="block text-sm font-medium text-slate-700 mb-2">
+                    Nom d'utilisateur
+                  </label>
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    placeholder="Votre nom d'utilisateur"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="code" className="block text-sm font-medium text-slate-700 mb-2">
+                    Code d'accès
+                  </label>
+                  <input
+                    id="code"
+                    name="code"
+                    type="password"
+                    required
+                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    placeholder="Code d'accès"
+                  />
+                </div>
+                <input type="hidden" name="redirect" value={redirectTarget} />
+                <Button type="submit" className="w-full">
+                  Se connecter et accéder aux cours
+                </Button>
+              </form>
+              <p className="mt-6 text-sm text-gray-500">
+                Les identifiants sont gérés dans le fichier <code className="rounded bg-slate-100 px-1 py-0.5">course-access.csv</code>.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

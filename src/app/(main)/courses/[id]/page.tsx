@@ -1,11 +1,14 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCourseById, videoCourses } from '@/lib/video-courses-data';
+import { isCourseAccessGranted } from '@/lib/course-access';
 import { ArrowLeft, BookOpen, Clock, Lock } from 'lucide-react';
+
+export const dynamic = 'force-dynamic';
 
 interface CoursePageProps {
   params: Promise<{ id: string }>;
@@ -41,6 +44,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
   if (!course) {
     notFound();
+  }
+
+  if (!isCourseAccessGranted()) {
+    redirect(`/courses?redirect=${encodeURIComponent(`/courses/${id}`)}`);
   }
 
   const getLevelColor = (level: string) => {
