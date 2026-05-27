@@ -1,7 +1,6 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
-import AdminAuthGuard from '@/app/components/admin-auth-guard';
 import { getCourseAccessCredentials, upsertCourseAccessCredential, deleteCourseAccessCredential } from '@/lib/course-access';
+import { createSiteAdminCookie, clearSiteAdminCookie, isSiteAdminAuthenticated } from '@/lib/site-admin';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -30,6 +29,10 @@ function formatMessage(key?: string) {
 }
 
 export default function AdminCredentialsPage({ searchParams }: AdminCredentialsPageProps) {
+  if (!isSiteAdminAuthenticated()) {
+    redirect('/admin/login');
+  }
+
   const credentials = getCourseAccessCredentials();
   const message = formatMessage(searchParams?.success ?? searchParams?.error);
 
@@ -58,8 +61,13 @@ export default function AdminCredentialsPage({ searchParams }: AdminCredentialsP
     redirect('/admin/credentials?success=deleted');
   }
 
+  async function logoutAdmin(formData: FormData) {
+    'use server';
+    clearSiteAdminCookie();
+    redirect('/admin/login');
+  }
+
   return (
-    <AdminAuthGuard>
       <div className="container py-12">
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
@@ -124,9 +132,18 @@ export default function AdminCredentialsPage({ searchParams }: AdminCredentialsP
                 </p>
               </CardContent>
             </Card>
+
+            <Card className="mt-6">
+              <CardContent>
+                <form action={logoutAdmin}>
+                  <Button type="submit" variant="outline" className="w-full">
+                    Se déconnecter
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </section>
         </div>
       </div>
-    </AdminAuthGuard>
   );
 }
