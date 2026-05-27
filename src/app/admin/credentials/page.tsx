@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { getCourseAccessCredentials, upsertCourseAccessCredential, deleteCourseAccessCredential } from '@/lib/course-access';
-import { createSiteAdminCookie, clearSiteAdminCookie, isSiteAdminAuthenticated } from '@/lib/site-admin';
+import { getCourseAccessCredentials } from '@/lib/course-access';
+import { isSiteAdminAuthenticated } from '@/lib/site-admin';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { PlusCircle, ArrowLeft } from 'lucide-react';
-import { redirect } from 'next/navigation';
 import { CredentialManager } from './CredentialManager';
+import { saveCredential, removeCredential, logoutAdmin, loginAdmin } from './actions';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,42 +29,41 @@ function formatMessage(key?: string) {
 }
 
 export default function AdminCredentialsPage({ searchParams }: AdminCredentialsPageProps) {
-  if (!isSiteAdminAuthenticated()) {
-    redirect('/admin/login');
-  }
-
-  const credentials = getCourseAccessCredentials();
+  const isAuthenticated = isSiteAdminAuthenticated();
+  const credentials = isAuthenticated ? getCourseAccessCredentials() : [];
   const message = formatMessage(searchParams?.success ?? searchParams?.error);
 
-  async function saveCredential(formData: FormData) {
-    'use server';
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-slate-50 py-16">
+        <div className="mx-auto w-full max-w-md rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-sm">
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold">Connexion administrateur</h1>
+            <p className="mt-2 text-sm text-slate-600">Accès réservé à l’administrateur du site.</p>
+          </div>
 
-    const username = (formData.get('username') as string | null)?.trim();
-    const code = (formData.get('code') as string | null)?.trim();
+          {message && (
+            <div className="mb-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+              E-mail ou mot de passe incorrect.
+            </div>
+          )}
 
-    if (!username || !code) {
-      redirect('/admin/credentials?error=invalid');
-    }
-
-    upsertCourseAccessCredential(username, code);
-    redirect('/admin/credentials?success=saved');
-  }
-
-  async function removeCredential(formData: FormData) {
-    'use server';
-
-    const username = (formData.get('username') as string | null)?.trim();
-    if (username) {
-      deleteCourseAccessCredential(username);
-    }
-
-    redirect('/admin/credentials?success=deleted');
-  }
-
-  async function logoutAdmin(formData: FormData) {
-    'use server';
-    clearSiteAdminCookie();
-    redirect('/admin/login');
+          <form action={loginAdmin} className="space-y-5">
+            <div>
+              <Label htmlFor="email">E-mail</Label>
+              <Input id="email" name="email" type="email" required placeholder="serrou.mohammed@outlook.com" />
+            </div>
+            <div>
+              <Label htmlFor="password">Mot de passe</Label>
+              <Input id="password" name="password" type="password" required placeholder="••••••••" />
+            </div>
+            <Button type="submit" className="w-full">
+              Se connecter
+            </Button>
+          </form>
+        </div>
+      </div>
+    );
   }
 
   return (
