@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Trash2, PlusCircle, ArrowLeft } from 'lucide-react';
+import { PlusCircle, ArrowLeft } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { CredentialManager } from './CredentialManager';
 
 export const dynamic = 'force-dynamic';
 
@@ -85,35 +86,8 @@ export default function AdminCredentialsPage({ searchParams }: AdminCredentialsP
         )}
 
         <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          <section className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Liste des accès</CardTitle>
-                <CardDescription>Chaque identifiant permet à un utilisateur de se connecter aux cours.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {credentials.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">Aucun accès n’est configuré pour le moment.</p>
-                ) : (
-                  <div className="space-y-4">
-                    {credentials.map((credential) => (
-                      <div key={credential.username} className="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                        <div>
-                          <p className="font-semibold">{credential.username}</p>
-                          <p className="text-sm text-slate-600">Code : {credential.code}</p>
-                        </div>
-                        <form action={removeCredential}>
-                          <input type="hidden" name="username" value={credential.username} />
-                          <Button type="submit" variant="destructive" size="sm" className="inline-flex items-center gap-2">
-                            <Trash2 className="h-4 w-4" /> Supprimer
-                          </Button>
-                        </form>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+          <section>
+            <CredentialManager credentials={credentials} deleteAction={removeCredential} />
           </section>
 
           <section>
