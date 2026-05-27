@@ -4,8 +4,8 @@ import crypto from 'crypto';
 const ADMIN_EMAIL = process.env.SITE_ADMIN_EMAIL || 'serrou.mohammed@outlook.com';
 const ADMIN_PASSWORD = process.env.SITE_ADMIN_PASSWORD || 'Serroumed50@';
 const ADMIN_SECRET = process.env.SITE_ADMIN_SECRET || 'site-admin-secret-change-me';
-const COOKIE_NAME = 'siteAdminAuth';
-const COOKIE_MAX_AGE = 60 * 60 * 24; // 24 hours
+export const COOKIE_NAME = 'siteAdminAuth';
+export const COOKIE_MAX_AGE = 60 * 60 * 24; // 24 hours
 
 function createSignature(email: string, password: string) {
   return crypto
@@ -39,16 +39,12 @@ export function validateSiteAdmin(email: string, password: string): boolean {
   );
 }
 
-export function createSiteAdminCookie() {
-  const token = buildToken(ADMIN_EMAIL, ADMIN_PASSWORD);
-  cookies().set({
-    name: COOKIE_NAME,
-    value: token,
-    path: '/',
-    maxAge: COOKIE_MAX_AGE,
-    httpOnly: true,
-    sameSite: 'lax',
-  });
+export function buildSiteAdminToken(): string {
+  return buildToken(ADMIN_EMAIL, ADMIN_PASSWORD);
+}
+
+export function getSiteAdminCookieName(): string {
+  return COOKIE_NAME;
 }
 
 export function clearSiteAdminCookie() {
@@ -57,6 +53,10 @@ export function clearSiteAdminCookie() {
 
 export function isSiteAdminAuthenticated(): boolean {
   const token = cookies().get(COOKIE_NAME)?.value;
+  return isSiteAdminAuthenticatedToken(token);
+}
+
+export function isSiteAdminAuthenticatedToken(token: string | undefined): boolean {
   if (!token) {
     return false;
   }
